@@ -6,11 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon"/>
 
-  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="./css/standard.css" />
-  <link rel="stylesheet" href="./css/color.css" />
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/fonts/fonts.css"/>
+  <link rel="stylesheet" href="./css/standard.css"/>
+  <link rel="stylesheet" href="./css/color.css"/>
+  <link rel="stylesheet" href="./css/style.css"/>
   <link rel="stylesheet" href="./css/responsive.css"/>
+  <link rel="stylesheet" href="./css/board.css">
+  <link rel="stylesheet" href="./css/add_task.css">
+
   <title>Join</title>
 </head>
 
@@ -73,10 +76,260 @@
         <div class="user-avatar">SM</div>
       </div>
     </header>
+
     <div class="main-content">
-      
+      <section class="kb">
+        <div class="kb-toolbar">
+          <h1 class="kb-title">Board</h1>
+          <div class="kb-actions">
+            <div class="kb-search">
+              <input type="text" placeholder="Find Task" aria-label="Find Task">
+              <img class="kb-icon" alt="Search">
+            </div>
+            <button class="kb-add-btn">
+              Add task
+              <span class="kb-plus">+</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="kb-columns">
+          <!-- To do -->
+          <section class="kb-col" aria-label="To do">
+            <header class="kb-col-head">
+              <h2 class="kb-col-title">To do</h2>
+              <button class="kb-col-add" aria-label="Add task to To do"></button>
+            </header>
+            <div class="kb-empty">
+              <span>No tasks To do</span>
+            </div>
+          </section>
+
+          <!-- In progress -->
+          <section class="kb-col" aria-label="In progress">
+            <header class="kb-col-head">
+              <h2 class="kb-col-title">In progress</h2>
+              <button class="kb-col-add" aria-label="Add task to In progress"></button>
+            </header>
+            <article class="kb-card">
+              <div class="kb-card-top">
+                <span class="kb-chip kb-chip--story">User Story</span>
+              </div>
+              <h3 class="kb-card-title">Kochwelt Page &amp; Recipe Recommender</h3>
+              <p class="kb-card-desc">Build start page with recipe recommendation...</p>
+              <div class="kb-progress-row">
+                <div class="kb-progress">
+                  <div class="kb-progress-bar" style="width: 50%"></div>
+                </div>
+                <span class="kb-subtasks">1/2 Subtasks</span>
+              </div>
+              <footer class="kb-card-foot">
+                <div class="kb-avatars" data-assignees="AM, EM, MB"></div>
+                <div class="kb-priority kb-priority--medium"></div>
+              </footer>
+            </article>
+          </section>
+
+          <!-- Await feedback -->
+          <section class="kb-col" aria-label="Await feedback">
+            <header class="kb-col-head">
+              <h2 class="kb-col-title">Await feedback</h2>
+              <button class="kb-col-add" aria-label="Add task to Await feedback"></button>
+            </header>
+            <article class="kb-card">
+              <div class="kb-card-top">
+                <span class="kb-chip kb-chip--technical">Technical Task</span>
+              </div>
+              <h3 class="kb-card-title">HTML Base Template Creation</h3>
+              <p class="kb-card-desc">Create reusable HTML base templates...</p>
+              <div class="kb-progress-row">
+                <div class="kb-progress">
+                  <div class="kb-progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="kb-subtasks">&nbsp;</span>
+              </div>
+              <footer class="kb-card-foot">
+                <div class="kb-avatars" data-assignees="DE, BZ, AS"></div>
+                <div class="kb-priority kb-priority--low"></div>
+              </footer>
+            </article>
+            <article class="kb-card">
+              <div class="kb-card-top">
+                <span class="kb-chip kb-chip--story">User Story</span>
+              </div>
+              <h3 class="kb-card-title">Daily Kochwelt Recipe</h3>
+              <p class="kb-card-desc">Implement daily recipe and portion calculator....</p>
+              <div class="kb-progress-row">
+                <div class="kb-progress">
+                  <div class="kb-progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="kb-subtasks">&nbsp;</span>
+              </div>
+              <footer class="kb-card-foot">
+                <div class="kb-avatars" data-assignees="EF, AS, TW"></div>
+                <div class="kb-priority kb-priority--high"></div>
+              </footer>
+            </article>
+          </section>
+
+          <!-- Done -->
+          <section class="kb-col" aria-label="Done">
+            <header class="kb-col-head">
+              <h2 class="kb-col-title">Done</h2>
+            </header>
+            <article class="kb-card">
+              <div class="kb-card-top">
+                <span class="kb-chip kb-chip--technical">Technical Task</span>
+              </div>
+              <h3 class="kb-card-title">CSS Architecture Planning</h3>
+              <p class="kb-card-desc">Define CSS naming conventions and structure...</p>
+              <div class="kb-progress-row">
+                <div class="kb-progress">
+                  <div class="kb-progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="kb-subtasks">2/2 Subtasks</span>
+              </div>
+              <footer class="kb-card-foot">
+                <div class="kb-avatars" data-assignees="SM, BZ"></div>
+                <div class="kb-priority kb-priority--medium"></div>
+              </footer>
+            </article>
+          </section>
+        </div>
+      </section>      
     </div>
   </div>
-</body>
 
+<!-- Overlay -->
+<div id="at-overlay" class="at-overlay" aria-hidden="true"></div>
+
+<!-- Add Task popup -->
+<div id="at-modal" class="at-modal">
+  <div class="at-dialog">
+    <div class="at-header">
+      <h2>Add Task</h2>
+      <span id="at-close" class="at-close">&times;</span>
+    </div>
+      <div class="at-grid">
+        <!-- Ліва колонка -->
+        <div class="at-col">
+          <label class="field">
+            <span class="field__label">Title<span class="req">*</span></span>
+            <input class="input" name="title" placeholder="Enter a title" required />
+          </label>
+      
+          <label class="field">
+            <span class="field__label">Description</span>
+            <textarea class="textarea" name="description" placeholder="Enter a Description"></textarea>
+          </label>
+      
+          <label class="field">
+            <span class="field__label">Due date<span class="req">*</span></span>
+            <input class="input" type="date" name="dueDate" required />
+          </label>
+          <p class="hint"><span class="req">*</span> This field is required</p>
+        </div>
+      
+        <!-- Права колонка -->
+        <div class="at-col at-col--right">
+          <div class="field">
+            <span class="field__label">Priority</span>
+            <div class="priority" data-priority>
+              <button type="button" class="priority__btn" data-value="urgent">
+                Urgent <span class="priority__icon">⤴︎</span>
+              </button>
+              <button type="button" class="priority__btn priority__btn--active" data-value="medium">
+                Medium <span class="priority__icon">＝</span>
+              </button>
+              <button type="button" class="priority__btn" data-value="low">
+                Low <span class="priority__icon">✓</span>
+              </button>
+              <input type="hidden" name="priority" value="medium" />
+            </div>
+          </div>
+      
+          <label class="field">
+            <span class="field__label">Assigned to</span>
+            <select class="select" name="assignees" multiple>
+              <option>Emmanuel Mauer</option>
+              <option>Marcel Bauer</option>
+              <option>Anton Mayer</option>
+              <option>Sofia Müller</option>
+              <option>Benedikt Ziegler</option>
+            </select>
+          </label>
+      
+          <label class="field">
+            <span class="field__label">Category<span class="req">*</span></span>
+            <select class="select" name="category" required>
+              <option value="" disabled selected>Select task category</option>
+              <option>User Story</option>
+              <option>Technical Task</option>
+              <option>Bug</option>
+              <option>Chore</option>
+            </select>
+          </label>
+      
+          <div class="field">
+            <span class="field__label">Subtasks</span>
+            <div class="subtasks" data-subtasks>
+              <input class="input" type="text" placeholder="Add a subtask and press Enter" />
+              <ul class="subtasks__list"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="at-footer">
+        <button type="button" id="at-cancel" class="btn">Cancel</button>
+        <button type="submit" id="at-create" class="btn btn-primary">Create Task</button>
+      </div>
+  </div>
+</div>
+
+<!-- ===== Task Details popup ===== -->
+<div id="td-modal" class="td-modal" role="dialog" aria-modal="true" aria-labelledby="td-title">
+  <div class="td-dialog">
+    <button class="td-close" type="button" data-td-close aria-label="Close">×</button>
+
+    <div class="td-chipwrap">
+      <span id="td-chip" class="td-chip">User Story</span>
+    </div>
+
+    <h2 id="td-title" class="td-title"></h2>
+    <p id="td-desc" class="td-desc"></p>
+
+    <div class="td-meta">
+      <div class="td-row">
+        <span class="td-label">Due date:</span>
+        <span id="td-due" class="td-value">—</span>
+      </div>
+
+      <div class="td-row">
+        <span class="td-label">Priority:</span>
+        <span id="td-prio-text" class="td-value">—</span>
+        <span id="td-prio-icon" class="td-icon"></span>
+      </div>
+
+      <div class="td-row">
+        <span class="td-label">Assigned To:</span>
+      </div>
+      <div id="td-assignees" class="td-assignees"></div>
+    </div>
+
+    <div id="td-subtasks" class="td-subtasks" hidden>
+      <div class="td-row">
+        <span class="td-label">Subtasks</span>
+      </div>
+      <ul id="td-subtasks-list" class="td-subtasks__list"></ul>
+    </div>
+
+    <div class="td-footer">
+      <button class="td-btn td-btn--icon" type="button">🗑️ Delete</button>
+      <button class="td-btn td-btn--icon" type="button">✏️ Edit</button>
+    </div>
+  </div>
+</div>
+  <script src="board.js" defer></script>
+</body>
 </html>

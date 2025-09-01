@@ -743,3 +743,160 @@ textarea {
     z-index: 1000;
   }
 }
+
+/* ====== AddTask popup polish (overlay version on Board) ====== */
+
+#at-modal .at-dialog{
+  width: min(1040px, 96vw);
+  padding: 32px 32px 20px;
+  border-radius: 24px;
+}
+
+#at-modal .at-header{
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between;
+  margin-bottom: 16px;
+}
+
+#at-modal .at-header h2{
+  font-size: 44px; 
+  font-weight: 800; 
+  margin: 0; 
+  color:#111827;
+}
+
+#at-modal .at-close{ 
+  font-size: 22px; 
+  color:#6B7280;
+  cursor:pointer; 
+}
+
+#at-modal .at-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+#at-modal .at-col{ 
+  display:grid; 
+  gap: 16px; 
+}
+
+#at-modal .field__label{
+  display:block; 
+  margin-bottom: 6px; 
+  color:#6B7280; 
+  font-size:14px;
+}
+
+#at-modal .req{ 
+  color:#EF4444; 
+  margin-left:4px; 
+}
+
+#at-modal .input,
+#at-modal .textarea,
+#at-modal .select{
+  width:100%;
+  border:1px solid #D1D5DB;
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:16px;
+  background:#fff;
+  outline:none;
+}
+
+#at-modal .input:focus,
+#at-modal .textarea:focus,
+#at-modal .select:focus{
+  border-color:#2563EB;
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+#at-modal .textarea{ 
+  min-height:86px; 
+  resize:vertical; 
+}
+
+#at-modal input[type="date"]{ 
+  padding-right:36px; 
+}
+
+#at-modal .select[multiple]{
+  min-height:130px;
+  padding:8px 10px;
+}
+
+#at-modal .hint{
+  margin: 4px 0 0;
+  font-size:12px; 
+  color:#6B7280;
+}
+
+#at-modal .priority{ 
+  display:flex; 
+  gap:10px; 
+}
+
+#at-modal .priority__btn{
+  border:1px solid #E5E7EB;
+  background:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:600;
+  cursor:pointer;
+  transition: border-color .15s, box-shadow .15s, transform .06s;
+}
+
+#at-modal .priority__btn:hover{
+  border-color:#2563EB;
+  box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+
+#at-modal .priority__btn--active{
+  background:#FFFAE6;
+  border-color:#F59E0B;
+  box-shadow:0 0 0 3px rgba(245,158,11,.15);
+}
+
+#at-modal .at-footer{
+  display:flex; 
+  justify-content:flex-end; 
+  gap:12px; 
+  margin-top: 18px;
+}
+
+#at-modal .btn{
+  border:1px solid #E5E7EB;
+  background:#F9FAFB;
+  border-radius:12px;
+  padding:10px 16px;
+  cursor:pointer;
+}
+
+#at-modal .btn:hover{ 
+  background:#F3F4F6; 
+}
+
+#at-modal .btn-primary{
+  background:#1F2A44; 
+  color:#fff; 
+  border-color:#1F2A44;
+}
+
+#at-modal .btn-primary:hover{ 
+  background:#005CFF; 
+  border-color:#005CFF; 
+}
+
+@media (max-width: 780px){
+  #at-modal .at-header h2{ 
+    font-size: 34px; 
+  }
+
+  #at-modal .at-grid{ 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+}
