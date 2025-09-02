@@ -5,6 +5,10 @@ html, body {
 
 /* Global */
 
+.hidden {
+    display: none !important;
+}
+
 .fs-b-16 {
     font-size: 16px;
     font-weight: 700;

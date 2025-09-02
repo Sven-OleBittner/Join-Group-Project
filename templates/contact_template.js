@@ -106,9 +106,12 @@ function addContactTemplate() {
 }
 
 function editContactTemplate(data) {
+    const nameWords = data.name.split(' ');
+    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
+
     return `
-    <div class="overlay">
-        <div class="add-contact-container d-flex-c">
+    <div class="overlay" onclick="closeEditContactOverlay()">
+        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
 
             <!-- Edit Container Left -->
             <div class="edit-add-contact-container d-flex-c-c-fs">
@@ -123,7 +126,7 @@ function editContactTemplate(data) {
             <!-- Contact Circle -->
             <div class="contact-circle-container d-flex-c">
                 <div class="contact-circle d-flex-c">
-                    <span class="contact-circle-text">AM</span>
+                    <span class="contact-circle-text">${initials}</span>
                 </div>
             </div>
 
@@ -138,23 +141,26 @@ function editContactTemplate(data) {
                 <div class="w100">
                     <form action="">
                         <div class="input-contact-container">
-                            <input id="edit-name" value="${data.name}" type="text" placeholder="Name">
+                            <input id="edit-name" value="${data.name}" type="text" placeholder="Name" oninput="validateEditNameInput(this)" required />
                             <img class="contact-input-icon" src="./assets/img/contact-person.svg" alt="Person">
                         </div>
+                        <div id="edit-name-validation" class="error-message"></div>
                         <div class="input-contact-container">
-                            <input id="edit-email" value="${data.email}" type="email" placeholder="Email">
+                            <input id="edit-email" value="${data.email}" type="email" placeholder="Email" oninput="validateEditEmailInput(this)" required />
                             <img class="contact-input-icon" src="./assets/img/contact-mail.svg" alt="Email">
                         </div>
+                        <div id="edit-email-validation" class="error-message"></div>
                         <div class="input-contact-container">
-                            <input id="edit-phone" value="${data.phone}" type="mobile" placeholder="Phone">
+                            <input id="edit-phone" value="${data.phone}" type="tel" placeholder="Phone" oninput="validateEditPhoneInput(this)" required />
                             <img class="contact-input-icon" src="./assets/img/contact-call.svg" alt="Phone">
                         </div>
+                        <div id="edit-phone-validation" class="error-message"></div>
                     </form>
                 
                     <!-- Button Container -->
                     <div class="edit-contact-buttons">
-                        <button class="contact-delete">Delete</button>
-                        <button onclick="saveContact()" class="contact-save d-flex-c">Save
+                        <button class="contact-delete" onclick="deleteSelectedContact()">Delete</button>
+                        <button onclick="saveEditedContact()" class="contact-save d-flex-c">Save
                             <img class="contact-save-icon" src="./assets/img/add_task_check.svg" alt="done">
                         </button>
                     </div>
@@ -176,13 +182,13 @@ function getContact(data) {
     const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
 
     return `
-        <div class="personal-ad">
+        <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}')">
             <div class="person-circle d-flex-c">
               ${initials}
             </div>
             <div class="personal-data">
               <span>${data.name}</span>
-              <a href="mailto:${data.email}">${data.email}</a>
+              <a href="mailto:${data.email}" onclick="event.stopPropagation()">${data.email}</a>
             </div>
         </div>
     `
