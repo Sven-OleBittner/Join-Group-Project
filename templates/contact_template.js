@@ -1,7 +1,7 @@
 function addContactTemplate() {
     return `  
-    <div class="overlay">
-        <div class="add-contact-container d-flex-c">
+    <div class="overlay" onclick="closeAddContactOverlay()">
+        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
         <!-- Add Container Left -->
         <div class="edit-add-contact-container d-flex-c-c-fs">
             <div class="add-contact-close-container-mobile">
@@ -9,6 +9,7 @@ function addContactTemplate() {
                 class="close-contact-img c-pointer"
                 src="./assets/img/contact-close-white.svg"
                 alt="Close"
+                onclick="closeAddContactOverlay()"
             />
             </div>
             <img
@@ -42,6 +43,7 @@ function addContactTemplate() {
                 class="close-contact-img c-pointer"
                 src="./assets/img/contact-close.svg"
                 alt="Close"
+                onclick="closeAddContactOverlay()"
             />
             </div>
 
@@ -49,7 +51,7 @@ function addContactTemplate() {
             <div class="w100">
             <form action="">
                 <div class="input-contact-container">
-                <input id="add-name" type="text" placeholder="Name" required />
+                <input id="add-name" type="text" placeholder="Name" oninput="validateNameInput(this)" required />
                 <img
                     class="contact-input-icon"
                     src="./assets/img/contact-person.svg"
@@ -58,7 +60,7 @@ function addContactTemplate() {
                 </div>
                 <div id="add-name-validation" class="error-message"></div>
                 <div class="input-contact-container">
-                <input id="add-email" type="email" placeholder="Email" required />
+                <input id="add-email" type="email" placeholder="Email" oninput="validateEmailInput(this)" required />
                 <img
                     class="contact-input-icon"
                     src="./assets/img/contact-mail.svg"
@@ -67,7 +69,7 @@ function addContactTemplate() {
                 </div>
                 <div id="add-email-validation" class="error-message"></div>
                 <div class="input-contact-container">
-                <input id="add-phone" type="tel" placeholder="Phone" required />
+                <input id="add-phone" type="tel" placeholder="Phone" oninput="validatePhoneInput(this)" required />
                 <img
                     class="contact-input-icon"
                     src="./assets/img/contact-call.svg"
@@ -79,7 +81,7 @@ function addContactTemplate() {
 
             <!-- Button Container -->
             <div class="edit-contact-buttons">
-                <button class="contact-delete add-contact-delete d-flex-c">
+                <button class="contact-delete add-contact-delete d-flex-c" onclick="closeAddContactOverlay()">
                 Cancel
                 <img
                     class="fill-hover"
@@ -163,21 +165,24 @@ function editContactTemplate(data) {
     `;
 }
 
-function getFirstLetter() {
+function getFirstLetter(letter) {
     return `
-    <div class="first-letter-container">A</div>
+    <div class="first-letter-container">${letter}</div>
     `
 }
 
-function getContact() {
+function getContact(data) {
+    const nameWords = data.name.split(' ');
+    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
+
     return `
         <div class="personal-ad">
             <div class="person-circle d-flex-c">
-              AS
+              ${initials}
             </div>
             <div class="personal-data">
-              <span>Anja Schulz</span>
-              <a href="mailto:anja.schulz@example.com">schulz@example.com</a>
+              <span>${data.name}</span>
+              <a href="mailto:${data.email}">${data.email}</a>
             </div>
         </div>
     `

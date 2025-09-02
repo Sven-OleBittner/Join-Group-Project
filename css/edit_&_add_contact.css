@@ -344,15 +344,11 @@
 
             .edit-contact-buttons {
                 justify-content: center;
-                margin-top: 40px;
-            }
-
-            .input-contact-container {
-                margin-bottom: 14px;
+                /* margin-top: 40px; */
             }
 
             .input-add-contact-container {
-                padding: 88px 16px 80px 16px;
+                padding: 88px 16px 40px 16px;
             }
 
             .edit-headline {
