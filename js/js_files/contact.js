@@ -2,6 +2,34 @@ const BASE_URL = "https://join-f5b75-default-rtdb.europe-west1.firebasedatabase.
 let currentData = [];
 let selectedContactKey = null;
 
+// Available color classes from color.css
+const colorClasses = [
+    'color-orange',
+    'color-pink',
+    'color-purple',
+    'color-violet',
+    'color-cyan',
+    'color-turquoise',
+    'color-coral',
+    'color-peach',
+    'color-light-pink',
+    'color-yellow',
+    'color-blue',
+    'color-lime-green',
+    'color-light-yellow',
+    'color-red',
+    'color-goldenrod'
+];
+
+/**
+ * Gets a random color class from the available color classes
+ * @returns {string} A random color class name
+ */
+function getRandomColorClass() {
+    const randomIndex = Math.floor(Math.random() * colorClasses.length);
+    return colorClasses[randomIndex];
+}
+
 /**
  * Loads and displays the complete contact list with alphabetical grouping
  * @async
@@ -118,11 +146,11 @@ function addContactsForLetterToDOM(container, contacts) {
  * @param {string} phone - Contact's phone number
  * @param {string} firebaseKey - Firebase database key for the contact
  */
-function showContactDetails(name, email, phone, firebaseKey) {
+function showContactDetails(name, email, phone, firebaseKey, randomColor) {
     selectedContactKey = firebaseKey;
     showContactDetailsSection();
     updateContactDisplayName(name);
-    updateContactInitials(name);
+    updateContactInitials(name, randomColor);
     updateContactEmail(email);
     updateContactPhone(phone);
 }
@@ -156,12 +184,16 @@ function updateContactDisplayName(name) {
  * Updates the contact initials circle with the contact's initials
  * @param {string} name - The contact's full name to generate initials from
  */
-function updateContactInitials(name) {
+function updateContactInitials(name, randomColor) {
     const nameWords = name.split(' ');
     const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
     const circleElement = document.getElementById('contact-initials-circle');
     if (circleElement) {
         circleElement.textContent = initials;
+        colorClasses.forEach(colorClass => {
+            circleElement.classList.remove(colorClass);
+        });
+        circleElement.classList.add(randomColor);
     }
 }
 
@@ -201,7 +233,6 @@ async function deleteSelectedContact() {
     }
     try {
         await deleteContactFromDatabase(selectedContactKey);
-        console.log("Contact deleted successfully.");
         closeEditContactOverlay();
         hideContactDetailsSection();
         selectedContactKey = null;
@@ -575,4 +606,8 @@ async function updateContactInDatabase(firebaseKey, contactData) {
 function closeEditContactOverlay() {
     let contactOverlay = document.getElementById("contact-overlay");
     contactOverlay.innerHTML = "";
+}
+
+function loadTitle() {
+    document.getElementById("title").innerHTML = "Contacts";
 }
