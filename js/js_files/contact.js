@@ -295,13 +295,17 @@ async function closeAddContactOverlay() {
  * @returns {Promise<void>}
  */
 async function postData(path = "", data) {
-    await fetch(BASE_URL + path + ".json", {
+    let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     });
+
+    if(!response.ok){
+        console.error(error);
+    };
 }
 
 /**
@@ -312,6 +316,9 @@ async function postData(path = "", data) {
  */
 async function getData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
+    if(!response.ok){
+        console.error(error);
+    }p
     let responseData = await response.json();
     return responseData;
 }
@@ -403,8 +410,8 @@ function validateName(value, showRequired = false) {
     if (trimmedValue === "") {
         return showRequired ? "Name is required." : true;
     }
-    if (trimmedValue.length < 2) {
-        return "Name must be at least 2 characters long.";
+    if (trimmedValue.length < 5) {
+        return "Name must be at least 5 characters long.";
     }
     const allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ \'-';
     for (let i = 0; i < trimmedValue.length; i++) {
@@ -469,7 +476,7 @@ function setValidationMessage(element, message) {
         } else {
             element.textContent = message;
             if (message) {
-                element.style.color = "#FF8190";
+                element.style.backgroundColor = "var(--required-color)";
             }
         }
     }
@@ -565,19 +572,24 @@ async function saveEditedContact() {
         console.error("No contact selected for editing.");
         return;
     }
-    const editName = document.getElementById("edit-name");
-    const editEmail = document.getElementById("edit-email");
-    const editPhone = document.getElementById("edit-phone");
-    const updatedContact = {
-        name: editName.value,
-        email: editEmail.value,
-        phone: editPhone.value
-    };
+    const oldName = document.getElementById("contact-display-name").textContent;
+    const oldEmail = document.getElementById("contact-email-link").textContent;
+    const oldPhone = document.getElementById("contact-phone-link").textContent;
+    const editName = document.getElementById("edit-name").value;
+    const editEmail = document.getElementById("edit-email").value;
+    const editPhone = document.getElementById("edit-phone").value;
     try {
-        await updateContactInDatabase(selectedContactKey, updatedContact);
-        closeEditContactOverlay();
-        await loadContactList();
-        showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey);
+        if (editName !== oldName || editEmail !== oldEmail || editPhone !== oldPhone) {
+            const updatedContact = {
+                name: editName,
+                email: editEmail,
+                phone: editPhone
+            };
+            await updateContactInDatabase(selectedContactKey, updatedContact);
+            await loadContactList();
+            showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey);
+        }
+         closeEditContactOverlay();
     } catch (error) {
         console.error("Error updating contact:", error);
     }
@@ -591,13 +603,17 @@ async function saveEditedContact() {
  * @returns {Promise<void>}
  */
 async function updateContactInDatabase(firebaseKey, contactData) {
-    await fetch(BASE_URL + "contacts/" + firebaseKey + ".json", {
+    let response = await fetch(BASE_URL + "contacts/" + firebaseKey + ".json", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(contactData)
     });
+
+    if(!response.ok){
+        console.error(error);
+    }
 }
 
 /**
