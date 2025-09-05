@@ -61,6 +61,10 @@
     display: none;
   }
 
+  .header-logo {
+    display: block;
+  }
+
   .sidebar {
     display: none !important;
   }
