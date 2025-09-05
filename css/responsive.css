@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
   background-color: #2a3647;
-  height: 90px; /* Increased from 60px */
+  height: 90px;
   z-index: 1000;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -56,8 +56,6 @@
   font-weight: 400;
 }
 
-
-/* Media Query für kleine Bildschirme */
 @media (max-width: 945px) {
   .title {
     display: none;
@@ -111,6 +109,6 @@
 
 @media (max-width: 900px) {
   .main-content {
-    padding-bottom: 80px; /* Increased from 60px to match new footer height */
+    padding-bottom: 80px;
   }
 }
