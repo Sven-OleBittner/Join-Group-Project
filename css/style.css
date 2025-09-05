@@ -9,7 +9,7 @@ body {
   border-bottom: 0.2rem solid rgb(236, 236, 236);
   box-shadow: 0 4px 2px -2px rgb(238, 237, 237);
   color: black;
-  height: 100px;
+  height: 96px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -151,17 +151,17 @@ body {
 
 .bottom-links {
   margin-top: auto;
-  padding: 20px;
+  padding: 0 0 56px 32px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
 .bottom-link {
   color: #999;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 16px;
   transition: color 0.2s ease;
 }
 
@@ -175,10 +175,9 @@ body {
 }
 
 .main-content-privacy {
-  max-height: 80vh;
   padding: 110px;
   overflow-y: auto;
-  height: 100vh;
+  max-height: 90vh;
 }
 
 .main-content-privacy h2 {
