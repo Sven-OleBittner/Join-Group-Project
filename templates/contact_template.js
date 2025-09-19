@@ -1,3 +1,7 @@
+/**
+ * Generates the HTML template for adding a new contact
+ * @returns {string} HTML template string for the add contact overlay
+ */
 function addContactTemplate() {
     return `  
     <div class="overlay" onclick="closeAddContactOverlay()">
@@ -105,6 +109,11 @@ function addContactTemplate() {
   `;
 }
 
+/**
+ * Generates the HTML template for editing an existing contact
+ * @param {Object} data - The contact data object containing name, email, and phone
+ * @returns {string} HTML template string for the edit contact overlay
+ */
 function editContactTemplate(data) {
     const nameWords = data.name.split(' ');
     const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
@@ -172,12 +181,22 @@ function editContactTemplate(data) {
     `;
 }
 
+/**
+ * Generates the HTML template for a letter header in the contact list
+ * @param {string} letter - The letter to display as a section header
+ * @returns {string} HTML template string for the letter header
+ */
 function getFirstLetter(letter) {
     return `
     <div class="first-letter-container">${letter}</div>
     `
 }
 
+/**
+ * Generates the HTML template for a contact card in the contact list
+ * @param {Object} data - The contact data object containing name, email, phone, and firebaseKey
+ * @returns {string} HTML template string for the contact card
+ */
 function getContact(data) {
     const nameWords = data.name.split(' ');
     const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);

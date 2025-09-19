@@ -145,6 +145,7 @@ function addContactsForLetterToDOM(container, contacts) {
  * @param {string} email - Contact's email address
  * @param {string} phone - Contact's phone number
  * @param {string} firebaseKey - Firebase database key for the contact
+ * @param {string} randomColor - CSS color class for the contact initials circle
  */
 function showContactDetails(name, email, phone, firebaseKey, randomColor) {
     selectedContactKey = firebaseKey;
@@ -183,6 +184,7 @@ function updateContactDisplayName(name) {
 /**
  * Updates the contact initials circle with the contact's initials
  * @param {string} name - The contact's full name to generate initials from
+ * @param {string} randomColor - CSS color class to apply to the contact initials circle
  */
 function updateContactInitials(name, randomColor) {
     const nameWords = name.split(' ');
@@ -303,7 +305,7 @@ async function postData(path = "", data) {
         body: JSON.stringify(data)
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         console.error(error);
     };
 }
@@ -316,9 +318,9 @@ async function postData(path = "", data) {
  */
 async function getData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
-    if(!response.ok){
+    if (!response.ok) {
         console.error(error);
-    }p
+    }
     let responseData = await response.json();
     return responseData;
 }
@@ -406,24 +408,20 @@ function validatePhoneInput(inputElement) {
  * @returns {boolean|string} True if valid, error message string if invalid
  */
 function validateName(value, showRequired = false) {
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜ.'\- ]{5,}$/;
     const trimmedValue = value.trim();
     if (trimmedValue === "") {
         return showRequired ? "Name is required." : true;
     }
-    if (trimmedValue.length < 5) {
-        return "Name must be at least 5 characters long.";
+    if (!nameRegex.test(trimmedValue)) {
+        return "Name can only contain letters, spaces, apostrophes, and hyphens.";
     }
-    const allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ \'-';
-    for (let i = 0; i < trimmedValue.length; i++) {
-        if (!allowedChars.includes(trimmedValue[i])) {
-            return "Name can only contain letters, spaces, apostrophes, and hyphens.";
-        }
-    }
+
     return true;
 }
 
 /**
- * Validates an email address according to basic format rules
+ * Validates an email address using comprehensive regex pattern
  * @param {string} value - The email value to validate
  * @param {boolean} showRequired - Whether to show required message for empty values
  * @returns {boolean|string} True if valid, error message string if invalid
@@ -433,8 +431,8 @@ function validateEmail(value, showRequired = false) {
     if (trimmedValue === "") {
         return showRequired ? "Email is required." : true;
     }
-    if (!trimmedValue.includes('@') || !trimmedValue.includes('.') ||
-        trimmedValue.indexOf('@') === 0 || trimmedValue.indexOf('.') === trimmedValue.length - 1) {
+    const emailRegex = /^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(trimmedValue)) {
         return "Please enter a valid email address";
     }
     return true;
@@ -448,18 +446,15 @@ function validateEmail(value, showRequired = false) {
  */
 function validatePhone(value, showRequired = false) {
     const trimmedValue = value.trim();
-    const allowedChars = '0123456789+- ()';
+    const phoneRegex = /^[0-9+\-() ]{5,20}$/;
     if (trimmedValue === "") {
         return showRequired ? "Phone is required." : true;
     }
+    if (!phoneRegex.test(trimmedValue)) {
+        return "Phone number can only contain numbers, +, -, spaces, and parentheses.";
+    }
     if (trimmedValue.length < 5) {
         return "Phone number must be at least 5 characters long.";
-    }
-    for (let i = 0; i < trimmedValue.length; i++) {
-        const currentChar = trimmedValue[i];
-        if (!allowedChars.includes(currentChar)) {
-            return "Phone number can only contain numbers, +, -, spaces, and parentheses.";
-        }
     }
     return true;
 }
@@ -476,7 +471,7 @@ function setValidationMessage(element, message) {
         } else {
             element.textContent = message;
             if (message) {
-                element.style.backgroundColor = "var(--required-color)";
+                element.style.color = "var(--required-color)";
             }
         }
     }
@@ -559,6 +554,20 @@ function validationEditContactInput() {
 }
 
 /**
+ * Gets the current values from display and edit form elements
+ * @returns {Object} Object containing old and new contact values
+ */
+function getValues() {
+    const oldName = document.getElementById("contact-display-name").textContent;
+    const oldEmail = document.getElementById("contact-email-link").textContent;
+    const oldPhone = document.getElementById("contact-phone-link").textContent;
+    const editName = document.getElementById("edit-name").value;
+    const editEmail = document.getElementById("edit-email").value;
+    const editPhone = document.getElementById("edit-phone").value;
+    return { oldName, oldEmail, oldPhone, editName, editEmail, editPhone };
+}
+
+/**
  * Saves the edited contact data to the database after validation
  * @async
  * @returns {Promise<void>}
@@ -572,12 +581,7 @@ async function saveEditedContact() {
         console.error("No contact selected for editing.");
         return;
     }
-    const oldName = document.getElementById("contact-display-name").textContent;
-    const oldEmail = document.getElementById("contact-email-link").textContent;
-    const oldPhone = document.getElementById("contact-phone-link").textContent;
-    const editName = document.getElementById("edit-name").value;
-    const editEmail = document.getElementById("edit-email").value;
-    const editPhone = document.getElementById("edit-phone").value;
+    const { oldName, oldEmail, oldPhone, editName, editEmail, editPhone } = getValues();
     try {
         if (editName !== oldName || editEmail !== oldEmail || editPhone !== oldPhone) {
             const updatedContact = {
@@ -587,9 +591,10 @@ async function saveEditedContact() {
             };
             await updateContactInDatabase(selectedContactKey, updatedContact);
             await loadContactList();
-            showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey);
+            const randomColor = getRandomColorClass();
+            showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey, randomColor);
         }
-         closeEditContactOverlay();
+        closeEditContactOverlay();
     } catch (error) {
         console.error("Error updating contact:", error);
     }
@@ -611,7 +616,7 @@ async function updateContactInDatabase(firebaseKey, contactData) {
         body: JSON.stringify(contactData)
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         console.error(error);
     }
 }
@@ -622,8 +627,4 @@ async function updateContactInDatabase(firebaseKey, contactData) {
 function closeEditContactOverlay() {
     let contactOverlay = document.getElementById("contact-overlay");
     contactOverlay.innerHTML = "";
-}
-
-function loadTitle() {
-    document.getElementById("title").innerHTML = "Contacts";
 }
