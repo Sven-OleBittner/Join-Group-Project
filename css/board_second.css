@@ -94,7 +94,6 @@
   padding:6px 12px;
   border-radius:10px;
   color:#fff;
-  font-weight:700;
   font-size:22px;
 }
 
@@ -377,42 +376,29 @@
 
 .kb-prio--high .kb-prio__text{color:#DC2626;}
 
+.kb-prio {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 22px;
+}
+
+.kb-prio__icon {
+  width: 22px;
+  height: 22px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .kb-prio--low .kb-prio__icon {
   background-image: url("../assets/img/green_low_urgent.svg");
 }
 
 .kb-prio--medium .kb-prio__icon {
-  background-image: url("../assets/img/Prio%20media.svg"); 
+  background-image: url("../assets/img/Prio%20media.svg");
 }
 
 .kb-prio--high .kb-prio__icon {
   background-image: url("../assets/img/red_high_urgent.svg");
-}
-
-
-.kb-prio{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  min-width:22px;
-}
-
-.kb-prio__icon{
-  width:22px;
-  height:22px;
-  background-size:contain;
-  background-position:center;
-  background-repeat:no-repeat;
-}
-
-.kb-prio--low .kb-prio__icon{
-  background-image:url("./assets/img/green_low_urgent.svg");
-}
-
-.kb-prio--medium .kb-prio__icon{
-  background-image:url("./assets/img/Prio media.svg");
-}
-
-.kb-prio--high .kb-prio__icon{
-  background-image:url("./assets/img/red_high_urgent.svg");
 }
