@@ -402,3 +402,7 @@
 .kb-prio--high .kb-prio__icon {
   background-image: url("../assets/img/red_high_urgent.svg");
 }
+
+.header .header-logo {
+  display: none;
+}

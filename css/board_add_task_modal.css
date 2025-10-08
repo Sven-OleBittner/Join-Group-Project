@@ -9,7 +9,8 @@
 }
 
 #at-modal .at-header h2 {
-  font: 800 48px/1.1 Inter;
+  font-size: 44px;
+  font-weight: 800;
   margin: 0 0 16px;
 }
 
@@ -77,21 +78,53 @@
   resize: vertical;
 }
 
+#at-modal .priority .priority__btn:nth-child(1).priority__btn--active {
+  background: #FF3B3B;
+  border-color: #FF3B3B;
+  color: #fff;
+}
+
+#at-modal .priority .priority__btn:nth-child(2).priority__btn--active {
+  background: #FFA800;
+  border-color: #FFA800;
+  color: #fff;
+}
+
+#at-modal .priority .priority__btn:nth-child(3).priority__btn--active {
+  background: #7AE229;
+  border-color: #7AE229;
+  color: #fff;
+}
+
 #at-modal .priority {
   display: grid;
   grid-auto-flow: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 #at-modal .priority__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 16px;
   border: 1px solid #E5E7EB;
   border-radius: 12px;
-  background: #FFFFFF;
-  font: 700 15px/1 Inter, system-ui;
+  background: #F6F7F8;
+  font-weight: 700;
+  line-height: 1;
   color: #111827;
   cursor: pointer;
   transition: background .12s, border-color .12s, transform .06s;
+}
+
+#at-modal .priority__btn img {
+  height: 18px;
+  width: 18px;
+  transition: filter .12s ease;
+}
+
+#at-modal .priority__btn--active img {
+  filter: brightness(0) invert(1);
 }
 
 #at-modal .priority__btn:active {
@@ -149,6 +182,16 @@
 
 #at-modal .btn:hover {
   filter: brightness(.98);
+}
+
+#at-modal .priority .priority__btn:nth-child(1) img {
+  filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
+}
+#at-modal .priority .priority__btn:nth-child(2) img {
+  filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
+}
+#at-modal .priority .priority__btn:nth-child(3) img {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
 }
 
 @media (max-width: 1023px) {
