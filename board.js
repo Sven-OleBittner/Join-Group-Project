@@ -87,6 +87,8 @@ function bindCardPopups(){
     const t=e.target; if(isInteractive(t)) return;
     const card=t instanceof Element?t.closest(".kb-card"):null;
     if(!card||!wrap.contains(card)) return;
+    if(!card.dataset.id) card.dataset.id="kb_"+Math.random().toString(36).slice(2,9);
+    window.__beCurrentDetailsCardId=card.dataset.id;
     const d=collectCardData(card); openDetails(d.type,d);
   });
 }
@@ -238,4 +240,3 @@ window.addEventListener("DOMContentLoaded",()=>{
   initStaticIcons(); renderAvatars(); bindAddTaskTriggers(); bindCardPopups();
   wireAddTaskModal(); wireTaskDetailsModal(); wireAddTaskForm(); bindSubtaskToggles();
 });
-

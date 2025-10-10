@@ -52,6 +52,7 @@
     place-items: center;
     font-size: 0;
     background: #2A3647;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
   }
   .kb-add-btn:hover {
     background: #29ABE2;
@@ -390,5 +391,18 @@
   }
   .kb {
     padding-bottom: calc(var(--footer-h) + env(safe-area-inset-bottom, 0px) + 16px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header .header-logo {
+    display: inline-block;
+    width: 40px;       
+    height: auto;
   }
 }
