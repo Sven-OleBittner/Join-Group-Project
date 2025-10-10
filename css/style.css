@@ -189,3 +189,15 @@ body {
 .main-content-privacy ul {
   margin-bottom: 25px;
 }
+
+.kb-card.is-tilted { 
+  transform: rotate(2deg) scale(1.02); 
+  box-shadow: 0 10px 30px rgba(0,0,0,.15); 
+  transition: transform 120ms ease; 
+}
+
+.kb-column.is-dragover, .kb-col.is-dragover { 
+  outline: 2px dashed rgba(0,0,0,.15); 
+  outline-offset: 4px; 
+}
+
