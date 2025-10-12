@@ -1,4 +1,5 @@
-const contacts=[
+// ---- data ----
+const contacts = [
   {initials:"SM",name:"Sofia Müller (You)"},
   {initials:"AM",name:"Anton Mayer"},
   {initials:"AS",name:"Anja Schulz"},
@@ -10,17 +11,20 @@ const contacts=[
   {initials:"TW",name:"Tatjana Wolf"}
 ];
 
-const ICONS={
+const ICONS = {
   prio:{
     low:["./assets/img/green_low_urgent.svg","./assets/icons/green_low_urgent.svg"],
     medium:["./assets/img/Prio media.svg","./assets/icons/Prio media.svg"],
     high:["./assets/img/red_high_urgent.svg","./assets/icons/red_high_urgent.svg"]
   }
 };
+
+// ---- utils ----
 function setIconWithFallback(img,srcs){
-  if(!img||!srcs?.length)return; let i=0;
-  img.onerror=()=>i+1<srcs.length?img.src=srcs[++i]:img.remove();
-  img.src=srcs[0];
+  if(!img || !srcs?.length) return;
+  let i=0;
+  img.onerror = () => i+1 < srcs.length ? img.src = srcs[++i] : img.remove();
+  img.src = srcs[0];
 }
 
 function isInteractive(el){
@@ -29,6 +33,24 @@ function isInteractive(el){
 }
 
 function isDesktop(){ return matchMedia("(min-width:1024px)").matches; }
+
+function mmddyyyyToISO(s){
+  // accepts "MM/DD/YYYY" -> "YYYY-MM-DD"
+  if(!s) return "";
+  const m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(!m) return s; // already ISO or unknown
+  const [,mm,dd,yyyy] = m;
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function isoToMMDDYYYY(s){
+  // "YYYY-MM-DD" -> "MM/DD/YYYY"
+  if(!s) return "";
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m) return s;
+  const [,yyyy,mm,dd] = m;
+  return `${mm}/${dd}/${yyyy}`;
+}
 
 function openAddTaskDependingOnViewport(){
   if(isDesktop() && window.openAddTaskPopup) openAddTaskPopup();
@@ -58,6 +80,7 @@ function triggerAddTaskPopup(){
   setTimeout(()=>location.href="add_task.html",0);
 }
 
+// ---- read card data ----
 function getPriorityFromCard(card){
   const el=card.querySelector(".kb-prio,.kb-priority");
   if(!el) return "medium";
@@ -77,10 +100,14 @@ function collectCardData(card){
   const assignees=(card.querySelector(".kb-avatars")?.getAttribute("data-assignees")||"").split(",").map(v=>v.trim()).filter(Boolean);
   const dueDate=card.dataset.due||"";
   let subtasks=[];
-  if(card.dataset.subtasks){try{subtasks=JSON.parse(card.dataset.subtasks);}catch{subtasks=card.dataset.subtasks.split(",").map(s=>s.trim()).filter(Boolean);}}
+  if(card.dataset.subtasks){
+    try{subtasks=JSON.parse(card.dataset.subtasks);}
+    catch{subtasks=card.dataset.subtasks.split(",").map(s=>s.trim()).filter(Boolean);}
+  }
   return {type,title,desc,priority,assignees,dueDate,subtasks,cardEl:card};
 }
 
+// ---- modals & overlay ----
 function bindCardPopups(){
   const wrap=document.querySelector(".kb-columns"); if(!wrap) return;
   wrap.addEventListener("click",e=>{
@@ -120,6 +147,7 @@ function wireAddTaskModal(){
   });
 }
 
+// ---- task details modal ----
 function setChip(type){
   const el=document.getElementById("td-chip"); if(!el) return;
   el.className="td-chip "+(type==="technical"?"td-chip--technical":"td-chip--story");
@@ -196,6 +224,7 @@ function wireTaskDetailsModal(){
   };
 }
 
+// ---- form wiring ----
 function bindPriorityButtons(){
   document.querySelectorAll(".priority__btn").forEach(b=>{
     b.addEventListener("click",()=>{
@@ -219,24 +248,42 @@ function bindSubtaskInput(){
 function bindAddTaskButtons(){
   document.getElementById("at-cancel")?.addEventListener("click",()=>{ document.getElementById("at-modal")?.classList.remove("is-open"); hideOverlay(); });
   document.getElementById("at-create")?.addEventListener("click",e=>{
-    e.preventDefault(); const f=document.querySelector("#at-modal form")||document.querySelector("#taskForm");
-    if(!f) return; const fd=new FormData(f); console.log("New Task:",Object.fromEntries(fd.entries()));
-    document.getElementById("at-modal")?.classList.remove("is-open"); hideOverlay();
+    const f = beGetForm();
+    if(!f || f.dataset.editingId) return; 
   });
 }
 
-function wireAddTaskForm(){ bindPriorityButtons(); bindSubtaskInput(); bindAddTaskButtons(); }
+function wireAddTaskForm(){
+  bindPriorityButtons(); bindSubtaskInput(); bindAddTaskButtons();
+  const f = beGetForm();
+  if(f){
+    const cat = f.querySelector('[name="category"]');
+    let typeHidden = f.querySelector('[name="type"]');
+    if(!typeHidden){
+      typeHidden = document.createElement('input');
+      typeHidden.type = 'hidden'; typeHidden.name = 'type'; typeHidden.value = 'story';
+      f.appendChild(typeHidden);
+    }
+    cat?.addEventListener('change', () => {
+      typeHidden.value = cat.value === 'Technical Task' ? 'technical' : 'story';
+    });
+  }
+}
 
+// ---- static icons & init ----
 function initStaticIcons(){
   const s=document.querySelector(".kb-search .kb-icon");
   if(s){s.src="./assets/img/board_input_search_icon.svg";s.alt="Search";}
   document.querySelectorAll(".kb-col-add").forEach(b=>b.textContent="");
-  document.querySelectorAll(".kb-priority").forEach(el=>{
-    if(el.querySelector(".kb-priority-text")) return;
-  });
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
-  initStaticIcons(); renderAvatars(); bindAddTaskTriggers(); bindCardPopups();
-  wireAddTaskModal(); wireTaskDetailsModal(); wireAddTaskForm(); bindSubtaskToggles();
+  initStaticIcons();
+  renderAvatars();
+  bindAddTaskTriggers();
+  bindCardPopups();
+  wireAddTaskModal();
+  wireTaskDetailsModal();
+  wireAddTaskForm();
+  bindSubtaskToggles();
 });
