@@ -351,3 +351,23 @@
   cursor: pointer;
   color: #6B7280;
 }
+
+.kb-card-list[data-cards] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kb-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border: 2px dashed #D0D5DD;
+  border-radius: 12px;
+  color: #98A2B3;
+  background: #F9FAFB;
+  margin-top: 8px;
+}
+
+.kb-empty[hidden] { display: none !important; }

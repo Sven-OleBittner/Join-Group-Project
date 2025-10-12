@@ -2,7 +2,9 @@
 function beGetBoard(){ return document.querySelector(".kb-columns"); }
 
 /** @param {Element} el @returns {HTMLElement|null} */
-function beGetColumn(el){ return el?.closest("[data-status], .kb-column, .kb-col") || null; }
+function beGetColumn(el){
+  return el?.closest(".kb-col, .kb-column, [data-status]:not(.kb-card)") || null;
+}
 
 /** @param {Element} col @returns {HTMLElement} */
 function beCardsWrap(col){ return col.querySelector(".kb-cards, .kb-card-list, [data-cards]") || col; }
@@ -105,7 +107,9 @@ function beGetForm(){ return document.querySelector("#at-modal form") || documen
 /** @returns {boolean} */
 function beOpenEditModal(){
   if (window.openAddTaskPopup){ window.openAddTaskPopup(); return true; }
-  const d=document.getElementById("td-modal"); if(!d) return false; showOverlay(); d.classList.add("is-open"); return true;
+  const d=document.getElementById("td-modal"); if(!d) return false; 
+  const showOverlay = window.showOverlay || (()=>{});
+  showOverlay(); d.classList.add("is-open"); return true;
 }
 
 /** @param {HTMLFormElement} f @param {string} n @param {string} v */
@@ -115,13 +119,38 @@ function beSetFormVal(f,n,v){
   el.dispatchEvent(new Event("input",{bubbles:true})); el.dispatchEvent(new Event("change",{bubbles:true}));
 }
 
+/** Helpers for assignees */
+function nameToInitials(full){
+  const hit = contacts.find(c => c.name === full || full.startsWith(c.name.split(' (')[0]));
+  return hit ? hit.initials : null;
+}
+function initialsToName(initials){
+  const hit = contacts.find(c => c.initials === initials);
+  return hit ? hit.name : initials;
+}
+
 /** @param {HTMLElement} card */
 function bePreloadForm(card){
   const f=beGetForm(); if(!f) return;
   const d=collectCardData(card);
-  beSetFormVal(f,"title",d.title); beSetFormVal(f,"description",d.desc);
-  beSetFormVal(f,"due",d.dueDate||""); beSetFormVal(f,"assignees",(d.assignees||[]).join(", "));
-  beSetFormVal(f,"priority",d.priority||"medium"); beSetFormVal(f,"type",d.type||"story");
+  beSetFormVal(f,"title",d.title);
+  beSetFormVal(f,"description",d.desc);
+  const iso = (window.mmddyyyyToISO || ((s)=>s))(d.dueDate || "");
+  beSetFormVal(f,"due", iso);
+  beSetFormVal(f,"priority",d.priority||"medium");
+  beSetFormVal(f,"type",d.type||"story");
+  const catSel = f.querySelector('[name="category"]');
+  if(catSel){
+    catSel.value = (d.type === 'technical') ? 'Technical Task' : 'User Story';
+  }
+  const sel = f.querySelector('[name="assignees"]');
+  if(sel){
+    const initials = d.assignees || [];
+    Array.from(sel.options).forEach(o=>{
+      const init = nameToInitials(o.textContent.trim());
+      o.selected = init ? initials.includes(init) : false;
+    });
+  }
   f.dataset.editingId=card.dataset.id||"";
 }
 
@@ -140,31 +169,50 @@ function beSetType(card,t){
   const chip=card.querySelector(".kb-chip"); if(!chip) return;
   chip.classList.toggle("kb-chip--technical",t==="technical");
   chip.classList.toggle("kb-chip--story",t!=="technical");
+  chip.textContent = t==="technical" ? "Technical Task" : "User Story";
 }
 
 /** @param {HTMLElement} card @param {HTMLFormElement} f */
 function beApplyForm(card, f){
   const fd = new FormData(f);
+
   beSetText(card, ".kb-card-title", (fd.get("title") || "").toString());
   beSetText(card, ".kb-card-desc", (fd.get("description") || "").toString());
-  const due = (fd.get("due") || "").toString(); if (due) card.dataset.due = due;
-  const list = (fd.get("assignees") || "").toString().split(",").map(s => s.trim()).filter(Boolean);
-  const av = card.querySelector(".kb-avatars"); if (av) { av.setAttribute("data-assignees", list.join(",")); renderAvatars(); }
+
+  
+  const dueISO = (fd.get("due") || "").toString();
+  if (dueISO){
+    const toUS = (window.isoToMMDDYYYY || ((s)=>s))(dueISO);
+    card.dataset.due = toUS;
+  }
+
+  
+  const sel = f.querySelector('[name="assignees"]');
+  const initials = sel ? Array.from(sel.selectedOptions)
+    .map(o => nameToInitials(o.textContent.trim()))
+    .filter(Boolean) : [];
+
+  const av = card.querySelector(".kb-avatars");
+  if (av) { av.setAttribute("data-assignees", initials.join(",")); renderAvatars(); }
+
   beSetPrio(card, (fd.get("priority") || "medium").toString());
   beSetType(card, (fd.get("type") || "story").toString());
+
   document.dispatchEvent(new CustomEvent("task:updated", { detail: { id: card.dataset.id || "" } }));
 }
 
-/** @param {HTMLFormElement} f */
+
 function beInterceptSave(f){
   const btn=document.getElementById("at-create"); if(!btn || btn.dataset.beSave) return;
   btn.dataset.beSave="1";
   btn.addEventListener("click",e=>{
-    if(!f.dataset.editingId) return;
+    if(!f.dataset.editingId) return; 
     e.preventDefault();
     const card=document.querySelector(`.kb-card[data-id="${f.dataset.editingId}"]`);
     if(card) beApplyForm(/** @type {HTMLElement} */(card), f);
-    delete f.dataset.editingId; document.getElementById("at-modal")?.classList.remove("is-open"); hideOverlay();
+    delete f.dataset.editingId; document.getElementById("at-modal")?.classList.remove("is-open");
+    const hideOverlay = window.hideOverlay || (()=>{});
+    hideOverlay();
   },true);
 }
 
@@ -204,7 +252,7 @@ function beOnDetailsClick(e){
   const del =t.closest("#td-modal [data-td-delete], #td-modal .td-delete, #td-modal [data-action='delete'], #td-modal #td-delete");
   if(!edit && !del) return; e.preventDefault();
   const card = beGetCurrentDetailsCard(); if(!card) return;
-  if(del){ beDelete(card); document.getElementById("td-modal")?.classList.remove("is-open"); hideOverlay(); return; }
+  if(del){ beDelete(card); document.getElementById("td-modal")?.classList.remove("is-open"); const hideOverlay = window.hideOverlay || (()=>{}); hideOverlay(); return; }
   if(!beOpenEditModal()) return bePromptEdit(card);
   bePreloadForm(card); const f=beGetForm(); if(f) beInterceptSave(f);
 }
@@ -223,15 +271,30 @@ function beWireFeedback(){
   document.addEventListener("task:deleted",()=>toast("Task deleted"));
 }
 
-
 (function beInit(){
   if (window.__kbEnhancementsInit) return; window.__kbEnhancementsInit = true;
   const b=beGetBoard(); if(!b) return;
   b.querySelectorAll(".kb-card").forEach(c=>beEnsureId(/** @type {HTMLElement} */(c)));
   beInitDnd(b); beWatchNewCards(b);
-  b.addEventListener("click",beOnBoardClick,true);         
-  document.addEventListener("click", beOnDetailsClick, true); 
+  b.addEventListener("click",beOnBoardClick,true);
+  document.addEventListener("click", beOnDetailsClick, true);
   beSyncAllColumns(); beWireFeedback();
+
   if (document.readyState==="loading") document.addEventListener("DOMContentLoaded", bePatchOpenDetails, {once:true});
   else bePatchOpenDetails();
 })();
+
+// === ensure .kb-empty visible/hidden correctly ===
+function beEnsureEmptyVisible() {
+  document.querySelectorAll("[data-status], .kb-col").forEach(col => {
+    const wrap = beCardsWrap(col);
+    const empty = beGetEmptyBox(col);
+    const hasCards = !!wrap.querySelector(".kb-card");
+    if (empty) empty.hidden = hasCards;
+  });
+}
+
+document.addEventListener("task:moved", beEnsureEmptyVisible);
+document.addEventListener("task:deleted", beEnsureEmptyVisible);
+document.addEventListener("task:updated", beEnsureEmptyVisible);
+window.addEventListener("DOMContentLoaded", beEnsureEmptyVisible);
