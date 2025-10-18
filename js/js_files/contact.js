@@ -628,11 +628,4 @@ async function updateContactInDatabase(firebaseKey, contactData) {
 function closeEditContactOverlay() {
     let contactOverlay = document.getElementById("contact-overlay");
     contactOverlay.innerHTML = "";
-<<<<<<< HEAD
-}
-
-function showSuccesfullyContactCreated() {
-    return
-=======
->>>>>>> def5b682cb0a6e1cea5a5c8cccc6e1937c48c554
 }
