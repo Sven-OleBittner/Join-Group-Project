@@ -32,9 +32,7 @@ async function deleteData(path = "") {
     const response = await fetch(BASE_URL + path + ".json", {
         method: "DELETE"
     });
-    if (response.ok) {
-        // placeholders for the functions to display the data again
-    } else {
-        console.error("Error deleting data");
-    }
+    if (!response.ok) {
+        throw new Error("Failed to delete data");
+    };
 }
