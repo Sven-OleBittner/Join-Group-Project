@@ -813,8 +813,7 @@ textarea {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  padding: 32px 32px 24px;
-  background-color:pink;
+  padding: 57px 68px 0px;
 }
 
 #at-modal .at-header {
@@ -827,7 +826,7 @@ textarea {
 #at-modal .at-header h2 {
   font-size: 44px;
   font-weight: 800;
-  margin: 0;
+  margin: 6px;
   color: #111827;
 }
 
