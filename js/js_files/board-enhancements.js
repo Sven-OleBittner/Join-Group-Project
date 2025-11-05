@@ -284,7 +284,6 @@ function beWireFeedback(){
   else bePatchOpenDetails();
 })();
 
-// === ensure .kb-empty visible/hidden correctly ===
 function beEnsureEmptyVisible() {
   document.querySelectorAll("[data-status], .kb-col").forEach(col => {
     const wrap = beCardsWrap(col);
@@ -298,3 +297,77 @@ document.addEventListener("task:moved", beEnsureEmptyVisible);
 document.addEventListener("task:deleted", beEnsureEmptyVisible);
 document.addEventListener("task:updated", beEnsureEmptyVisible);
 window.addEventListener("DOMContentLoaded", beEnsureEmptyVisible);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const list = document.querySelector('.kb-col[data-status="todo"] [data-cards]');
+  if (!list) return;
+  (JSON.parse(localStorage.getItem('tasks') || '[]')).forEach(t => {
+    const ass = (t.assigned || []).map(x => x.initials).join(', ');
+    const pr  = t.priority === 'urgent' ? 'high' : (t.priority || 'medium');
+    const type = t.category?.name === 'Technical Task' ? 'technical' : 'story';
+    const el = document.createElement('article');
+    el.className = 'kb-card'; el.dataset.due = t.dueDate || '';
+    el.innerHTML = `<div class="kb-card-top"><span class="kb-chip kb-chip--${type}">${t.category?.name||'User Story'}</span></div>
+      <h3 class="kb-card-title">${t.title}</h3><p class="kb-card-desc">${t.description||''}</p>
+      <footer class="kb-card-foot"><div class="kb-avatars" data-assignees="${ass}"></div>
+      <div class="kb-prio kb-prio--${pr}"><span class="kb-prio__icon" aria-hidden="true"></span></div></footer>`;
+    list.appendChild(el);
+  });
+  if (typeof renderAvatars === 'function') renderAvatars();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const list = document.querySelector('.kb-col[data-status="todo"] [data-cards]');
+  if (!list || !tasks.length) return;
+  let i = 0;
+  list.querySelectorAll('.kb-card:not([data-id])').forEach(card => {
+    const t = tasks[i++]; if (t && t.id != null) card.dataset.id = String(t.id);
+  });
+});
+
+document.addEventListener('task:deleted', (e) => {
+  const id = String(e.detail?.id || '');
+  if (!id) return;
+  let arr = JSON.parse(localStorage.getItem('tasks') || '[]');
+  arr = arr.filter(t => String(t.id) !== id);
+  localStorage.setItem('tasks', JSON.stringify(arr));
+});
+
+document.addEventListener('task:moved', (e) => {
+  const { id, status } = e.detail || {};
+  if (!id || !status) return;
+  const arr = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const ix = arr.findIndex(t => String(t.id) === String(id));
+  if (ix > -1) {
+    arr[ix].status = status;
+    localStorage.setItem('tasks', JSON.stringify(arr));
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const findTask = (card) => {
+    const title = card.querySelector('.kb-card-title')?.textContent.trim() || '';
+    const due   = card.dataset.due || '';
+    return tasks.find(t => (t.title||'')===title && (t.dueDate||'')===due);
+  };
+  document.querySelectorAll('.kb-card:not([data-id])').forEach(card => {
+    const t = findTask(card);
+    if (t?.id != null) card.dataset.id = String(t.id);
+  });
+});
+
+document.addEventListener('task:deleted', (e) => {
+  let id = String(e.detail?.id || '');
+  let arr = JSON.parse(localStorage.getItem('tasks') || '[]');
+  if (!arr.some(t => String(t.id) === id)) {
+    const mt = document.getElementById('td-title')?.textContent?.trim() || '';
+    const md = document.getElementById('td-due')?.textContent?.trim() || '';
+    const hit = arr.find(t => (t.title||'')===mt && (t.dueDate||'')===md);
+    if (hit) id = String(hit.id);
+  }
+  if (!id) return;
+  arr = arr.filter(t => String(t.id) !== id);
+  localStorage.setItem('tasks', JSON.stringify(arr));
+});

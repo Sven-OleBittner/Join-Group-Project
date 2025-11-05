@@ -235,3 +235,17 @@ function setupSubtasks() {
     confirm.style.display = 'none';
   });
 }
+
+document.querySelector('.create-btn').onclick = e => {
+  e.preventDefault();
+  const t = v => document.getElementById(v).value.trim();
+  const p = document.querySelector('.priority.selected')?.classList[1];
+  if (!t('title') || !t('due-date') || selected.category === null) return alert('Fill all required fields');
+  const task = {id:Date.now(),title:t('title'),description:t('description'),
+    dueDate:t('due-date'),priority:p,category:categories[selected.category],
+    assigned:[...selected.contacts].map(i=>contacts[i]),status:'todo'};
+  const a = JSON.parse(localStorage.getItem('tasks')||'[]');
+  a.push(task);
+  localStorage.setItem('tasks',JSON.stringify(a));
+  location='board.html';
+};

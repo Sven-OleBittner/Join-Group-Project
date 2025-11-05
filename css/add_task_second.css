@@ -1,3 +1,85 @@
+/* === ADD TASK SECOND MODAL === */
+
+/* === BASE GRID STRUCTURE === */
+#at-modal .at-dialog {
+  max-width: 980px !important;
+  width: calc(100vw - 80px) !important;
+  margin: 0 auto;
+  background: #F5F6F8;
+  border-radius: 24px;
+  padding: 48px 60px 28px !important;
+  overflow: visible;
+}
+
+#at-modal .at-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 28px !important;
+  position: relative !important;
+}
+
+#at-modal .at-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #F6F7F8;
+  transform: translateX(-50%);
+}
+
+#at-modal .at-col {
+  grid-column: auto !important;
+  min-width: 0 !important;
+}
+
+#at-modal .at-col:not(.at-col--right) {
+  grid-column: 1 !important;
+}
+
+#at-modal .at-col--right {
+  grid-column: 2 !important;
+}
+
+/* === PRIORITY === */
+#at-modal .priority,
+#at-modal .priority-options {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* === DROPDOWNS === */
+#at-modal .dropdown.full-expandable {
+  position: relative !important;
+}
+
+#at-modal .dropdown.full-expandable .dropdown-menu {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  z-index: 4000;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+
+#at-modal .dropdown.full-expandable.open .dropdown-menu {
+  max-height: 420px;
+  opacity: 1;
+  overflow: auto;
+}
+
+/* === ASSIGNED-TO DROPDOWN === */
 .dropdown.assigned-to {
   padding: 0;
   border: 1px solid #ccc;
@@ -24,10 +106,10 @@
 }
 
 .dropdown.assigned-to .dropdown-menu {
-  position: static;
-  left: auto;
-  right: auto;
-  top: auto;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
   margin-top: 6px;
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -36,14 +118,14 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.2s ease, opacity 0.2s ease;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
   z-index: 1000;
 }
 
 .dropdown.assigned-to.open .dropdown-menu {
-  max-height: 320px;
-  opacity: 1;
+  max-height: 420px;
   overflow-y: auto;
+  opacity: 1;
 }
 
 .dropdown.assigned-to .dropdown-search {
@@ -128,6 +210,7 @@
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
+/* === CATEGORY SELECT === */
 .dropdown.category-select {
   padding: 0;
   border: 1px solid #ccc;
@@ -154,10 +237,10 @@
 }
 
 .dropdown.category-select .dropdown-menu {
-  position: static;
-  left: auto;
-  right: auto;
-  top: auto;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
   margin-top: 6px;
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -166,12 +249,12 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.2s ease, opacity 0.2s ease;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
   z-index: 1000;
 }
 
 .dropdown.category-select.open .dropdown-menu {
-  max-height: 320px;
+  max-height: 420px;
   opacity: 1;
   overflow-y: auto;
 }
@@ -263,6 +346,7 @@
   cursor: pointer;
 }
 
+/* === DESCRIPTION FIELD === */
 #description {
   resize: vertical;
   min-height: 80px;
@@ -271,28 +355,7 @@
   box-sizing: border-box;
 }
 
-.dropdown.assigned-to .dropdown-menu,
-.dropdown.category-select .dropdown-menu {
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  margin-top: 6px;
-  transform: none !important;
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.dropdown.assigned-to.open .dropdown-menu,
-.dropdown.category-select.open .dropdown-menu {
-  max-height: 420px;
-  overflow-y: auto;
-  opacity: 1;
-}
-
+/* === FORM ACTIONS === */
 .form-actions {
   position: fixed !important;
   right: 60px;
@@ -305,6 +368,7 @@
   box-shadow: none;
 }
 
+/* === MISC === */
 .add-task-container {
   padding-bottom: 180px;
 }
@@ -325,4 +389,12 @@
   color: #fff;
 }
 
-
+/* === RESPONSIVE === */
+@media (max-width: 820px) {
+  #at-modal .at-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #at-modal .at-grid::before {
+    display: none;
+  }
+}

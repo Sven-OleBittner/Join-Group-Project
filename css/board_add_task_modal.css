@@ -1,11 +1,11 @@
-
-
+/* === HEADER === */
 #at-modal .at-header h2 {
   font-size: 44px;
   font-weight: 800;
   margin: 0 0 16px;
 }
 
+/* === GRID === */
 #at-modal .at-grid {
   position: relative;
   display: grid;
@@ -31,6 +31,7 @@
   gap: 16px;
 }
 
+/* === FORM FIELDS === */
 #at-modal .field {
   display: grid;
   gap: 6px;
@@ -62,7 +63,7 @@
 #at-modal .textarea:focus,
 #at-modal .select:focus {
   border-color: #94A3B8;
-  box-shadow: 0 0 0 3px rgba(41,171,226,.15);
+  box-shadow: 0 0 0 3px rgba(41, 171, 226, .15);
 }
 
 #at-modal .textarea {
@@ -70,24 +71,7 @@
   resize: vertical;
 }
 
-#at-modal .priority .priority__btn:nth-child(1).priority__btn--active {
-  background: #FF3B3B;
-  border-color: #FF3B3B;
-  color: #fff;
-}
-
-#at-modal .priority .priority__btn:nth-child(2).priority__btn--active {
-  background: #FFA800;
-  border-color: #FFA800;
-  color: #fff;
-}
-
-#at-modal .priority .priority__btn:nth-child(3).priority__btn--active {
-  background: #7AE229;
-  border-color: #7AE229;
-  color: #fff;
-}
-
+/* === PRIORITY BUTTONS === */
 #at-modal .priority {
   display: grid;
   grid-auto-flow: column;
@@ -123,12 +107,26 @@
   transform: scale(.98);
 }
 
-#at-modal .priority__btn--active {
-  background: #FFB001;
-  border-color: #FFB001;
-  color: #111827;
+/* ACTIVE STATES */
+#at-modal .priority .priority__btn:nth-child(1).priority__btn--active {
+  background: #FF3B3B;
+  border-color: #FF3B3B;
+  color: #fff;
 }
 
+#at-modal .priority .priority__btn:nth-child(2).priority__btn--active {
+  background: #FFA800;
+  border-color: #FFA800;
+  color: #fff;
+}
+
+#at-modal .priority .priority__btn:nth-child(3).priority__btn--active {
+  background: #7AE229;
+  border-color: #7AE229;
+  color: #fff;
+}
+
+/* === SUBTASKS === */
 #at-modal .subtasks {
   display: grid;
   gap: 10px;
@@ -149,6 +147,7 @@
   background: #fff;
 }
 
+/* === FOOTER === */
 #at-modal .at-footer {
   margin-top: 28px;
   display: flex;
@@ -156,6 +155,7 @@
   gap: 12px;
 }
 
+/* === BUTTONS === */
 #at-modal .btn {
   padding: 12px 18px;
   border-radius: 12px;
@@ -164,6 +164,11 @@
   font: 700 15px/1 Inter, system-ui;
   color: #111827;
   cursor: pointer;
+  transition: filter .1s ease;
+}
+
+#at-modal .btn:hover {
+  filter: brightness(.98);
 }
 
 #at-modal .btn-primary {
@@ -172,20 +177,20 @@
   color: #FFFFFF;
 }
 
-#at-modal .btn:hover {
-  filter: brightness(.98);
-}
-
+/* === PRIORITY ICON FILTERS === */
 #at-modal .priority .priority__btn:nth-child(1) img {
   filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
 }
+
 #at-modal .priority .priority__btn:nth-child(2) img {
   filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
 }
+
 #at-modal .priority .priority__btn:nth-child(3) img {
   filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
 }
 
+/* === RESPONSIVE === */
 @media (max-width: 1023px) {
   #at-modal .at-grid {
     grid-template-columns: 1fr;
@@ -194,3 +199,77 @@
     display: none;
   }
 }
+
+/* === FINAL OVERRIDES (modal 2-col + dropdowns) === */
+#at-modal .at-dialog{
+  max-width:980px !important;
+  width:min(980px,calc(100vw - 80px)) !important;
+}
+#at-modal .at-grid{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:28px 40px !important;
+  position:relative !important;
+}
+#at-modal .at-col{grid-column:auto !important; min-width:0 !important;}
+#at-modal .at-col--right{grid-column:2 !important;}
+#at-modal .at-grid::after{
+  content:""; position:absolute; top:0; bottom:0; left:50%;
+  width:1px; background:#E5E7EB; transform:translateX(-0.5px);
+}
+#at-modal .priority,
+#at-modal .priority-options{display:flex !important; gap:10px; align-items:center; flex-wrap:wrap;}
+#at-modal .dropdown.full-expandable{position:relative !important;}
+#at-modal .dropdown.full-expandable .dropdown-menu{
+  position:absolute !important; left:0; right:0; top:100%; margin-top:6px;
+  z-index:4000; border:1px solid #e5e7eb; border-radius:10px; background:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .2s ease, opacity .2s ease;
+}
+#at-modal .dropdown.full-expandable.open .dropdown-menu{
+  max-height:420px; opacity:1; overflow:auto;
+}
+@media (max-width:1023px){
+  #at-modal .at-grid{grid-template-columns:1fr !important;}
+  #at-modal .at-grid::after{display:none;}
+}
+
+/* --- Priority buttons: lift only the hovered button --- */
+.td-modal .priority__btn {
+  position: relative;
+  z-index: 0;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+  will-change: transform;
+}
+
+.td-modal .priority__btn:hover {
+  transform: translateY(-2px);            /* легкий підйом без масштабу */
+  box-shadow: 0 6px 14px rgba(0,0,0,.16); /* об’єм тільки у самої кнопки */
+  z-index: 1;                             
+}
+
+/* прибираємо можливі підсвічування контейнера на hover (про всяк випадок) */
+.td-modal [data-priority]:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* --- Task type chip colors in details modal --- */
+.td-modal .td-chip { 
+  background: var(--at-chip-bg); 
+  color: var(--at-text);
+}
+
+/* стиль для User Story (як на борді — блакитний) */
+.td-modal .td-chip--story {
+  background: #29ABE2;   /* наближено до бордової «story» */
+  color: #fff;
+}
+
+/* стиль для Technical Task (зелений) */
+.td-modal .td-chip--technical {
+  background: #8FD58A;   /* наближено до бордової «technical» */
+  color: #0f172a;
+}
+
