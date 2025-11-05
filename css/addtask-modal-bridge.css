@@ -1,3 +1,4 @@
+/* === ROOT VARIABLES === */
 :root {
   --at-bg: #F5F6F8;
   --at-card: #ffffff;
@@ -7,34 +8,32 @@
   --at-border-2: #e5e7eb;
   --at-brand: #2a3647;
   --at-brand-acc: #29ABE2;
-
   --at-prio-urgent: #FF3B3B;
   --at-prio-medium: #FFA800;
   --at-prio-low: #7AE229;
-
   --at-chip-bg: #eef1f6;
   --at-radius: 10px;
   --at-radius-lg: 12px;
   --at-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 
-
+/* === MODAL DIALOG === */
 .td-modal .td-dialog {
-  background: var(--at-bg) !important;
-  border-radius: 24px !important;
-  padding: 32px !important;
+  background: var(--at-bg);
+  border-radius: 24px;
+  padding: 32px;
   box-shadow: var(--at-shadow);
 }
 
-
+/* === TITLE === */
 .td-modal .td-title {
-  font-size: 44px !important;
+  font-size: 44px;
   font-weight: 800;
   margin: 0 0 8px 0;
   color: #111827;
 }
 
-
+/* === CHIPS === */
 .td-modal .td-chip {
   background: var(--at-chip-bg);
   color: var(--at-text);
@@ -43,14 +42,14 @@
   padding: 6px 10px;
 }
 
-
+/* === LABELS === */
 .td-modal .field__label,
 .td-modal .td-label {
   color: var(--at-muted);
   font-size: 14px;
 }
 
-
+/* === INPUTS === */
 .td-modal .input,
 .td-modal .textarea,
 .td-modal .select,
@@ -79,7 +78,7 @@
   box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
 }
 
-
+/* === DATE INPUT === */
 .td-modal input[type="date"] {
   appearance: none;
   -webkit-appearance: none;
@@ -90,11 +89,13 @@
   padding-right: 38px;
 }
 
-
+/* === TEXT COLORS === */
 .td-modal .hint,
-.td-modal .req { color: #EF4444; }
+.td-modal .req {
+  color: #EF4444;
+}
 
-
+/* === PRIORITY BUTTONS === */
 .td-modal [data-priority] {
   display: flex;
   gap: 10px;
@@ -119,52 +120,61 @@
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
 }
 
-
+/* ACTIVE COLORS */
 .td-modal .priority__btn.selected[data-value="urgent"] {
   background: var(--at-prio-urgent);
   color: #fff;
 }
+
 .td-modal .priority__btn.selected[data-value="medium"] {
   background: var(--at-prio-medium);
   color: #fff;
 }
+
 .td-modal .priority__btn.selected[data-value="low"] {
   background: var(--at-prio-low);
   color: #fff;
 }
 
-
+/* PRIORITY ICONS */
 .td-modal .priority__btn::after {
   content: "";
-  width: 14px; height: 14px;
+  width: 14px;
+  height: 14px;
   display: inline-block;
   filter: brightness(0) saturate(100%) invert(0);
 }
+
 .td-modal .priority__btn[data-value="urgent"]::after {
   background: url("./assets/img/red_high_urgent.svg") no-repeat center / contain;
   filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
 }
+
 .td-modal .priority__btn[data-value="medium"]::after {
   background: url("./assets/img/=_for yellow.svg") no-repeat center / contain;
   filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
 }
+
 .td-modal .priority__btn[data-value="low"]::after {
   background: url("./assets/img/green_low_urgent.svg") no-repeat center / contain;
   filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
 }
+
 .td-modal .priority__btn.selected::after {
   filter: brightness(0) invert(1);
 }
 
-
+/* === SUBTASKS === */
 .td-modal [data-subtasks] .input {
   padding: 10px 12px;
 }
+
 .td-modal .subtasks__list {
   list-style: none;
   margin: 8px 0 0 0;
   padding: 0;
 }
+
 .td-modal .subtasks__list li {
   display: flex;
   align-items: center;
@@ -177,16 +187,21 @@
   font-size: 14px;
 }
 
-
+/* === ACTION BUTTONS === */
 .td-modal .td-actions .td-action {
   border: 1px solid var(--at-border-2);
   background: #F9FAFB;
   border-radius: 12px;
   padding: 10px 16px;
   cursor: pointer;
+  transition: background .15s ease;
 }
-.td-modal .td-actions .td-action:hover { background: #F3F4F6; }
 
+.td-modal .td-actions .td-action:hover {
+  background: #F3F4F6;
+}
+
+/* PRIMARY BUTTONS */
 .td-modal #td-edit,
 .td-modal .btn-primary,
 .td-modal #at-create {
@@ -194,6 +209,7 @@
   color: #fff !important;
   border: 1px solid var(--at-brand);
 }
+
 .td-modal #td-edit:hover,
 .td-modal .btn-primary:hover,
 .td-modal #at-create:hover {
@@ -203,23 +219,38 @@
   box-shadow: 0 6px 12px rgba(0,0,0,.08);
 }
 
-
+/* === GRID === */
 #at-modal .at-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
 }
-#at-modal .at-col { display: grid; gap: 16px; }
 
-
-@media (max-width: 780px) {
-  .td-modal .td-title { font-size: 34px !important; }
-  #at-modal .at-grid { grid-template-columns: 1fr; gap: 20px; }
+#at-modal .at-col {
+  display: grid;
+  gap: 16px;
 }
 
+/* === RESPONSIVE === */
+@media (max-width: 780px) {
+  .td-modal .td-title {
+    font-size: 34px;
+  }
 
-.td-modal .td-actions { position: static; box-shadow: none; }
+  #at-modal .at-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
 
+/* === TEXT === */
+.td-modal .td-desc,
+.td-modal .td-value {
+  color: #111827;
+}
 
-.td-modal .td-desc { color: #111827; }
-.td-modal .td-value { color: #111827; }
+.td-modal .td-actions {
+  position: static;
+  box-shadow: none;
+}
+
