@@ -1,4 +1,5 @@
-const BASE_URL = "https://join-f5b75-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL =
+    "https://join-1314-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentData = [];
 let selectedContactKey = null;
 
@@ -306,8 +307,8 @@ async function postData(path = "", data) {
     });
 
     if (!response.ok) {
-        console.error(error);
-    };
+        console.error(`POST request failed: ${response.status} ${response.statusText}`);
+    }
 }
 
 /**
@@ -319,7 +320,7 @@ async function postData(path = "", data) {
 async function getData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     if (!response.ok) {
-        console.error(error);
+        console.error(`GET request failed: ${response.status} ${response.statusText}`);
     }
     let responseData = await response.json();
     return responseData;
