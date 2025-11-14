@@ -1,14 +1,18 @@
-const contacts = [
-  { initials: "SM", name: "Sofia Müller (You)", color: "#00BEE8" },
-  { initials: "AM", name: "Anton Mayer",        color: "#FF7A00" },
-  { initials: "AS", name: "Anja Schulz",        color: "#9E00FF" },
-  { initials: "BZ", name: "Benedikt Ziegler",   color: "#0038FF" },
-  { initials: "DE", name: "David Eisenberg",    color: "#FF00FF" },
-  { initials: "EF", name: "Eva Fischer",        color: "#FFC701" },
-  { initials: "EM", name: "Emmanuel Mauer",     color: "#00BEE8" },
-  { initials: "MB", name: "Marcel Bauer",       color: "#6E52FF" },
-  { initials: "TW", name: "Tatjana Wolf",       color: "#FF4646" },
-];
+
+
+
+
+// const contacts = [
+//   { initials: "SM", name: "Sofia Müller (You)", color: "#00BEE8" },
+//   { initials: "AM", name: "Anton Mayer",        color: "#FF7A00" },
+//   { initials: "AS", name: "Anja Schulz",        color: "#9E00FF" },
+//   { initials: "BZ", name: "Benedikt Ziegler",   color: "#0038FF" },
+//   { initials: "DE", name: "David Eisenberg",    color: "#FF00FF" },
+//   { initials: "EF", name: "Eva Fischer",        color: "#FFC701" },
+//   { initials: "EM", name: "Emmanuel Mauer",     color: "#00BEE8" },
+//   { initials: "MB", name: "Marcel Bauer",       color: "#6E52FF" },
+//   { initials: "TW", name: "Tatjana Wolf",       color: "#FF4646" },
+// ];
 const categories = [
   { name: "Technical Task", color: "#6c8cff" },
   { name: "User Story",     color: "#8fd58a" },
@@ -19,7 +23,7 @@ const selected = {
   category: null
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   if (window.flatpickr) flatpickr('#due-date', { dateFormat: 'd/m/Y' });
   document.querySelectorAll('.priority').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('selected');
     });
   });
-  renderContacts();
+  await renderContacts();
   renderCategories();
   setupDropdownToggles();
   ensureChipsContainers();
@@ -67,12 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', checkMobile);
 });
 
-function renderContacts() {
+async function renderContacts() {
   const menu = document.querySelector('.dropdown.assigned-to .dropdown-menu');
   if (!menu) return;
 
   menu.innerHTML = '';
-  contacts.forEach((c, idx) => {
+  const contactsData = await getData('contacts');
+  const contactsArr = contactsData ? Object.values(contactsData) : [];
+  contactsArr.forEach((c, idx) => {
     const row = document.createElement('label');
     row.className = 'contact-option';
 
@@ -235,3 +241,17 @@ function setupSubtasks() {
     confirm.style.display = 'none';
   });
 }
+
+document.querySelector('.create-btn').onclick = e => {
+  e.preventDefault();
+  const t = v => document.getElementById(v).value.trim();
+  const p = document.querySelector('.priority.selected')?.classList[1];
+  if (!t('title') || !t('due-date') || selected.category === null) return alert('Fill all required fields');
+  const task = {id:Date.now(),title:t('title'),description:t('description'),
+    dueDate:t('due-date'),priority:p,category:categories[selected.category],
+    assigned:[...selected.contacts].map(i=>contacts[i]),status:'todo'};
+  const a = JSON.parse(localStorage.getItem('tasks')||'[]');
+  a.push(task);
+  localStorage.setItem('tasks',JSON.stringify(a));
+  location='board.html';
+};
