@@ -47,7 +47,7 @@
           </div>
           <div class="button-group">
             <button type="submit" class="login-btn">Log in</button>
-            <button type="button" class="guest-btn">Guest Log in</button>
+            <button onclick="goToPage('./summary.html')" type="button" class="guest-btn">Guest Log in</button>
           </div>
         </form>
       </div>
@@ -64,5 +64,10 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    function goToPage(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>
