@@ -1,3 +1,4 @@
+let contacts = [];
 
 
 
@@ -78,6 +79,7 @@ async function renderContacts() {
   menu.innerHTML = '';
   const contactsData = await getData('contacts');
   const contactsArr = contactsData ? Object.values(contactsData) : [];
+  contacts = contactsArr;
   contactsArr.forEach((c, idx) => {
     const row = document.createElement('label');
     row.className = 'contact-option';
@@ -250,8 +252,9 @@ document.querySelector('.create-btn').onclick = e => {
   const task = {id:Date.now(),title:t('title'),description:t('description'),
     dueDate:t('due-date'),priority:p,category:categories[selected.category],
     assigned:[...selected.contacts].map(i=>contacts[i]),status:'todo'};
-  const a = JSON.parse(localStorage.getItem('tasks')||'[]');
-  a.push(task);
-  localStorage.setItem('tasks',JSON.stringify(a));
+  postData((path = "task"), task);
+    // const a = JSON.parse(localStorage.getItem('tasks')||'[]');
+  // a.push(task);
+  // localStorage.setItem('tasks',JSON.stringify(a));
   location='board.html';
 };

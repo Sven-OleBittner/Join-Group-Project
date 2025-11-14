@@ -298,17 +298,23 @@ document.addEventListener("task:deleted", beEnsureEmptyVisible);
 document.addEventListener("task:updated", beEnsureEmptyVisible);
 window.addEventListener("DOMContentLoaded", beEnsureEmptyVisible);
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const list = document.querySelector('.kb-col[data-status="todo"] [data-cards]');
   if (!list) return;
-  (JSON.parse(localStorage.getItem('tasks') || '[]')).forEach(t => {
-    const ass = (t.assigned || []).map(x => x.initials).join(', ');
-    const pr  = t.priority === 'urgent' ? 'high' : (t.priority || 'medium');
-    const type = t.category?.name === 'Technical Task' ? 'technical' : 'story';
-    const el = document.createElement('article');
-    el.className = 'kb-card'; el.dataset.due = t.dueDate || '';
-    el.innerHTML = `<div class="kb-card-top"><span class="kb-chip kb-chip--${type}">${t.category?.name||'User Story'}</span></div>
-      <h3 class="kb-card-title">${t.title}</h3><p class="kb-card-desc">${t.description||''}</p>
+  const tasks = await getData("task");
+  (tasks ? Object.values(tasks) : []).forEach((t) => {
+    const ass = (t.assigned || []).map((x) => x.initials).join(", ");
+    const pr = t.priority === "urgent" ? "high" : t.priority || "medium";
+    const type = t.category?.name === "Technical Task" ? "technical" : "story";
+    const el = document.createElement("article");
+    el.className = "kb-card";
+    el.dataset.due = t.dueDate || "";
+    el.innerHTML = `<div class="kb-card-top"><span class="kb-chip kb-chip--${type}">${
+      t.category?.name || "User Story"
+    }</span></div>
+      <h3 class="kb-card-title">${t.title}</h3><p class="kb-card-desc">${
+      t.description || ""
+    }</p>
       <footer class="kb-card-foot"><div class="kb-avatars" data-assignees="${ass}"></div>
       <div class="kb-prio kb-prio--${pr}"><span class="kb-prio__icon" aria-hidden="true"></span></div></footer>`;
     list.appendChild(el);
