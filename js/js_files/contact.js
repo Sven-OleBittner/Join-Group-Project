@@ -359,11 +359,12 @@ async function postNewContact() {
     const addName = document.getElementById("add-name");
     const addEmail = document.getElementById("add-email");
     const addPhone = document.getElementById("add-phone");
+    const addColor = getRandomColorClass();
     const newContact = {
         name: addName.value,
         email: addEmail.value,
-        phone: addPhone.value
-    };
+        phone: addPhone.value,
+        color: addColor};
     try {
         await postData("contacts", newContact);
         showSuccesfullyContactCreated();
