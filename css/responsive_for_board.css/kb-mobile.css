@@ -363,6 +363,7 @@
     border-radius: 14px;
     line-height: 1.1;
     text-decoration: none;
+    transition: background .08s ease, color .08s ease;
   }
   .footer-nav-item img {
     width: 24px;

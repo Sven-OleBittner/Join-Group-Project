@@ -43,6 +43,7 @@
   height: 48px;
   padding: 0 44px 0 16px;
   border-radius: 12px;
+  border: unset;
   border: 1px solid #D1D1D1;
   background: #FFFFFF;
   font-size: 16px;
@@ -64,6 +65,7 @@
   height: 48px;
   padding: 0 18px 0 16px;
   border-radius: 10px;
+  border: unset;
   background: #2A3647;
   color: #FFFFFF;
   font-weight: 600;
@@ -72,7 +74,7 @@
   gap: 10px;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(0,0,0,.15);
-  transition: background .15s ease, box-shadow .15s ease, transform .12s ease;
+  transition: background .1s ease, box-shadow .1s ease, transform .08s ease;
 }
 
 .kb-add-btn:hover {
@@ -120,7 +122,7 @@
 
 .kb-col-add {
   background: transparent;
-  border: 0;
+  border: unset;
   padding: 0;
   line-height: 0;
   display: inline-grid;
@@ -133,7 +135,7 @@
   height: 24px;
   border: 2px solid transparent;
   border-radius: 6px;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   cursor: pointer;
 }
 
@@ -172,7 +174,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: box-shadow .2s ease, transform .1s ease;
+  transition: box-shadow .12s ease, transform .08s ease;
 }
 
 .kb-card:hover {
@@ -300,7 +302,7 @@
   background: rgba(0,0,0,.35);
   opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease;
+  transition: opacity .1s ease;
   z-index: 1000;
 }
 
@@ -316,7 +318,7 @@
   place-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease;
+  transition: opacity .1s ease;
   z-index: 1001;
 }
 
@@ -333,7 +335,7 @@
   padding: 32px 32px 24px;
   position: relative;
   transform: translateY(6px);
-  transition: transform .15s ease;
+  transition: transform .1s ease;
 }
 
 .at-modal.is-open .at-dialog {
@@ -347,7 +349,7 @@
   font-size: 20px;
   line-height: 1;
   background: none;
-  border: 0;
+  border: unset;
   cursor: pointer;
   color: #6B7280;
 }
