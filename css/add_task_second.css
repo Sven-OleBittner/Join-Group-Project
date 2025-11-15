@@ -70,7 +70,7 @@
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
 }
 
 #at-modal .dropdown.full-expandable.open .dropdown-menu {
@@ -98,7 +98,7 @@
 }
 
 .dropdown.assigned-to .dropdown-toggle img {
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
 .dropdown.assigned-to.open .dropdown-toggle img {
@@ -118,7 +118,7 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
   z-index: 1000;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .dropdown.category-select .dropdown-toggle img {
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
 .dropdown.category-select.open .dropdown-toggle img {
@@ -249,7 +249,7 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
   z-index: 1000;
 }
 

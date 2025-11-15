@@ -1,7 +1,3 @@
-
-
-
-
 // const contacts = [
 //   { initials: "SM", name: "Sofia Müller (You)", color: "#00BEE8" },
 //   { initials: "AM", name: "Anton Mayer",        color: "#FF7A00" },
