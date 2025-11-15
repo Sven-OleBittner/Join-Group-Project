@@ -51,7 +51,6 @@
   padding-top: 70px;
   row-gap: 40px;
   column-gap: 40px;
-  /* no wrap to match old behavior on desktop */
 }
 
 .form-left,
@@ -66,6 +65,7 @@
 input[type="text"],
 textarea {
   padding: 10px;
+  border: unset;
   border: 1px solid #cccccc;
   border-radius: 8px;
   width: 100%;
@@ -100,7 +100,7 @@ textarea {
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .priority:hover { 
@@ -108,7 +108,7 @@ textarea {
   box-shadow: 0 4px 10px rgba(0,0,0,.15); 
 }
 
-.priority img { transition: filter .2s ease; }
+.priority img { transition: filter .1s ease; }
 .priority.urgent img { filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%); }
 .priority.medium img { filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%); }
 .priority.low img { filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%); }
@@ -120,6 +120,7 @@ textarea {
 
 .dropdown.full-expandable {
   position: relative;
+  border: unset;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
@@ -131,7 +132,7 @@ textarea {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 0.12s ease;
   transform: translateY(-10px);
 }
 
@@ -153,6 +154,7 @@ textarea {
 #subtask-input {
   flex: 1 1 auto;
   padding: 10px 90px 10px 10px;
+  border: unset;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -191,8 +193,9 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 0;
+  border: unset;
   cursor: pointer;
+  transition: all .1s ease;
 }
 
 .clear-btn { 
@@ -219,7 +222,6 @@ textarea {
   box-shadow: 0 6px 12px rgba(0,0,0,.08);
 }
 
-/* Mobile adaptation only – keep behavior identical */
 @media (max-width: 945px) {
   .form-divider { 
     display: none; 

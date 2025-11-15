@@ -21,8 +21,6 @@
   <link rel="stylesheet" href="./css/addtask-modal-bridge.css"/>
   <link rel="stylesheet" href="./css/add_task_second.css"/>
   <link rel="stylesheet" href="./css/board_add_task_modal.css"/>
-
- 
   
   <title>Join</title>
 </head>
@@ -82,7 +80,7 @@
           <div class="kb-actions">
             <div class="kb-search">
               <input type="text" placeholder="Find Task" aria-label="Find Task">
-              <img class="kb-icon" alt="Search">
+              <img class="kb-icon" src="./assets/img/board_input_search_icon.svg" alt="Search">
             </div>
             <button class="kb-add-btn" type="button">
               Add task <span class="kb-plus">+</span>
@@ -225,11 +223,11 @@
       </div>
 
       <div class="at-grid">
-        <!-- ЛІВА КОЛОНКА -->
+        <!-- LEFT COLUMN -->
         <div class="at-col">
           <label class="field">
             <span class="field__label">Title<span class="req">*</span></span>
-            <input class="input" name="title" placeholder="Enter a title" required />
+            <input class="input" name="title" placeholder="Enter a title" />
           </label>
 
           <label class="field">
@@ -240,28 +238,28 @@
           <label class="field">
             <span class="field__label">Due date<span class="req">*</span></span>
             <div class="date-wrapper">
-              <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" required />
+              <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" />
               <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar" alt="">
             </div>
           </label>
         </div>
 
-        <!-- ПРАВА КОЛОНКА -->
+        <!-- RIGHT COLUMN -->
         <div class="at-col at-col--right">
           <!-- PRIORITY -->
           <div class="field">
             <span class="field__label">Priority</span>
             <div class="priority priority-options" data-priority>
-              <button type="button" class="priority__btn priority__btn--active" data-value="urgent">
+              <button type="button" class="priority__btn" data-value="urgent">
                 Urgent <img src="./assets/img/red_high_urgent.svg" alt="">
               </button>
-              <button type="button" class="priority__btn" data-value="medium">
+              <button type="button" class="priority__btn priority__btn--active" data-value="medium">
                 Medium <img src="./assets/img/=_for yellow.svg" alt="">
               </button>
               <button type="button" class="priority__btn" data-value="low">
                 Low <img src="./assets/img/green_low_urgent.svg" alt="">
               </button>
-              <input type="hidden" name="priority" value="urgent">
+              <input type="hidden" name="priority" value="medium">
             </div>
           </div>
 
@@ -318,6 +316,7 @@
     </form>
   </div>
 </div>
+
   <div id="td-modal" class="td-modal" role="dialog" aria-modal="true" aria-labelledby="td-title">
     <div class="td-dialog" tabindex="-1">
       <button class="td-close" type="button" data-td-close aria-label="Close">×</button>
@@ -386,8 +385,10 @@
     function goToPage(page){ window.location.href = page; }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="board.js" defer></script>
-  <script src="js/js_files/board-enhancements.js" defer></script>
-  <script src="js/js_files/addtask-modal-bridge.js" defer></script>
+  <script src="/js/js_files/board-utils.js"></script>
+  <script src="/js/js_files/board-main.js"></script>
+  <script src="js/js_files/board-enhancements-core.js"></script>
+  <script src="js/js_files/board-enhancements-edit.js"></script>
+  <script src="js/js_files/addtask-modal-bridge.js"></script>
 </body>
 </html>
