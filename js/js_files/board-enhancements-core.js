@@ -225,7 +225,7 @@ async function beLoadTasks() {
   if (!list || !tasks.length) return;
 
   tasks.forEach(t => {
-    const ass = (t.assigned || []).map(x => x.name).join(', ');
+    const ass = (t.assigned || []).map(x => x.initials).join(', ');
     const pr  = t.priority === 'urgent' ? 'high' : (t.priority || 'medium');
     const type = t.category?.name === 'Technical Task' ? 'technical' : 'story';
     const el = document.createElement('article');
