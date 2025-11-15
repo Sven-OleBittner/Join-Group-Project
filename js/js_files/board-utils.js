@@ -2,16 +2,16 @@
  * Contact data array
  * @type {Array<{initials: string, name: string}>}
  */
-const contacts = [
-  {initials:"SM",name:"Sofia Müller (You)"},
-  {initials:"AM",name:"Anton Mayer"},
-  {initials:"AS",name:"Anja Schulz"},
-  {initials:"BZ",name:"Benedikt Ziegler"},
-  {initials:"DE",name:"David Eisenberg"},
-  {initials:"EF",name:"Eva Fischer"},
-  {initials:"EM",name:"Emmanuel Mauer"},
-  {initials:"MB",name:"Marcel Bauer"},
-  {initials:"TW",name:"Tatjana Wolf"}
+let contacts = [
+  // {initials:"SM",name:"Sofia Müller (You)"},
+  // {initials:"AM",name:"Anton Mayer"},
+  // {initials:"AS",name:"Anja Schulz"},
+  // {initials:"BZ",name:"Benedikt Ziegler"},
+  // {initials:"DE",name:"David Eisenberg"},
+  // {initials:"EF",name:"Eva Fischer"},
+  // {initials:"EM",name:"Emmanuel Mauer"},
+  // {initials:"MB",name:"Marcel Bauer"},
+  // {initials:"TW",name:"Tatjana Wolf"}
 ];
 
 
@@ -92,13 +92,15 @@ function isoToMMDDYYYY(s){
 /**
  * Renders avatar circles in cards
  */
-function renderAvatars(){
+async function renderAvatars(){
+  let contactsData = await getData(path = "contacts");
+  const contactsArr = contactsData ? Object.values(contactsData) : [];
   document.querySelectorAll(".kb-avatars").forEach(b=>{
     const list=(b.getAttribute("data-assignees")||"").split(",")
       .map(v=>v.trim()).filter(Boolean);
     b.innerHTML="";
     list.forEach(i=>{
-      const p=contacts.find(c=>c.initials===i); 
+      const p=contactsArr.find(c=>c.initials===i); 
       if(!p) return;
       const e=document.createElement("div");
       e.className="kb-avatar kb-avatar--"+i; 
