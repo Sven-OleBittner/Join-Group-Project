@@ -341,20 +341,12 @@ function initBoard(){
   });
   
   const container = document.getElementById('task-board');
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const tasks = getData(path = "task");
   if (container) {
     tasks.forEach(task => {
       const card = document.createElement('div');
       card.className = 'task-card';
-      card.innerHTML = `
-        <div class="task-category" style="background:${task.category.color}">
-          ${task.category.name}
-        </div>
-        <h3>${task.title}</h3>
-        <p>${task.description}</p>
-        <p><b>Due:</b> ${task.dueDate}</p>
-        <p><b>Priority:</b> ${task.priority}</p>
-      `;
+      card.innerHTML = taskTemplateBoard(task);
       container.appendChild(card);
     });
   }

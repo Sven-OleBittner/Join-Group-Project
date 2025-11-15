@@ -13,3 +13,15 @@ function taskTemplate(t, ass, pr, type, el) {
         </div>
       </footer>`;
 }
+
+function taskTemplateBoard(task) {
+  return `
+        <div class="task-category" style="background:${task.category.color}">
+          ${task.category.name}
+        </div>
+        <h3>${task.title}</h3>
+        <p>${task.description}</p>
+        <p><b>Due:</b> ${task.dueDate}</p>
+        <p><b>Priority:</b> ${task.priority}</p>
+      `;
+}
