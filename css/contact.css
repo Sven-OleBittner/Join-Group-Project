@@ -1,14 +1,74 @@
 /* HTML/Body Höhe definieren */
 html, body {
     height: 100%;
+    overflow-x: hidden;
 }
 
 /* Global */
+
+.hidden {
+    display: none !important;
+}
 
 .fs-b-16 {
     font-size: 16px;
     font-weight: 700;
     font-style: bold;
+}
+
+.g-8 {
+    gap: 8px;
+}
+
+.succesfully-creat {
+    width: 326px;
+    height: 74px;
+    background-color: var( --darkblue-light-color);
+    color: var(--white-color);
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.succesfully-creat, .show-animation {
+    animation: slideInOut 3s ease-in-out forwards;
+}
+
+@keyframes slideInOut {
+    0% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: block;
+    }
+    1% {
+        display: block;
+    }
+    33% {
+        transform: translateX(0);
+        opacity: 1;
+        display: block;
+    }
+    66% {
+        transform: translateX(0);
+        opacity: 1;
+        display: block;
+    }
+    99% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: block;
+    }
+    100% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: none;
+    }
 }
 
 /* Main Content Layout */
@@ -44,6 +104,16 @@ html, body {
     color: var(--white-color);
 }
 
+.add-contact-btn:hover {
+    background-color: var(--lightblue-color);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    scale: 1.02;
+}
+
+.add-contact-btn:active {
+    scale: 0.98;
+}
+
 .add-contact-img {
     width: 32px;
     height: 32px;
@@ -54,6 +124,14 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#contact-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .first-letter-container {
@@ -90,11 +168,11 @@ html, body {
 }
 
 .person-circle {
-    width: 52.81px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background-color: var(--urgent-color);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     border: 2px solid var(--white-color);
     box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
@@ -103,6 +181,8 @@ html, body {
 
 .personal-data {
     font-weight: 400;
+    display: flex;
+    flex-direction: column;
 }
 
 .person-name {
@@ -196,7 +276,6 @@ html, body {
     margin-bottom: 40px;
 }
 
-/* Schöner Custom Scrollbar */
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -226,4 +305,136 @@ html, body {
 
 *::-webkit-scrollbar-thumb:active {
   background: linear-gradient(180deg, #1976a3 0%, #151e28 100%);
+}
+
+.contact-email-frame,
+.contact-phone-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-email-frame {
+    margin-bottom: 12px;
+}
+
+.add-contact-mobile {
+    background-color: var(--darkblue-color);
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+}
+
+.add-contact-mobile img {
+    width: 29.33px;
+    height: 20.91px;
+}
+
+@media (max-width: 1300px) {
+    .contact-list-container {
+        min-width: 40%;
+    }
+    
+    .first-letter-container,
+    .personal-ad {
+        width: 95%;
+    }
+
+    .add-contact-btn {
+        width: 90%;
+    }
+
+    .contact-team-container {
+        gap: 10px;
+    }
+
+    .contact-team-container h1 {
+        font-size: 50px;
+    }
+
+    .contact-team-container p {
+        font-size: 22px;
+    }
+
+    .contact-form-name {
+        font-size: 38px;
+    }
+
+    .contact-form-circle {
+        height: 100px;
+        width: 100px;
+        font-size: 40px;
+    }
+} 
+
+@media (max-width: 1050px) {
+    .show-contact-container {
+        padding-left: 24px;
+    }
+
+    .add-contact-btn {
+        width: 95%;
+    }
+
+    .personal-ad {
+        width: 100%;
+    }
+
+    .contact-team-container h1 {
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 945px) {
+    .add-contact-mobile {
+        display: none !important;
+    }
+}
+
+@media (max-width: 945px) {
+    .add-contact-mobile {
+        position: absolute;
+        bottom: 124px;
+        right: 24px;
+    }
+
+  .show-contact-container {
+    display: none;
+  }
+
+  .add-contact-btn {
+    display: none;
+  }
+
+  .contact-list-container {
+      min-width: 100%;
+      padding: 24px;
+  }
+
+  .first-letter-container,
+  .personal-ad {
+    width: 90%;
+  }
+
+  .person-circle {
+    height: 42px !important;
+    width: 42px !important;
+  }
+
+  .personal-data {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 400px) {
+    .contact-list-container {
+        padding: 8px;
+    }
+
+    .personal-ad {
+        gap: 16px;
+        padding: 16px 20px 16px 20px;
+    }
 }
