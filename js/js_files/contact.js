@@ -356,15 +356,21 @@ async function postNewContact() {
         console.error("Validation failed.");
         return;
     }
-    const addName = document.getElementById("add-name");
-    const addEmail = document.getElementById("add-email");
-    const addPhone = document.getElementById("add-phone");
-    const addColor = getRandomColorClass();
-    const newContact = {
-        name: addName.value,
-        email: addEmail.value,
-        phone: addPhone.value,
-        color: addColor};
+        const addName = document.getElementById("add-name");
+        const addEmail = document.getElementById("add-email");
+        const addPhone = document.getElementById("add-phone");
+        const addColor = getRandomColorClass();
+        const nameWords = addName.value.split(" ");
+        const initials = nameWords
+            .map((word) => word.charAt(0).toUpperCase())
+            .join("")
+            .substring(0, 2);
+        const newContact = {
+                name: addName.value,
+                email: addEmail.value,
+                phone: addPhone.value,
+                color: addColor,
+                initials: initials};
     try {
         await postData("contacts", newContact);
         showSuccesfullyContactCreated();
