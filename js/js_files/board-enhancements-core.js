@@ -214,13 +214,18 @@ function beWireFeedback(){
 /**
  * Loads tasks from localStorage
  */
-function beLoadTasks() {
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+async function beLoadTasks() {
+  const tasksData = await getData(path="task");
   const list = document.querySelector('.kb-col[data-status="todo"] [data-cards]');
+  const tasks = Array.isArray(tasksData)
+    ? tasksData
+    : tasksData
+      ? Object.values(tasksData)
+      : [];
   if (!list || !tasks.length) return;
-  
+
   tasks.forEach(t => {
-    const ass = (t.assigned || []).map(x => x.initials).join(', ');
+    const ass = (t.assigned || []).map(x => x.name).join(', ');
     const pr  = t.priority === 'urgent' ? 'high' : (t.priority || 'medium');
     const type = t.category?.name === 'Technical Task' ? 'technical' : 'story';
     const el = document.createElement('article');
@@ -230,7 +235,7 @@ function beLoadTasks() {
     el.innerHTML = taskTemplate(t, ass, pr, type, el);
     list.appendChild(el);
   });
-  
+
   if (typeof renderAvatars === 'function') renderAvatars();
 }
 

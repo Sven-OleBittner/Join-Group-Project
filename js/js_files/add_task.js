@@ -253,8 +253,5 @@ document.querySelector('.create-btn').onclick = e => {
     dueDate:t('due-date'),priority:p,category:categories[selected.category],
     assigned:[...selected.contacts].map(i=>contacts[i]),status:'todo'};
   postData((path = "task"), task);
-    // const a = JSON.parse(localStorage.getItem('tasks')||'[]');
-  // a.push(task);
-  // localStorage.setItem('tasks',JSON.stringify(a));
   location='board.html';
 };
