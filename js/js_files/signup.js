@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "index.html";
     });
   }
+
   const passwordInput = document.getElementById("signup-password");
   const confirmInput = document.getElementById("confirm-password");
   const togglePassIcon = document.getElementById("toggle-signup-password");
@@ -19,17 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "./assets/img/visibility.svg"
       : "./assets/img/visibility_off.svg";
   }
+
   togglePassIcon.addEventListener("click", () => {
     toggleVisibility(passwordInput, togglePassIcon);
   });
+
   toggleConfirmIcon.addEventListener("click", () => {
     toggleVisibility(confirmInput, toggleConfirmIcon);
   });
+
   passwordInput.addEventListener("input", () => {
     const hasValue = passwordInput.value.length > 0;
     togglePassIcon.style.display = hasValue ? "block" : "none";
     lockPassIcon.style.display = hasValue ? "none" : "block";
   });
+  
   confirmInput.addEventListener("input", () => {
     const hasValue = confirmInput.value.length > 0;
     toggleConfirmIcon.style.display = hasValue ? "block" : "none";
