@@ -2,8 +2,8 @@
  * Gets board element
  * @returns {HTMLElement|null}
  */
-function beGetBoard(){ 
-  return document.querySelector(".kb-columns"); 
+function beGetBoard() {
+  return document.querySelector(".kb-columns");
 }
 
 
@@ -12,7 +12,7 @@ function beGetBoard(){
  * @param {Element} el - Child element
  * @returns {HTMLElement|null}
  */
-function beGetColumn(el){
+function beGetColumn(el) {
   return el?.closest(".kb-col, .kb-column, [data-status]:not(.kb-card)") || null;
 }
 
@@ -22,8 +22,8 @@ function beGetColumn(el){
  * @param {Element} col - Column element
  * @returns {HTMLElement}
  */
-function beCardsWrap(col){ 
-  return col.querySelector(".kb-cards, .kb-card-list, [data-cards]") || col; 
+function beCardsWrap(col) {
+  return col.querySelector(".kb-cards, .kb-card-list, [data-cards]") || col;
 }
 
 
@@ -32,8 +32,18 @@ function beCardsWrap(col){
  * @param {HTMLElement} col - Column element
  * @returns {HTMLElement|null}
  */
-function beGetEmptyBox(col){ 
-  return col.querySelector(".kb-empty, [data-empty]") || null; 
+function beGetEmptyBox(col) {
+  return col.querySelector(".kb-empty, [data-empty]") || null;
+}
+
+
+/**
+ * Checks if column has cards
+ * @param {HTMLElement} col - Column element
+ * @returns {boolean}
+ */
+function beColumnHasCards(col) {
+  return !!beCardsWrap(col).querySelector(".kb-card");
 }
 
 
@@ -41,9 +51,9 @@ function beGetEmptyBox(col){
  * Updates column empty state
  * @param {HTMLElement} col - Column element
  */
-function beUpdateColumnState(col){
-  const hasCards = !!beCardsWrap(col).querySelector(".kb-card");
-  const box = beGetEmptyBox(col); 
+function beUpdateColumnState(col) {
+  const hasCards = beColumnHasCards(col);
+  const box = beGetEmptyBox(col);
   if (box) box.hidden = hasCards;
 }
 
@@ -51,9 +61,18 @@ function beUpdateColumnState(col){
 /**
  * Syncs all columns empty states
  */
-function beSyncAllColumns(){
+function beSyncAllColumns() {
   document.querySelectorAll("[data-status], .kb-column, .kb-col")
     .forEach(el => beUpdateColumnState(el));
+}
+
+
+/**
+ * Generates unique card ID
+ * @returns {string}
+ */
+function beGenerateCardId() {
+  return "kb_" + Math.random().toString(36).slice(2, 9);
 }
 
 
@@ -61,22 +80,28 @@ function beSyncAllColumns(){
  * Ensures card has unique ID
  * @param {HTMLElement} card - Card element
  */
-function beEnsureId(card){
+function beEnsureId(card) {
   if (!card.dataset.id) {
-    card.dataset.id = "kb_" + Math.random().toString(36).slice(2,9);
+    card.dataset.id = beGenerateCardId();
   }
 }
 
 
 /**
- * Makes card draggable
+ * Adds dragging classes to card
  * @param {HTMLElement} card - Card element
  */
-function beMakeDraggable(card){
-  beEnsureId(card); 
-  card.setAttribute("draggable","true");
-  card.addEventListener("dragstart",beOnDragStart);
-  card.addEventListener("dragend",beOnDragEnd);
+function beAddDraggingClass(card) {
+  card.classList.add("is-dragging", "is-tilted");
+}
+
+
+/**
+ * Removes dragging classes from card
+ * @param {HTMLElement} card - Card element
+ */
+function beRemoveDraggingClass(card) {
+  card.classList.remove("is-dragging", "is-tilted");
 }
 
 
@@ -84,13 +109,15 @@ function beMakeDraggable(card){
  * Handles drag start event
  * @param {DragEvent} e - Drag event
  */
-function beOnDragStart(e){
-  const c = e.currentTarget;
-  if (e.dataTransfer){ 
-    e.dataTransfer.setData("text/plain",c.dataset.id||""); 
-    e.dataTransfer.setDragImage(c,10,10); 
+function beOnDragStart(e) {
+  const card = e.currentTarget;
+  
+  if (e.dataTransfer) {
+    e.dataTransfer.setData("text/plain", card.dataset.id || "");
+    e.dataTransfer.setDragImage(card, 10, 10);
   }
-  c.classList.add("is-dragging","is-tilted");
+  
+  beAddDraggingClass(card);
 }
 
 
@@ -98,9 +125,39 @@ function beOnDragStart(e){
  * Handles drag end event
  * @param {DragEvent} e - Drag event
  */
-function beOnDragEnd(e){
-  const c = e.currentTarget;
-  c.classList.remove("is-dragging","is-tilted");
+function beOnDragEnd(e) {
+  const card = e.currentTarget;
+  beRemoveDraggingClass(card);
+}
+
+
+/**
+ * Makes card draggable
+ * @param {HTMLElement} card - Card element
+ */
+function beMakeDraggable(card) {
+  beEnsureId(card);
+  card.setAttribute("draggable", "true");
+  card.addEventListener("dragstart", beOnDragStart);
+  card.addEventListener("dragend", beOnDragEnd);
+}
+
+
+/**
+ * Adds dragover class to column
+ * @param {HTMLElement} col - Column element
+ */
+function beAddDragoverClass(col) {
+  col.classList.add("is-dragover");
+}
+
+
+/**
+ * Removes dragover class from column
+ * @param {HTMLElement} col - Column element
+ */
+function beRemoveDragoverClass(col) {
+  col.classList.remove("is-dragover");
 }
 
 
@@ -108,12 +165,14 @@ function beOnDragEnd(e){
  * Handles drag over event
  * @param {DragEvent} e - Drag event
  */
-function beOnDragOver(e){
-  const col = beGetColumn(e.target); 
+function beOnDragOver(e) {
+  const col = beGetColumn(e.target);
   if (!col) return;
-  e.preventDefault(); 
+  
+  e.preventDefault();
   if (e.dataTransfer) e.dataTransfer.dropEffect = "move";
-  col.classList.add("is-dragover");
+  
+  beAddDragoverClass(col);
 }
 
 
@@ -121,9 +180,53 @@ function beOnDragOver(e){
  * Handles drag leave event
  * @param {DragEvent} e - Drag event
  */
-function beOnDragLeave(e){
+function beOnDragLeave(e) {
   const col = beGetColumn(e.target);
-  if (col) col.classList.remove("is-dragover");
+  if (col) beRemoveDragoverClass(col);
+}
+
+
+/**
+ * Gets card by ID
+ * @param {string} id - Card ID
+ * @returns {HTMLElement|null}
+ */
+function beGetCardById(id) {
+  const board = beGetBoard();
+  return board?.querySelector(`.kb-card[data-id="${id}"]`) || null;
+}
+
+
+/**
+ * Moves card to column
+ * @param {HTMLElement} card - Card element
+ * @param {HTMLElement} col - Column element
+ */
+function beMoveCardToColumn(card, col) {
+  beCardsWrap(col).appendChild(card);
+}
+
+
+/**
+ * Updates card status
+ * @param {HTMLElement} card - Card element
+ * @param {HTMLElement} col - Column element
+ */
+function beUpdateCardStatus(card, col) {
+  const status = col.getAttribute("data-status") || "";
+  if (status) card.dataset.status = status;
+}
+
+
+/**
+ * Dispatches task moved event
+ * @param {string} id - Card ID
+ * @param {string} status - New status
+ */
+function beDispatchTaskMoved(id, status) {
+  document.dispatchEvent(new CustomEvent("task:moved", {
+    detail: { id, status }
+  }));
 }
 
 
@@ -131,25 +234,30 @@ function beOnDragLeave(e){
  * Handles drop event
  * @param {DragEvent} e - Drop event
  */
-function beOnDrop(e){
-  const b = beGetBoard(); 
+function beOnDrop(e) {
+  const board = beGetBoard();
   const col = beGetColumn(e.target);
-  if (!b || !col) return; 
-  e.preventDefault(); 
-  col.classList.remove("is-dragover");
-  const id = e.dataTransfer?.getData("text/plain"); 
+  
+  if (!board || !col) return;
+  
+  e.preventDefault();
+  beRemoveDragoverClass(col);
+  
+  const id = e.dataTransfer?.getData("text/plain");
   if (!id) return;
-  const card = b.querySelector(`.kb-card[data-id="${id}"]`); 
+  
+  const card = beGetCardById(id);
   if (!card) return;
+  
   const fromCol = beGetColumn(card);
-  beCardsWrap(col).appendChild(card);
+  
+  beMoveCardToColumn(card, col);
+  
   if (fromCol) beUpdateColumnState(fromCol);
   beUpdateColumnState(col);
-  const status = col.getAttribute("data-status") || ""; 
-  if (status) card.dataset.status = status;
-  document.dispatchEvent(new CustomEvent("task:moved",{
-    detail:{id,status}
-  }));
+  beUpdateCardStatus(card, col);
+  
+  beDispatchTaskMoved(id, card.dataset.status || "");
 }
 
 
@@ -157,11 +265,43 @@ function beOnDrop(e){
  * Initializes drag and drop
  * @param {HTMLElement} root - Root element
  */
-function beInitDnd(root){
-  root.querySelectorAll(".kb-card").forEach(c=>beMakeDraggable(c));
-  root.addEventListener("dragover",beOnDragOver);
-  root.addEventListener("dragleave",beOnDragLeave);
-  root.addEventListener("drop",beOnDrop);
+function beInitDnd(root) {
+  root.querySelectorAll(".kb-card").forEach(c => beMakeDraggable(c));
+  root.addEventListener("dragover", beOnDragOver);
+  root.addEventListener("dragleave", beOnDragLeave);
+  root.addEventListener("drop", beOnDrop);
+}
+
+
+/**
+ * Processes added card node
+ * @param {Node} node - Added node
+ */
+function beProcessAddedCard(node) {
+  if (!(node instanceof HTMLElement)) return;
+  
+  if (node.matches(".kb-card")) {
+    beMakeDraggable(node);
+    const col = beGetColumn(node) || beGetColumn(node.parentElement);
+    if (col) beUpdateColumnState(col);
+  }
+  
+  node.querySelectorAll?.(".kb-card").forEach(card => {
+    beMakeDraggable(card);
+    const col = beGetColumn(card) || beGetColumn(card.parentElement);
+    if (col) beUpdateColumnState(col);
+  });
+}
+
+
+/**
+ * Processes mutation records
+ * @param {MutationRecord[]} mutations - Mutation records
+ */
+function beProcessMutations(mutations) {
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => beProcessAddedCard(node));
+  });
 }
 
 
@@ -169,21 +309,9 @@ function beInitDnd(root){
  * Watches for new cards being added
  * @param {HTMLElement} el - Element to observe
  */
-function beWatchNewCards(el){
-  const mo = new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{
-    if(!(n instanceof HTMLElement)) return;
-    if(n.matches(".kb-card")){ 
-      beMakeDraggable(n); 
-      const col=beGetColumn(n)||beGetColumn(n.parentElement); 
-      if(col) beUpdateColumnState(col); 
-    }
-    n.querySelectorAll?.(".kb-card").forEach(c=>{ 
-      beMakeDraggable(c); 
-      const col=beGetColumn(c)||beGetColumn(c.parentElement); 
-      if(col) beUpdateColumnState(col); 
-    });
-  })));
-  mo.observe(el,{childList:true,subtree:true});
+function beWatchNewCards(el) {
+  const observer = new MutationObserver(beProcessMutations);
+  observer.observe(el, { childList: true, subtree: true });
 }
 
 
@@ -195,19 +323,124 @@ function beEnsureEmptyVisible() {
     const wrap = beCardsWrap(col);
     const empty = beGetEmptyBox(col);
     const hasCards = !!wrap.querySelector(".kb-card");
+    
     if (empty) empty.hidden = hasCards;
   });
 }
 
 
 /**
+ * Shows toast message
+ * @param {string} message - Toast message
+ */
+function beShowToast(message) {
+  console.log(message);
+}
+
+
+/**
  * Wires feedback events
  */
-function beWireFeedback(){
-  const toast = t => console.log(t);
-  document.addEventListener("task:moved",  ()=>toast("Task moved"));
-  document.addEventListener("task:updated",()=>toast("Task updated"));
-  document.addEventListener("task:deleted",()=>toast("Task deleted"));
+function beWireFeedback() {
+  document.addEventListener("task:moved", () => beShowToast("Task moved"));
+  document.addEventListener("task:updated", () => beShowToast("Task updated"));
+  document.addEventListener("task:deleted", () => beShowToast("Task deleted"));
+}
+
+
+/**
+ * Gets task priority class
+ * @param {string} priority - Priority value
+ * @returns {string}
+ */
+function beGetPriorityClass(priority) {
+  return priority === 'urgent' ? 'high' : (priority || 'medium');
+}
+
+
+/**
+ * Gets task type class
+ * @param {string} categoryName - Category name
+ * @returns {string}
+ */
+function beGetTaskTypeClass(categoryName) {
+  return categoryName === 'Technical Task' ? 'technical' : 'story';
+}
+
+
+/**
+ * Gets assignees string
+ * @param {Array} assigned - Assigned contacts
+ * @returns {string}
+ */
+function beGetAssigneesString(assigned) {
+  return (assigned || []).map(x => x.initials).join(', ');
+}
+
+
+/**
+ * Generates card HTML
+ * @param {Object} task - Task data
+ * @returns {string}
+ */
+function beGenerateCardHTML(task) {
+  const assignees = beGetAssigneesString(task.assigned);
+  const priority = beGetPriorityClass(task.priority);
+  const type = beGetTaskTypeClass(task.category?.name);
+  const categoryName = task.category?.name || 'User Story';
+  
+  return `<div class="kb-card-top">
+    <span class="kb-chip kb-chip--${type}">${categoryName}</span>
+  </div>
+  <h3 class="kb-card-title">${task.title}</h3>
+  <p class="kb-card-desc">${task.description || ''}</p>
+  <footer class="kb-card-foot">
+    <div class="kb-avatars" data-assignees="${assignees}"></div>
+    <div class="kb-prio kb-prio--${priority}">
+      <span class="kb-prio__icon" aria-hidden="true"></span>
+    </div>
+  </footer>`;
+}
+
+
+/**
+ * Creates card element
+ * @param {Object} task - Task data
+ * @returns {HTMLElement}
+ */
+function beCreateCardElement(task) {
+  const el = document.createElement('article');
+  el.className = 'kb-card';
+  el.dataset.due = task.dueDate || '';
+  
+  if (task.id != null) {
+    el.dataset.id = String(task.id);
+  }
+  
+  el.innerHTML = beGenerateCardHTML(task);
+  
+  return el;
+}
+
+
+/**
+ * Appends card to list
+ * @param {HTMLElement} list - List element
+ * @param {Object} task - Task data
+ */
+function beAppendCardToList(list, task) {
+  const card = beCreateCardElement(task);
+  list.appendChild(card);
+}
+
+
+/**
+ * Renders avatars after loading
+ */
+function beRenderAvatarsIfAvailable() {
+  if (typeof renderAvatars === 'function') {
+    renderAvatars();
+  }
 }
 
 
@@ -217,31 +450,39 @@ function beWireFeedback(){
 function beLoadTasks() {
   const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
   const list = document.querySelector('.kb-col[data-status="todo"] [data-cards]');
+  
   if (!list || !tasks.length) return;
   
-  tasks.forEach(t => {
-    const ass = (t.assigned || []).map(x => x.initials).join(', ');
-    const pr  = t.priority === 'urgent' ? 'high' : (t.priority || 'medium');
-    const type = t.category?.name === 'Technical Task' ? 'technical' : 'story';
-    const el = document.createElement('article');
-    el.className = 'kb-card'; 
-    el.dataset.due = t.dueDate || '';
-    if(t.id != null) el.dataset.id = String(t.id);
-    el.innerHTML = `<div class="kb-card-top">
-      <span class="kb-chip kb-chip--${type}">${t.category?.name||'User Story'}</span>
-    </div>
-      <h3 class="kb-card-title">${t.title}</h3>
-      <p class="kb-card-desc">${t.description||''}</p>
-      <footer class="kb-card-foot">
-        <div class="kb-avatars" data-assignees="${ass}"></div>
-        <div class="kb-prio kb-prio--${pr}">
-          <span class="kb-prio__icon" aria-hidden="true"></span>
-        </div>
-      </footer>`;
-    list.appendChild(el);
-  });
+  tasks.forEach(task => beAppendCardToList(list, task));
   
-  if (typeof renderAvatars === 'function') renderAvatars();
+  beRenderAvatarsIfAvailable();
+}
+
+
+/**
+ * Finds task in storage by ID
+ * @param {Array} tasks - Tasks array
+ * @param {string} id - Task ID
+ * @returns {number}
+ */
+function beFindTaskIndex(tasks, id) {
+  return tasks.findIndex(t => String(t.id) === String(id));
+}
+
+
+/**
+ * Updates task status in storage
+ * @param {string} id - Task ID
+ * @param {string} status - New status
+ */
+function beUpdateTaskStatusInStorage(id, status) {
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const index = beFindTaskIndex(tasks, id);
+  
+  if (index > -1) {
+    tasks[index].status = status;
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
 }
 
 
@@ -252,33 +493,24 @@ function beLoadTasks() {
 function beOnTaskMoved(e) {
   const { id, status } = e.detail || {};
   if (!id || !status) return;
-  const arr = JSON.parse(localStorage.getItem('tasks') || '[]');
-  const ix = arr.findIndex(t => String(t.id) === String(id));
-  if (ix > -1) {
-    arr[ix].status = status;
-    localStorage.setItem('tasks', JSON.stringify(arr));
-  }
+  
+  beUpdateTaskStatusInStorage(id, status);
 }
 
 
 /**
- * Main core initialization
+ * Ensures all cards have IDs
+ * @param {HTMLElement} board - Board element
  */
-function beInitCore(){
-  if (window.__kbEnhancementsCoreInit) return; 
-  window.__kbEnhancementsCoreInit = true;
-  
-  const b=beGetBoard(); 
-  if(!b) return;
-  
-  b.querySelectorAll(".kb-card").forEach(c=>beEnsureId(c));
-  beInitDnd(b); 
-  beWatchNewCards(b);
-  beSyncAllColumns(); 
-  beWireFeedback();
-  
-  beLoadTasks();
-  
+function beEnsureAllCardsHaveIds(board) {
+  board.querySelectorAll(".kb-card").forEach(card => beEnsureId(card));
+}
+
+
+/**
+ * Binds all event listeners
+ */
+function beBindEventListeners() {
   document.addEventListener("task:moved", beEnsureEmptyVisible);
   document.addEventListener("task:deleted", beEnsureEmptyVisible);
   document.addEventListener("task:updated", beEnsureEmptyVisible);
@@ -286,8 +518,28 @@ function beInitCore(){
 }
 
 
-if (document.readyState==="loading") {
-  document.addEventListener("DOMContentLoaded", beInitCore, {once:true});
+/**
+ * Main core initialization
+ */
+function beInitCore() {
+  if (window.__kbEnhancementsCoreInit) return;
+  window.__kbEnhancementsCoreInit = true;
+  
+  const board = beGetBoard();
+  if (!board) return;
+  
+  beEnsureAllCardsHaveIds(board);
+  beInitDnd(board);
+  beWatchNewCards(board);
+  beSyncAllColumns();
+  beWireFeedback();
+  beLoadTasks();
+  beBindEventListeners();
+}
+
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", beInitCore, { once: true });
 } else {
   beInitCore();
 }
