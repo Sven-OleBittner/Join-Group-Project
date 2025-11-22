@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "index.html";
     });
   }
-
   const passwordInput = document.getElementById("signup-password");
   const confirmInput = document.getElementById("confirm-password");
   const togglePassIcon = document.getElementById("toggle-signup-password");
@@ -20,21 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "./assets/img/visibility.svg"
       : "./assets/img/visibility_off.svg";
   }
-
   togglePassIcon.addEventListener("click", () => {
     toggleVisibility(passwordInput, togglePassIcon);
   });
-
   toggleConfirmIcon.addEventListener("click", () => {
     toggleVisibility(confirmInput, toggleConfirmIcon);
   });
-
   passwordInput.addEventListener("input", () => {
     const hasValue = passwordInput.value.length > 0;
     togglePassIcon.style.display = hasValue ? "block" : "none";
     lockPassIcon.style.display = hasValue ? "none" : "block";
   });
-  
   confirmInput.addEventListener("input", () => {
     const hasValue = confirmInput.value.length > 0;
     toggleConfirmIcon.style.display = hasValue ? "block" : "none";
@@ -42,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // === Validation ===
+  const userName = document.getElementById("signup-name");
   const form = document.getElementById("signup-form");
   const email = document.getElementById("signup-email");
   const emailError = document.getElementById("email-error");
@@ -71,5 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!hasError) {
       console.log("Signup successful!");
     }
+    regDataToBackend(userName, email, passwordInput, confirmInput);
   });
 });
+
+function regDataToBackend(email, passwordInput, confirmInput) {
+  if (passwordInput.value === confirmInput.value) {
+    let user = {
+      name: userName.value,
+      email: email.value,
+      password: passwordInput.value,
+    };
+    postData((path = "user"), user);
+    setTimeout(() => {window.location = "index.html";}, 5000);
+  } else {
+    console.log("false password");
+  }
+}
