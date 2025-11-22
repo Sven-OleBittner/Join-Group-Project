@@ -1,180 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/responsive.css" />
-    <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./css/contact.css" />
-    <link rel="stylesheet" href="./css/standard.css">
-    <link rel="stylesheet" href="./css/edit_&_add_contact.css" />
-    <link rel="stylesheet" href="./css/color.css" />
-    <script src="./js/js_files/contact.js"></script>
-    <script src="./templates/contact_template.js"></script>
-    <title id="title">Join</title>
-  </head>
-  <body onload="loadContactList()">
-    <div id="contact-overlay"></div>
-    <div class="sidebar">
-      <div class="frame">
-        <div class="capa2">
-          <img class="logo-img" src="./assets/icons/Join_logo 2.svg" />
-        </div>
-      </div>
-      <div class="nav-container">
-        <ul class="nav-menu">
-          <li>
-            <a href="summary.html" class="nav-item">
-              <span class="icon">
-                <img src="./assets/img/summary_sidebar.svg" alt="Summary">
-              </span>
-              <span class="text">Summary</span>
-            </a>
-          </li>
-          <li>
-            <a href="add_task.html" class="nav-item active">
-              <span class="icon">
-                <img
-                  src="./assets/img/sidebar_add_task_icon.svg"
-                  alt="Add Task"
-                />
-              </span>
-              <span class="text">Add Task</span>
-            </a>
-          </li>
-          <li>
-            <a href="board.html" class="nav-item">
-              <span class="icon">
-                <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
-              </span>
-              <span class="text">Board</span>
-            </a>
-          </li>
-          <li>
-            <a href="contacts.html" class="nav-item">
-              <span class="icon">
-                <img
-                  src="./assets/img/sidebar_contact_calendar_icon.svg"
-                  alt="Contacts"
-                />
-              </span>
-              <span class="text">Contacts</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="bottom-links">
-        <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
-        <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./css/contact.css" />
+  <link rel="stylesheet" href="./css/standard.css">
+  <link rel="stylesheet" href="./css/edit_&_add_contact.css" />
+  <link rel="stylesheet" href="./css/color.css" />
+  <script src="./js/js_files/contact.js"></script>
+  <script src="./templates/contact_template.js"></script>
+  <title id="title">Join</title>
+</head>
+
+<body onload="loadContactList()">
+  <div id="contact-overlay"></div>
+  <div class="sidebar">
+    <div class="frame">
+      <div class="capa2">
+        <img class="logo-img" src="./assets/icons/Join_logo 2.svg" />
       </div>
     </div>
+    <div class="nav-container">
+      <ul class="nav-menu">
+        <li>
+          <a href="summary.html" class="nav-item">
+            <span class="icon">
+              <img src="./assets/img/summary_sidebar.svg" alt="Summary">
+            </span>
+            <span class="text">Summary</span>
+          </a>
+        </li>
+        <li>
+          <a href="add_task.html" class="nav-item active">
+            <span class="icon">
+              <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+            </span>
+            <span class="text">Add Task</span>
+          </a>
+        </li>
+        <li>
+          <a href="board.html" class="nav-item">
+            <span class="icon">
+              <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+            </span>
+            <span class="text">Board</span>
+          </a>
+        </li>
+        <li>
+          <a href="contacts.html" class="nav-item">
+            <span class="icon">
+              <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+            </span>
+            <span class="text">Contacts</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+      <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
+    </div>
+  </div>
 
-    <div class="headercontainer">
-      <header class="header">
-        <div class="title-container">
-          <p>Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
-        </div>
-      </header>
+  <div class="headercontainer">
+    <header class="header">
+      <div class="title-container">
+        <p>Kanban Project Management Tool</p>
+      </div>
+      <div class="header-right">
+        <a href="./help.html" class="help-icon">?</a>
+        <div id="userInitials" class="user-avatar">SM</div>
+      </div>
+    </header>
 
-      <!-- maincontent -->
-      <div class="main-content">
-        <div class="contact-list-container">
-          <button onclick="openAddContactOverlay()" class="add-contact-btn">Add new contact
-            <img class="add-contact-img" src="./assets/img/contact_add.svg" alt="Add Contact">
-          </button>
-          <div id="contact-list"></div>
+    <!-- maincontent -->
+    <div class="main-content">
+      <div class="contact-list-container">
+        <button onclick="openAddContactOverlay()" class="add-contact-btn">Add new contact
+          <img class="add-contact-img" src="./assets/img/contact_add.svg" alt="Add Contact">
+        </button>
+        <div id="contact-list"></div>
+      </div>
+      <div class="show-contact-container">
+        <div class="contact-team-container">
+          <h1>Contacts</h1>
+          <div class="bar"></div>
+          <p>Better with a team</p>
         </div>
-        <div class="show-contact-container">
-          <div class="contact-team-container">
-            <h1>Contacts</h1>
-            <div class="bar"></div>
-            <p>Better with a team</p>
-          </div>
-          <div id="contact-details-section" class="contact-form-control hidden">
-            <div id="contact-initials-circle" class="contact-form-circle d-flex-c"></div>
-            <div class="contact-form-description">
-              <h1 id="contact-display-name" class="contact-form-name">Select a contact</h1>
-              <div class="contact-form-edit-delete">
-                <div onclick="openEditContactOverlay()" class="d-flex-c g-8">
-                  <img src="./assets/img/contact-main-edit.svg" alt="Edit">
-                  <span>Edit</span>
-                </div>
-                <div class="d-flex-c g-8" onclick="deleteSelectedContact()">
-                  <img src="./assets/img/contact-main-delete.svg" alt="Delete">
-                  <span>Delete</span>
-                </div>
+        <div id="contact-details-section" class="contact-form-control hidden">
+          <div id="contact-initials-circle" class="contact-form-circle d-flex-c"></div>
+          <div class="contact-form-description">
+            <h1 id="contact-display-name" class="contact-form-name">Select a contact</h1>
+            <div class="contact-form-edit-delete">
+              <div onclick="openEditContactOverlay()" class="d-flex-c g-8">
+                <img src="./assets/img/contact-main-edit.svg" alt="Edit">
+                <span>Edit</span>
+              </div>
+              <div class="d-flex-c g-8" onclick="deleteSelectedContact()">
+                <img src="./assets/img/contact-main-delete.svg" alt="Delete">
+                <span>Delete</span>
               </div>
             </div>
           </div>
-          <span id="contact-info-label" class="contact-info hidden">Contact information</span>
-          <div id="contact-email-section" class="contact-email-frame hidden">
-            <h3 class="fs-b-16">Email</h3>
-            <a id="contact-email-link" href="mailto:"></a>
-          </div>
-          <div id="contact-phone-section" class="contact-phone-frame hidden">
-            <h3 class="fs-b-16">Phone</h3>
-            <a id="contact-phone-link" href="tel:"></a>
-          </div>
+        </div>
+        <span id="contact-info-label" class="contact-info hidden">Contact information</span>
+        <div id="contact-email-section" class="contact-email-frame hidden">
+          <h3 class="fs-b-16">Email</h3>
+          <a id="contact-email-link" href="mailto:"></a>
+        </div>
+        <div id="contact-phone-section" class="contact-phone-frame hidden">
+          <h3 class="fs-b-16">Phone</h3>
+          <a id="contact-phone-link" href="tel:"></a>
         </div>
       </div>
-      <div onclick="openAddContactOverlay()" class="add-contact-mobile d-flex-c c-pointer">
-        <img src="./assets/img/contact-add-person.svg" alt="Add contact">
-      </div>
     </div>
-    <div class="footer">
-      <nav class="footer-nav">
-        <a href="summary.html" class="footer-nav-item">
-          <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
-          <span>Summary</span>
-        </a>
-        <a href="add_task.html" class="footer-nav-item active">
-          <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
-          <span>Add Task</span>
-        </a>
-        <a href="board.html" class="footer-nav-item">
-          <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
-          <span>Board</span>
-        </a>
-        <a href="contacts.html" class="footer-nav-item">
-          <img
-            src="./assets/img/sidebar_contact_calendar_icon.svg"
-            alt="Contacts"
-          />
-          <span>Contacts</span>
-        </a>
-      </nav>
+    <div onclick="openAddContactOverlay()" class="add-contact-mobile d-flex-c c-pointer">
+      <img src="./assets/img/contact-add-person.svg" alt="Add contact">
     </div>
+  </div>
+  <div class="footer">
+    <nav class="footer-nav">
+      <a href="summary.html" class="footer-nav-item">
+        <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+        <span>Summary</span>
+      </a>
+      <a href="add_task.html" class="footer-nav-item active">
+        <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+        <span>Add Task</span>
+      </a>
+      <a href="board.html" class="footer-nav-item">
+        <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+        <span>Board</span>
+      </a>
+      <a href="contacts.html" class="footer-nav-item">
+        <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+        <span>Contacts</span>
+      </a>
+    </nav>
+  </div>
 
-    <div class="footer">
-      <nav class="footer-nav">
-        <a href="./summary.html" class="footer-nav-item">
-          <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
-          <span>Summary</span>
-        </a>
-        <a href="./add_task.html" class="footer-nav-item">
-          <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
-          <span>Add Task</span>
-        </a>
-        <a href="./board.html" class="footer-nav-item">
-          <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
-          <span>Board</span>
-        </a>
-        <a href="./contacts.html" class="footer-nav-item">
-          <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
-          <span>Contacts</span>
-        </a>
-      </nav>
-    </div>
-    <script>
-      function goToPage(page) {
-        window.location.href = page;
-      }
-    </script>
-  </body>
+  <div class="footer">
+    <nav class="footer-nav">
+      <a href="./summary.html" class="footer-nav-item">
+        <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+        <span>Summary</span>
+      </a>
+      <a href="./add_task.html" class="footer-nav-item">
+        <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+        <span>Add Task</span>
+      </a>
+      <a href="./board.html" class="footer-nav-item">
+        <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+        <span>Board</span>
+      </a>
+      <a href="./contacts.html" class="footer-nav-item">
+        <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+        <span>Contacts</span>
+      </a>
+    </nav>
+  </div>
+  <script>
+    function goToPage(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+
 </html>

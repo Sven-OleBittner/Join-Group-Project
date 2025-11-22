@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
 
   <!-- Fonts & base styles -->
-  <link rel="stylesheet" href="./assets/fonts/fonts.css"/>
-  <link rel="stylesheet" href="./css/standard.css"/>
-  <link rel="stylesheet" href="./css/color.css"/>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <link rel="stylesheet" href="./css/board.css"/>
-  <link rel="stylesheet" href="./css/board_second.css"/>
-  <link rel="stylesheet" href="./css/add_task.css"/>
-  <link rel="stylesheet" href="./css/responsive.css"/>
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./css/standard.css" />
+  <link rel="stylesheet" href="./css/color.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/board.css" />
+  <link rel="stylesheet" href="./css/board_second.css" />
+  <link rel="stylesheet" href="./css/add_task.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
   <link rel="stylesheet" href="./css/add_task_media.css">
-  <link rel="stylesheet" href="./css/responsive_for_board.css/kb-desktop.css"/>
-  <link rel="stylesheet" href="./css/responsive_for_board.css/kb-mobile.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
-  <link rel="stylesheet" href="./css/addtask-modal-bridge.css"/>
-  <link rel="stylesheet" href="./css/add_task_second.css"/>
-  <link rel="stylesheet" href="./css/board_add_task_modal.css"/>
-  
+  <link rel="stylesheet" href="./css/responsive_for_board.css/kb-desktop.css" />
+  <link rel="stylesheet" href="./css/responsive_for_board.css/kb-mobile.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link rel="stylesheet" href="./css/addtask-modal-bridge.css" />
+  <link rel="stylesheet" href="./css/add_task_second.css" />
+  <link rel="stylesheet" href="./css/board_add_task_modal.css" />
+
   <title>Join</title>
 </head>
+
 <body>
   <div class="sidebar">
     <div class="frame">
       <div class="capa2">
-        <img class="logo-img" src="./assets/icons/Join_logo 2.svg" alt="Join"/>
+        <img class="logo-img" src="./assets/icons/Join_logo 2.svg" alt="Join" />
       </div>
     </div>
     <div class="nav-container">
       <ul class="nav-menu">
         <li>
           <button class="nav-item" onclick="goToPage('./summary.html')">
-            <span class="icon"><img src="./assets/img/summary_sidebar.svg" alt="Summary"/></span>
+            <span class="icon"><img src="./assets/img/summary_sidebar.svg" alt="Summary" /></span>
             <span class="text">Summary</span>
           </button>
         </li>
         <li>
           <button class="nav-item" onclick="goToPage('./add_task.html')">
-            <span class="icon"><img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/></span>
+            <span class="icon"><img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" /></span>
             <span class="text">Add Task</span>
           </button>
         </li>
         <li>
           <button class="nav-item active" onclick="goToPage('./board.html')">
-            <span class="icon"><img src="./assets/img/sidebar_board_icon.svg" alt="Board"/></span>
+            <span class="icon"><img src="./assets/img/sidebar_board_icon.svg" alt="Board" /></span>
             <span class="text">Board</span>
           </button>
         </li>
         <li>
           <button class="nav-item" onclick="goToPage('./contacts.html')">
-            <span class="icon"><img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/></span>
+            <span class="icon"><img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" /></span>
             <span class="text">Contacts</span>
           </button>
         </li>
@@ -68,10 +70,14 @@
   <div class="headercontainer">
     <header class="header">
       <div class="title-container">
-        <p class="title">Kanban Project Management Tool</p>
-        <img class="header-logo" src="./assets/icons/Join_logo 1.svg" alt="Join Logo">
+        <p>Kanban Project Management Tool</p>
+      </div>
+      <div class="header-right">
+        <a href="./help.html" class="help-icon">?</a>
+        <div id="userInitials" class="user-avatar">SM</div>
       </div>
     </header>
+
 
     <div class="main-content">
       <section class="kb">
@@ -106,8 +112,7 @@
               <button class="kb-col-add" type="button" aria-label="Add task to In progress"></button>
             </header>
             <div class="kb-card-list" data-cards>
-              <article class="kb-card"
-                data-due="10/05/2023"
+              <article class="kb-card" data-due="10/05/2023"
                 data-subtasks='["Implement Recipe Recommendation","Start Page Layout"]'>
                 <div class="kb-card-top">
                   <span class="kb-chip kb-chip--story">User Story</span>
@@ -115,7 +120,9 @@
                 <h3 class="kb-card-title">Kochwelt Page &amp; Recipe Recommender</h3>
                 <p class="kb-card-desc">Build start page with recipe recommendation...</p>
                 <div class="kb-progress-row">
-                  <div class="kb-progress"><div class="kb-progress-bar" style="width:50%"></div></div>
+                  <div class="kb-progress">
+                    <div class="kb-progress-bar" style="width:50%"></div>
+                  </div>
                   <span class="kb-subtasks">1/2 Subtasks</span>
                 </div>
                 <footer class="kb-card-foot">
@@ -136,8 +143,7 @@
               <button class="kb-col-add" type="button" aria-label="Add task to Await feedback"></button>
             </header>
             <div class="kb-card-list" data-cards>
-              <article class="kb-card"
-                data-due="12/05/2023"
+              <article class="kb-card" data-due="12/05/2023"
                 data-subtasks='["Create base.html","Extract header & footer"]'>
                 <div class="kb-card-top">
                   <span class="kb-chip kb-chip--technical">Technical Task</span>
@@ -145,7 +151,9 @@
                 <h3 class="kb-card-title">HTML Base Template Creation</h3>
                 <p class="kb-card-desc">Create reusable HTML base templates...</p>
                 <div class="kb-progress-row">
-                  <div class="kb-progress"><div class="kb-progress-bar" style="width:0%"></div></div>
+                  <div class="kb-progress">
+                    <div class="kb-progress-bar" style="width:0%"></div>
+                  </div>
                   <span class="kb-subtasks">0/2 Subtasks</span>
                 </div>
                 <footer class="kb-card-foot">
@@ -155,8 +163,7 @@
                   </div>
                 </footer>
               </article>
-              <article class="kb-card"
-                data-due="11/05/2023"
+              <article class="kb-card" data-due="11/05/2023"
                 data-subtasks='["Implement daily recipe","Portion calculator"]'>
                 <div class="kb-card-top">
                   <span class="kb-chip kb-chip--story">User Story</span>
@@ -164,7 +171,9 @@
                 <h3 class="kb-card-title">Daily Kochwelt Recipe</h3>
                 <p class="kb-card-desc">Implement daily recipe and portion calculator....</p>
                 <div class="kb-progress-row">
-                  <div class="kb-progress"><div class="kb-progress-bar" style="width:0%"></div></div>
+                  <div class="kb-progress">
+                    <div class="kb-progress-bar" style="width:0%"></div>
+                  </div>
                   <span class="kb-subtasks">0/2 Subtasks</span>
                 </div>
                 <footer class="kb-card-foot">
@@ -184,16 +193,16 @@
               <h2 class="kb-col-title">Done</h2>
             </header>
             <div class="kb-card-list" data-cards>
-              <article class="kb-card"
-                data-due="09/30/2023"
-                data-subtasks='["Define BEM","Write style guide"]'>
+              <article class="kb-card" data-due="09/30/2023" data-subtasks='["Define BEM","Write style guide"]'>
                 <div class="kb-card-top">
                   <span class="kb-chip kb-chip--technical">Technical Task</span>
                 </div>
                 <h3 class="kb-card-title">CSS Architecture Planning</h3>
                 <p class="kb-card-desc">Define CSS naming conventions and structure...</p>
                 <div class="kb-progress-row">
-                  <div class="kb-progress"><div class="kb-progress-bar" style="width:100%"></div></div>
+                  <div class="kb-progress">
+                    <div class="kb-progress-bar" style="width:100%"></div>
+                  </div>
                   <span class="kb-subtasks">2/2 Subtasks</span>
                 </div>
                 <footer class="kb-card-foot">
@@ -212,110 +221,110 @@
   </div>
 
   <!-- overlay + modals -->
-<div id="at-overlay" class="at-overlay" aria-hidden="true"></div>
+  <div id="at-overlay" class="at-overlay" aria-hidden="true"></div>
 
-<div id="at-modal" class="at-modal" role="dialog" aria-modal="true" aria-labelledby="at-title">
-  <div class="at-dialog">
-    <form id="taskForm">
-      <div class="at-header">
-        <h2 id="at-title">Add Task</h2>
-        <button id="at-close" class="at-close" type="button" aria-label="Close">&times;</button>
-      </div>
-
-      <div class="at-grid">
-        <!-- LEFT COLUMN -->
-        <div class="at-col">
-          <label class="field">
-            <span class="field__label">Title<span class="req">*</span></span>
-            <input class="input" name="title" placeholder="Enter a title" />
-          </label>
-
-          <label class="field">
-            <span class="field__label">Description</span>
-            <textarea class="textarea" name="description" placeholder="Enter a Description"></textarea>
-          </label>
-
-          <label class="field">
-            <span class="field__label">Due date<span class="req">*</span></span>
-            <div class="date-wrapper">
-              <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" />
-              <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar" alt="">
-            </div>
-          </label>
+  <div id="at-modal" class="at-modal" role="dialog" aria-modal="true" aria-labelledby="at-title">
+    <div class="at-dialog">
+      <form id="taskForm">
+        <div class="at-header">
+          <h2 id="at-title">Add Task</h2>
+          <button id="at-close" class="at-close" type="button" aria-label="Close">&times;</button>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="at-col at-col--right">
-          <!-- PRIORITY -->
-          <div class="field">
-            <span class="field__label">Priority</span>
-            <div class="priority priority-options" data-priority>
-              <button type="button" class="priority__btn" data-value="urgent">
-                Urgent <img src="./assets/img/red_high_urgent.svg" alt="">
-              </button>
-              <button type="button" class="priority__btn priority__btn--active" data-value="medium">
-                Medium <img src="./assets/img/=_for yellow.svg" alt="">
-              </button>
-              <button type="button" class="priority__btn" data-value="low">
-                Low <img src="./assets/img/green_low_urgent.svg" alt="">
-              </button>
-              <input type="hidden" name="priority" value="medium">
-            </div>
+        <div class="at-grid">
+          <!-- LEFT COLUMN -->
+          <div class="at-col">
+            <label class="field">
+              <span class="field__label">Title<span class="req">*</span></span>
+              <input class="input" name="title" placeholder="Enter a title" />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Description</span>
+              <textarea class="textarea" name="description" placeholder="Enter a Description"></textarea>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Due date<span class="req">*</span></span>
+              <div class="date-wrapper">
+                <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" />
+                <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar" alt="">
+              </div>
+            </label>
           </div>
 
-          <!-- ASSIGNED TO -->
-          <label class="field">
-            <span class="field__label">Assigned to</span>
-            <div class="dropdown full-expandable assigned-to" id="assignees">
-              <div class="dropdown-toggle" role="button" tabindex="0">
-                <span class="placeholder">Select contacts to assign</span>
-                <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="">
-              </div>
-              <div class="dropdown-menu">
-                <div class="dropdown-search">
-                  <input type="text" id="assignee-search" placeholder="Search contacts">
-                </div>
-                <div class="options" id="assignee-options"></div>
-              </div>
-            </div>
-          </label>
-          <div class="chips assigned-chips" id="assignee-chips"></div>
-
-          <!-- CATEGORY -->
-          <label class="field">
-            <span class="field__label">Category<span class="req">*</span></span>
-            <div class="dropdown full-expandable category-select" id="category">
-              <div class="dropdown-toggle" role="button" tabindex="0">
-                <span class="placeholder">Select task category</span>
-                <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="">
-              </div>
-              <div class="dropdown-menu">
-                <div class="dropdown-search">
-                  <input type="text" id="category-search" placeholder="Search categories">
-                </div>
-                <div class="options" id="category-options"></div>
+          <!-- RIGHT COLUMN -->
+          <div class="at-col at-col--right">
+            <!-- PRIORITY -->
+            <div class="field">
+              <span class="field__label">Priority</span>
+              <div class="priority priority-options" data-priority>
+                <button type="button" class="priority__btn" data-value="urgent">
+                  Urgent <img src="./assets/img/red_high_urgent.svg" alt="">
+                </button>
+                <button type="button" class="priority__btn priority__btn--active" data-value="medium">
+                  Medium <img src="./assets/img/=_for yellow.svg" alt="">
+                </button>
+                <button type="button" class="priority__btn" data-value="low">
+                  Low <img src="./assets/img/green_low_urgent.svg" alt="">
+                </button>
+                <input type="hidden" name="priority" value="medium">
               </div>
             </div>
-          </label>
-          <div class="chips category-chipbox" id="category-chipbox"></div>
 
-          <!-- SUBTASKS -->
-          <div class="field">
-            <span class="field__label">Subtasks</span>
-            <div class="subtasks" data-subtasks>
-              <input class="input" type="text" id="subtask-input" placeholder="Add new subtask" />
-              <ul class="subtasks__list"></ul>
+            <!-- ASSIGNED TO -->
+            <label class="field">
+              <span class="field__label">Assigned to</span>
+              <div class="dropdown full-expandable assigned-to" id="assignees">
+                <div class="dropdown-toggle" role="button" tabindex="0">
+                  <span class="placeholder">Select contacts to assign</span>
+                  <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="">
+                </div>
+                <div class="dropdown-menu">
+                  <div class="dropdown-search">
+                    <input type="text" id="assignee-search" placeholder="Search contacts">
+                  </div>
+                  <div class="options" id="assignee-options"></div>
+                </div>
+              </div>
+            </label>
+            <div class="chips assigned-chips" id="assignee-chips"></div>
+
+            <!-- CATEGORY -->
+            <label class="field">
+              <span class="field__label">Category<span class="req">*</span></span>
+              <div class="dropdown full-expandable category-select" id="category">
+                <div class="dropdown-toggle" role="button" tabindex="0">
+                  <span class="placeholder">Select task category</span>
+                  <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="">
+                </div>
+                <div class="dropdown-menu">
+                  <div class="dropdown-search">
+                    <input type="text" id="category-search" placeholder="Search categories">
+                  </div>
+                  <div class="options" id="category-options"></div>
+                </div>
+              </div>
+            </label>
+            <div class="chips category-chipbox" id="category-chipbox"></div>
+
+            <!-- SUBTASKS -->
+            <div class="field">
+              <span class="field__label">Subtasks</span>
+              <div class="subtasks" data-subtasks>
+                <input class="input" type="text" id="subtask-input" placeholder="Add new subtask" />
+                <ul class="subtasks__list"></ul>
+              </div>
             </div>
           </div>
         </div>
-      </div> 
-      <div class="at-footer">
-        <button type="button" id="at-cancel" class="btn">Cancel</button>
-        <button type="submit" id="at-create" class="btn btn-primary">Create Task</button>
-      </div>
-    </form>
+        <div class="at-footer">
+          <button type="button" id="at-cancel" class="btn">Cancel</button>
+          <button type="submit" id="at-create" class="btn btn-primary">Create Task</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
   <div id="td-modal" class="td-modal" role="dialog" aria-modal="true" aria-labelledby="td-title">
     <div class="td-dialog" tabindex="-1">
@@ -363,26 +372,26 @@
   <div class="footer">
     <nav class="footer-nav">
       <a href="summary.html" class="footer-nav-item">
-        <img src="./assets/img/summary_sidebar.svg" alt="Summary"/>
+        <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
         <span>Summary</span>
       </a>
       <a href="add_task.html" class="footer-nav-item">
-        <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/>
+        <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
         <span>Add Task</span>
       </a>
       <a href="board.html" class="footer-nav-item active">
-        <img src="./assets/img/sidebar_board_icon.svg" alt="Board"/>
+        <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
         <span>Board</span>
       </a>
       <a href="contacts.html" class="footer-nav-item">
-        <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/>
+        <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
         <span>Contacts</span>
       </a>
     </nav>
   </div>
 
   <script>
-    function goToPage(page){ window.location.href = page; }
+    function goToPage(page) { window.location.href = page; }
   </script>
   <script src="./general_script.js"></script>
   <script src="./js/js_files/db.js"></script>
@@ -394,4 +403,5 @@
   <script src="js/js_files/board-enhancements-edit.js"></script>
   <script src="js/js_files/addtask-modal-bridge.js"></script>
 </body>
+
 </html>
