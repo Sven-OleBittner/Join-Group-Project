@@ -80,7 +80,5 @@ function regDataToBackend(email, passwordInput, confirmInput) {
     };
     postData((path = "user"), user);
     setTimeout(() => {window.location = "index.html";}, 5000);
-  } else {
-    console.log("false password");
   }
 }
