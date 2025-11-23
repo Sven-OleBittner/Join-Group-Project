@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./css/responsive.css">
   <link rel="stylesheet" href="./assets/fonts/fonts.css">
 </head>
-<body>
+<body onload="init()">
 
   <!-- Intro Logo -->
   <div class="intro-screen" id="intro">
@@ -33,7 +33,7 @@
       <div class="login-box">
         <h1>Log in</h1>
         <div class="underline"></div>
-        <form id="login-form">
+        <form id="login-form" onsubmit="login(); return false">
           <div class="input-group">
             <input type="email" id="email" placeholder="Email" required />
             <img src="./assets/img/mail.svg" class="input-icon" alt="Email" />
@@ -55,6 +55,10 @@
         <span>Not a Join user?</span>
         <a href="signup.html" class="signup-btn">Sign up</a>
       </div>
+
+      <div>
+        <span id="msgBox"></span>
+      </div>
     </main>
 
     <footer class="login-footer">
@@ -63,7 +67,9 @@
     </footer>
   </div>
 
+  <script src="./js/js_files/db.js"></script>
   <script src="script.js"></script>
+  <script src="./js/js_files/login.js"></script>
   <script>
     function goToPage(page) {
       window.location.href = page;

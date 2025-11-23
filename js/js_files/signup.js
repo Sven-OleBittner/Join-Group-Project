@@ -79,6 +79,6 @@ function regDataToBackend(email, passwordInput, confirmInput) {
       password: passwordInput.value,
     };
     postData((path = "user"), user);
-    setTimeout(() => {window.location = "index.html";}, 5000);
+    setTimeout(() => {window.location.href = "index.html?msg=You Signed Up succesfully";}, 5000);
   }
 }
