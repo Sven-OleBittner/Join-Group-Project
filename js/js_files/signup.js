@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function regDataToBackend(email, passwordInput, confirmInput) {
+function regDataToBackend(userName, email, passwordInput, confirmInput) {
   if (passwordInput.value === confirmInput.value) {
     let user = {
       name: userName.value,
@@ -79,6 +79,8 @@ function regDataToBackend(email, passwordInput, confirmInput) {
       password: passwordInput.value,
     };
     postData((path = "user"), user);
-    setTimeout(() => {window.location.href = "index.html?msg=You Signed Up succesfully";}, 5000);
+    setTimeout(() => {
+      window.location = "index.html?msg=You Signed Up succesfully";
+    }, 1000);
   }
 }
