@@ -32,7 +32,7 @@
     width: 232px;
     background: #2a3647;
     z-index: 999;
-    transition: left 0.125ms ease;
+    transition: left 125ms ease;
   }
 
   .sidebar.open {
