@@ -9,7 +9,7 @@
     }
 
     .main-content {
-        animation: main_fadeIn 1000ms ease-in;
+        animation: main_fadeIn 2000ms ease-in;
         animation-delay: 1s;
     }
 
