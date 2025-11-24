@@ -28,7 +28,7 @@
 #at-modal .at-col,
 #at-modal .at-col--right {
   display: grid;
-  gap: 16px;
+  gap: 8px;
 }
 
 /* === FORM FIELDS === */
@@ -40,6 +40,14 @@
 #at-modal .field__label {
   font: 600 16px/1.3 Inter, system-ui;
   color: #1F2937;
+}
+
+.field__label_description{
+  padding-top:16px;
+}
+
+.field__label_due_date{
+  padding-top:16px;
 }
 
 #at-modal .req {
@@ -150,6 +158,7 @@
 /* === FOOTER === */
 #at-modal .at-footer {
   margin-top: 28px;
+  padding: 68px 0px 24px;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
