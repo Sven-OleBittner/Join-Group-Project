@@ -1,0 +1,17 @@
+.msg__Box {
+    background-color: #2A3647;
+    border-radius: 16px;
+    width: 312px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg {
+    color: white;
+    padding: 16px 8px;
+    align-self: center;
+    font-weight: 400;
+    font-size: 20px;
+}

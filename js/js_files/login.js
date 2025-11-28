@@ -17,7 +17,7 @@ function login() {
     (u) => u.email == email.value && u.password == password.value
   );
   if (user) {
-    console.log("user gefunden");
+    window.location.href = 'summary.html'
   } else {
     console.log("user nicht registriert");
   }
@@ -27,7 +27,7 @@ function showMsg() {
   // Source - https://stackoverflow.com/a
   // Posted by Artem Barger, modified by community. See post 'Timeline' for change history
   // Retrieved 2025-11-23, License - CC BY-SA 4.0
-    let msgBox = document.getElementById("msgBox");
+    let msgBox = document.getElementById("msgBoxText");
   const urlParams = new URLSearchParams(window.location.search);
   const msg = urlParams.get("msg");
   if (msg) {

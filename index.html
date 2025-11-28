@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,12 +14,13 @@
   <link rel="stylesheet" href="./css/responsive.css">
   <link rel="stylesheet" href="./assets/fonts/fonts.css">
 </head>
+
 <body onload="init()">
 
   <!-- Intro Logo -->
   <div class="intro-screen" id="intro">
     <img src="./assets/img/Capa 2.svg" alt="Join Logo" class="intro-logo" id="introLogo" />
-  </div>  
+  </div>
 
   <!-- Main Content -->
   <div class="login-page" id="loginPage">
@@ -43,7 +45,8 @@
           <div class="input-group">
             <input type="password" id="password" placeholder="Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-password" alt="Password" />
-            <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-password" style="display: none;" alt="Show password" />
+            <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-password"
+              style="display: none;" alt="Show password" />
             <div class="error-text" id="password-error">Password must be at least 6 characters.</div>
           </div>
           <div class="button-group">
@@ -57,8 +60,8 @@
         <a href="signup.html" class="signup-btn">Sign up</a>
       </div>
 
-      <div class="msg__Box">
-        <span class="msg" id="msgBox"></span>
+      <div class="msg__Box" id="msgBox">
+        <span class="msg" id="msgBoxText"></span>
       </div>
     </main>
 
@@ -77,4 +80,5 @@
     }
   </script>
 </body>
+
 </html>
