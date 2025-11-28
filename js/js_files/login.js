@@ -19,7 +19,7 @@ function login() {
   if (user) {
     window.location.href = "summary.html";
   } else {
-    console.log("user nicht registriert");
+    userNotFound();
   }
 }
 
@@ -34,4 +34,8 @@ function showMsg() {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
   }
+}
+
+function userNotFound() {
+  window.location = "index.html?msg=User not Found";
 }
