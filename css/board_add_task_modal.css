@@ -107,7 +107,9 @@
   transition: filter .12s ease;
 }
 
-#at-modal .priority__btn--active img {
+#at-modal .priority .priority__btn:nth-child(1).priority__btn--active img,
+#at-modal .priority .priority__btn:nth-child(2).priority__btn--active img,
+#at-modal .priority .priority__btn:nth-child(3).priority__btn--active img {
   filter: brightness(0) invert(1);
 }
 
