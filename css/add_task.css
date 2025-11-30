@@ -91,7 +91,7 @@ textarea {
 }
 
 .priority {
-  padding: 2px 16px;
+  padding: 12px 16px;
   border-radius: 10px;
   background-color: #F6F7F8;
   color: #000;
@@ -101,6 +101,7 @@ textarea {
   gap: 8px;
   cursor: pointer;
   transition: all 0.1s ease;
+  min-width: 96px;
 }
 
 .priority:hover { 
