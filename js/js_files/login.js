@@ -1,4 +1,5 @@
 let users = [];
+let loginUser;
 
 function init() {
   dataToUsers();
@@ -17,6 +18,7 @@ function login() {
     (u) => u.email == email.value && u.password == password.value
   );
   if (user) {
+    loggingInUser(user);
     window.location.href = "summary.html";
   } else {
     userNotFound();
@@ -38,4 +40,13 @@ function showMsg() {
 
 function userNotFound() {
   window.location = "index.html?msg=User not Found";
+}
+
+function loggingInUser(user) {
+  postData((path = "loggingInUser"), user);
+}
+
+function loggingOutUser() {
+  deleteData((path = "loggingInUser"));
+  window.location.href = "index.html";
 }
