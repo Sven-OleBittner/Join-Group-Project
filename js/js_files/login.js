@@ -48,5 +48,5 @@ function loggingInUser(user) {
 
 function loggingOutUser() {
   deleteData((path = "loggingInUser"));
-  window.location.href = "index.html";
+  window.location.href = "index.html?msg=You have been logged out!";
 }
