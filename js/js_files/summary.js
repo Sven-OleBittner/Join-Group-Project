@@ -9,14 +9,15 @@ async function loadUserData() {
     userFound(logInUser);
   } else {
     userInitials.innerHTML = "G";
-    greetingText.innerHTML = `Good Morning !`;
+    greetingText.innerHTML = "Good Morning !";
+    greetingBox.innerHTML = "Good Morning !";
   }
 }
 
 function userFound(logInUser) {
   let userInitials = document.getElementById("userInitials");
   let greetingText = document.getElementById("greetingText");
-  let greetingBox = document.getElementById('greetingBox');
+  let greetingBox = document.getElementById("greetingBox");
   const nameWords = logInUser.name.split(" ");
   const initials = nameWords
     .map((word) => word.charAt(0).toUpperCase())
