@@ -32,7 +32,7 @@
     width: 232px;
     background: #2a3647;
     z-index: 999;
-    transition: left 125ms ease;
+    transition: left 0.12s ease;
   }
 
   .sidebar.open {
@@ -212,8 +212,6 @@
   }
 }
 
-/* ====== AddTask popup polish (overlay version on Board) ====== */
-
 #at-modal .at-dialog {
   border-radius: 24px;
   display: flex;
@@ -317,7 +315,7 @@
   padding: 10px 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.06s;
+  transition: border-color 0.1s, box-shadow 0.1s, transform 0.08s;
 }
 
 #at-modal .priority__btn:hover {
@@ -371,4 +369,3 @@
     gap: 20px;
   }
 }
-
