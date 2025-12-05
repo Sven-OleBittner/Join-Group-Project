@@ -1,3 +1,7 @@
+/* ============================================= */
+/* ADD TASK MODAL – CLEAN & FINAL VERSION 2025   */
+/* ============================================= */
+
 /* === HEADER === */
 #at-modal .at-header h2 {
   font-size: 44px;
@@ -17,8 +21,7 @@
 #at-modal .at-grid::after {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
+  inset: 0;
   left: 50%;
   width: 1px;
   background: #E5E7EB;
@@ -28,7 +31,7 @@
 #at-modal .at-col,
 #at-modal .at-col--right {
   display: grid;
-  gap: 16px;
+  gap: 8px;
 }
 
 /* === FORM FIELDS === */
@@ -38,8 +41,13 @@
 }
 
 #at-modal .field__label {
-  font: 600 16px/1.3 Inter, system-ui;
+  font: 400 17px/1.3 Inter, system-ui;
   color: #1F2937;
+}
+
+.field__label_description,
+.field__label_due_date {
+  padding-top: 16px;
 }
 
 #at-modal .req {
@@ -71,6 +79,12 @@
   resize: vertical;
 }
 
+/* === PLACEHOLDER – schwach grau === */
+#at-modal ::placeholder {
+  color: #9CA3AF !important;
+  opacity: 1 !important;
+}
+
 /* === PRIORITY BUTTONS === */
 #at-modal .priority {
   display: grid;
@@ -85,74 +99,47 @@
   padding: 10px 16px;
   border: 1px solid #E5E7EB;
   border-radius: 12px;
-  background: #F6F7F8;
+  background: white;
   font-weight: 700;
   line-height: 1;
   color: #111827;
   cursor: pointer;
-  transition: background .12s, border-color .12s, transform .06s;
+  transition: all .15s ease;
 }
 
 #at-modal .priority__btn img {
   height: 18px;
   width: 18px;
-  transition: filter .12s ease;
+  transition: filter .15s ease;
 }
 
+/* WICHTIG: nur aktive Buttons → weißes Icon */
 #at-modal .priority__btn--active img {
   filter: brightness(0) invert(1);
 }
+
+/* Aktive Zustände – kürzer mit nth-child(-n+3) */
+#at-modal .priority .priority__btn:nth-child(1).priority__btn--active { background:#FF3B3B; border-color:#FF3B3B; color:#fff; }
+#at-modal .priority .priority__btn:nth-child(2).priority__btn--active { background:#FFA800; border-color:#FFA800; color:#fff; }
+#at-modal .priority .priority__btn:nth-child(3).priority__btn--active { background:#7AE229; border-color:#7AE229; color:#fff; }
 
 #at-modal .priority__btn:active {
   transform: scale(.98);
 }
 
-/* ACTIVE STATES */
-#at-modal .priority .priority__btn:nth-child(1).priority__btn--active {
-  background: #FF3B3B;
-  border-color: #FF3B3B;
-  color: #fff;
-}
-
-#at-modal .priority .priority__btn:nth-child(2).priority__btn--active {
-  background: #FFA800;
-  border-color: #FFA800;
-  color: #fff;
-}
-
-#at-modal .priority .priority__btn:nth-child(3).priority__btn--active {
-  background: #7AE229;
-  border-color: #7AE229;
-  color: #fff;
-}
-
-/* === SUBTASKS === */
-#at-modal .subtasks {
-  display: grid;
-  gap: 10px;
-}
-
-#at-modal .subtasks__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 8px;
-}
-
-#at-modal .subtasks__list li {
-  padding: 10px 12px;
-  border: 1px solid #E5E7EB;
-  border-radius: 10px;
-  background: #fff;
-}
-
 /* === FOOTER === */
 #at-modal .at-footer {
   margin-top: 28px;
+  padding: 56px 0 16px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
   gap: 12px;
+}
+
+.at-footer-modal {
+  font-size: 14px;
+  padding-bottom: 24px;
 }
 
 /* === BUTTONS === */
@@ -167,109 +154,23 @@
   transition: filter .1s ease;
 }
 
-#at-modal .btn:hover {
-  filter: brightness(.98);
-}
-
-#at-modal .btn-primary {
-  background: #2A3647;
-  border-color: #2A3647;
-  color: #FFFFFF;
-}
-
-/* === PRIORITY ICON FILTERS === */
-#at-modal .priority .priority__btn:nth-child(1) img {
-  filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
-}
-
-#at-modal .priority .priority__btn:nth-child(2) img {
-  filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
-}
-
-#at-modal .priority .priority__btn:nth-child(3) img {
-  filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
-}
+#at-modal .btn:hover { filter: brightness(.98); }
+#at-modal .btn-primary { background:#2A3647; border-color:#2A3647; color:#fff; }
 
 /* === RESPONSIVE === */
 @media (max-width: 1023px) {
-  #at-modal .at-grid {
-    grid-template-columns: 1fr;
-  }
-  #at-modal .at-grid::after {
-    display: none;
-  }
+  #at-modal .at-grid { grid-template-columns: 1fr; }
+  #at-modal .at-grid::after { display: none; }
 }
 
-/* === FINAL OVERRIDES (modal 2-col + dropdowns) === */
-#at-modal .at-dialog{
-  max-width:980px !important;
-  width:min(980px,calc(100vw - 80px)) !important;
-}
-#at-modal .at-grid{
-  display:grid !important;
-  grid-template-columns:1fr 1fr !important;
-  gap:28px 40px !important;
-  position:relative !important;
-}
-#at-modal .at-col{grid-column:auto !important; min-width:0 !important;}
-#at-modal .at-col--right{grid-column:2 !important;}
-#at-modal .at-grid::after{
-  content:""; position:absolute; top:0; bottom:0; left:50%;
-  width:1px; background:#E5E7EB; transform:translateX(-0.5px);
-}
-#at-modal .priority,
-#at-modal .priority-options{display:flex !important; gap:10px; align-items:center; flex-wrap:wrap;}
-#at-modal .dropdown.full-expandable{position:relative !important;}
-#at-modal .dropdown.full-expandable .dropdown-menu{
-  position:absolute !important; left:0; right:0; top:100%; margin-top:6px;
-  z-index:4000; border:1px solid #e5e7eb; border-radius:10px; background:#fff;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
-  max-height:0; opacity:0; overflow:hidden;
-  transition:max-height .2s ease, opacity .2s ease;
-}
-#at-modal .dropdown.full-expandable.open .dropdown-menu{
-  max-height:420px; opacity:1; overflow:auto;
-}
-@media (max-width:1023px){
-  #at-modal .at-grid{grid-template-columns:1fr !important;}
-  #at-modal .at-grid::after{display:none;}
-}
+/* === FINAL OVERRIDES (nur falls nötig) === */
+#at-modal .at-dialog { max-width:980px !important; width:min(980px,calc(100vw-80px)) !important; }
+#at-modal .at-grid { display:grid !important; grid-template-columns:1fr 1fr !important; gap:28px 40px !important; }
+#at-modal .at-col--right { grid-column:2 !important; }
 
-/* --- Priority buttons: lift only the hovered button --- */
-.td-modal .priority__btn {
-  position: relative;
-  z-index: 0;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
-  will-change: transform;
-}
-
+/* Hover-Lift nur für td-modal (Board-Ansicht) – bleibt erhalten */
 .td-modal .priority__btn:hover {
-  transform: translateY(-2px);            /* легкий підйом без масштабу */
-  box-shadow: 0 6px 14px rgba(0,0,0,.16); /* об’єм тільки у самої кнопки */
-  z-index: 1;                             
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.16);
+  z-index: 1;
 }
-
-/* прибираємо можливі підсвічування контейнера на hover (про всяк випадок) */
-.td-modal [data-priority]:hover {
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-/* --- Task type chip colors in details modal --- */
-.td-modal .td-chip { 
-  background: var(--at-chip-bg); 
-  color: var(--at-text);
-}
-
-/* стиль для User Story (як на борді — блакитний) */
-.td-modal .td-chip--story {
-  background: #29ABE2;   /* наближено до бордової «story» */
-  color: #fff;
-}
-
-/* стиль для Technical Task (зелений) */
-.td-modal .td-chip--technical {
-  background: #8FD58A;   /* наближено до бордової «technical» */
-  color: #0f172a;
-}
-

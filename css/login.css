@@ -74,9 +74,9 @@ html {
 .login-main {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding-top: 180px; /* ← фіксована висота логотипа + відступ */
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 180px;
   box-sizing: border-box;
   flex-direction: column;
 }
