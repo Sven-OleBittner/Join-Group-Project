@@ -6,7 +6,6 @@ function openAddTaskView(){
   else triggerAddTaskPopup();
 }
 
-
 /**
  * Binds click events to add task buttons
  */
@@ -50,17 +49,48 @@ function bindCardPopups(){
 /**
  * Wires add task modal events
  */
-function wireAddTaskModal(){
-  const m=document.getElementById("at-modal"); 
-  if(!m) return;
-  window.openAddTaskPopup=()=>{ 
-    showOverlay(); 
-    m.classList.add("is-open"); 
+function wireAddTaskModal() {
+  const modal = document.getElementById("at-modal");
+  const overlay = document.getElementById("at-overlay");
+  if (!modal) return;
+
+  // Globale Funktion, die überall funktioniert
+  window.openAddTaskPopup = () => {
+    // Falls showOverlay noch nicht existiert → selber machen
+    if (typeof showOverlay !== "function") {
+      if (overlay) overlay.style.display = "block";
+    } else {
+      showOverlay();
+    }
+
+    // Wichtig: erst sichtbar machen, dann Klasse hinzufügen → Slide-Animation!
+    modal.style.display = "block";           // falls es auf none steht
+    void modal.offsetHeight;                 // force reflow
+
+    requestAnimationFrame(() => {
+      modal.classList.add("is-open");
+    });
   };
-  document.getElementById("at-close")?.addEventListener("click",()=>{
-    m.classList.remove("is-open"); 
-    hideOverlay();
-  });
+
+  // Schließen
+  const closeBtn = document.getElementById("at-close");
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      modal.classList.remove("is-open");
+      setTimeout(() => {
+        modal.style.display = "none";
+        if (typeof hideOverlay === "function") hideOverlay();
+        else if (overlay) overlay.style.display = "none";
+      }, 300); // warte bis Animation fertig (300ms im CSS)
+    };
+  }
+
+  // Optional: Overlay-Klick schließt auch
+  if (overlay) {
+    overlay.onclick = (e) => {
+      if (e.target === overlay) closeBtn?.click();
+    };
+  }
 }
 
 
