@@ -407,67 +407,6 @@
   <script src="./js/js_files/board-enhancements-edit.part2.js"></script>  
   <script src="./js/js_files/addtask-modal-bridge.js"></script>     
   <script>
-    // ─────────────────────────────────────────────────────────────
-    // FIX: Add Task Modal Slide-In + Overlay (ONLY TEMPORARY)
-    // ─────────────────────────────────────────────────────────────
-    (function () {
-      const modal   = document.getElementById('at-modal');
-      const overlay = document.getElementById('at-overlay');
-      const closeBtn = document.getElementById('at-close');
-  
-      if (!modal || !overlay) return;
-  
-      // Globale Funktionen sicherstellen (werden von allen Skripten benutzt)
-      window.showOverlay = () => {
-        overlay.style.display = 'block';
-        requestAnimationFrame(() => overlay.classList.add('is-visible'));
-      };
-  
-      window.hideOverlay = () => {
-        overlay.classList.remove('is-visible');
-        overlay.addEventListener('transitionend', function handler() {
-          overlay.style.display = 'none';
-          overlay.removeEventListener('transitionend', handler);
-        });
-      };
-  
-      // Öffnen mit wunderschönem Slide-In
-      window.openAddTaskPopup = () => {
-        showOverlay();
-        modal.style.display = 'block';
-        modal.classList.remove('is-open'); // falls noch offen
-  
-        // Force reflow → Animation startet garantiert
-        void modal.offsetHeight;
-  
-        requestAnimationFrame(() => {
-          modal.classList.add('is-open');
-        });
-      };
-  
-      // Schließen
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          modal.classList.remove('is-open');
-          setTimeout(() => {
-            modal.style.display = 'none';
-            hideOverlay();
-          }, 320); // passt zur CSS-Transition-Dauer
-        });
-      }
-  
-      // Overlay-Klick = schließen
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeBtn?.click();
-      });
-  
-      // ESC-Taste
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeBtn?.click();
-        }
-      });
-    })();
   </script>
 </body>
 

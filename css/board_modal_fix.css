@@ -28,16 +28,29 @@
   pointer-events: auto;
 }
 
-/* two-column layout */
 #at-modal .at-dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
   max-width: 980px;
   width: min(980px, calc(100vw - 80px));
   background: #f5f6f8;
   border-radius: 24px;
   padding: 48px 60px 28px;
-  overflow: visible;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  /* KEIN transform hier! */
+  animation: slideIn 0.6s ease-out forwards !important;
 }
+
+@keyframes slideIn {
+  0% {
+    transform: translate(150vw, -50%); /* Startet rechts außerhalb */
+  }
+  100% {
+    transform: translate(-50%, -50%); /* Endet zentriert */
+  }
+}
+
 #at-modal .at-grid {
   position: relative;
   display: grid;
@@ -63,7 +76,6 @@
 #at-modal .at-footer {
   margin-top: 28px;
   display: flex;
-  justify-content: flex-end;
   gap: 12px;
 }
 
