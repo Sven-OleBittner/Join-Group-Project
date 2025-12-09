@@ -172,6 +172,10 @@ body {
   color: var(--darkblue-light-color);
 }
 
+.greetingName {
+  color: var(--lightblue-color);
+}
+
 .urgent {
   background-color: var(--urgent-color);
 }
