@@ -5,7 +5,7 @@ function initSummary() {
 async function loadUserData() {
   let user = await getData((path = "loggingInUser"));
   let logInUser = Object.values(user || {})[0];
-  if (user) {
+  if (logInUser.name !== "Guest") {
     userFound(logInUser);
   } else {
     userInitials.innerHTML = "G";
