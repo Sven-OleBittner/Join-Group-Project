@@ -4,7 +4,9 @@ function initSite() {
 
 async function loggingOutUser() {
   await deleteData((path = "loggingInUser"));
-  window.location.href = "index.html?msg=You have been logged out!";
+  setTimeout(() => {
+    window.location.href = "index.html?msg=You have been logged out!";
+  }, 500);
 }
 
 async function searchForLoginUser() {
