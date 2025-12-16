@@ -20,11 +20,11 @@
   <link rel="stylesheet" href="./css/responsive_for_board.css/kb-mobile.css">
   <link rel="stylesheet" href="./assets/fonts/fonts.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  
+
   <title>Join</title>
 </head>
 
-<body>
+<body onload="initSite()">
   <div class="sidebar">
     <div class="frame">
       <div class="capa2">
@@ -237,38 +237,38 @@
               <input class="input" name="title" placeholder="Enter a title" />
             </label>
 
-          <label class="field">
-            <span class="field__label_description">Description</span>
-            <textarea class="textarea" name="description" placeholder="Enter a Description"></textarea>
-          </label>
+            <label class="field">
+              <span class="field__label_description">Description</span>
+              <textarea class="textarea" name="description" placeholder="Enter a Description"></textarea>
+            </label>
 
-          <label class="field">
-            <span class="field__label_due_date">Due date<span class="req">*</span></span>
-            <div class="date-wrapper">
-              <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" />
-              <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar" alt="">
-            </div>
-          </label>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="at-col at-col--right">
-          <!-- PRIORITY -->
-          <div class="field">
-            <span class="field__label">Priority</span>
-            <div class="priority priority-options" data-priority>
-              <button type="button" class="priority__btn" data-value="urgent">
-                Urgent <img src="./assets/img/red_high_urgent.svg" alt="">
-              </button>
-              <button type="button" class="priority__btn priority__btn" data-value="medium">
-                Medium <img src="./assets/img/icons8-equal-50.png" alt="">
-              </button>
-              <button type="button" class="priority__btn" data-value="low">
-                Low <img src="./assets/img/green_low_urgent.svg" alt="">
-              </button>
-              <input type="hidden" name="priority" value="medium">
-            </div>
+            <label class="field">
+              <span class="field__label_due_date">Due date<span class="req">*</span></span>
+              <div class="date-wrapper">
+                <input type="text" id="due-date" name="due" placeholder="dd/mm/yyyy" />
+                <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar" alt="">
+              </div>
+            </label>
           </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="at-col at-col--right">
+            <!-- PRIORITY -->
+            <div class="field">
+              <span class="field__label">Priority</span>
+              <div class="priority priority-options" data-priority>
+                <button type="button" class="priority__btn" data-value="urgent">
+                  Urgent <img src="./assets/img/red_high_urgent.svg" alt="">
+                </button>
+                <button type="button" class="priority__btn priority__btn" data-value="medium">
+                  Medium <img src="./assets/img/icons8-equal-50.png" alt="">
+                </button>
+                <button type="button" class="priority__btn" data-value="low">
+                  Low <img src="./assets/img/green_low_urgent.svg" alt="">
+                </button>
+                <input type="hidden" name="priority" value="medium">
+              </div>
+            </div>
 
             <!-- ASSIGNED TO -->
             <label class="field">
@@ -306,28 +306,28 @@
             </label>
             <div class="chips category-chipbox" id="category-chipbox"></div>
 
-          <!-- SUBTASKS -->
-          <div class="field">
-            <span class="field__label">Subtasks</span>
-            <div class="subtasks" data-subtasks>
-              <input class="input" type="text" id="subtask-input" placeholder="Add new subtask" />
-              <ul class="subtasks__list"></ul>
+            <!-- SUBTASKS -->
+            <div class="field">
+              <span class="field__label">Subtasks</span>
+              <div class="subtasks" data-subtasks>
+                <input class="input" type="text" id="subtask-input" placeholder="Add new subtask" />
+                <ul class="subtasks__list"></ul>
+              </div>
             </div>
           </div>
         </div>
-      </div> 
-      <div class="at-footer">
-        <span class="at-footer-modal"> This field is required
-          <span class="req">*</span>
-        </span>
-      <div class="at-footer"> 
-        <button type="button" id="at-cancel" class="btn">Cancel</button>
-        <button type="submit" id="at-create" class="btn btn-primary">Create Task</button>
-      </div>
-      </div>
-    </form>
+        <div class="at-footer">
+          <span class="at-footer-modal"> This field is required
+            <span class="req">*</span>
+          </span>
+          <div class="at-footer">
+            <button type="button" id="at-cancel" class="btn">Cancel</button>
+            <button type="submit" id="at-create" class="btn btn-primary">Create Task</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
   <div id="td-modal" class="td-modal" role="dialog" aria-modal="true" aria-labelledby="td-title">
     <div class="td-dialog" tabindex="-1">
@@ -392,20 +392,20 @@
       </a>
     </nav>
   </div>
-
+  <script src="./general_script.js"></script>
   <script src="./js/js_files/db.js"></script>
   <script src="./js/js_files/navigation.js"></script>
   <script src="./js/js_files/board-utils.part1.js"></script>
-  <script src="./js/js_files/board-utils.part2.js"></script>          
-  <script src="./js/js_files/board-main.js"></script>           
+  <script src="./js/js_files/board-utils.part2.js"></script>
+  <script src="./js/js_files/board-main.js"></script>
   <script src="./js/js_files/board-modals.part1.js"></script>
-  <script src="./js/js_files/board-modals.part2.js"></script> 
-  <script src="./js/js_files/board-modals.part3.js"></script>         
+  <script src="./js/js_files/board-modals.part2.js"></script>
+  <script src="./js/js_files/board-modals.part3.js"></script>
   <script src="./js/js_files/board-enhancements-core.part1.js"></script>
-  <script src="./js/js_files/board-enhancements-core.part2.js"></script>    
-  <script src="./js/js_files/board-enhancements-edit.part1.js"></script> 
-  <script src="./js/js_files/board-enhancements-edit.part2.js"></script>  
-  <script src="./js/js_files/addtask-modal-bridge.js"></script>     
+  <script src="./js/js_files/board-enhancements-core.part2.js"></script>
+  <script src="./js/js_files/board-enhancements-edit.part1.js"></script>
+  <script src="./js/js_files/board-enhancements-edit.part2.js"></script>
+  <script src="./js/js_files/addtask-modal-bridge.js"></script>
 </body>
 
 </html>
