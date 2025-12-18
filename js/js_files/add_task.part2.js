@@ -136,12 +136,12 @@ function saveTaskToStorage(task) {
  * Handles create button click
  * @param {Event} e - Click event
  */
-function handleCreateTask(e) {
+async function handleCreateTask(e) {
   if (e && e.preventDefault) e.preventDefault();
   
   if (!validateRequiredFields()) return;
   
-  const task = createTaskObject();
+  const task = await createTaskObject();
   saveTaskToStorage(task);
   location.href = 'board.html';
 }

@@ -1,3 +1,16 @@
+// Ensure getData is available from db.js
+// If using modules, use import. If not, ensure db.js is loaded before this script in HTML.
+if (typeof getData !== 'function') {
+  throw new Error('getData is not defined. Please ensure db.js is loaded before board-main.js');
+}
+
+/**
+ * Fetches all tasks from backend
+ * @returns {Promise<Object>} All tasks object
+ */
+async function backendGetAllTasks() {
+  return await getData('task');
+}
 /**
  * Opens add task modal based on viewport
  */
@@ -340,24 +353,48 @@ function initBoard(){
     if(e.key==="Escape") closeAllOpenModals(); 
   });
   
-  const container = document.getElementById('task-board');
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  if (container) {
+  const columns = {
+    todo: document.querySelector('.kb-col[data-status="todo"] .kb-card-list'),
+    inprogress: document.querySelector('.kb-col[data-status="inprogress"] .kb-card-list'),
+    feedback: document.querySelector('.kb-col[data-status="feedback"] .kb-card-list'),
+    done: document.querySelector('.kb-col[data-status="done"] .kb-card-list')
+  };
+  // Clear all columns
+  Object.values(columns).forEach(col => { if (col) col.innerHTML = ''; });
+
+  backendGetAllTasks().then(data => {
+    const tasks = [];
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        tasks.push(data[key]);
+      }
+    }
     tasks.forEach(task => {
-      const card = document.createElement('div');
-      card.className = 'task-card';
+      const col = columns[task.status] || columns.todo;
+      if (!col) return;
+      const card = document.createElement('article');
+      card.className = 'kb-card';
       card.innerHTML = `
-        <div class="task-category" style="background:${task.category.color}">
-          ${task.category.name}
+        <div class="kb-card-top">
+          <span class="kb-chip">${task.category?.name || ''}</span>
         </div>
-        <h3>${task.title}</h3>
-        <p>${task.description}</p>
-        <p><b>Due:</b> ${task.dueDate}</p>
-        <p><b>Priority:</b> ${task.priority}</p>
+        <h3 class="kb-card-title">${task.title || ''}</h3>
+        <p class="kb-card-desc">${task.description || ''}</p>
+        <div class="kb-progress-row">
+          <div class="kb-progress">
+            <div class="kb-progress-bar" style="width:0%"></div>
+          </div>
+        </div>
+        <footer class="kb-card-foot">
+          <div class="kb-avatars"></div>
+          <div class="kb-prio kb-prio--${task.priority || 'medium'}">
+            <span class="kb-prio__icon" aria-hidden="true"></span>
+          </div>
+        </footer>
       `;
-      container.appendChild(card);
+      col.appendChild(card);
     });
-  }
+  });
 }
 
 
