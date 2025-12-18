@@ -125,9 +125,10 @@ async function createTaskObject() {
  * @param {Object} task - Task object
  */
 function saveTaskToStorage(task) {
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-  tasks.push(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  postData('task', task);
+  // const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  // tasks.push(task);
+  // localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 
@@ -135,12 +136,12 @@ function saveTaskToStorage(task) {
  * Handles create button click
  * @param {Event} e - Click event
  */
-async function handleCreateTask(e) {
-  e.preventDefault();
+function handleCreateTask(e) {
+  if (e && e.preventDefault) e.preventDefault();
   
   if (!validateRequiredFields()) return;
   
-  const task = await createTaskObject();
+  const task = createTaskObject();
   saveTaskToStorage(task);
   location.href = 'board.html';
 }
