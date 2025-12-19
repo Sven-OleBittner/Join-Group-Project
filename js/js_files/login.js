@@ -46,7 +46,7 @@ function loggingInUser(user) {
   postData((path = "loggingInUser"), user);
 }
 
-function loggingOutUser() {
-  deleteData((path = "loggingInUser"));
+async function loggingOutUser() {
+  await deleteData((path = "loggingInUser"));
   window.location.href = "index.html?msg=You have been logged out!";
 }
