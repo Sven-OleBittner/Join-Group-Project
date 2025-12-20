@@ -74,8 +74,8 @@ html {
 .login-main {
   flex: 1;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
   padding-top: 180px;
   box-sizing: border-box;
   flex-direction: column;

@@ -5,7 +5,7 @@ body {
 .d-flex {
   border-radius: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: white;
   align-self: center;
@@ -170,6 +170,10 @@ body {
   font-weight: 500;
   font-size: 47px;
   color: var(--darkblue-light-color);
+}
+
+.greetingName {
+  color: var(--lightblue-color);
 }
 
 .urgent {

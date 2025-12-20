@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./assets/fonts/fonts.css">
 </head>
 
-<body onload="initSummary()">
+<body onload="initSummary(); searchForLoginUser();">
   <div class="sidebar">
     <div class="frame">
       <div class="capa2">
@@ -71,7 +71,7 @@
       </div>
     </header>
     <div class="greeting-container">
-      <span id="greetingText" class="greeting-text"></span>
+      <span id="greetingText" class="greeting-text">Good Morning, <br> <span class="greetingName" id="greetingNameResp"></span>!</span>
     </div>
     <div class="main-content">
       <main>
@@ -142,7 +142,7 @@
               </section>
             </section>
             <section class="summary-right">
-              <span id="greetingBox" class="greeting-box"></span>
+              <span id="greetingBox" class="greeting-box">Good Morning, <br> <span class="greetingName" id="greetingName"></span>!</span>
             </section>
           </section>
       </main>
@@ -188,6 +188,7 @@
       </a>
     </nav>
   </div>
+  <script src="./general_script.js"></script>
   <script src="./js/js_files/db.js"></script>
   <script src="./js/js_files/summary.js"></script>
   <script src="./js/js_files/login.js"></script>
