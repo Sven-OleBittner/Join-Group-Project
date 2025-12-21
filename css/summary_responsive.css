@@ -5,12 +5,13 @@
         align-self: center;
         height: 78vh;
         font-size: 32px;
-        animation: greeting 2s ease-out forwards;
+        animation: greeting 3.5s ease-out forwards;
     }
 
     .main-content {
-        animation: main_fadeIn 2000ms ease-in;
-        animation-delay: 1s;
+        opacity: 0;
+        animation: main_fadeIn 1500ms ease-in forwards;
+        animation-delay: 3.5s;
     }
 
     .summary-right {
@@ -110,13 +111,13 @@
         height: 78vh;
         font-size: 32px;
         opacity: 0;
-        animation: greeting 1000ms ease-out forwards;
+        animation: greeting 3000ms ease-out forwards;
     }
 
     .main-content {
         opacity: 0;
-        animation: main_fadeIn 1000ms ease-in forwards;
-        animation-delay: 1s;
+        animation: main_fadeIn 1500ms ease-in forwards;
+        animation-delay: 3s;
     }
 }
 
