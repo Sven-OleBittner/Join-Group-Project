@@ -71,7 +71,7 @@
       </div>
     </header>
     <div class="greeting-container">
-      <span id="greetingText" class="greeting-text">Good Morning, <br> <span class="greetingName" id="greetingNameResp"></span>!</span>
+      <span id="greetingText" class="greeting-text"><span id="greetingResp"></span><br> <span class="greetingName" id="greetingNameResp"></span>!</span>
     </div>
     <div class="main-content">
       <main>
@@ -89,7 +89,7 @@
                     <img class="icon__container--img" src="./assets/img/summary_to_do_pencil.svg" alt="" />
                   </div>
                   <div class="summary-text">
-                    <span class="task-count">1</span>
+                    <span id="todoCount" class="task-count"></span>
                     <span>To-Do</span>
                   </div>
                 </a>
@@ -98,7 +98,7 @@
                     <img class="icon__container--img" src="./assets/img/summary_done_checkmark.svg" alt="" />
                   </div>
                   <div class="summary-text">
-                    <span class="task-count">1</span>
+                    <span id="doneCount" class="task-count"></span>
                     <span>Done</span>
                   </div>
                 </a>
@@ -110,12 +110,12 @@
                       <img src="./assets/img/summary_urgent_sign.svg" alt="urgent_sign" />
                     </div>
                     <div class="summary-text">
-                      <span class="task-count">1</span>
+                      <span id="urgentCount" class="task-count">1</span>
                       <span>Urgent</span>
                     </div>
                   </div>
                   <div class="summary-mid-right">
-                    <span class="date">October 16,2022</span>
+                    <span id="urgentDate" class="date">October 16,2022</span>
                     <span class="msg-box">Upcoming Deadline</span>
                   </div>
                 </a>
@@ -123,26 +123,26 @@
               <section class="summary-head-footer">
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">5</span>
+                    <span id="boardCount" class="task-count">5</span>
                     <span class="text-align-center resp-size">Tasks in <br> Board</span>
                   </div>
                 </a>
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">2</span>
+                    <span id="progressCount" class="task-count">2</span>
                     <span class="text-align-center resp-size">Tasks in <br> Progress</span>
                   </div>
                 </a>
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">2</span>
+                    <span id="awaitingFeedbackCount" class="task-count">2</span>
                     <span class="text-align-center resp-size">Awaiting Feedback</span>
                   </div>
                 </a>
               </section>
             </section>
             <section class="summary-right">
-              <span id="greetingBox" class="greeting-box">Good Morning, <br> <span class="greetingName" id="greetingName"></span>!</span>
+              <span id="greetingBox" class="greeting-box"><span id="greeting"></span> <br> <span class="greetingName" id="greetingName"></span>!</span>
             </section>
           </section>
       </main>
@@ -192,6 +192,7 @@
   <script src="./js/js_files/db.js"></script>
   <script src="./js/js_files/summary.js"></script>
   <script src="./js/js_files/login.js"></script>
+  <script src="./js/js_files/summary.js"></script>
   <script>
 
     function goToPage(page) {
