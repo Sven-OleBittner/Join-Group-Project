@@ -47,6 +47,7 @@ async function loadTaskData() {
     awaitFeedbackTasks,
     doneTasks
   );
+  showUrgent(tasksArray);
 }
 
 function sortTasks(tasksArray, status) {
@@ -54,13 +55,7 @@ function sortTasks(tasksArray, status) {
   return statusTasks;
 }
 
-function showTaskCount(
-  tasksArray,
-  toDoTasks,
-  inProgressTasks,
-  awaitFeedbackTasks,
-  doneTasks
-) {
+function showTaskCount(tasksArray,toDoTasks,inProgressTasks,awaitFeedbackTasks,doneTasks) {
   document.getElementById("boardCount").innerHTML = tasksArray.length || "0";
   document.getElementById("todoCount").innerHTML = toDoTasks.length || "0";
   document.getElementById("progressCount").innerHTML =
@@ -70,22 +65,48 @@ function showTaskCount(
   document.getElementById("doneCount").innerHTML = doneTasks.length || "0";
 }
 
-function greetingBasedOnTime() {
-  let greetingText = document.getElementById("greetingResp");
-  let greetingBox = document.getElementById("greeting");
-  let currentHour = new Date().getHours();
-  let greeting = "";
-  if (currentHour < 12) {
-    greeting = "Good Morning, ";
-  } else if (currentHour < 16) {
-    greeting = "Good Day, ";
-  } else if (currentHour < 18) {
-    greeting = "Good Afternoon, ";
-  } else {
-    greeting = "Good Evening, ";
+function showUrgent(tasksArray) {
+  let urgentTasks = tasksArray.filter((task) => task.priority === "urgent");
+  document.getElementById("urgentCount").innerHTML = urgentTasks.length || "0";
+  document.getElementById("urgentDate").innerHTML = getNextUrgentDate(urgentTasks);
+}
+
+function getNextUrgentDate(urgentTasks) {
+  if (urgentTasks.length === 0) return "No date set";
+  let sortedTasks = urgentTasks.sort((a, b) => parseDateValue(a.dueDate) - parseDateValue(b.dueDate));
+  return sortedTasks[0].dueDate ? formatDate(parseDateValue(sortedTasks[0].dueDate)) : "No date set";
+}
+
+function parseDateValue(dateValue) {
+  if (!dateValue) return new Date();
+  if (typeof dateValue === 'string' && dateValue.includes('/')) {
+    const [day, month, year] = dateValue.split('/');
+    return new Date(year, month - 1, day);
   }
-  greetingText.innerHTML = greeting;
-  greetingBox.innerHTML = greeting;
+  if (typeof dateValue === 'object' && dateValue.year) {
+    return new Date(dateValue.year, (dateValue.month - 1), dateValue.day);
+  }
+  return new Date(dateValue);
+}
+
+function formatDate(date) {
+  if (!date || isNaN(date.getTime())) {
+    return "No date set";
+  }
+  const months = ["January", "February", "March", "April", "May", "June", 
+                  "July", "August", "September", "October", "November", "December"];
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+  return `${month} ${day}, ${year}`;
+}
+
+function greetingBasedOnTime() {
+  let currentHour = new Date().getHours();
+  let greeting = currentHour < 12 ? "Good Morning, " :
+                 currentHour < 18 ? "Good Afternoon, " : "Good Evening, ";
+  document.getElementById("greetingResp").innerHTML = greeting;
+  document.getElementById("greeting").innerHTML = greeting;
 }
 
 function userFound(logInUser) {
