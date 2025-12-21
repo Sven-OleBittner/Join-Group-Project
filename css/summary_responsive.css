@@ -8,10 +8,19 @@
         animation: greeting 3.5s ease-out forwards;
     }
 
+    .greeting-container.no-animation {
+        display: none;
+    }
+
     .main-content {
         opacity: 0;
         animation: main_fadeIn 1500ms ease-in forwards;
         animation-delay: 3.5s;
+    }
+
+    .main-content.no-animation {
+        opacity: 1;
+        animation: none;
     }
 
     .summary-right {
@@ -114,10 +123,19 @@
         animation: greeting 3000ms ease-out forwards;
     }
 
+    .greeting-container.no-animation {
+        display: none;
+    }
+
     .main-content {
         opacity: 0;
         animation: main_fadeIn 1500ms ease-in forwards;
         animation-delay: 3s;
+    }
+
+    .main-content.no-animation {
+        opacity: 1;
+        animation: none;
     }
 }
 

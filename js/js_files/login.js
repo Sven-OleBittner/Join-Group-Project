@@ -19,6 +19,7 @@ function login() {
   );
   if (user) {
     loggingInUser(user);
+    sessionStorage.setItem('justLoggedIn', 'true');
     window.location.href = "summary.html";
   } else {
     userNotFound();
@@ -51,5 +52,6 @@ function loginGuest() {
     name: "Guest",
   };
   loggingInUser(guestUser);
+  sessionStorage.setItem('justLoggedIn', 'true');
   window.location.href = "summary.html";
 }

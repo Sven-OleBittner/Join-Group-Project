@@ -1,7 +1,21 @@
 function initSummary() {
+  checkAndSetGreetingAnimation();
   loadUserData();
   greetingBasedOnTime();
   loadTaskData();
+}
+
+function checkAndSetGreetingAnimation() {
+  const justLoggedIn = sessionStorage.getItem('justLoggedIn');
+  const greetingContainer = document.querySelector('.greeting-container');
+  const mainContent = document.querySelector('.main-content');
+  
+  if (!justLoggedIn) {
+    greetingContainer?.classList.add('no-animation');
+    mainContent?.classList.add('no-animation');
+  } else {
+    sessionStorage.removeItem('justLoggedIn');
+  }
 }
 
 async function loadUserData() {
@@ -16,21 +30,12 @@ async function loadUserData() {
 }
 
 function guestGreeting() {
-  let greetingText = document.getElementById("greetingText");
-  let greetingBox = document.getElementById("greetingBox");
-  let currentHour = new Date().getHours();
-  let greeting = "";
-  if (currentHour < 12) {
-    greeting = "Good Morning !";
-  } else if (currentHour < 16) {
-    greeting = "Good Day !";
-  } else if (currentHour < 18) {
-    greeting = "Good Afternoon !";
-  } else {
-    greeting = "Good Evening !";
-  }
-  greetingText.innerHTML = greeting;
-  greetingBox.innerHTML = greeting;
+  const currentHour = new Date().getHours();
+  const greeting = currentHour < 12 ? "Good Morning !" :
+                   currentHour < 16 ? "Good Day !" :
+                   currentHour < 18 ? "Good Afternoon !" : "Good Evening !";
+  document.getElementById("greetingText").innerHTML = greeting;
+  document.getElementById("greetingBox").innerHTML = greeting;
 }
 
 async function loadTaskData() {
