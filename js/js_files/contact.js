@@ -433,7 +433,7 @@ async function postData(path = "", data) {
     });
 
     if (!response.ok) {
-        console.error(error);
+        console.error(`Error posting data: ${response.status} ${response.statusText}`);
     };
 }
 
@@ -446,7 +446,7 @@ async function postData(path = "", data) {
 async function getData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     if (!response.ok) {
-        console.error(error);
+        console.error(`Error fetching data: ${response.status} ${response.statusText}`);
     }
     let responseData = await response.json();
     return responseData;
