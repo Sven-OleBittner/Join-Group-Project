@@ -1,5 +1,4 @@
-const BASE_URL =
-    "https://join-1314-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-f5b75-default-rtdb.europe-west1.firebasedatabase.app/";
 let currentData = [];
 let selectedContactKey = null;
 
@@ -42,6 +41,41 @@ async function loadContactList() {
     const sortedContacts = sortContactsAlphabetically(validContacts);
     const groupedByLetter = groupContactsByFirstLetter(sortedContacts);
     displayContactsGroupedByLetter(groupedByLetter);
+
+    // Initialize mobile resize handler
+    initializeMobileHandler();
+}
+
+/**
+ * Initializes mobile view handler for window resize
+ */
+function initializeMobileHandler() {
+    // Only add listener once
+    if (!window.mobileHandlerInitialized) {
+        window.addEventListener('resize', handleWindowResize);
+        window.mobileHandlerInitialized = true;
+    }
+}
+
+/**
+ * Handles window resize events for mobile view
+ */
+function handleWindowResize() {
+    // If switching from mobile to desktop and details are shown
+    if (window.innerWidth > 1250) {
+        const mainContent = document.querySelector('.main-content');
+        const backArrow = document.querySelector('.mobile-back-arrow');
+
+        if (mainContent) {
+            mainContent.classList.remove('mobile-showing-details');
+        }
+        if (backArrow) {
+            backArrow.classList.add('hidden');
+        }
+        
+        // Reset buttons when switching to desktop
+        toggleMobileButtons(false);
+    }
 }
 
 /**
@@ -70,7 +104,6 @@ async function fetchContactsFromDatabase() {
 function filterValidContacts(contacts) {
     return contacts.filter(contact => contact && contact.name && contact.name.trim() !== "");
 }
-
 /**
  * Sorts contacts alphabetically by name
  * @param {Array} contacts - Array of contact objects to sort
@@ -155,6 +188,93 @@ function showContactDetails(name, email, phone, firebaseKey, randomColor) {
     updateContactInitials(name, randomColor);
     updateContactEmail(email);
     updateContactPhone(phone);
+
+    // Mobile: Show details view and hide contact list
+    if (window.innerWidth <= 1250) {
+        showMobileContactDetails();
+    }
+}
+
+/**
+ * Shows contact details in mobile view
+ */
+function showMobileContactDetails() {
+    const mainContent = document.querySelector('.main-content');
+    const showContactContainer = document.querySelector('.show-contact-container');
+
+    if (mainContent && showContactContainer) {
+        mainContent.classList.add('mobile-showing-details');
+
+        // Add back arrow to contact details
+        addMobileBackArrow();
+        
+        // Show edit button and hide add button in mobile
+        toggleMobileButtons(true);
+    }
+}
+
+/**
+ * Adds a back arrow to mobile contact details view
+ */
+function addMobileBackArrow() {
+    const backArrow = document.querySelector('.mobile-back-arrow');
+    if (backArrow) {
+        backArrow.classList.remove('hidden');
+    }
+}
+
+/**
+ * Hides contact details in mobile view and shows contact list
+ */
+function hideMobileContactDetails() {
+    const mainContent = document.querySelector('.main-content');
+    const backArrow = document.querySelector('.mobile-back-arrow');
+
+    if (mainContent) {
+        mainContent.classList.remove('mobile-showing-details');
+    }
+
+    if (backArrow) {
+        backArrow.classList.add('hidden');
+    }
+    
+    // Hide edit button and show add button
+    toggleMobileButtons(false);
+}
+
+/**
+ * Toggles between add and edit buttons in mobile view
+ * @param {boolean} showEdit - If true, shows edit button and hides add button
+ */
+function toggleMobileButtons(showEdit) {
+    const addButton = document.querySelector('.add-contact-mobile');
+    const editButton = document.getElementById('edit-contact-mobile');
+    
+    if (showEdit) {
+        if (addButton) addButton.classList.add('hidden');
+        if (editButton) editButton.classList.remove('hidden');
+    } else {
+        if (addButton) addButton.classList.remove('hidden');
+        if (editButton) editButton.classList.add('hidden');
+    }
+}
+
+/**
+ * Opens the mobile edit/delete menu
+ */
+function openMobileEditMenu() {
+    const menuHTML = getMobileEditDeleteMenu();
+    document.body.insertAdjacentHTML('beforeend', menuHTML);
+}
+
+/**
+ * Closes the mobile edit/delete menu
+ */
+function closeMobileEditMenu() {
+    const overlay = document.getElementById('mobile-menu-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
 }
 
 /**
@@ -265,10 +385,16 @@ function hideContactDetailsSection() {
     const contactInfoLabel = document.getElementById('contact-info-label');
     const contactEmailSection = document.getElementById('contact-email-section');
     const contactPhoneSection = document.getElementById('contact-phone-section');
+
     if (contactDetailsSection) contactDetailsSection.classList.add('hidden');
     if (contactInfoLabel) contactInfoLabel.classList.add('hidden');
     if (contactEmailSection) contactEmailSection.classList.add('hidden');
     if (contactPhoneSection) contactPhoneSection.classList.add('hidden');
+
+    // Mobile: Also hide mobile details view
+    if (window.innerWidth <= 1250) {
+        hideMobileContactDetails();
+    }
 }
 
 /**
@@ -307,8 +433,8 @@ async function postData(path = "", data) {
     });
 
     if (!response.ok) {
-        console.error(`POST request failed: ${response.status} ${response.statusText}`);
-    }
+        console.error(error);
+    };
 }
 
 /**
@@ -320,7 +446,7 @@ async function postData(path = "", data) {
 async function getData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     if (!response.ok) {
-        console.error(`GET request failed: ${response.status} ${response.statusText}`);
+        console.error(error);
     }
     let responseData = await response.json();
     return responseData;
@@ -356,25 +482,18 @@ async function postNewContact() {
         console.error("Validation failed.");
         return;
     }
-        const addName = document.getElementById("add-name");
-        const addEmail = document.getElementById("add-email");
-        const addPhone = document.getElementById("add-phone");
-        const addColor = getRandomColorClass();
-        const nameWords = addName.value.split(" ");
-        const initials = nameWords
-            .map((word) => word.charAt(0).toUpperCase())
-            .join("")
-            .substring(0, 2);
-        const newContact = {
-                name: addName.value,
-                email: addEmail.value,
-                phone: addPhone.value,
-                color: addColor,
-                initials: initials};
+    const addName = document.getElementById("add-name");
+    const addEmail = document.getElementById("add-email");
+    const addPhone = document.getElementById("add-phone");
+    const newContact = {
+        name: addName.value,
+        email: addEmail.value,
+        phone: addPhone.value
+    };
     try {
         await postData("contacts", newContact);
-        showSuccesfullyContactCreated();
-        closeAddContactOverlay();
+        await closeAddContactOverlay();
+        getSuccessfullyContactCreated();
     } catch (error) {
         console.error("Error posting new contact:", error);
     }
@@ -636,4 +755,14 @@ async function updateContactInDatabase(firebaseKey, contactData) {
 function closeEditContactOverlay() {
     let contactOverlay = document.getElementById("contact-overlay");
     contactOverlay.innerHTML = "";
+}
+
+/**
+ * Displays a success notification message when a contact is successfully created
+ * Uses insertAdjacentHTML('beforeend') to add the notification HTML at the end of the body element
+ * The CSS animation handles the display duration and automatic removal after 3 seconds
+ */
+function getSuccessfullyContactCreated() {
+    let body = document.querySelector("body");
+    body.insertAdjacentHTML('beforeend', getMessageSuccessfullyAdded());
 }
