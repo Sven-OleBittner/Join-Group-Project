@@ -297,16 +297,16 @@
             }
         }
 
-        @media (min-width: 945px) {
+        @media (min-width: 1050px) {
             .add-contact-close-container-mobile,
             .edit-contact-close-container-mobile {
                 display: none;
             }
         }
 
-        @media (max-width: 945px) {
+        @media (max-width: 1050px) {
             .overlay {
-                height: calc(100vh - 90px);
+                height: 100vh;
             }
 
             .add-contact-container {
@@ -397,4 +397,12 @@
             .contact-progress-bar {
                 margin-bottom: 80px;
             }
-     }  
+     }
+
+             @media (max-width: 945px) {
+            .overlay {
+                height: calc(100vh - 90px);
+            }
+        }
+
+    

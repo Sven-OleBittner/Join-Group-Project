@@ -215,10 +215,36 @@ function getContact(data) {
     `
 }
 
+/**
+ * Generates the HTML template for the success notification message
+ * Returns a div with animation class that displays for 3 seconds and then disappears
+ * @returns {string} HTML template string for the success notification
+ */
 function getMessageSuccessfullyAdded() {
     return `
-    <div class="succesfully-creat d-flex-c">
-        Contact succesfully created
+    <div class="succesfully-creat">
+        Contact successfully created
+    </div>
+    `
+}
+
+/**
+ * Generates the HTML template for the mobile edit/delete menu
+ * @returns {string} HTML template string for the mobile menu
+ */
+function getMobileEditDeleteMenu() {
+    return `
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" onclick="closeMobileEditMenu()">
+        <div class="mobile-edit-delete" onclick="event.stopPropagation()">
+            <div class="d-flex-c g-8 c-pointer" onclick="openEditContactOverlay(); closeMobileEditMenu();">
+                <img src="./assets/img/contact-edit-mobile.svg" alt="pen">
+                <span class="fs-400-16">Edit</span>
+            </div>
+            <div class="d-flex-c g-8 c-pointer" onclick="deleteSelectedContact(); closeMobileEditMenu();">
+                <img src="./assets/img/contact-delete-mobile.svg" alt="trash can">
+                <span class="fs-400-16">Delete</span>
+            </div>
+        </div>
     </div>
     `
 }
