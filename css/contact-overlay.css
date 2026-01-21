@@ -1,0 +1,320 @@
+/**
+ * CONTACT PAGE - OVERLAY & CONTAINER STYLES
+ * 
+ * Styles for add/edit contact overlay and container layouts
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   OVERLAY STYLES
+   =================================================================== */
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+}
+
+/* ===================================================================
+   MAIN CONTAINER
+   =================================================================== */
+
+.add-contact-container {
+    width: 1212px;
+    height: 594px;
+}
+
+/* ===================================================================
+   EDIT + ADD CONTACT STYLES
+   =================================================================== */
+
+.edit-add-contact-container {
+    width: 453px;
+    height: 594px;
+    background-color: var(--darkblue-light-color);
+    color: var(--white-color);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-left: 40px;
+}
+
+.edit-headline {
+    font-size: 61px;
+    font-weight: 700;
+    padding: 16px 0 16px 0;
+}
+
+.add-contact-description {
+    font-size: 27.5px;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.contact-logo {
+    width: 48px;
+    height: 56px;
+}
+
+.contact-progress-bar {
+    width: 90px;
+    height: 3px;
+    background-color: var(--lightblue-color);
+    border-radius: 3px;
+    margin-bottom: 128px;
+}
+
+/* ===================================================================
+   CIRCLE CONTAINER
+   =================================================================== */
+
+.contact-circle-container {
+    width: 259px;
+    height: 594px;
+    background-color: var(--white-color);
+}
+
+.contact-circle {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--white-color);
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+    background-color: var(--medium-color);
+    transform: translateY(-56px);
+}
+
+.contact-circle-text {
+    color: var(--white-color);
+    font-weight: 500;
+    font-size: 47px;
+}
+
+/* ===================================================================
+   ADD CONTACT IMG CONTAINER
+   =================================================================== */
+
+.add-contact-person-container {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: var(--placeholder-grey-color);
+    border: 3px solid var(--white-color);
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+    transform: translateY(-56px);
+}
+
+.add-contact-person-img {
+    width: 43px;
+    height: 43px;
+    background-color: var(--placeholder-grey-color);
+}
+
+/* ===================================================================
+   CLOSE STYLE
+   =================================================================== */
+
+.contact-close-container {
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 64px;
+}
+
+.contact-close-container-mobile {
+    display: none;
+}
+
+.close-contact-img {
+    height: 32px;
+    width: 32px;
+    padding: 8px;
+    border-radius: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.close-contact-img:hover {
+    background-color: var(--placeholder-grey-color);
+}
+
+/* ===================================================================
+   INPUT CONTAINER
+   =================================================================== */
+
+.input-add-contact-container {
+    width: 500px;
+    height: 594px;
+    background-color: var(--white-color);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 52px 52px 52px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===================================================================
+   RESPONSIVE STYLES - OVERLAY
+   =================================================================== */
+
+@media (max-width: 1230px) {
+    .add-contact-container,
+    .edit-add-contact-container,
+    .contact-circle-container,
+    .input-add-contact-container {
+        height: 520px;
+    }
+    
+    .add-contact-container {
+        width: 100%;
+        margin: 32px;
+    }
+
+    .edit-add-contact-container{
+        width: 40%;
+        padding-left: 32px;
+    }
+
+    .contact-circle-container {
+        width: 20%;
+    }
+
+    .input-add-contact-container {
+        width: 40%;
+        padding: 40px 40px 40px 0;
+    }
+}
+
+@media (max-width: 1100px) {
+    .edit-headline {
+        font-size:48px;
+    }
+
+    .add-contact-description {
+        font-size: 22px;
+    }
+
+    .input-add-contact-container {
+        width: 45%;
+        padding: 40px 20px 40px 0;
+    }
+
+    .edit-add-contact-container {
+        padding-left: 16px;
+    }
+
+    .add-contact-person-container {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media (min-width: 1050px) {
+    .add-contact-close-container-mobile,
+    .edit-contact-close-container-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 1050px) {
+    .overlay {
+        height: 100vh;
+    }
+
+    .add-contact-container {
+        height: 760px;
+        width: 396px;
+        flex-direction: column;
+    }
+
+    .edit-add-contact-container,
+    .contact-circle-container,
+    .input-add-contact-container {
+        width: 396px;
+    }
+
+    .edit-add-contact-container {
+        height: 352px;
+        border-radius: 30px 30px 0 0;
+        padding: 24px 24px 32px 32px;
+    }
+
+    .contact-circle-container {
+        height: 0;
+    }
+
+    .input-add-contact-container {
+        height: 409px;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .add-contact-delete,
+    .contact-logo,
+    .contact-close-container {
+        display: none;
+    }
+
+    .input-add-contact-container {
+        padding: 88px 16px 40px 16px;
+    }
+
+    .edit-headline {
+        font-size: 47px;
+        padding-top: 40px;
+    }
+
+    .add-contact-description {
+        font-size: 20px;
+    }
+
+    .add-contact-person-container,
+    .contact-circle  {
+        z-index: 999;
+        transform: translateY(0);
+    }
+
+    form {
+        height: 153px;
+    }
+
+    input {
+        height: 32px;
+    }
+
+    .add-contact-close-container-mobile,
+    .edit-contact-close-container-mobile {
+        width: 100%;
+        display: block;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .edit-contact-close-container-mobile {
+        transform: translateY(-32px);
+    }
+
+    .add-contact-close-container-mobile {
+        transform: translateY(-12px);
+    }
+
+    .close-contact-img:hover {
+        background-color: var(--lightblue-color);
+    }
+
+    .contact-progress-bar {
+        margin-bottom: 80px;
+    }
+}
+
+@media (max-width: 945px) {
+    .overlay {
+        height: calc(100vh - 90px);
+    }
+}

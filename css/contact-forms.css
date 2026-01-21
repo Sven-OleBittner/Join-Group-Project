@@ -1,0 +1,136 @@
+/**
+ * CONTACT PAGE - FORM STYLES
+ * 
+ * Styles for form inputs, buttons and validation messages
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   INPUT STYLES
+   =================================================================== */
+
+.input-contact-container {
+    border: 1px solid var(--placeholder-grey-color);
+    border-radius: 10px;
+    padding: 4px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input {
+    height: 40px;
+    font-size: 20px;
+    width: 90%;
+}
+
+input:focus {
+    outline: none;   
+    border: none;    
+}
+
+input::placeholder {
+    font-size: 20px;
+    color: var(--placeholder-grey-color);
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 12px;
+    height: 27px;
+}
+
+/* ===================================================================
+   BUTTON STYLES
+   =================================================================== */
+
+.edit-contact-buttons {
+    gap: 24px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 64px;
+}
+
+.contact-delete,
+.contact-save {
+    font-size: 21px;
+    width: 113px;
+    height: 55px;
+    border-radius: 8px;
+    padding: 15px 23.5px;
+    gap: 10px;
+    border-width: 1px;
+}
+
+.contact-delete {
+    font-weight: 400;
+    background-color: var(--white-color);
+    color: var(--darkblue-light-color);
+    border: 1px solid var(--darkblue-light-color);
+}
+
+.contact-delete:hover {
+    border-color: var(--lightblue-color);
+    color: var(--lightblue-color);
+}
+
+.contact-save {
+    font-weight: bold;
+    background-color: var(--darkblue-color);
+    color: var(--white-color);
+}
+
+.add-contact-save {
+    width: 220px;
+}
+
+.add-contact-delete {
+    width: 126px;
+}
+
+.contact-save:hover {
+    background-color: var(--lightblue-color);
+}
+
+.contact-save-icon, 
+.contact-input-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.contact-delete:hover,
+.contact-save:hover {
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    scale: 1.02;
+}
+
+.contact-delete:active,
+.contact-save:active {
+    scale: 0.98;
+}
+
+.contact-delete:hover .fill-hover {
+    filter: brightness(0) saturate(100%) invert(74%) sepia(12%) saturate(2613%) hue-rotate(177deg) brightness(101%) contrast(92%);
+}
+
+.fill-hover:hover {
+    filter: brightness(0) saturate(100%) invert(74%) sepia(12%) saturate(2613%) hue-rotate(177deg) brightness(101%) contrast(92%);
+}
+
+.contact-delete:active,
+.contact-save:active {
+    box-shadow: none;
+    scale: 0.98;
+}
+
+/* ===================================================================
+   RESPONSIVE STYLES - FORMS
+   =================================================================== */
+
+@media (max-width: 1050px) {
+    .edit-contact-buttons {
+        justify-content: center;
+    }
+}

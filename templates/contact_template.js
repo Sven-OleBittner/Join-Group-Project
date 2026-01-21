@@ -200,11 +200,11 @@ function getFirstLetter(letter) {
 function getContact(data) {
     const nameWords = data.name.split(' ');
     const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-    const randomColor = getRandomColorClass();
+    const contactColor = getColorClass(data);
 
     return `
-        <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${randomColor}')">
-            <div class="person-circle d-flex-c ${randomColor}">
+        <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${contactColor}')">
+            <div class="person-circle d-flex-c ${contactColor}">
               ${initials}
             </div>
             <div class="personal-data">

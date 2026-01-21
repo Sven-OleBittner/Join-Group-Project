@@ -1,0 +1,101 @@
+/**
+ * CONTACT PAGE - BASE STYLES
+ * 
+ * Base styles, reset, utilities and scrollbar customization
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   1. BASE STYLES & RESET
+   =================================================================== */
+
+/* HTML/Body base configuration */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* ===================================================================
+   2. UTILITY CLASSES
+   =================================================================== */
+
+/* Visibility utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Typography utilities */
+.fs-b-16 {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: bold;
+}
+
+.fs-400-16 {
+    font-size: 16px;
+    font-weight: 400; 
+}
+
+/* Layout utilities */
+.g-8 {
+    gap: 8px;
+}
+
+/* Hide mobile-specific elements on desktop */
+.mobile-back-arrow {
+    display: none;
+}
+
+/* ===================================================================
+   3. LAYOUT COMPONENTS
+   =================================================================== */
+
+/* Main container for the contact page */
+.main-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    min-height: 0; 
+}
+
+/* ===================================================================
+   4. SCROLLBAR CUSTOMIZATION
+   =================================================================== */
+
+/* Custom scrollbar styling */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Scrollbar track */
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #e0e0e0;
+}
+
+/* Scrollbar track hover state */
+*::-webkit-scrollbar-track:hover {
+  background-color: #e8e8e8;
+}
+
+/* Scrollbar thumb (draggable part) */
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #29ABE2 0%, #2A3647 100%);
+  border: 1px solid #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar thumb hover state */
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #1e8cc7 0%, #1e2a35 100%);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Scrollbar thumb active state */
+*::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #1976a3 0%, #151e28 100%);
+}
