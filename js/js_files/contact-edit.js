@@ -77,17 +77,19 @@ async function saveEditedContact() {
         return;
     }
     const { oldName, oldEmail, oldPhone, editName, editEmail, editPhone } = getValues();
+    const selectedContact = findContactByKey(selectedContactKey);
     try {
         if (editName !== oldName || editEmail !== oldEmail || editPhone !== oldPhone) {
             const updatedContact = {
                 name: editName,
                 email: editEmail,
-                phone: editPhone
+                phone: editPhone,
+                color: selectedContact.color,
+                initials: editName !== oldName ? getInitials(editName) : selectedContact.initials
             };
             await updateContactInDatabase(selectedContactKey, updatedContact);
             await loadContactList();
-            const randomColor = getRandomColorClass();
-            showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey, randomColor);
+            showContactDetails(updatedContact.name, updatedContact.email, updatedContact.phone, selectedContactKey, updatedContact.color);
         }
         closeEditContactOverlay();
     } catch (error) {

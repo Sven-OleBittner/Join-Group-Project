@@ -9,13 +9,14 @@
  * @param {string} email - Contact's email address
  * @param {string} phone - Contact's phone number
  * @param {string} firebaseKey - Firebase database key for the contact
- * @param {string} randomColor - CSS color class for the contact initials circle
+ * @param {string} contactColor - CSS color class for the contact initials circle
  */
-function showContactDetails(name, email, phone, firebaseKey, randomColor) {
+function showContactDetails(name, email, phone, firebaseKey, contactColor) {
     selectedContactKey = firebaseKey;
+    const contact = findContactByKey(firebaseKey);
     showContactDetailsSection();
     updateContactDisplayName(name);
-    updateContactInitials(name, randomColor);
+    updateContactInitials(contact.initials, contactColor);
     updateContactEmail(email);
     updateContactPhone(phone);
 
@@ -52,19 +53,17 @@ function updateContactDisplayName(name) {
 
 /**
  * Updates the contact initials circle with the contact's initials
- * @param {string} name - The contact's full name to generate initials from
- * @param {string} randomColor - CSS color class to apply to the contact initials circle
+ * @param {string} initials - The contact's initials from Firebase data
+ * @param {string} contactColor - CSS color class to apply to the contact initials circle
  */
-function updateContactInitials(name, randomColor) {
-    const nameWords = name.split(' ');
-    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
+function updateContactInitials(initials, contactColor) {
     const circleElement = document.getElementById('contact-initials-circle');
     if (circleElement) {
         circleElement.textContent = initials;
         colorClasses.forEach(colorClass => {
             circleElement.classList.remove(colorClass);
         });
-        circleElement.classList.add(randomColor);
+        circleElement.classList.add(contactColor);
     }
 }
 

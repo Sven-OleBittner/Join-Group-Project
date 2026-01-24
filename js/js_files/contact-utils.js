@@ -1,35 +1,6 @@
 /**
  * Contact Management - Utility Functions
- * This module contains helper functions for contact processing and manipulation
  */
-
-// Available color classes from color.css
-const availableColorClasses = [
-    'color-orange',
-    'color-pink',
-    'color-purple',
-    'color-violet',
-    'color-cyan',
-    'color-turquoise',
-    'color-coral',
-    'color-peach',
-    'color-light-pink',
-    'color-yellow',
-    'color-blue',
-    'color-lime-green',
-    'color-light-yellow',
-    'color-red',
-    'color-goldenrod'
-];
-
-/**
- * Gets a random color class from the available color classes
- * @returns {string} A random color class name
- */
-function getRandomColorClass() {
-    const randomIndex = Math.floor(Math.random() * availableColorClasses.length);
-    return availableColorClasses[randomIndex];
-}
 
 /**
  * Gets initials from a name (first letter of first two words)
@@ -39,15 +10,6 @@ function getRandomColorClass() {
 function getInitials(name) {
     const nameWords = name.split(' ');
     return nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-}
-
-/**
- * Gets the color class for a contact from Firebase data or returns default
- * @param {Object} contact - The contact object
- * @returns {string} The color class name
- */
-function getColorClass(contact) {
-    return contact.color || 'color-orange';
 }
 
 /**

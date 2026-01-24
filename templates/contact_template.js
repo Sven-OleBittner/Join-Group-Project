@@ -115,9 +115,7 @@ function addContactTemplate() {
  * @returns {string} HTML template string for the edit contact overlay
  */
 function editContactTemplate(data) {
-    const nameWords = data.name.split(' ');
-    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-    const randomColor = getRandomColorClass();
+    const contactColor = data.color;
 
     return `
     <div class="overlay" onclick="closeEditContactOverlay()">
@@ -135,8 +133,8 @@ function editContactTemplate(data) {
 
             <!-- Contact Circle -->
             <div class="contact-circle-container d-flex-c">
-                <div class="contact-circle d-flex-c ${randomColor}">
-                    <span class="contact-circle-text">${initials}</span>
+                <div class="contact-circle d-flex-c ${contactColor}">
+                    <span class="contact-circle-text">${data.initials}</span>
                 </div>
             </div>
 
@@ -198,14 +196,12 @@ function getFirstLetter(letter) {
  * @returns {string} HTML template string for the contact card
  */
 function getContact(data) {
-    const nameWords = data.name.split(' ');
-    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-    const contactColor = getColorClass(data);
+    const contactColor = data.color;
 
     return `
         <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${contactColor}')">
             <div class="person-circle d-flex-c ${contactColor}">
-              ${initials}
+              ${data.initials}
             </div>
             <div class="personal-data">
               <span>${data.name}</span>
