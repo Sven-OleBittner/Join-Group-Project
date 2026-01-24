@@ -25,12 +25,12 @@
     transition: ease-in-out 150ms;
 }
 
-p {
+.main-content p {
     font-size: 16px;
     font-weight: 400;
 }
 
-span {
+.main-content span {
     color: var(--lightblue-color);
 }
 
