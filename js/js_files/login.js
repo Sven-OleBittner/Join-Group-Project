@@ -11,14 +11,14 @@ async function dataToUsers() {
   users = Object.values(user || {});
 }
 
-function login() {
+async function login() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let user = users.find(
     (u) => u.email == email.value && u.password == password.value
   );
   if (user) {
-    loggingInUser(user);
+    await loggingInUser(user);
     sessionStorage.setItem('justLoggedIn', 'true');
     window.location.href = "summary.html";
   } else {
@@ -43,15 +43,15 @@ function userNotFound() {
   window.location = "index.html?msg=User not Found";
 }
 
-function loggingInUser(user) {
-  postData((path = "loggingInUser"), user);
+async function loggingInUser(user) {
+  await postData((path = "loggingInUser"), user);
 }
 
-function loginGuest() {
+async function loginGuest() {
   let guestUser = {
     name: "Guest",
   };
-  loggingInUser(guestUser);
+  await loggingInUser(guestUser);
   sessionStorage.setItem('justLoggedIn', 'true');
   window.location.href = "summary.html";
 }
