@@ -97,8 +97,7 @@ function createContactOption(contact, idx) {
  */
 function createContactAvatar(contact) {
   const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.style.backgroundColor = contact.color;
+  avatar.className = `avatar ${contact.color}`;
   avatar.textContent = contact.initials;
   return avatar;
 }
