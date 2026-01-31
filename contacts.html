@@ -17,22 +17,6 @@
     <link rel="stylesheet" href="./css/contact-mobile.css" />
     <link rel="stylesheet" href="./css/contact-overlay.css" />
     <link rel="stylesheet" href="./css/contact-forms.css" />
-
-    <!-- JavaScript -->
-    <!-- Base Database Functions -->
-    <script src="./js/js_files/db.js"></script>
-    <!-- Contact Modules -->
-    <script src="./js/js_files/contact-constants.js"></script>
-    <script src="./js/js_files/contact-database.js"></script>
-    <script src="./js/js_files/contact-validation.js"></script>
-    <script src="./js/js_files/contact-utils.js"></script>
-    <script src="./js/js_files/contact-list.js"></script>
-    <script src="./js/js_files/contact-details.js"></script>
-    <script src="./js/js_files/contact-add.js"></script>
-    <script src="./js/js_files/contact-edit.js"></script>
-    <script src="./js/js_files/contact-mobile.js"></script>
-    <script src="./templates/contact_template.js"></script>
-    <script src="./js/js_files/help.js"></script>
     <title id="title">Join</title>
   </head>
   <body onload="loadContactList()">
@@ -106,7 +90,7 @@
         </div>
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
+          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar">SM</div>
         </div>
       </header>
 
@@ -214,5 +198,21 @@
         </a>
       </nav>
     </div>
+        <!-- JavaScript -->
+    <!-- Base Database Functions -->
+    <script src="./js/js_files/db.js"></script>
+    <!-- Contact Modules -->
+    <script src="./js/js_files/contact-constants.js"></script>
+    <script src="./js/js_files/contact-database.js"></script>
+    <script src="./js/js_files/contact-validation.js"></script>
+    <script src="./js/js_files/contact-utils.js"></script>
+    <script src="./js/js_files/contact-list.js"></script>
+    <script src="./js/js_files/contact-details.js"></script>
+    <script src="./js/js_files/contact-add.js"></script>
+    <script src="./js/js_files/contact-edit.js"></script>
+    <script src="./js/js_files/contact-mobile.js"></script>
+    <script src="./templates/contact_template.js"></script>
+    <script src="./js/js_files/help.js"></script>
+    <script src="./js/js_files/log_out.js"></script>
   </body>
 </html>

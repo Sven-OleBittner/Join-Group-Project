@@ -66,8 +66,7 @@
       </div>
       <div class="header-right">
         <a href="./help.html" class="help-icon">?</a>
-        <div id="userInitials" class="user-avatar"></div>
-        <button onclick="loggingOutUser()">Abmelden</button>
+        <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar"></div>
       </div>
     </header>
     <div class="greeting-container">
@@ -192,6 +191,7 @@
   <script src="./js/js_files/db.js"></script>
   <script src="./js/js_files/summary.js"></script>
   <script src="./js/js_files/login.js"></script>
+  <script src="./js/js_files/log_out.js"></script>
   <script>
 
     function goToPage(page) {
