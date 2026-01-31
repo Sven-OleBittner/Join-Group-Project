@@ -118,7 +118,6 @@ function hideContactDetailsSection() {
  */
 async function deleteSelectedContact() {
     if (!selectedContactKey) {
-        console.error("No contact selected for deletion.");
         return;
     }
     try {
@@ -128,6 +127,6 @@ async function deleteSelectedContact() {
         selectedContactKey = null;
         await loadContactList();
     } catch (error) {
-        console.error("Error deleting contact:", error);
+        console.error(error);
     }
 }

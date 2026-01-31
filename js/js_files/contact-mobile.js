@@ -7,7 +7,6 @@
  * Initializes mobile view handler for window resize
  */
 function initializeMobileHandler() {
-    // Only add listener once
     if (!window.mobileHandlerInitialized) {
         window.addEventListener('resize', handleWindowResize);
         window.mobileHandlerInitialized = true;
@@ -18,19 +17,15 @@ function initializeMobileHandler() {
  * Handles window resize events for mobile view
  */
 function handleWindowResize() {
-    // If switching from mobile to desktop and details are shown
     if (window.innerWidth > 1250) {
         const mainContent = document.querySelector('.main-content');
         const backArrow = document.querySelector('.mobile-back-arrow');
-
         if (mainContent) {
             mainContent.classList.remove('mobile-showing-details');
         }
         if (backArrow) {
             backArrow.classList.add('hidden');
         }
-        
-        // Reset buttons when switching to desktop
         toggleMobileButtons(false);
     }
 }
@@ -41,14 +36,9 @@ function handleWindowResize() {
 function showMobileContactDetails() {
     const mainContent = document.querySelector('.main-content');
     const showContactContainer = document.querySelector('.show-contact-container');
-
     if (mainContent && showContactContainer) {
         mainContent.classList.add('mobile-showing-details');
-
-        // Add back arrow to contact details
         addMobileBackArrow();
-        
-        // Show edit button and hide add button in mobile
         toggleMobileButtons(true);
     }
 }
@@ -69,16 +59,12 @@ function addMobileBackArrow() {
 function hideMobileContactDetails() {
     const mainContent = document.querySelector('.main-content');
     const backArrow = document.querySelector('.mobile-back-arrow');
-
     if (mainContent) {
         mainContent.classList.remove('mobile-showing-details');
     }
-
     if (backArrow) {
         backArrow.classList.add('hidden');
     }
-    
-    // Hide edit button and show add button
     toggleMobileButtons(false);
 }
 
