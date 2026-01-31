@@ -228,8 +228,10 @@ body {
     display: block;
 }
 
-.menu-item:hover {
-    background-color: rgba(41, 171, 226, 0.15);
+@media (min-width: 947px) {
+    .menu-item:hover {
+        background-color: rgba(41, 171, 226, 0.15);
+    }
 }
 
 

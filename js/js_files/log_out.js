@@ -33,7 +33,7 @@ function loggingOutUser() {
  */
 function getDesktopLogOutMenuHTML() {
     return `
-    <div id="logout-menu-overlay" onclick="event.stopPropagation()">
+    <div id="logout-menu-overlay">
         <div class="logout-menu">
             <a href="./legal_notice.html" class="menu-item">Legal Notice</a>
             <a href="./privacy_policy.html" class="menu-item">Privacy Policy</a>
@@ -50,7 +50,7 @@ function getDesktopLogOutMenuHTML() {
  */
 function getMobileLogOutMenuHTML() {
     return `
-    <div id="logout-menu-overlay" onclick="event.stopPropagation()">
+    <div id="logout-menu-overlay">
         <div class="logout-menu">
             <a href="./help.html" class="menu-item">Help</a>
             <a href="./legal_notice.html" class="menu-item">Legal Notice</a>
