@@ -22,6 +22,8 @@ function showLogOutMenu() {
  * Shows logout message after redirect
  */
 function loggingOutUser() {
+    //eventuell User beim Login in der Session speichern und hier entfernen
+    //sessionStorage.removeItem('loggingInUser');
     setTimeout(() => {
         window.location.href = "index.html?msg=You have been logged out!";
     }, 500);

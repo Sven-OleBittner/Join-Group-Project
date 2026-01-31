@@ -2,13 +2,6 @@ function initSite() {
   searchForLoginUser();
 }
 
-async function loggingOutUser() {
-  await deleteData((path = "loggingInUser"));
-  setTimeout(() => {
-    window.location.href = "index.html?msg=You have been logged out!";
-  }, 500);
-}
-
 /**
  * Checks if a user is logged in and redirects to login page if not.
  * Public pages (login, signup, privacy policy, legal notice) are excluded from this check.
