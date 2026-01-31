@@ -303,8 +303,7 @@ async function updateAssignedChips() {
  */
 function createAssignedChip(contact) {
   const chip = document.createElement('div');
-  chip.className = 'avatar-chip';
-  chip.style.backgroundColor = contact.color;
+  chip.className = `avatar-chip ${contact.color}`;
   chip.textContent = contact.initials;
   return chip;
 }
