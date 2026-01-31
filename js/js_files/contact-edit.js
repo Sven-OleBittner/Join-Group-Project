@@ -8,12 +8,10 @@
  */
 function openEditContactOverlay() {
     if (!selectedContactKey) {
-        console.error("No contact selected for editing.");
         return;
     }
     const selectedContact = findContactByKey(selectedContactKey);
     if (!selectedContact) {
-        console.error("Selected contact not found.");
         return;
     }
     const contactOverlay = document.getElementById("contact-overlay");
@@ -69,11 +67,9 @@ function getValues() {
  */
 async function saveEditedContact() {
     if (!validationEditContactInput()) {
-        console.error("Validation failed.");
         return;
     }
     if (!selectedContactKey) {
-        console.error("No contact selected for editing.");
         return;
     }
     const { oldName, oldEmail, oldPhone, editName, editEmail, editPhone } = getValues();
@@ -93,6 +89,6 @@ async function saveEditedContact() {
         }
         closeEditContactOverlay();
     } catch (error) {
-        console.error("Error updating contact:", error);
+        console.error(error);
     }
 }
