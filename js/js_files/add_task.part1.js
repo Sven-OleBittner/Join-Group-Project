@@ -3,8 +3,8 @@
  * @type {Array<{name: string, color: string}>}
  */
 const categories = [
-  { name: "Technical Task", color: "#6c8cff" },
-  { name: "User Story", color: "#8fd58a" },
+  { name: "Technical Task", },
+  { name: "User Story"}
 ];
 
 
@@ -168,31 +168,13 @@ function renderCategories() {
  * @returns {HTMLElement}
  */
 function createCategoryOption(cat, idx, menu) {
-  const row = document.createElement('label');
-  row.className = 'category-option';
-
-  const dot = createCategoryDot(cat);
+  const row = document.createElement('div');
   const name = createCategoryName(cat);
-  const checkbox = createCategoryCheckbox(idx, menu);
-
-  row.appendChild(dot);
+  row.className = 'category-option';
+  row.classList.add("c-pointer");
+  row.onclick = () => handleCategorySelect(idx, menu);
   row.appendChild(name);
-  row.appendChild(checkbox);
-  
   return row;
-}
-
-
-/**
- * Creates category color dot
- * @param {Object} cat - Category data
- * @returns {HTMLElement}
- */
-function createCategoryDot(cat) {
-  const dot = document.createElement('div');
-  dot.className = 'dot';
-  dot.style.backgroundColor = cat.color;
-  return dot;
 }
 
 
@@ -210,45 +192,19 @@ function createCategoryName(cat) {
 
 
 /**
- * Creates category checkbox
- * @param {number} idx - Category index
- * @param {HTMLElement} menu - Parent menu element
- * @returns {HTMLInputElement}
- */
-function createCategoryCheckbox(idx, menu) {
-  const cb = document.createElement('input');
-  cb.type = 'checkbox';
-  cb.addEventListener('change', () => handleCategoryChange(cb, idx, menu));
-  return cb;
-}
-
-
-/**
- * Handles category checkbox change
- * @param {HTMLInputElement} cb - Checkbox element
+ * Handles category selection
  * @param {number} idx - Category index
  * @param {HTMLElement} menu - Parent menu element
  */
-function handleCategoryChange(cb, idx, menu) {
-  if (cb.checked) {
-    selected.category = idx;
-    deselectOtherCategories(cb, menu);
-  } else {
-    selected.category = null;
-  }
+function handleCategorySelect(idx, menu) {
+  selected.category = idx;
   updateCategoryChip();
-}
-
-
-/**
- * Deselects other category checkboxes
- * @param {HTMLInputElement} currentCb - Current checkbox
- * @param {HTMLElement} menu - Parent menu element
- */
-function deselectOtherCategories(currentCb, menu) {
-  menu.querySelectorAll('input[type="checkbox"]').forEach((other) => {
-    if (other !== currentCb) other.checked = false;
-  });
+  
+  // Close dropdown
+  const dropdown = menu.closest('.dropdown');
+  if (dropdown) {
+    dropdown.classList.remove('open');
+  }
 }
 
 
