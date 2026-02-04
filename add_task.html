@@ -126,21 +126,21 @@
             <div class="form-right">
               <label>Priority</label>
               <div class="priority-options">
-                <button type="button" class="priority urgent">
+                <button type="button" class="priority urgent" id="priority-urgent">
                   Urgent
                   <img
                     src="./assets/img/red_high_urgent.svg"
                     alt="Urgent Arrow"
                   />
                 </button>
-                <button type="button" class="priority medium">
+                <button type="button" class="priority medium" id="priority-medium">
                   Medium
                   <img
                     src="./assets/img/icons8-equal-50.png"
                     alt="equal sign"
                   />
                 </button>
-                <button type="button" class="priority low">
+                <button type="button" class="priority low" id="priority-low">
                   Low
                   <img
                     src="./assets/img/green_low_urgent.svg"
@@ -233,10 +233,10 @@
               <span class="required">*</span> This field is required
             </div>
             <div class="form-actions">
-              <button type="button" class="clear-btn">
+              <button type="button" class="clear-btn" id="clear-btn">
                 Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
               </button>
-              <button type="button" class="create-btn">
+              <button type="button" class="create-btn" id="create-btn">
                 Create Task <img src="./assets/img/check.svg" alt="check" />
               </button>
             </div>
@@ -272,5 +272,6 @@
     <script src="./js/js_files/db.js"></script>
     <script src="./js/js_files/navigation.js"></script>
     <script src="./js/js_files/log_out.js"></script>
+    <script src="./js/js_files/add-task.js"></script>
   </body>
 </html>
