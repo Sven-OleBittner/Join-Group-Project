@@ -126,21 +126,21 @@
             <div class="form-right">
               <label>Priority</label>
               <div class="priority-options">
-                <button type="button" class="priority urgent" id="priority-urgent">
+                <button type="button" class="priority urgent" id="priority-urgent" onclick="selectPriority('urgent')">
                   Urgent
                   <img
                     src="./assets/img/red_high_urgent.svg"
                     alt="Urgent Arrow"
                   />
                 </button>
-                <button type="button" class="priority medium" id="priority-medium">
+                <button type="button" class="priority medium" id="priority-medium" onclick="selectPriority('medium')">
                   Medium
                   <img
                     src="./assets/img/icons8-equal-50.png"
                     alt="equal sign"
                   />
                 </button>
-                <button type="button" class="priority low" id="priority-low">
+                <button type="button" class="priority low" id="priority-low" onclick="selectPriority('low')">
                   Low
                   <img
                     src="./assets/img/green_low_urgent.svg"

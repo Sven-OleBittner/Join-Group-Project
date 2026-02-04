@@ -136,9 +136,20 @@ textarea {
 .priority.medium img { filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%); width:20px; }
 .priority.low img { filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%); }
 
-.priority.selected.urgent { background:#FF3B3B; color:#fff; }
-.priority.selected.medium { background:#FFA800; color:#fff; }
-.priority.selected.low { background:#7AE229; color:#fff; }
+.priority.selected.urgent { 
+  background: var(--urgent-color); 
+  color: var(--white-color);
+}
+
+.priority.selected.medium { 
+  background: var(--medium-color); 
+  color: var(--white-color);
+}
+.priority.selected.low { 
+  background: var(--low-color); 
+  color: var(--white-color);
+}
+  
 .priority.selected img { filter: brightness(0) invert(1); }
 
 .dropdown.full-expandable {
