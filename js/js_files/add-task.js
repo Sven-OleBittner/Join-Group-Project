@@ -1,6 +1,9 @@
 /**
  * Add Task functionality
  */
+add_task_init(){
+    return;
+}
 
 /**
  * Selects a priority and removes selection from other priority buttons
