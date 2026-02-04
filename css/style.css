@@ -3,6 +3,8 @@ body {
   overflow-y: hidden;
   margin: 0;
   font-family: "Inter";
+  width: 100vw;
+  height: 100vh;
 }
 
 .header {

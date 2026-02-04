@@ -1,10 +1,28 @@
 .addTaskDialog {
-    border: none;
-    border-radius: 8px;
-    padding: 0;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    z-index: 999;
+  border: unset;
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+/* .addTaskDialog::backdrop {
+  width: 100%;
+  height: 100%;
+} */
+
+.addTaskDialogContent {
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.addTaskDialog:-internal-dialog-in-top-layer::backdrop {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.05);
+    inset: 0px;
+    width: 100vw;
+    height: 100vh;
 }
