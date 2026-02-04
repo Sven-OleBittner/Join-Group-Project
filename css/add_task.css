@@ -63,6 +63,7 @@
 }
 
 input[type="text"],
+input[type="date"],
 textarea {
   padding: 10px;
   border: unset;
@@ -72,7 +73,28 @@ textarea {
 }
 
 .date-wrapper { 
-  position: relative; 
+  position: relative;
+  width: 100%;
+}
+
+#date {
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+}
+
+#date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  top: 0;
+  left: 0;
 }
 
 .icon-calendar {
@@ -167,6 +189,10 @@ textarea {
   gap: 8px; 
 }
 
+#subtask-add-icon {
+  display: none;
+}
+
 .form-footer { 
   display: flex; 
   justify-content: space-between; 
@@ -209,12 +235,24 @@ textarea {
   color: #fff; 
 }
 
+.create-btn img {
+  filter: brightness(0) invert(1);
+}
+
 .clear-btn:hover {
   border-color: #29ABE2; 
   color: #29ABE2; 
   background:#fff;
   transform: translateY(-2px); 
   box-shadow: 0 6px 12px rgba(0,0,0,.08);
+}
+
+.clear-btn img {
+  transition: filter 0.1s ease;
+}
+
+.clear-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
 }
 
 .create-btn:hover {
