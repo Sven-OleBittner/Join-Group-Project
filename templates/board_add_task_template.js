@@ -1,6 +1,10 @@
 function getAddTaskTemplate() {
     return `
-<form  method="dialog" class="task-form" id="task-form">
+        <div class="add-task-container">
+          <div class="add-task-uppercontainer">
+            <h1>Add Task</h1>
+          </div>
+          <form  formmethod="dialog" class="task-form" id="task-form">
             <div class="form-left">
               <label for="title">Title<span class="required">*</span></label>
               <input type="text" id="title" placeholder="Enter a title" />
@@ -15,7 +19,7 @@ function getAddTaskTemplate() {
                 >Due date<span class="required">*</span></label
               >
               <div class="date-wrapper">
-                <input type="text" id="due-date" placeholder="dd/mm/yyyy" />
+                <input type="date" id="due-date" placeholder="dd/mm/yyyy" />
                 <img
                   src="./assets/img/add_task_due_date_calendar_icon.svg"
                   class="icon-calendar"
@@ -129,5 +133,22 @@ function getAddTaskTemplate() {
                 </div>
               </div>
             </div>
-          </form>`        
+          </form>
+
+          <div class="form-footer">
+            <div class="footer-left">
+              <span class="required">*</span> This field is required
+            </div>
+            <div class="form-actions">
+              <button type="button" class="clear-btn">
+                Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
+              </button>
+              <button type="button" class="create-btn">
+                Create Task <img src="./assets/img/check.svg" alt="check" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+          `        
 }

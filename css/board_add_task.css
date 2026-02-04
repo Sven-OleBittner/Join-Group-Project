@@ -1,17 +1,18 @@
 .addTaskDialog {
-  border: unset;
   background-color: rgba(0, 0, 0, 0.05);
-  width: 100% !important;
-  height: 100% !important;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-}
-
-/* .addTaskDialog::backdrop {
   width: 100%;
   height: 100%;
-} */
+  max-width: 100vw;
+  max-height: 100vh;
+  border: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addTaskDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .addTaskDialogContent {
   background: white;
@@ -19,10 +20,6 @@
   border-radius: 12px;
 }
 
-.addTaskDialog:-internal-dialog-in-top-layer::backdrop {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.05);
-    inset: 0px;
-    width: 100vw;
-    height: 100vh;
+dialog:not([open]) {
+  display: none;
 }

@@ -7,6 +7,11 @@ function generateAddTaskModal() {
   dialog.showModal();
 }
 
+function closeAddTaskModal() {
+  let dialog = document.getElementById("addTaskDialog");
+  dialog.close();
+}
+
 // function getStatusByButtonId(id) {
 //   switch (id) {
 //     case "addTaskInProgress":

@@ -31,8 +31,16 @@
   </head>
 
   <body onload="initSite()">
-    <dialog class="addTaskDialog" id="addTaskDialog">
-      <div id="addTaskDialogContent" class="addTaskDialogContent"></div>
+    <dialog
+      class="addTaskDialog"
+      id="addTaskDialog"
+      onclick="closeAddTaskModal()"
+    >
+      <div
+        onclick="event.stopPropagation()"
+        id="addTaskDialogContent"
+        class="addTaskDialogContent"
+      ></div>
     </dialog>
 
     <div class="sidebar">
@@ -142,6 +150,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">To do</h2>
                 <button
+                  onclick="generateAddTaskModal()"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to To do"
@@ -161,6 +170,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">In progress</h2>
                 <button
+                onclick="generateAddTaskModal()"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to In progress"
@@ -208,6 +218,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Await feedback</h2>
                 <button
+                onclick="generateAddTaskModal()"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to Await feedback"
