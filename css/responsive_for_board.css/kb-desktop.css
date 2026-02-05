@@ -87,7 +87,8 @@
 
 @media (max-width: 1024px) {
   .sidebar {
-    display: none;
+    
+    /* display: none; */
   }
   .headercontainer {
     margin-left: 0;
@@ -117,7 +118,7 @@
     height: 44px;
   }
   .kb-columns {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
 }

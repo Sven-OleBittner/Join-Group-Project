@@ -229,7 +229,7 @@ textarea {
   }
 
   .add-task-container { 
-    padding: 24px 16px 160px; 
+    padding: 24px 16px 60px; 
   }
 
   .task-form { 
@@ -247,5 +247,14 @@ textarea {
     width: 100%; 
     justify-content: space-between; 
     padding-top: 20px; 
+  }
+
+  .form-footer {
+    display: block; 
+    padding-top: 48px;
+  }
+
+  .priority-options {
+    display: block;
   }
 }

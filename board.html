@@ -6,11 +6,11 @@
     <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
 
     <!-- Fonts & base styles -->
-    <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/color.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
     <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/board_second.css" />
     <link rel="stylesheet" href="./css/add_task.css" />
     <link rel="stylesheet" href="./css/board_add_task_modal.css" />
@@ -30,7 +30,7 @@
     <title>Join</title>
   </head>
 
-  <body onload="initSite()">
+  <body onload="initBoardSite()">
     <dialog
       class="addTaskDialog"
       id="addTaskDialog"
@@ -130,7 +130,8 @@
                 />
               </div>
               <button
-                onclick="generateAddTaskModal()"
+                id="addTaskBoard"
+                onclick="chooseAddTaskSite('addTaskBoard')"
                 class="kb-add-btn"
                 type="button"
               >
@@ -142,7 +143,7 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
-              id="toDo"
+              id="addTaskBoardToDo"
               class="kb-col"
               aria-label="To do"
               data-status="todo"
@@ -150,19 +151,21 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">To do</h2>
                 <button
-                  onclick="generateAddTaskModal()"
+                  onclick="chooseAddTaskSite('addTaskBoardToDo')"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to To do"
                 ></button>
               </header>
-              <div class="kb-card-list" data-cards></div>
-              <div class="kb-empty"><span>No tasks To do</span></div>
+              <div id="toDoTaskList" class="kb-card-list" data-cards></div>
+              <div id="emptyToDo" class="kb-empty">
+                <span>No tasks To do</span>
+              </div>
             </section>
 
             <!-- In progress -->
             <section
-              id="inProgress"
+              id="addTaskBoardInProgress"
               class="kb-col"
               aria-label="In progress"
               data-status="inprogress"
@@ -170,13 +173,13 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">In progress</h2>
                 <button
-                onclick="generateAddTaskModal()"
+                  onclick="chooseAddTaskSite('addTaskBoardInProgress')"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to In progress"
                 ></button>
               </header>
-              <div class="kb-card-list" data-cards>
+              <div id="inProgressTaskList" class="kb-card-list" data-cards>
                 <article
                   class="kb-card"
                   data-due="10/05/2023"
@@ -205,12 +208,14 @@
                   </footer>
                 </article>
               </div>
-              <div class="kb-empty"><span>No tasks In progress</span></div>
+              <div id="emptyInProgress" class="kb-empty">
+                <span>No tasks In progress</span>
+              </div>
             </section>
 
             <!-- Await feedback -->
             <section
-              id="awaitFeedback"
+              id="addTaskBoardAwaitFeedback"
               class="kb-col"
               aria-label="Await feedback"
               data-status="feedback"
@@ -218,13 +223,13 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Await feedback</h2>
                 <button
-                onclick="generateAddTaskModal()"
+                  onclick="chooseAddTaskSite('addTaskBoardAwaitFeedback')"
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to Await feedback"
                 ></button>
               </header>
-              <div class="kb-card-list" data-cards>
+              <div id="awaitFeedbackTaskList" class="kb-card-list" data-cards>
                 <article
                   class="kb-card"
                   data-due="12/05/2023"
@@ -278,12 +283,14 @@
                   </footer>
                 </article>
               </div>
-              <div class="kb-empty"><span>No tasks Await feedback</span></div>
+              <div id="emptyAwaitFeedback" class="kb-empty">
+                <span>No tasks Await feedback</span>
+              </div>
             </section>
 
             <!-- Done -->
             <section
-              id="done"
+              id="addTaskBoardDone"
               class="kb-col"
               aria-label="Done"
               data-status="done"
@@ -291,7 +298,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Done</h2>
               </header>
-              <div class="kb-card-list" data-cards>
+              <div id="doneTaskList" class="kb-card-list" data-cards>
                 <article
                   class="kb-card"
                   data-due="09/30/2023"
@@ -320,7 +327,9 @@
                   </footer>
                 </article>
               </div>
-              <div class="kb-empty"><span>No tasks Done</span></div>
+              <div id="emptyDone" class="kb-empty">
+                <span>No tasks Done</span>
+              </div>
             </section>
           </div>
         </section>

@@ -23,3 +23,9 @@
 dialog:not([open]) {
   display: none;
 }
+
+@media (max-width: 945px) {
+  .addTaskDialog {
+    display: none;
+  }
+}

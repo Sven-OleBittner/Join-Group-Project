@@ -102,9 +102,9 @@
   gap: var(--kb-gap);
 }
 
-.kb-col {
+/* .kb-col {
   min-width: 260px;
-}
+} */
 
 .kb-col-head {
   display: flex;
