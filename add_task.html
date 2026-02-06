@@ -150,53 +150,20 @@
               </div>
 
               <label>Assigned to</label>
-              <div class="dropdown full-expandable assigned-to" id="assignees">
-                <div class="dropdown-toggle" role="button" tabindex="0">
-                  <span class="placeholder">Select contacts to assign</span>
-                  <img
-                    class="caret"
-                    src="./assets/img/arrow_drop_down.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="dropdown-menu">
-                  <div class="dropdown-search">
-                    <input
-                      type="text"
-                      id="assignee-search"
-                      placeholder="Search contacts"
-                    />
-                  </div>
-                  <div class="options" id="assignee-options"></div>
+              <div class="custom-select" id="assignees">
+                <div class="select-selected" id="assignees-selected" onclick="toggleDropdown('assignees')">Select contacts to assign</div>
+                <div class="select-items select-hide" id="assignees-items">
                 </div>
               </div>
-              <div class="chips assigned-chips" id="assignee-chips"></div>
 
               <label>Category<span class="required">*</span></label>
-              <div
-                class="dropdown full-expandable category-select"
-                id="category"
-              >
-                <div class="dropdown-toggle" role="button" tabindex="0">
-                  <span class="placeholder">Select task category</span>
-                  <img
-                    class="caret"
-                    src="./assets/img/arrow_drop_down.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="dropdown-menu">
-                  <div class="dropdown-search">
-                    <input
-                      type="text"
-                      id="category-search"
-                      placeholder="Search categories"
-                    />
-                  </div>
-                  <div class="options" id="category-options"></div>
+              <div class="custom-select" id="category">
+                <div class="select-selected" id="category-selected" onclick="toggleDropdown('category')">Select task category</div>
+                <div class="select-items select-hide" id="category-items">
+                  <div onclick="selectCategoryOption('Technical Task')">Technical Task</div>
+                  <div onclick="selectCategoryOption('User Story')">User Story</div>
                 </div>
               </div>
-              <div class="chips category-chipbox" id="category-chipbox"></div>
 
               <label>Subtasks</label>
               <div class="subtasks">

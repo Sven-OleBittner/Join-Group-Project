@@ -65,11 +65,72 @@
 input[type="text"],
 input[type="date"],
 textarea {
-  padding: 10px;
-  border: unset;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
   width: 100%;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background-color: var(--light-grey-color);
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.select-selected {
+  padding: 12px 40px 12px 16px;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
+  cursor: pointer;
+  min-height: 51px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.select-selected::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  /* top: calc(100% + 4px); */
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
+}
+
+.select-items div {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.select-items div:hover {
+  background-color: var(--light-grey-color);
+}
+
+.select-hide {
+  display: none;
 }
 
 .date-wrapper { 
