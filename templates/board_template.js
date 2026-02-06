@@ -7,7 +7,7 @@ function getTasksTemplate(task, backgroundColor, index) {
               </div>
               <h3 class="kb-card-title">${task.title}</h3>
               <p class="kb-card-desc">${task.description}</p>
-              <div id="task-subtasks" class="kb-progress-row">
+              <div id="task-subtasks${index}" class="kb-progress-row"></div>
               <footer class="kb-card-foot">
                 <div id="avatarsFoto${index}" class="kb-avatars" data-assignees="${task.assignees || ''}"></div>
                 <div class="kb-prio kb-prio--${task.priority || 'urgent'}">

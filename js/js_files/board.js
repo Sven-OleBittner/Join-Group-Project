@@ -12,7 +12,7 @@ async function renderTask() {
     const task = taskArray[index];
     let backgroundColor = getCategoryColor(task.category);
     container.innerHTML += getTasksTemplate(task, backgroundColor, index);
-    renderSubTask(task);
+    renderSubTask(task, index);
     renderAvatars(task.assigned, index);
   }
 }
@@ -28,8 +28,8 @@ function getCategoryColor(category) {
 }
 
 
-function renderSubTask(task) {
-   const subTasksContainer = document.getElementById('task-subtasks');
+function renderSubTask(task, index) {
+   const subTasksContainer = document.getElementById('task-subtasks' + index);
     if (task.subtask != null) {
       subTasksContainer.innerHTML += getSubTemplate(task);
     } else {
