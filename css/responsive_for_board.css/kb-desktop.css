@@ -1,7 +1,7 @@
 /* ===== Desktop polish (>=1024px) ===== */
 @media (min-width: 1024px) and (max-width: 1399px) {
   .kb-columns {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 22px;
   }
 }
@@ -14,6 +14,7 @@
     padding: 28px 40px 40px;
   }
 }
+
 @media (min-width: 1024px) {
   .kb-toolbar {
     grid-template-columns: 1fr auto auto;
@@ -44,7 +45,7 @@
   .kb-col-title {
     margin: 0;
     flex: 1;
-    font-size: 19px;
+    font-size: 18px;
   }
   .kb-col-add {
     width: 28px;
