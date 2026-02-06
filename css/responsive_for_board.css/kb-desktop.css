@@ -96,7 +96,7 @@
   }
   .kb {
     padding: 24px 24px 40px;
-    min-height: calc(100vh - 72px);
+    /* min-height: calc(100vh - 72px); */
   }
   .kb-toolbar {
     grid-template-columns: 1fr auto;

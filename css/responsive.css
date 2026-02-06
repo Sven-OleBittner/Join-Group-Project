@@ -97,13 +97,13 @@
 /* Additional breakpoint to cover 900-940px range */
 @media (max-width: 940px) and (min-width: 901px) {
   .legal_notice {
-    padding-bottom: 120px !important;
+    /* padding-bottom: 120px !important; */
     margin-bottom: 0 !important;
   }
   
-  .main-content {
+  /* .main-content {
     padding-bottom: 120px;
-  }
+  } */
 }
 
 .header-left {
@@ -124,7 +124,7 @@
 
 @media (max-width: 945px) {
   .main-content {
-    padding-bottom: 120px; /* Increased padding */
+    /* padding-bottom: 120px; Increased padding */
   }
 
   .main-content-privacy {
