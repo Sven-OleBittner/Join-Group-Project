@@ -41,8 +41,8 @@
   .kb-card-list[data-cards] {
     flex-direction: row;
     width: max-content;
-    overflow-x: clip;
   }
+
 }
 
 @media (max-width: 480px) {
@@ -166,7 +166,7 @@
     width: 20px;
     height: 20px;
   }
-  .kb {
+   .kb {
     overflow-x: hidden;
   }
   .kb-columns {
@@ -177,7 +177,7 @@
   }
   .kb-card {
     overflow-x: hidden;
-  }
+  } 
 }
 
 @media (max-width: 360px) {
