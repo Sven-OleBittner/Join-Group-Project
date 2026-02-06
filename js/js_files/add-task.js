@@ -1,5 +1,8 @@
 /**
- * Add Task functionality
+ * Initializes the Add Task page
+ * Sets default priority and loads contacts for the assignees dropdown
+ * @async
+ * @returns {Promise<void>}
  */
 async function add_task_init(){
     standartselectPriority();
@@ -8,6 +11,8 @@ async function add_task_init(){
 
 /**
  * Loads contacts from Firebase and renders them in the assignees dropdown
+ * @async
+ * @returns {Promise<void>}
  */
 async function loadContactsForDropdown() {
     const contacts = await fetchContactsFromDatabase();
@@ -52,19 +57,19 @@ function getContacts(contact) {
 }
 
 /**
- * Toggles the selection state of a contact
- * @param {string} firebaseKey - The Firebase key of the contact
+ * Toggles the selection state of a contact and updates the display
+ * @param {string} firebaseKey - The Firebase key of the contact to toggle
+ * @returns {void}
  */
 function toggleContactSelection(firebaseKey) {
   const checkbox = document.getElementById('contact-' + firebaseKey);
-  if (checkbox) {
-    checkbox.checked = !checkbox.checked;
-    updateSelectedContactsDisplay();
-  }
+  checkbox.checked = !checkbox.checked;
+  updateSelectedContactsDisplay();
 }
 
 /**
- * Updates the display of selected contacts as avatar chips
+ * Updates the display of selected contacts as avatar chips below the dropdown
+ * @returns {void}
  */
 function updateSelectedContactsDisplay() {
   const selectedContacts = getSelectedContacts();
@@ -86,7 +91,7 @@ function getSelectedContacts() {
   const selectedContacts = [];
   currentData.forEach(contact => {
     const checkbox = document.getElementById('contact-' + contact.firebaseKey);
-    if (checkbox && checkbox.checked) {
+    if (checkbox.checked) {
       selectedContacts.push(contact);
     }
   });
@@ -94,7 +99,9 @@ function getSelectedContacts() {
 }
 
 /**
- * Toggle dropdown
+ * Toggles the visibility of a dropdown menu
+ * @param {string} id - The ID of the dropdown to toggle
+ * @returns {void}
  */
 function toggleDropdown(id) {
   const items = document.getElementById(id + '-items');
@@ -102,7 +109,9 @@ function toggleDropdown(id) {
 }
 
 /**
- * Select category
+ * Selects a category option and closes the category dropdown
+ * @param {string} value - The category value to select
+ * @returns {void}
  */
 function selectCategoryOption(value) {
   document.getElementById('category-selected').textContent = value;
@@ -110,7 +119,9 @@ function selectCategoryOption(value) {
 }
 
 /**
- * Select priority
+ * Selects a priority level and updates the UI accordingly
+ * @param {string} priority - The priority level to select ('urgent', 'medium', or 'low')
+ * @returns {void}
  */
 function selectPriority(priority) {
   document.getElementById('priority-urgent').classList.remove('selected');
@@ -119,6 +130,10 @@ function selectPriority(priority) {
   document.getElementById('priority-' + priority).classList.add('selected');
 }
 
+/**
+ * Sets the default priority selection to 'medium' on page load
+ * @returns {void}
+ */
 function standartselectPriority() {
   document.getElementById('priority-medium').classList.add('selected');
 }
