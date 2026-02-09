@@ -3,6 +3,7 @@ function initSite() {
 }
 
 
+
 async function renderTask() {
   const tasksData = await getData("task");
   const taskArray = Object.values(tasksData);
@@ -38,11 +39,34 @@ function renderSubTask(task, index) {
 }
 
 
+function getAvatarBg(index) {
+  const colors = [
+    '#FF7A00', // orange
+    '#FF5EB3', // pink
+    '#6E52FF', // purple
+    '#00BEE8', // cyan
+    '#1FD7C1', // turquoise
+    '#FF745E', // coral
+    '#FFA35E', // peach
+    '#0038FF', // blue
+    '#C3FF2B', // lime-green
+    '#FF4646', // red
+    '#FFC701'  // yellow
+  ];
+  return colors[index % colors.length];
+}
+
 function renderAvatars(taskAssigned, index) {
-   let avatarsContainer = document.getElementById('avatarsFoto' + index);
-    avatarsContainer.innerHTML = '';
-    for (let i = 0; i < taskAssigned.length; i++) {
-      avatarsContainer.innerHTML += `<div class="kb-avatar color-orange" title="${taskAssigned[i].initials}">${taskAssigned[i].initials}</div>`;
-    }
-    
+  let avatarsContainer = document.getElementById('avatarsFoto' + index);
+  avatarsContainer.innerHTML = '';
+
+  for (let i = 0; i < taskAssigned.length; i++) {
+    const backgroundColor = getAvatarBg(i);
+
+    avatarsContainer.innerHTML += `
+      <div class="kb-avatar" style="background:${backgroundColor}" title="${taskAssigned[i].initials}">
+        ${taskAssigned[i].initials}
+      </div>
+    `;
   }
+}
