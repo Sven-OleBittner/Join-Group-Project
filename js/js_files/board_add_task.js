@@ -56,3 +56,17 @@ function closeAddTaskModal() {
 //   assignedTo: [],
 //   status: getStatusByButtonId(id),
 // };
+
+
+function getContactBgColorClass(task) {
+  let contactsDb = getData("contacts");
+  let contactsArray = Object.values(contactsDb);
+  let assignedArr = task.assigned;
+  let contact = contactsArray.find(contact => contact.name === assignedArr);
+  let colorClass = "";
+  if (contact) {
+    colorClass = contact.color;
+  }
+
+  return colorClass;
+}
