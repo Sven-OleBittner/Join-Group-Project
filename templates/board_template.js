@@ -1,4 +1,4 @@
-function getTasksTemplate(task, backgroundColor, index) {
+function getTasksTemplate(task, backgroundColor, index, priority) {
   return `
   <article class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
@@ -11,7 +11,7 @@ function getTasksTemplate(task, backgroundColor, index) {
               <footer class="kb-card-foot">
                 <div id="avatarsFoto${index}" class="kb-avatars" data-assignees="${task.assignees || ''}"></div>
                 <div class="kb-prio kb-prio--${task.priority || 'urgent'}">
-                  <span class="kb-prio__icon" aria-hidden="true"></span>
+                  <img src="./assets/img/${priority}" alt="${task.priority}-icon">
                 </div>
               </footer>
             </article>

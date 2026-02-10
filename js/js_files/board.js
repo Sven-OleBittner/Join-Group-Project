@@ -12,7 +12,8 @@ async function renderTask() {
   for (let index = 0; index < taskArray.length; index++) {
     const task = taskArray[index];
     let backgroundColor = getCategoryColor(task.category);
-    container.innerHTML += getTasksTemplate(task, backgroundColor, index);
+    let priority = getPriority(task.priority);
+    container.innerHTML += getTasksTemplate(task, backgroundColor, index, priority);
     renderSubTask(task, index);
     await renderAvatars(task.assigned, index);
   }
@@ -60,4 +61,17 @@ async function getContactBg(taskAssigned) {
   const contactArray = Object.values(contactDb);
   let contact = contactArray.find(contact => contact.initials === taskAssigned);
   return contact ? contact.color : 'color-default';
+}
+
+
+ function getPriority(taskPriority) {
+  if (taskPriority === 'urgent') {
+    return 'red_high_urgent.svg';
+  } else if (taskPriority === 'medium') {
+    return 'Prio%20media.svg';
+  } else if (taskPriority === 'low') {
+    return 'green_low_urgent.svg';
+  } else {
+    return 'kb-prio--default';
+  }
 }
