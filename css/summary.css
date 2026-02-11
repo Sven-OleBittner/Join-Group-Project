@@ -3,7 +3,7 @@ body {
 }
 
 .d-flex {
-  border-radius: 50%;
+  /* border-radius: 50%; */
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -3,6 +3,8 @@
   margin: 0;
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
+  /* overflow-y: hidden;
+  overflow-x: hidden; */
 }
 
 :root {
