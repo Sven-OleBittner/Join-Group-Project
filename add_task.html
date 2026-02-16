@@ -172,27 +172,24 @@
                   type="text"
                   id="subtask-input"
                   placeholder="Add new subtask"
+                  onfocus="showSubtaskIcons()"
                 />
                 <div class="subtask-icons">
                   <img
-                    src="./assets/img/Subtasks icons11.svg"
-                    id="subtask-add-icon"
-                    alt=""
-                  />
-                  <img
                     src="./assets/img/iconoir_cancel.svg"
                     id="subtask-cancel-icon"
-                    style="display: none"
-                    alt=""
+                    class="d-none c-pointer"
+                    onclick="cancelSubtask()"
                   />
                   <img
                     src="./assets/img/check.svg"
                     id="subtask-confirm-icon"
-                    style="display: none"
-                    alt=""
+                    class="d-none c-pointer"
+                    onclick="addSubtask()"
                   />
                 </div>
               </div>
+              <div class="subtask-list" id="subtask-list"></div>
             </div>
           </form>
 
