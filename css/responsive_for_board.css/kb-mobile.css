@@ -1,16 +1,15 @@
-  @media (max-width: 1024px) {
-    .title-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header .header-logo {
-      display: inline-block;
-      width: 40px;
-      height: auto;
-    }
+@media (max-width: 1024px) {
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-
+  .header .header-logo {
+    display: inline-block;
+    width: 40px;
+    height: auto;
+  }
+}
 
 @media (min-width: 769px) and (max-width: 995px) {
   .kb-col-title {
@@ -19,9 +18,6 @@
 }
 
 @media (max-width: 768px) {
-  body::-webkit-scrollbar {
-    display: none;
-  }
   .kb {
     padding: 20px 20px 92px;
   }
@@ -37,7 +33,7 @@
   }
   .kb-card {
     gap: 6px;
-    width: 300px;
+    min-width: 300px;
   }
   .kb-card-title {
     font-size: 17px;
@@ -54,14 +50,16 @@
 
   .kb-card-list[data-cards] {
     flex-direction: row;
-    width: max-content;
-  }
-
-  .kb-card-list {
+    width: 100%;
+    white-space: nowrap;
     overflow-x: auto;
-    padding-bottom: 8px;
   }
-
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  .kb-card-list::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -185,7 +183,7 @@
     width: 20px;
     height: 20px;
   }
-   .kb {
+  .kb {
     overflow-x: hidden;
   }
   .kb-columns {
@@ -196,7 +194,7 @@
   }
   .kb-card {
     overflow-x: hidden;
-  } 
+  }
 }
 
 @media (max-width: 360px) {
@@ -442,5 +440,3 @@
   */
   /* } */
 }
-
-
