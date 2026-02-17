@@ -101,6 +101,7 @@
             <div class="form-left">
               <label for="title">Title<span class="required">*</span></label>
               <input type="text" id="title" placeholder="Enter a title" />
+              <span class="error-message" id="title-error">This field is required</span>
 
               <label for="description">Description</label>
               <textarea
@@ -119,6 +120,8 @@
                   alt=""
                 />
               </div>
+              <span class="error-message" id="date-error">This field is required</span>
+              <span class="error-message" id="date-format-error">Please use format dd/mm/yyyy</span>
             </div>
 
             <div class="form-divider"></div>
@@ -165,6 +168,7 @@
                   <div onclick="selectCategoryOption('User Story')">User Story</div>
                 </div>
               </div>
+              <span class="error-message" id="category-error">This field is required</span>
 
               <label>Subtasks</label>
               <div class="subtasks">
@@ -201,7 +205,7 @@
               <button type="button" class="clear-btn" id="clear-btn" onclick="clearForm()">
                 Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
               </button>
-              <button type="button" class="create-btn" id="create-btn">
+              <button type="button" class="create-btn" id="create-btn" onclick="validateForm()">
                 Create Task <img src="./assets/img/check.svg" alt="check" />
               </button>
             </div>
