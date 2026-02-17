@@ -417,3 +417,59 @@ function validateCategory() {
   error.classList.remove('visible');
   return true;
 }
+
+
+/**
+ * Gibt die aktuell gewählte Priorität zurück
+ * @returns {string}
+ */
+function getSelectedPriority() {
+  if (document.getElementById('priority-urgent').classList.contains('selected')) return 'urgent';
+  if (document.getElementById('priority-medium').classList.contains('selected')) return 'medium';
+  if (document.getElementById('priority-low').classList.contains('selected')) return 'low';
+  return '';
+}
+
+/**
+ * Erstellt und postet einen neuen Task nach Validierung
+ * @async
+ * @returns {Promise<void>}
+ */
+async function postNewTask() {
+  if (!validateForm()) return;
+  const newTask = collectTaskFormData('title', 'description', 'date', 'category-selected');
+  try {
+    await postData('task', newTask);
+    clearForm();
+    // success message (Figma)
+    window.location.href = 'board.html';
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+/**
+ * Sammelt alle Taskdaten anhand der übergebenen IDs
+ * @param {string} titleId
+ * @param {string} descId
+ * @param {string} dateId
+ * @param {string} categoryId
+ * @returns {Object} Task-Objekt
+ */
+function collectTaskFormData(titleId, descId, dateId, categoryId) {
+  const title = document.getElementById(titleId);
+  const description = document.getElementById(descId);
+  const dueDate = document.getElementById(dateId);
+  const category = document.getElementById(categoryId);
+  return {
+    title: title.value,
+    description: description.value,
+    dueDate: dueDate.value,
+    priority: getSelectedPriority(),
+    assigned: getSelectedContacts(),
+    category: category.value || category.textContent,
+    subtasks: subtasks,
+    status: 'todo'
+  };
+}
+
