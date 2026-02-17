@@ -122,6 +122,7 @@ function toggleDropdown(id) {
 function selectCategoryOption(value) {
   document.getElementById('category-selected').textContent = value;
   document.getElementById('category-items').classList.add('select-hide');
+  validateCategory();
 }
 
 /**
