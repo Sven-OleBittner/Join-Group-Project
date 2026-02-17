@@ -106,21 +106,15 @@
 
     <div class="headercontainer">
       <header class="header">
-        <img
-          class="responsiveLogo"
-          src="./assets/icons/Join_logo 1.svg"
-          alt=""
-        />
+      <div class="header-left">
+        <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+      </div>
         <div class="title-container">
-          <p>Kanban Project Management Tool</p>
+          <p class="title">Kanban Project Management Tool</p>
         </div>
         <div class="header-right">
-          <a href="./help.html" class="help-icon">?</a>
-          <div
-            onclick="showLogOutMenu()"
-            id="userInitials"
-            class="user-avatar"
-          ></div>
+          <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar"></div>
         </div>
       </header>
 

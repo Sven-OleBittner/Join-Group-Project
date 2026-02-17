@@ -426,10 +426,6 @@
     border-radius: 18px;
     max-width: 96px;
   }
-
-  .title-container {
-    display: none;
-  }
   /* body {
     padding-bottom: calc(var(--footer-h) + env(safe-area-inset-bottom, 0px) + 16px);
   }

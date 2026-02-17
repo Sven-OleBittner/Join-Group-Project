@@ -146,3 +146,11 @@
     display: block;
   }
 }
+
+@media (max-width: 768px) {
+
+  .title {
+    display: none;
+  }
+
+}
