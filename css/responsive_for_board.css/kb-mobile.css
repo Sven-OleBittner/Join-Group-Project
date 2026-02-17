@@ -18,6 +18,10 @@
 }
 
 @media (max-width: 768px) {
+  .kb-addTask {
+    display: none;
+  }
+
   .kb {
     padding: 20px 20px 92px;
   }
@@ -33,6 +37,7 @@
   }
   .kb-card {
     gap: 6px;
+    margin-bottom: 16px;
     min-width: 300px;
   }
   .kb-card-title {

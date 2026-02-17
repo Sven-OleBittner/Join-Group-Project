@@ -37,36 +37,3 @@ function closeAddTaskModal() {
   dialog.close();
 }
 
-// function getStatusByButtonId(id) {
-//   switch (id) {
-//     case "addTaskInProgress":
-//       return "inProgress";
-//     case "addTaskAwaitingFeedback":
-//       return "awaitFeedback";
-//     default:
-//       return "toDo";
-//   }
-// }
-
-// let taskObject = {
-//   title: "",
-//   description: "",
-//   dueDate: "",
-//   priority: "medium",
-//   assignedTo: [],
-//   status: getStatusByButtonId(id),
-// };
-
-
-function getContactBgColorClass(task) {
-  let contactsDb = getData("contacts");
-  let contactsArray = Object.values(contactsDb);
-  let assignedArr = task.assigned;
-  let contact = contactsArray.find(contact => contact.name === assignedArr);
-  let colorClass = "";
-  if (contact) {
-    colorClass = contact.color;
-  }
-
-  return colorClass;
-}

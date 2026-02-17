@@ -30,7 +30,12 @@
     <title>Join</title>
   </head>
 
-  <body onload="initBoardSite()">
+  <body
+    onload="
+      initBoardSite();
+      initSite();
+    "
+  >
     <dialog
       class="addTaskDialog"
       id="addTaskDialog"
@@ -111,9 +116,11 @@
         </div>
         <div class="header-right">
           <a href="./help.html" class="help-icon">?</a>
-          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar">
-            SM
-          </div>
+          <div
+            onclick="showLogOutMenu()"
+            id="userInitials"
+            class="user-avatar"
+          ></div>
         </div>
       </header>
 
@@ -140,7 +147,8 @@
                 class="kb-add-btn"
                 type="button"
               >
-                Add task <span class="kb-plus">+</span>
+                <span class="kb-addTask">Add task</span>
+                <span class="kb-plus">+</span>
               </button>
             </div>
           </div>
