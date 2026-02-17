@@ -10,6 +10,12 @@ async function add_task_init(){
 }
 
 /**
+ * Array to store subtasks
+ * @type {Array<string>}
+ */
+let subtasks = [];
+
+/**
  * Loads contacts from Firebase and renders them in the assignees dropdown
  * @async
  * @returns {Promise<void>}
@@ -139,12 +145,6 @@ function standartselectPriority() {
 }
 
 /**
- * Array to store subtasks
- * @type {Array<string>}
- */
-let subtasks = [];
-
-/**
  * Shows the confirm and cancel icons when typing in subtask input
  * @returns {void}
  */
@@ -196,6 +196,7 @@ function renderSubtasks() {
   subtasks.forEach((subtask, index) => {
     list.innerHTML += getSubtaskHTML(subtask, index);
   });
+  console.log(subtasks);
 }
 
 /**
@@ -270,4 +271,35 @@ function confirmEditSubtask(index) {
 function deleteSubtask(index) {
   subtasks.splice(index, 1);
   renderSubtasks();
+}
+
+/**
+ * Clears all form fields and resets to default state
+ * @returns {void}
+ */
+function clearForm() {
+  document.getElementById('title').value = '';
+  document.getElementById('description').value = '';
+  document.getElementById('date').value = '';
+  selectPriority('medium');
+  clearAssignedContacts();
+  document.getElementById('category-selected').textContent = 'Select task category';
+  subtasks = [];
+  renderSubtasks();
+  document.getElementById('subtask-input').value = '';
+  hideSubtaskIcons();
+}
+
+/**
+ * Clears all selected contacts and updates the display
+ * @returns {void}
+ */
+function clearAssignedContacts() {
+  currentData.forEach(contact => {
+    const checkbox = document.getElementById('contact-' + contact.firebaseKey);
+    if (checkbox) {
+      checkbox.checked = false;
+    }
+  });
+  document.getElementById('assigned-chips').innerHTML = '';
 }
