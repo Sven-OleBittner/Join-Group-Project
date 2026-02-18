@@ -3,10 +3,6 @@ function initBoardSite() {
   sortTaskByStatus("inProgressTaskList", "inprogress", "emptyInProgress");
   sortTaskByStatus("awaitFeedbackTaskList", "feedback", "emptyAwaitFeedback");
   sortTaskByStatus("doneTaskList", "done", "emptyDone");
-  // checkColumns("toDoTaskList", "emptyToDo");
-  // checkColumns("inProgressTaskList", "emptyInProgress");
-  // checkColumns("awaitFeedbackTaskList", "emptyAwaitFeedback");
-  // checkColumns("doneTaskList", "emptyDone");
 }
 
 async function sortTaskByStatus(id, status, emptyColumnId) {
