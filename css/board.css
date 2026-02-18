@@ -376,12 +376,6 @@ button[id="at-close"] {
   display: none; /* Chrome, Safari, Edge */
 }
 
-/* .kb-card-list {
-  min-height: 64px;
-  overflow-y: auto;
-  max-height: 666px;
-} */
-
 .kb-empty {
   display: flex;
   align-items: center;
