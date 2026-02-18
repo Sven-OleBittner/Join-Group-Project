@@ -363,8 +363,6 @@ button[id="at-close"] {
 
 .kb-card-list {
   min-height: 64px;
-  overflow-y: auto;
-  max-height: 100vh;
 }
 
 .kb-empty {
