@@ -1,22 +1,22 @@
 function initBoardSite() {
-  sortTaskByStatus("toDoTaskList", "todo");
-  sortTaskByStatus("inProgressTaskList", "inprogress");
-  sortTaskByStatus("awaitFeedbackTaskList", "feedback");
-  sortTaskByStatus("doneTaskList", "done");
-  checkColumns("toDoTaskList", "emptyToDo");
-  checkColumns("inProgressTaskList", "emptyInProgress");
-  checkColumns("awaitFeedbackTaskList", "emptyAwaitFeedback");
-  checkColumns("doneTaskList", "emptyDone");
+  sortTaskByStatus("toDoTaskList", "todo", "emptyToDo");
+  sortTaskByStatus("inProgressTaskList", "inprogress", "emptyInProgress");
+  sortTaskByStatus("awaitFeedbackTaskList", "feedback", "emptyAwaitFeedback");
+  sortTaskByStatus("doneTaskList", "done", "emptyDone");
+  // checkColumns("toDoTaskList", "emptyToDo");
+  // checkColumns("inProgressTaskList", "emptyInProgress");
+  // checkColumns("awaitFeedbackTaskList", "emptyAwaitFeedback");
+  // checkColumns("doneTaskList", "emptyDone");
 }
 
-async function sortTaskByStatus(id, status) {
+async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
   const taskArray = Object.values(tasksData);
   const filteredTasks = taskArray.filter((task) => task.status === status);
-  renderTask(id, filteredTasks);
+  renderTask(id, filteredTasks, emptyColumnId);
 }
 
-async function renderTask(id, filteredTasks) {
+async function renderTask(id, filteredTasks, emptyColumnId) {
   const container = document.getElementById(id);
   container.innerHTML = "";
   for (let index = 0; index < filteredTasks.length; index++) {
@@ -24,13 +24,15 @@ async function renderTask(id, filteredTasks) {
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
     container.innerHTML += getTasksTemplate(
+      id,
       task,
       backgroundColor,
       index,
       priority,
     );
-    renderSubTask(task, index);
-    await renderAvatars(task.assigned, index);
+    renderSubTask(id, task, index);
+    await renderAvatars(task.assigned, index, id);
+    checkColumns(id, emptyColumnId);
   }
 }
 
@@ -44,8 +46,8 @@ function getCategoryColor(category) {
   }
 }
 
-function renderSubTask(task, index) {
-  const subTasksContainer = document.getElementById("task-subtasks" + index);
+function renderSubTask(id, task, index) {
+  const subTasksContainer = document.getElementById(index + "task-subtasks"  + id);
   if (task.subtask != null) {
     subTasksContainer.innerHTML += getSubTemplate(task);
   } else {
@@ -53,8 +55,8 @@ function renderSubTask(task, index) {
   }
 }
 
-async function renderAvatars(taskAssigned, index) {
-  let avatarsContainer = document.getElementById("avatarsFoto" + index);
+async function renderAvatars(taskAssigned, index, id) {
+  let avatarsContainer = document.getElementById(index + "avatarsFoto" + id);
   avatarsContainer.innerHTML = "";
 
   for (let i = 0; i < taskAssigned.length; i++) {
