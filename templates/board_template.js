@@ -1,6 +1,6 @@
 function getTasksTemplate(id, task, backgroundColor, index, priority) {
   return `
-  <article draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
+  <article draggable="true" ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)" class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
                 <span class="${backgroundColor} kb-chip">${task.category.name || 'Technical Task'}</span>
