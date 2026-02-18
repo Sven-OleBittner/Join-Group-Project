@@ -9,13 +9,30 @@ function initSite() {
  * @returns {Promise<void>}
  */
 async function searchForLoginUser() {
-  const publicPages = ['index.html', 'signup.html', 'privacy_policy_before_logged_in.html', 'legal_notice.html'];
-  const currentPage = window.location.pathname.split('/').pop();
+  let user = await getData("loggingInUser");
+  let logInUser = Object.values(user || {})[0];
+  const publicPages = [
+    "index.html",
+    "signup.html",
+    "privacy_policy_before_logged_in.html",
+    "legal_notice.html",
+  ];
+  const currentPage = window.location.pathname.split("/").pop();
   if (publicPages.includes(currentPage)) {
     return;
   }
-  let loginUser = await getData((path = "loggingInUser"));
-  if (!loginUser) {
+  if (!logInUser) {
     window.location.href = "index.html";
   }
+  showUserInitials(logInUser);
+}
+
+function showUserInitials(logInUser) {
+  let userInitials = document.getElementById("userInitials");
+  const nameWords = logInUser.name.split(" ");
+  const initials = nameWords
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("")
+    .substring(0, 2);
+  userInitials.innerHTML = initials;
 }
