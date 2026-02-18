@@ -529,3 +529,49 @@ textarea:focus {
     padding-top: 20px; 
   }
 }
+
+/* ===================================================================
+   TASK ADDED SUCCESS NOTIFICATION
+   =================================================================== */
+
+.task-added-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(100vh);
+  background-color: var(--darkblue-light-color);
+  color: var(--white-color);
+  border-radius: 20px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 21px;
+  font-weight: 400;
+  z-index: 9999;
+  animation: slideToCenter 2s ease-in-out forwards;
+}
+
+.task-added-notification img {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes slideToCenter {
+  0% {
+    transform: translate(-50%, -50%) translateY(100vh);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(100vh);
+    opacity: 0;
+  }
+}

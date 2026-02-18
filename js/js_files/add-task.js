@@ -459,7 +459,8 @@ function getSelectedPriority() {
 }
 
 /**
- * Erstellt und postet einen neuen Task nach Validierung
+ * Creates and posts a new task after validation
+ * Shows success notification before redirecting to board
  * @async
  * @returns {Promise<void>}
  */
@@ -469,11 +470,36 @@ async function postNewTask() {
   try {
     await postData('task', newTask);
     clearForm();
-    // success message (Figma)
-    window.location.href = 'board.html';
+    showTaskAddedNotification();
   } catch (error) {
     console.error(error);
   }
+}
+
+/**
+ * Displays the "Task added to board" success notification
+ * Redirects to board page after animation completes (2 seconds)
+ * @returns {void}
+ */
+function showTaskAddedNotification() {
+  const body = document.querySelector('body');
+  body.insertAdjacentHTML('beforeend', getTaskAddedNotificationHTML());
+  setTimeout(() => {
+    window.location.href = 'board.html';
+  }, 2000);
+}
+
+/**
+ * Generates the HTML template for the task added success notification
+ * @returns {string} HTML template string for the notification
+ */
+function getTaskAddedNotificationHTML() {
+  return `
+    <div class="task-added-notification">
+      <span>Task added to board</span>
+      <img src="./assets/img/addedToBoard.svg" alt="Board icon">
+    </div>
+  `;
 }
 
 /**
@@ -501,3 +527,13 @@ function collectTaskFormData(titleId, descId, dateId, categoryId) {
   };
 }
 
+
+/**
+ * Displays a success notification message when a contact is successfully created
+ * Uses insertAdjacentHTML('beforeend') to add the notification HTML at the end of the body element
+ * The CSS animation handles the display duration and automatic removal after 3 seconds
+ */
+function getSuccessfullyContactCreated() {
+    let body = document.querySelector("body");
+    body.insertAdjacentHTML('beforeend', getMessageSuccessfullyAdded());
+}
