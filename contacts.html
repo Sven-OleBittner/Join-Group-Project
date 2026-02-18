@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./css/contact-forms.css" />
     <title id="title">Join</title>
   </head>
-  <body onload="loadContactList()">
+  <body onload="loadContactList(),initSite();">
     <!-- Contact overlay for add/edit forms -->
     <div id="contact-overlay"></div>
     
@@ -85,12 +85,15 @@
     <!-- Main Header Container -->
     <div class="headercontainer">
       <header class="header">
+      <div class="header-left">
+        <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+      </div>
         <div class="title-container">
-          <p>Kanban Project Management Tool</p>
+          <p class="title">Kanban Project Management Tool</p>
         </div>
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar">SM</div>
+          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar"></div>
         </div>
       </header>
 
@@ -204,6 +207,7 @@
     <!-- Contact Modules -->
 
     <script src="./js/js_files/navigation.js"></script>
+    <script src="./general_script.js"></script>
 
     <script src="./js/js_files/contact-constants.js"></script>
     <script src="./js/js_files/contact-database.js"></script>
