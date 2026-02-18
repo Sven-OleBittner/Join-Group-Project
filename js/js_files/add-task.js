@@ -114,7 +114,7 @@ function collectTaskFormData(titleId, descId, dateId, categoryId) {
     dueDate: dueDate.value,
     priority: getSelectedPriority(),
     assigned: getSelectedContacts(),
-    category: category.value,
+    category: category.textContent,
     subtasks: subtasks,
     status: getStatusFromUrl()
   };
