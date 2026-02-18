@@ -42,10 +42,12 @@ function getCategoryColor(category) {
   }
 }
 
-function renderSubTask(id, task, index) {
+function renderSubTask(id, task, index,) {
   const subTasksContainer = document.getElementById(index + "task-subtasks"  + id);
-  if (task.subtasks != null) {
-    subTasksContainer.innerHTML += getSubTemplate(task);
+  if (task.subtasks != null && task.subtasks.length > 0) {
+    const compleatedSubtasks = task.subtasks.filter((subtask) => subtask.completed).length;
+    let percent = (compleatedSubtasks / task.subtasks.length) * 100;
+    subTasksContainer.innerHTML += getSubTemplate(task, percent, compleatedSubtasks);
   } else {
     subTasksContainer.innerHTML = "";
   }
