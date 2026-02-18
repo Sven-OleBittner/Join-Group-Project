@@ -10,6 +10,33 @@ async function add_task_init(){
 }
 
 /**
+ * Determines the task status based on the button ID from the URL.
+ * On mobile redirect from the board page, the column button ID is passed.
+ * @param {string} id - The button ID (e.g. 'addTaskInProgress', 'addTaskAwaitingFeedback')
+ * @returns {string} The corresponding status
+ */
+function getStatusByButtonId(id) {
+    switch (id) {
+        case "addTaskInProgress":
+            return "inprogress";
+        case "addTaskAwaitingFeedback":
+            return "feedback";
+        default:
+            return "todo";
+    }
+}
+
+/**
+ * Reads the button ID from the URL parameter and returns the corresponding status.
+ * @returns {string} The status based on the ID or 'todo' as default
+ */
+function getStatusFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    return getStatusByButtonId(id);
+}
+
+/**
  * Array to store subtasks
  * @type {Array<string>}
  */
@@ -470,7 +497,7 @@ function collectTaskFormData(titleId, descId, dateId, categoryId) {
     assigned: getSelectedContacts(),
     category: category.value,
     subtasks: subtasks,
-    status: 'todo'
+    status: getStatusFromUrl()
   };
 }
 
