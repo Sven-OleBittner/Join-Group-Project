@@ -1,0 +1,182 @@
+/* =============================================================
+   ADD TASK – AKTIONEN, VALIDIERUNG & FEEDBACK
+   Enthält: Pflichtfeld-Markierung, Fehlermeldungen, Buttons
+            (Löschen / Erstellen), Erfolgs-Benachrichtigung
+   ============================================================= */
+
+
+/* -------------------------------------------------------
+   Validierung & Fehler-Zustände
+   ------------------------------------------------------- */
+
+/* Rotes Sternchen / Pflichtfeld-Hinweis */
+.required {
+  color: var(--required-color);
+}
+
+/* Roten Rahmen auf fehlerhaften Text-/Datumseingaben */
+.input-error {
+  border: 1px solid var(--required-color) !important;
+}
+
+/* Roten Rahmen auf dem Custom-Select-Trigger */
+.select-error .select-selected {
+  border: 1px solid var(--required-color) !important;
+}
+
+/* Fehlermeldungstext unterhalb des Feldes (standardmäßig ausgeblendet) */
+.error-message {
+  color: var(--required-color);
+  font-size: 12px;
+  display: none;
+  margin-top: -12px;
+}
+
+/* Fehlermeldung sichtbar schalten */
+.error-message.visible {
+  display: block;
+}
+
+
+/* -------------------------------------------------------
+   Formular-Aktions-Buttons
+   ------------------------------------------------------- */
+
+/* Wrapper für Abbrechen- und Erstellen-Button */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  position: sticky;
+  bottom: 16px;
+  z-index: 1500;
+  background: #fff;
+  padding: 0;
+}
+
+/* Icon-Größe innerhalb der Buttons */
+.form-actions button img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Gemeinsame Basis beider Buttons */
+.clear-btn,
+.create-btn {
+  padding: 12px 25px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: unset;
+  cursor: pointer;
+  transition: all .1s ease;
+}
+
+/* "Löschen"-Button: weißer Hintergrund mit Rahmen */
+.clear-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+/* "Erstellen"-Button: dunkler Hintergrund, weißer Text */
+.create-btn {
+  background: #2a3647;
+  color: #fff;
+}
+
+/* Erstellen-Icon weiß einfärben */
+.create-btn img {
+  filter: brightness(0) invert(1);
+}
+
+/* Löschen-Button Hover: blaue Akzentfarbe */
+.clear-btn:hover {
+  border-color: #29ABE2;
+  color: #29ABE2;
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+}
+
+/* Icon-Übergang vorbereiten */
+.clear-btn img {
+  transition: filter 0.1s ease;
+}
+
+/* Icon im Löschen-Button bei Hover blau einfärben */
+.clear-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
+}
+
+/* Erstellen-Button Hover: blauer Hintergrund */
+.create-btn:hover {
+  background: #29ABE2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+}
+
+
+/* -------------------------------------------------------
+   Responsive – Aktions-Buttons (≤ 945 px)
+   ------------------------------------------------------- */
+
+@media (max-width: 945px) {
+
+  /* Buttons nebeneinander, volle Breite */
+  .form-actions {
+    position: static;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+}
+
+
+/* -------------------------------------------------------
+   Erfolgs-Benachrichtigung „Task added"
+   ------------------------------------------------------- */
+
+/* Zentriertes Toast-Element, das von unten einfährt */
+.task-added-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(100vh);
+  background-color: var(--darkblue-light-color);
+  color: var(--white-color);
+  border-radius: 20px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 21px;
+  font-weight: 400;
+  z-index: 9999;
+  animation: slideToCenter 2s ease-in-out forwards;
+}
+
+/* Icon innerhalb der Benachrichtigung */
+.task-added-notification img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Animation: von unten zur Mitte und zurück nach unten */
+@keyframes slideToCenter {
+  0% {
+    transform: translate(-50%, -50%) translateY(100vh);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(100vh);
+    opacity: 0;
+  }
+}
