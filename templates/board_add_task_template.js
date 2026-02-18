@@ -1,13 +1,14 @@
 function getAddTaskTemplate() {
-    return `
-        <div class="add-task-container">
+  return `
+ <div class="add-task-container">
           <div class="add-task-uppercontainer">
             <h1>Add Task</h1>
           </div>
-          <form  formmethod="dialog" class="task-form" id="task-form">
+          <form class="task-form" id="task-form">
             <div class="form-left">
               <label for="title">Title<span class="required">*</span></label>
-              <input type="text" id="title" placeholder="Enter a title" />
+              <input type="text" id="title" placeholder="Enter a title" oninput="validateTitle()" />
+              <span class="error-message" id="title-error">This field is required</span>
 
               <label for="description">Description</label>
               <textarea
@@ -19,13 +20,15 @@ function getAddTaskTemplate() {
                 >Due date<span class="required">*</span></label
               >
               <div class="date-wrapper">
-                <input type="date" id="due-date" placeholder="dd/mm/yyyy" />
+                <input type="text" id="date" placeholder="dd/mm/yyyy" oninput="validateDate()" />
                 <img
                   src="./assets/img/add_task_due_date_calendar_icon.svg"
                   class="icon-calendar"
                   alt=""
                 />
               </div>
+              <span class="error-message" id="date-error">This field is required</span>
+              <span class="error-message" id="date-format-error">Please use format dd/mm/yyyy</span>
             </div>
 
             <div class="form-divider"></div>
@@ -33,21 +36,21 @@ function getAddTaskTemplate() {
             <div class="form-right">
               <label>Priority</label>
               <div class="priority-options">
-                <button type="button" class="priority urgent">
+                <button type="button" class="priority urgent" id="priority-urgent" onclick="selectPriority('urgent')">
                   Urgent
                   <img
                     src="./assets/img/red_high_urgent.svg"
                     alt="Urgent Arrow"
                   />
                 </button>
-                <button type="button" class="priority medium">
+                <button type="button" class="priority medium" id="priority-medium" onclick="selectPriority('medium')">
                   Medium
                   <img
                     src="./assets/img/icons8-equal-50.png"
                     alt="equal sign"
                   />
                 </button>
-                <button type="button" class="priority low">
+                <button type="button" class="priority low" id="priority-low" onclick="selectPriority('low')">
                   Low
                   <img
                     src="./assets/img/green_low_urgent.svg"
@@ -57,53 +60,22 @@ function getAddTaskTemplate() {
               </div>
 
               <label>Assigned to</label>
-              <div class="dropdown full-expandable assigned-to" id="assignees">
-                <div class="dropdown-toggle" role="button" tabindex="0">
-                  <span class="placeholder">Select contacts to assign</span>
-                  <img
-                    class="caret"
-                    src="./assets/img/arrow_drop_down.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="dropdown-menu">
-                  <div class="dropdown-search">
-                    <input
-                      type="text"
-                      id="assignee-search"
-                      placeholder="Search contacts"
-                    />
-                  </div>
-                  <div class="options" id="assignee-options"></div>
+              <div class="custom-select" id="assignees">
+                <div class="select-selected" id="assignees-selected" onclick="toggleDropdown('assignees')">Select contacts to assign</div>
+                <div class="select-items select-hide" id="assignees-items">
                 </div>
               </div>
-              <div class="chips assigned-chips" id="assignee-chips"></div>
+              <div class="assigned-chips" id="assigned-chips"></div>
 
               <label>Category<span class="required">*</span></label>
-              <div
-                class="dropdown full-expandable category-select"
-                id="category"
-              >
-                <div class="dropdown-toggle" role="button" tabindex="0">
-                  <span class="placeholder">Select task category</span>
-                  <img
-                    class="caret"
-                    src="./assets/img/arrow_drop_down.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="dropdown-menu">
-                  <div class="dropdown-search">
-                    <input
-                      type="text"
-                      id="category-search"
-                      placeholder="Search categories"
-                    />
-                  </div>
-                  <div class="options" id="category-options"></div>
+              <div class="custom-select" id="category">
+                <div class="select-selected" id="category-selected" onclick="toggleDropdown('category')">Select task category</div>
+                <div class="select-items select-hide" id="category-items">
+                  <div onclick="selectCategoryOption('Technical Task')">Technical Task</div>
+                  <div onclick="selectCategoryOption('User Story')">User Story</div>
                 </div>
               </div>
-              <div class="chips category-chipbox" id="category-chipbox"></div>
+              <span class="error-message" id="category-error">This field is required</span>
 
               <label>Subtasks</label>
               <div class="subtasks">
@@ -111,27 +83,24 @@ function getAddTaskTemplate() {
                   type="text"
                   id="subtask-input"
                   placeholder="Add new subtask"
+                  onfocus="showSubtaskIcons()"
                 />
                 <div class="subtask-icons">
                   <img
-                    src="./assets/img/Subtasks icons11.svg"
-                    id="subtask-add-icon"
-                    alt=""
-                  />
-                  <img
                     src="./assets/img/iconoir_cancel.svg"
                     id="subtask-cancel-icon"
-                    style="display: none"
-                    alt=""
+                    class="d-none c-pointer"
+                    onclick="cancelSubtask()"
                   />
                   <img
                     src="./assets/img/check.svg"
                     id="subtask-confirm-icon"
-                    style="display: none"
-                    alt=""
+                    class="d-none c-pointer"
+                    onclick="addSubtask()"
                   />
                 </div>
               </div>
+              <div class="subtask-list" id="subtask-list"></div>
             </div>
           </form>
 
@@ -140,15 +109,14 @@ function getAddTaskTemplate() {
               <span class="required">*</span> This field is required
             </div>
             <div class="form-actions">
-              <button type="button" class="clear-btn">
+              <button type="button" class="clear-btn" id="clear-btn" onclick="clearForm()">
                 Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
               </button>
-              <button type="button" class="create-btn">
+              <button type="button" class="create-btn" id="create-btn" onclick="postNewTask()">
                 Create Task <img src="./assets/img/check.svg" alt="check" />
               </button>
             </div>
           </div>
         </div>
-      </div>
-          `        
+                  `;
 }
