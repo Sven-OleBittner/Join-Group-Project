@@ -49,7 +49,6 @@ function validationAddContactInput() {
  */
 async function postNewContact() {
     if (!validationAddContactInput()) {
-        console.error("Validation failed.");
         return;
     }
     const addName = document.getElementById("add-name");

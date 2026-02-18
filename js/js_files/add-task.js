@@ -180,7 +180,9 @@ function addSubtask() {
   const input = document.getElementById('subtask-input');
   const value = input.value.trim();
   if (value) {
-    subtasks.push(value);
+    subtasks.push(
+      {"text": value, "completed": false}
+    );
     renderSubtasks();
     input.value = '';
     hideSubtaskIcons();
@@ -209,7 +211,7 @@ function renderSubtasks() {
 function getSubtaskHTML(subtask, index) {
   return `
     <div class="subtask-item" id="subtask-${index}">
-      <span class="subtask-item-text">${subtask}</span>
+      <span class="subtask-item-text">${subtask.text}</span>
       <div class="subtask-item-actions">
         <img src="./assets/img/contact_edit_pen.svg" alt="Edit" onclick="editSubtask(${index})">
         <span class="subtask-item-divider"></span>
@@ -226,7 +228,7 @@ function getSubtaskHTML(subtask, index) {
  */
 function editSubtask(index) {
   const item = document.getElementById('subtask-' + index);
-  const currentText = subtasks[index];
+  const currentText = subtasks[index].text;
   item.outerHTML = getSubtaskEditHTML(currentText, index);
   document.getElementById('subtask-edit-input-' + index).focus();
 }
@@ -259,7 +261,7 @@ function confirmEditSubtask(index) {
   const input = document.getElementById('subtask-edit-input-' + index);
   const value = input.value.trim();
   if (value) {
-    subtasks[index] = value;
+    subtasks[index] = {"text": value, "completed": subtasks[index].completed};
   }
   renderSubtasks();
 }
@@ -427,7 +429,6 @@ function getSelectedPriority() {
   if (document.getElementById('priority-urgent').classList.contains('selected')) return 'urgent';
   if (document.getElementById('priority-medium').classList.contains('selected')) return 'medium';
   if (document.getElementById('priority-low').classList.contains('selected')) return 'low';
-  return '';
 }
 
 /**
