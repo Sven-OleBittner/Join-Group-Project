@@ -369,8 +369,7 @@ button[id="at-close"] {
   min-height: 64px;
   max-height: 666px;
   scrollbar-width: none; /* Firefox */
-  margin-bottom: 16px;
-  padding-bottom: 32px;
+  padding: 0px 6px 20px 6px;
 }
 
 .kb-card-list[data-cards]::-webkit-scrollbar {
