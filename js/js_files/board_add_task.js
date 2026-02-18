@@ -31,3 +31,18 @@ function closeAddTaskModal() {
   dialog.close();
 }
 
+function handleDragStart(event) {
+  event.dataTransfer.setData("text/plain", event.target.id);
+}
+
+function handleDragEnd(event) {
+  
+}
+
+function dragoverHandler(event) {
+  event.preventDefault();
+}
+
+function dropHandler(event) {
+  event.preventDefault();
+}
