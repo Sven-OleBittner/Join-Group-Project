@@ -1,15 +1,11 @@
-function initBoardSite() {
-  checkColumns("toDoTaskList", "emptyToDo")
-  checkColumns("inProgressTaskList", "emptyInProgress")
-  checkColumns("awaitFeedbackTaskList", "emptyAwaitFeedback")
-  checkColumns("doneTaskList", "emptyDone")
-}
 
 function checkColumns(columnId, emptyColumnId) {
   let column = document.getElementById(columnId);
   let emptyColumn = document.getElementById(emptyColumnId);
-  if (column.innerHTML != "") {
+  if (column.innerHTML === "") {
     emptyColumn.classList.add("d-none");
+  } else {
+    emptyColumn.classList.remove("d-none");
   }
 }
 
@@ -21,7 +17,6 @@ function chooseAddTaskSite(id) {
   }
 }
 
-// ?status=${getStatusByButtonId(id)}
 
 function generateAddTaskModal() {
   let dialog = document.getElementById("addTaskDialog");
@@ -36,4 +31,3 @@ function closeAddTaskModal() {
   let dialog = document.getElementById("addTaskDialog");
   dialog.close();
 }
-
