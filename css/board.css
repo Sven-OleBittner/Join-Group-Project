@@ -116,6 +116,10 @@
   min-width: 260px;
 } */
 
+body {
+  overflow: hidden;
+}
+
 .kb-col-head {
   display: flex;
   align-items: center;
@@ -176,6 +180,7 @@
 }
 
 .kb-card {
+  width: 90%;
   margin-top: 20px;
   background: #ffffff;
   border-radius: var(--kb-card-radius);
@@ -357,13 +362,26 @@ button[id="at-close"] {
 
 .kb-card-list[data-cards] {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 12px;
+  overflow-y: auto;
+  min-height: 64px;
+  max-height: 666px;
+  scrollbar-width: none; /* Firefox */
+  margin-bottom: 16px;
+  padding-bottom: 32px;
 }
 
-.kb-card-list {
-  min-height: 64px;
+.kb-card-list[data-cards]::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
+
+/* .kb-card-list {
+  min-height: 64px;
+  overflow-y: auto;
+  max-height: 666px;
+} */
 
 .kb-empty {
   display: flex;
