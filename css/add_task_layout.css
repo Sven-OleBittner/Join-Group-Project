@@ -1,0 +1,120 @@
+/* =============================================================
+   ADD TASK – LAYOUT & SEITENSTRUKTUR
+   Enthält: Header, Content-Wrapper, Formular-Container,
+            linke/rechte Spalte, Trennlinie, Footer
+   ============================================================= */
+
+
+/* -------------------------------------------------------
+   Seitenlayout-Wrapper
+   ------------------------------------------------------- */
+
+/* Vertikaler Trenner zwischen linker und rechter Form-Spalte */
+.form-divider {
+  width: 1px;
+  background-color: var(--divider-color);
+  margin: 0 20px;
+}
+
+/* Hauptinhalt-Bereich (wächst / schrumpft flexibel) */
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+
+/* -------------------------------------------------------
+   Seitenheader
+   ------------------------------------------------------- */
+
+.header {
+  background-color: #ffffff;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dddddd;
+}
+
+/* Runder Nutzer-Avatar im Header */
+.user-circle {
+  border: 2px solid #2a3647;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* -------------------------------------------------------
+   Add-Task-Seiten-Container
+   ------------------------------------------------------- */
+
+/* Äußerer Wrapper der kompletten Add-Task-Seite */
+.add-task-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 60px 12px;
+  height: 100%;
+}
+
+/* Zweispaltiges Formular (links + rechts) */
+.task-form {
+  display: flex;
+  padding-top: 70px;
+  row-gap: 40px;
+  column-gap: 40px;
+}
+
+/* Linke und rechte Formular-Spalte */
+.form-left,
+.form-right {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  column-gap: 16px;
+  flex: 1 1 auto;
+}
+
+/* Footer-Zeile des Formulars (hält Platz für Buttons) */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 14px;
+}
+
+
+/* -------------------------------------------------------
+   RESPONSIVE – Schmale Bildschirme (≤ 945 px)
+   ------------------------------------------------------- */
+
+@media (max-width: 945px) {
+
+  /* Vertikalen Trenner auf schmalen Screens ausblenden */
+  .form-divider {
+    display: none;
+  }
+
+  /* Weniger Innenabstand auf mobilen Geräten */
+  .add-task-container {
+    padding: 24px 16px 160px;
+  }
+
+  /* Einspaltig statt zweispaltig */
+  .task-form {
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 24px;
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+}

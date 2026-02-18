@@ -3,10 +3,6 @@ function initBoardSite() {
   sortTaskByStatus("inProgressTaskList", "inprogress", "emptyInProgress");
   sortTaskByStatus("awaitFeedbackTaskList", "feedback", "emptyAwaitFeedback");
   sortTaskByStatus("doneTaskList", "done", "emptyDone");
-  // checkColumns("toDoTaskList", "emptyToDo");
-  // checkColumns("inProgressTaskList", "emptyInProgress");
-  // checkColumns("awaitFeedbackTaskList", "emptyAwaitFeedback");
-  // checkColumns("doneTaskList", "emptyDone");
 }
 
 async function sortTaskByStatus(id, status, emptyColumnId) {
@@ -49,7 +45,7 @@ function getCategoryColor(category) {
 function renderSubTask(id, task, index) {
   const subTasksContainer = document.getElementById(index + "task-subtasks"  + id);
   if (task.subtasks != null) {
-    subTasksContainer.innerHTML += getSubTemplate(task.subtasks);
+    subTasksContainer.innerHTML += getSubTemplate(task);
   } else {
     subTasksContainer.innerHTML = "";
   }
