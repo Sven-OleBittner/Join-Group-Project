@@ -48,8 +48,8 @@ function getCategoryColor(category) {
 
 function renderSubTask(id, task, index) {
   const subTasksContainer = document.getElementById(index + "task-subtasks"  + id);
-  if (task.subtask != null) {
-    subTasksContainer.innerHTML += getSubTemplate(task);
+  if (task.subtasks != null) {
+    subTasksContainer.innerHTML += getSubTemplate(task.subtasks);
   } else {
     subTasksContainer.innerHTML = "";
   }
