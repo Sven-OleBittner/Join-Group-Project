@@ -10,6 +10,12 @@ async function add_task_init(){
 }
 
 /**
+ * Array to store subtasks
+ * @type {Array<{text: string, completed: boolean}>}
+ */
+let subtasks = [];
+
+/**
  * Determines the task status based on the button ID from the URL.
  * On mobile redirect from the board page, the column button ID is passed.
  * @param {string} id - The button ID (e.g. 'addTaskInProgress', 'addTaskAwaitingFeedback')
@@ -35,12 +41,6 @@ function getStatusFromUrl() {
     const id = params.get('id');
     return getStatusByButtonId(id);
 }
-
-/**
- * Array to store subtasks
- * @type {Array<string>}
- */
-let subtasks = [];
 
 /**
  * Loads contacts from Firebase and renders them in the assignees dropdown
