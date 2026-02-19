@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="./css/board_modal_fix.css" />
     <link rel="stylesheet" href="./css/addtask-modal-bridge.css" />
     <link rel="stylesheet" href="./css/board_add_task.css" />
-    <link rel="stylesheet" href="./css/add_task.css">
-    <link rel="stylesheet" href="./css/add_task_actions.css">
-    <link rel="stylesheet" href="./css/add_task_components.css">
-    <link rel="stylesheet" href="./css/add_task_inputs.css">
-    <link rel="stylesheet" href="./css/add_task_layout.css">
-    <link rel="stylesheet" href="./css/add_task.css">
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/add_task_actions.css" />
+    <link rel="stylesheet" href="./css/add_task_components.css" />
+    <link rel="stylesheet" href="./css/add_task_inputs.css" />
+    <link rel="stylesheet" href="./css/add_task_layout.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
     <link
       rel="stylesheet"
       href="./css/responsive_for_board.css/kb-desktop.css"
@@ -147,7 +147,10 @@
               </div>
               <button
                 id="addTaskBoard"
-                onclick="chooseAddTaskSite('addTaskBoard'); loadContactsForDropdown()"
+                onclick="
+                  chooseAddTaskSite('addTaskBoard');
+                  loadContactsForDropdown();
+                "
                 class="kb-add-btn"
                 type="button"
               >
@@ -160,6 +163,8 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
+              ondrop="moveTo('toDoTaskList')"
+              ondragover="dragoverHandler(event)"
               id="addTaskBoardToDo"
               class="kb-col"
               aria-label="To do"
@@ -168,13 +173,16 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">To do</h2>
                 <button
-                  onclick="chooseAddTaskSite('addTaskBoardToDo'); loadContactsForDropdown()"
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardToDo');
+                    loadContactsForDropdown();
+                  "
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to To do"
                 ></button>
               </header>
-              <div id="toDoTaskList" class="kb-card-list" data-cards ondrop="moveTo('toDoTaskList')" ondragover="dragoverHandler(event)"></div>
+              <div id="toDoTaskList" class="kb-card-list" data-cards></div>
               <div id="emptyToDo" class="kb-empty">
                 <span>No tasks To do</span>
               </div>
@@ -182,6 +190,8 @@
 
             <!-- In progress -->
             <section
+              ondrop="moveTo('inProgressTaskList')"
+              ondragover="dragoverHandler(event)"
               id="addTaskBoardInProgress"
               class="kb-col"
               aria-label="In progress"
@@ -190,41 +200,20 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">In progress</h2>
                 <button
-                  onclick="chooseAddTaskSite('addTaskBoardInProgress'); loadContactsForDropdown()"
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardInProgress');
+                    loadContactsForDropdown();
+                  "
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to In progress"
                 ></button>
               </header>
-              <div id="inProgressTaskList" class="kb-card-list" data-cards ondrop="moveTo('inProgressTaskList')" ondragover="dragoverHandler(event)">
-                <article
-                  class="kb-card"
-                  data-due="10/05/2023"
-                  data-subtasks='["Implement Recipe Recommendation","Start Page Layout"]'
-                >
-                  <div class="kb-card-top">
-                    <span class="kb-chip kb-chip--story">User Story</span>
-                  </div>
-                  <h3 class="kb-card-title">
-                    Kochwelt Page &amp; Recipe Recommender
-                  </h3>
-                  <p class="kb-card-desc">
-                    Build start page with recipe recommendation...
-                  </p>
-                  <div class="kb-progress-row">
-                    <div class="kb-progress">
-                      <div class="kb-progress-bar" style="width: 50%"></div>
-                    </div>
-                    <span class="kb-subtasks">1/2 Subtasks</span>
-                  </div>
-                  <footer class="kb-card-foot">
-                    <div class="kb-avatars" data-assignees="EM, MB, AM"></div>
-                    <div class="kb-prio kb-prio--medium">
-                      <span class="kb-prio__icon" aria-hidden="true"></span>
-                    </div>
-                  </footer>
-                </article>
-              </div>
+              <div
+                id="inProgressTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
               <div id="emptyInProgress" class="kb-empty">
                 <span>No tasks In progress</span>
               </div>
@@ -232,6 +221,8 @@
 
             <!-- Await feedback -->
             <section
+              ondrop="moveTo('awaitFeedbackTaskList')"
+              ondragover="dragoverHandler(event)"
               id="addTaskBoardAwaitFeedback"
               class="kb-col"
               aria-label="Await feedback"
@@ -240,66 +231,20 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Await feedback</h2>
                 <button
-                  onclick="chooseAddTaskSite('addTaskBoardAwaitFeedback'); loadContactsForDropdown()"
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardAwaitFeedback');
+                    loadContactsForDropdown();
+                  "
                   class="kb-col-add"
                   type="button"
                   aria-label="Add task to Await feedback"
                 ></button>
               </header>
-              <div id="awaitFeedbackTaskList" class="kb-card-list" data-cards ondrop="moveTo('awaitFeedbackTaskList')" ondragover="dragoverHandler(event)">
-                <article
-                  class="kb-card"
-                  data-due="12/05/2023"
-                  data-subtasks='["Create base.html","Extract header & footer"]'
-                >
-                  <div class="kb-card-top">
-                    <span class="kb-chip kb-chip--technical"
-                      >Technical Task</span
-                    >
-                  </div>
-                  <h3 class="kb-card-title">HTML Base Template Creation</h3>
-                  <p class="kb-card-desc">
-                    Create reusable HTML base templates...
-                  </p>
-                  <div class="kb-progress-row">
-                    <div class="kb-progress">
-                      <div class="kb-progress-bar" style="width: 0%"></div>
-                    </div>
-                    <span class="kb-subtasks">0/2 Subtasks</span>
-                  </div>
-                  <footer class="kb-card-foot">
-                    <div class="kb-avatars" data-assignees="DE, BZ, AS"></div>
-                    <div class="kb-prio kb-prio--low">
-                      <span class="kb-prio__icon" aria-hidden="true"></span>
-                    </div>
-                  </footer>
-                </article>
-                <article
-                  class="kb-card"
-                  data-due="11/05/2023"
-                  data-subtasks='["Implement daily recipe","Portion calculator"]'
-                >
-                  <div class="kb-card-top">
-                    <span class="kb-chip kb-chip--story">User Story</span>
-                  </div>
-                  <h3 class="kb-card-title">Daily Kochwelt Recipe</h3>
-                  <p class="kb-card-desc">
-                    Implement daily recipe and portion calculator....
-                  </p>
-                  <div class="kb-progress-row">
-                    <div class="kb-progress">
-                      <div class="kb-progress-bar" style="width: 0%"></div>
-                    </div>
-                    <span class="kb-subtasks">0/2 Subtasks</span>
-                  </div>
-                  <footer class="kb-card-foot">
-                    <div class="kb-avatars" data-assignees="EF, AS, TW"></div>
-                    <div class="kb-prio kb-prio--high">
-                      <span class="kb-prio__icon" aria-hidden="true"></span>
-                    </div>
-                  </footer>
-                </article>
-              </div>
+              <div
+                id="awaitFeedbackTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
               <div id="emptyAwaitFeedback" class="kb-empty">
                 <span>No tasks Await feedback</span>
               </div>
@@ -307,6 +252,8 @@
 
             <!-- Done -->
             <section
+              ondrop="moveTo('doneTaskList')"
+              ondragover="dragoverHandler(event)"
               id="addTaskBoardDone"
               class="kb-col"
               aria-label="Done"
@@ -315,35 +262,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Done</h2>
               </header>
-              <div id="doneTaskList" class="kb-card-list" data-cards ondrop="moveTo('doneTaskList')" ondragover="dragoverHandler(event)">
-                <article
-                  class="kb-card"
-                  data-due="09/30/2023"
-                  data-subtasks='["Define BEM","Write style guide"]'
-                >
-                  <div class="kb-card-top">
-                    <span class="kb-chip kb-chip--technical"
-                      >Technical Task</span
-                    >
-                  </div>
-                  <h3 class="kb-card-title">CSS Architecture Planning</h3>
-                  <p class="kb-card-desc">
-                    Define CSS naming conventions and structure...
-                  </p>
-                  <div class="kb-progress-row">
-                    <div class="kb-progress">
-                      <div class="kb-progress-bar" style="width: 100%"></div>
-                    </div>
-                    <span class="kb-subtasks">2/2 Subtasks</span>
-                  </div>
-                  <footer class="kb-card-foot">
-                    <div class="kb-avatars" data-assignees="SM, BZ"></div>
-                    <div class="kb-prio kb-prio--medium">
-                      <span class="kb-prio__icon" aria-hidden="true"></span>
-                    </div>
-                  </footer>
-                </article>
-              </div>
+              <div id="doneTaskList" class="kb-card-list" data-cards></div>
               <div id="emptyDone" class="kb-empty">
                 <span>No tasks Done</span>
               </div>
