@@ -12,7 +12,7 @@ function chooseAddTaskSite(id) {
   if (window.innerWidth > 945) {
     generateAddTaskModal();
   } else {
-    window.location.href = `add_task.html`;
+    window.location.href = `add_task.html?id=${id}`;
   }
 }
 

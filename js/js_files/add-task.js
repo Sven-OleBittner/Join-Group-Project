@@ -17,14 +17,14 @@ async function add_task_init() {
 /**
  * Determines the task status based on the button ID from the URL.
  * On mobile redirect from the board page, the column button ID is passed.
- * @param {string} id - The button ID (e.g. 'addTaskInProgress', 'addTaskAwaitingFeedback')
+ * @param {string} id - The button ID (e.g. 'addTaskInProgress', 'addTaskBoardAwaitingFeedback')
  * @returns {string} The corresponding status
  */
 function getStatusByButtonId(id) {
     switch (id) {
-        case "addTaskInProgress":
+        case "addTaskBoardInProgress":
             return "inprogress";
-        case "addTaskAwaitingFeedback":
+        case "addTaskBoardAwaitFeedback":
             return "feedback";
         default:
             return "todo";
