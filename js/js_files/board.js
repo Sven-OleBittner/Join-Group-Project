@@ -5,31 +5,66 @@ function initBoardSite() {
   sortTaskByStatus("doneTaskList", "done", "emptyDone");
 }
 
+let currentDraggedTask;
+
+function dragStart(taskId) {
+  currentDraggedTask = taskId;
+}
+
+function dragoverHandler(ev) {
+  ev.preventDefault();
+}
+
+async function moveTo(columnId) {
+  const taskData = await getData("task");
+  if (!taskData) return;
+  const taskId = currentDraggedTask.replace("task-", "");
+  const newStatus = setNewStatus(columnId);
+  const existingTask = taskData[taskId];
+  if (existingTask) {
+    existingTask.status = newStatus;
+    await putData(`task/${taskId}`, existingTask);
+initBoardSite();  }
+}
+
+function setNewStatus(columnId) {
+  switch (columnId) {
+    case "toDoTaskList":
+      return "todo";
+    case "inProgressTaskList":
+      return "inprogress";
+    case "awaitFeedbackTaskList":
+      return "feedback";
+    case "doneTaskList":
+      return "done";
+  }
+}
+
+function capitalizeFirstLetter(str) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
-  const taskArray = Object.values(tasksData);
-  const filteredTasks = taskArray.filter((task) => task.status === status);
+  if (!tasksData) return renderTask(id, [], emptyColumnId);
+  const taskEntries = Object.entries(tasksData);
+  const filteredTasks = taskEntries.filter(([, task]) => task.status === status);
   renderTask(id, filteredTasks, emptyColumnId);
 }
 
 async function renderTask(id, filteredTasks, emptyColumnId) {
   const container = document.getElementById(id);
   container.innerHTML = "";
-  for (let index = 0; index < filteredTasks.length; index++) {
-    const task = filteredTasks[index];
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(
-      id,
-      task,
-      backgroundColor,
-      index,
-      priority,
-    );
-    renderSubTask(id, task, index);
-    await renderAvatars(task.assigned, index, id);
-    checkColumns(id, emptyColumnId);
+    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
+    renderSubTask(id, task, key);
+    await renderAvatars(task.assigned || [], key, id);
   }
+  checkColumns(id, emptyColumnId);
 }
 
 function getCategoryColor(category) {
@@ -42,8 +77,9 @@ function getCategoryColor(category) {
   }
 }
 
-function renderSubTask(id, task, index) {
-  const subTasksContainer = document.getElementById(index + "task-subtasks"  + id);
+function renderSubTask(id, task, key) {
+  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
+  if (!subTasksContainer) return;
   if (task.subtasks != null) {
     subTasksContainer.innerHTML += getSubTemplate(task);
   } else {
@@ -51,16 +87,17 @@ function renderSubTask(id, task, index) {
   }
 }
 
-async function renderAvatars(taskAssigned, index, id) {
-  let avatarsContainer = document.getElementById(index + "avatarsFoto" + id);
+async function renderAvatars(taskAssigned, key, id) {
+  let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
+  if (!avatarsContainer) return;
   avatarsContainer.innerHTML = "";
 
   for (let i = 0; i < taskAssigned.length; i++) {
-    const color = await getContactBg(taskAssigned[i].initials);
-
+    const assignee = taskAssigned[i];
+    const color = await getContactBg(assignee.initials);
     avatarsContainer.innerHTML += `
-      <div class="kb-avatar ${taskAssigned[i].color}" title="${taskAssigned[i].initials}">
-        ${taskAssigned[i].initials}
+      <div class="kb-avatar ${assignee.color || color}" title="${assignee.initials}">
+        ${assignee.initials}
       </div>
     `;
   }

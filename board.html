@@ -174,7 +174,7 @@
                   aria-label="Add task to To do"
                 ></button>
               </header>
-              <div id="toDoTaskList" class="kb-card-list" data-cards></div>
+              <div id="toDoTaskList" class="kb-card-list" data-cards ondrop="moveTo('toDoTaskList')" ondragover="dragoverHandler(event)"></div>
               <div id="emptyToDo" class="kb-empty">
                 <span>No tasks To do</span>
               </div>
@@ -196,7 +196,7 @@
                   aria-label="Add task to In progress"
                 ></button>
               </header>
-              <div id="inProgressTaskList" class="kb-card-list" data-cards>
+              <div id="inProgressTaskList" class="kb-card-list" data-cards ondrop="moveTo('inProgressTaskList')" ondragover="dragoverHandler(event)">
                 <article
                   class="kb-card"
                   data-due="10/05/2023"
@@ -246,7 +246,7 @@
                   aria-label="Add task to Await feedback"
                 ></button>
               </header>
-              <div id="awaitFeedbackTaskList" class="kb-card-list" data-cards>
+              <div id="awaitFeedbackTaskList" class="kb-card-list" data-cards ondrop="moveTo('awaitFeedbackTaskList')" ondragover="dragoverHandler(event)">
                 <article
                   class="kb-card"
                   data-due="12/05/2023"
@@ -315,7 +315,7 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Done</h2>
               </header>
-              <div id="doneTaskList" class="kb-card-list" data-cards>
+              <div id="doneTaskList" class="kb-card-list" data-cards ondrop="moveTo('doneTaskList')" ondragover="dragoverHandler(event)">
                 <article
                   class="kb-card"
                   data-due="09/30/2023"
@@ -353,7 +353,7 @@
       </div>
     </div>
 
-    <div
+    <!-- <div
       id="td-modal"
       class="td-modal"
       role="dialog"
@@ -412,7 +412,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="footer">
       <nav class="footer-nav">
