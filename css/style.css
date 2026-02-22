@@ -183,6 +183,7 @@ a.nav-item {
 .main-content-privacy {
   padding: 110px;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 90vh;
 }
 

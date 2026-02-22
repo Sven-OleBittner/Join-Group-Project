@@ -1,11 +1,37 @@
-.legal_notice{
-    padding: 64px 75px 32px 119px;
-    overflow-y: auto;
-    max-height: 84vh;
-    margin-bottom: 68px;;
-
+.headercontainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.legal_notice a {
-color:#75c7ea ;
+.main-content {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.main-content-privacy {
+    padding: 64px 75px 32px 80px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.main-content-privacy a {
+    color: #75c7ea;
+}
+
+.main-content-privacy h3 {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.main-content-privacy p {
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.main-content-privacy ul {
+    margin-bottom: 16px;
 }
