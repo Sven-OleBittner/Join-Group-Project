@@ -130,6 +130,12 @@ body {
   cursor: pointer;
   transition: background-color 0.2s ease;
   position: relative;
+  text-decoration: none;
+}
+
+a.nav-item {
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
 }
 
 .nav-item:hover {
