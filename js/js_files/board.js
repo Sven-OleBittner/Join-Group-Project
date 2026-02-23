@@ -7,9 +7,16 @@ function initBoardSite() {
 
 let currentDraggedTask;
 
-function dragStart(taskId) {
+function dragStart(taskId, event) {
   currentDraggedTask = taskId;
+  let taskElement = document.getElementById(taskId);
+  taskElement.classList.add("rotateDraggedTask");
+  event.dataTransfer.setData("text/plain", taskId);
+  event.dataTransfer.setDragImage(taskElement, 0, 0);
+  
 }
+
+
 
 function dragoverHandler(ev) {
   ev.preventDefault();
@@ -24,7 +31,8 @@ async function moveTo(columnId) {
   if (existingTask) {
     existingTask.status = newStatus;
     await putData(`task/${taskId}`, existingTask);
-initBoardSite();  }
+    initBoardSite();
+  }
 }
 
 function setNewStatus(columnId) {
@@ -49,7 +57,9 @@ async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
   if (!tasksData) return renderTask(id, [], emptyColumnId);
   const taskEntries = Object.entries(tasksData);
-  const filteredTasks = taskEntries.filter(([, task]) => task.status === status);
+  const filteredTasks = taskEntries.filter(
+    ([, task]) => task.status === status,
+  );
   renderTask(id, filteredTasks, emptyColumnId);
 }
 
@@ -60,7 +70,13 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
     const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
+    container.innerHTML += getTasksTemplate(
+      id,
+      task,
+      key,
+      backgroundColor,
+      priority,
+    );
     renderSubTask(id, task, key);
     await renderAvatars(task.assigned || [], key, id);
   }
@@ -78,7 +94,9 @@ function getCategoryColor(category) {
 }
 
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
+  const subTasksContainer = document.getElementById(
+    `task-${key}-subtasks-${id}`,
+  );
   if (!subTasksContainer) return;
   if (task.subtasks != null) {
     subTasksContainer.innerHTML += getSubTemplate(task);
