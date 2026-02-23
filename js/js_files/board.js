@@ -10,13 +10,9 @@ let currentDraggedTask;
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
   let taskElement = document.getElementById(taskId);
-  taskElement.classList.add("rotateDraggedTask");
-  event.dataTransfer.setData("text/plain", taskId);
   event.dataTransfer.setDragImage(taskElement, 0, 0);
-  
+  taskElement.style.rotate = "5deg";
 }
-
-
 
 function dragoverHandler(ev) {
   ev.preventDefault();
@@ -46,11 +42,6 @@ function setNewStatus(columnId) {
     case "doneTaskList":
       return "done";
   }
-}
-
-function capitalizeFirstLetter(str) {
-  if (!str) return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 async function sortTaskByStatus(id, status, emptyColumnId) {
