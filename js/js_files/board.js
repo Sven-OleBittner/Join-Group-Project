@@ -77,15 +77,18 @@ function getCategoryColor(category) {
   }
 }
 
+
 function renderSubTask(id, task, key) {
   const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
-  if (!subTasksContainer) return;
-  if (task.subtasks != null) {
-    subTasksContainer.innerHTML += getSubTemplate(task);
+  if (task.subtasks != null && task.subtasks.length > 0) {
+    const compleatedSubtasks = task.subtasks.filter((subtask) => subtask.completed).length;
+    let percent = (compleatedSubtasks / task.subtasks.length) * 100;
+    subTasksContainer.innerHTML += getSubTemplate(task, percent, compleatedSubtasks);
   } else {
     subTasksContainer.innerHTML = "";
   }
 }
+
 
 async function renderAvatars(taskAssigned, key, id) {
   let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
