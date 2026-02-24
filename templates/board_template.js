@@ -1,6 +1,6 @@
 function getTasksTemplate(id, task, key, backgroundColor, priority) {
   return `
-  <article id="task-${key}" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
+  <article id="task-${key}" ondragleave="dragLeave('task-${key}', event)" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
                 <span class="${backgroundColor} kb-chip">${(task.category && task.category.name) || 'Technical Task'}</span>
@@ -19,11 +19,11 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
 }
 
 
-function getSubTemplate(task) {
+function getSubTemplate(id, task, key) {
   return `<div class="kb-progress">
                   <div class="kb-progress-bar" style="width:${task.progress || 0}%"></div>
                 </div>
-                <span class="kb-subtasks">${task.subtasksCompleted || 0}/${task.subtasksTotal || 0}</span>
+                <span id="task-${key}-subtasks-${id}" class="kb-subtasks">${task.subtasksCompleted || 0}/${task.subtasksTotal || 0} Subtasks</span>
               </div>
-  </articele>`;
+  </article>`;
 }

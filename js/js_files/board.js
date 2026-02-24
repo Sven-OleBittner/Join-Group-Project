@@ -9,13 +9,34 @@ let currentDraggedTask;
 
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
-  let taskElement = document.getElementById(taskId);
-  event.dataTransfer.setDragImage(taskElement, 0, 0);
-  taskElement.style.rotate = "5deg";
+  event.target.classList.add("rotateDraggedTask");
 }
 
 function dragoverHandler(ev) {
   ev.preventDefault();
+}
+
+function dragLeave(taskId, event) {
+  let taskElement = document.getElementById(taskId);
+  // taskElement.classList.remove("rotateDraggedTask");
+}
+
+function showSubtasks(subtasksId) {
+let subtasksElement = document.getElementById(subtasksId);
+if (subtasksElement) {
+  subtasksElement.style.display = "flex";
+} else {
+  console.warn("Subtasks element not found.");
+}
+}
+
+function hideSubtasks(subtasksId) {
+  const subtasksElement = document.getElementById(subtasksId);
+  if (subtasksElement) {
+    subtasksElement.style.display = "none";
+  } else {
+    console.warn("Subtasks element not found.");
+  }
 }
 
 async function moveTo(columnId) {
@@ -90,7 +111,7 @@ function renderSubTask(id, task, key) {
   );
   if (!subTasksContainer) return;
   if (task.subtasks != null) {
-    subTasksContainer.innerHTML += getSubTemplate(task);
+    subTasksContainer.innerHTML += getSubTemplate(id, task, key);
   } else {
     subTasksContainer.innerHTML = "";
   }
