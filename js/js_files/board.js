@@ -7,12 +7,36 @@ function initBoardSite() {
 
 let currentDraggedTask;
 
-function dragStart(taskId) {
+function dragStart(taskId, event) {
   currentDraggedTask = taskId;
+  event.target.classList.add("rotateDraggedTask");
 }
 
 function dragoverHandler(ev) {
   ev.preventDefault();
+}
+
+function dragLeave(taskId, event) {
+  let taskElement = document.getElementById(taskId);
+  // taskElement.classList.remove("rotateDraggedTask");
+}
+
+function showSubtasks(subtasksId) {
+let subtasksElement = document.getElementById(subtasksId);
+if (subtasksElement) {
+  subtasksElement.style.display = "flex";
+} else {
+  console.warn("Subtasks element not found.");
+}
+}
+
+function hideSubtasks(subtasksId) {
+  const subtasksElement = document.getElementById(subtasksId);
+  if (subtasksElement) {
+    subtasksElement.style.display = "none";
+  } else {
+    console.warn("Subtasks element not found.");
+  }
 }
 
 async function moveTo(columnId) {
@@ -24,7 +48,8 @@ async function moveTo(columnId) {
   if (existingTask) {
     existingTask.status = newStatus;
     await putData(`task/${taskId}`, existingTask);
-initBoardSite();  }
+    initBoardSite();
+  }
 }
 
 function setNewStatus(columnId) {
@@ -40,16 +65,13 @@ function setNewStatus(columnId) {
   }
 }
 
-function capitalizeFirstLetter(str) {
-  if (!str) return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
   if (!tasksData) return renderTask(id, [], emptyColumnId);
   const taskEntries = Object.entries(tasksData);
-  const filteredTasks = taskEntries.filter(([, task]) => task.status === status);
+  const filteredTasks = taskEntries.filter(
+    ([, task]) => task.status === status,
+  );
   renderTask(id, filteredTasks, emptyColumnId);
 }
 
@@ -60,7 +82,13 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
     const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
+    container.innerHTML += getTasksTemplate(
+      id,
+      task,
+      key,
+      backgroundColor,
+      priority,
+    );
     renderSubTask(id, task, key);
     await renderAvatars(task.assigned || [], key, id);
   }
@@ -77,18 +105,17 @@ function getCategoryColor(category) {
   }
 }
 
-
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
-  if (task.subtasks != null && task.subtasks.length > 0) {
-    const compleatedSubtasks = task.subtasks.filter((subtask) => subtask.completed).length;
-    let percent = (compleatedSubtasks / task.subtasks.length) * 100;
-    subTasksContainer.innerHTML += getSubTemplate(task, percent, compleatedSubtasks);
+  const subTasksContainer = document.getElementById(
+    `task-${key}-subtasks-${id}`,
+  );
+  if (!subTasksContainer) return;
+  if (task.subtasks != null) {
+    subTasksContainer.innerHTML += getSubTemplate(id, task, key);
   } else {
     subTasksContainer.innerHTML = "";
   }
 }
-
 
 async function renderAvatars(taskAssigned, key, id) {
   let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
