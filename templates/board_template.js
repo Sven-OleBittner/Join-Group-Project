@@ -7,7 +7,7 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
               </div>
               <h3 class="kb-card-title">${task.title}</h3>
               <p class="kb-card-desc">${task.description}</p>
-              <div id="task-${key}-subtasks-${id}" class="kb-progress-row"></div>
+              <div id="task-${key}-subtasks-container-${id}" class="kb-progress-row"></div>
               <footer class="kb-card-foot">
                 <div id="task-${key}-avatars-${id}" class="kb-avatars" data-assignees="${task.assigned || ''}"></div>
                 <div class="kb-prio kb-prio--${task.priority || 'urgent'}">
@@ -19,11 +19,11 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
 }
 
 
-function getSubTemplate(id, task, key) {
+function getSubTemplate(task, key, id, percent, compleatedSubtasks) {
   return `<div class="kb-progress">
                   <div class="kb-progress-bar" style="width:${percent}%"></div>
                 </div>
-                <span id="task-${key}-subtasks-${id}" class="kb-subtasks">${task.subtasksCompleted || 0}/${task.subtasksTotal || 0} Subtasks</span>
+                <span id="task-${key}-subtasks-${id}" class="kb-subtasks">${compleatedSubtasks || 0}/${task.subtasks.length || 0} Subtasks</span>
               </div>
   </article>`;
 }
