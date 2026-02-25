@@ -21,24 +21,6 @@ function dragLeave(taskId, event) {
   // taskElement.classList.remove("rotateDraggedTask");
 }
 
-function showSubtasks(subtasksId) {
-let subtasksElement = document.getElementById(subtasksId);
-if (subtasksElement) {
-  subtasksElement.style.display = "flex";
-} else {
-  console.warn("Subtasks element not found.");
-}
-}
-
-function hideSubtasks(subtasksId) {
-  const subtasksElement = document.getElementById(subtasksId);
-  if (subtasksElement) {
-    subtasksElement.style.display = "none";
-  } else {
-    console.warn("Subtasks element not found.");
-  }
-}
-
 async function moveTo(columnId) {
   const taskData = await getData("task");
   if (!taskData) return;
