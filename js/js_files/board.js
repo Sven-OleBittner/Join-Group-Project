@@ -26,13 +26,9 @@ function addRotate(taskId) {
   taskElement.classList.add("rotateDraggedTask");
 }
 
-function hideSubtasks(subtasksId) {
-  const subtasksElement = document.getElementById(subtasksId);
-  if (subtasksElement) {
-    subtasksElement.style.display = "none";
-  } else {
-    console.warn("Subtasks element not found.");
-  }
+function removeRotate(taskId) {
+  let taskElement = document.getElementById(taskId);
+  taskElement.classList.remove("rotateDraggedTask");
 }
 
 async function moveTo(columnId) {
