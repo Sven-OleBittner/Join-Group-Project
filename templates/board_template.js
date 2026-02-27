@@ -25,5 +25,5 @@ function getSubTemplate(task, percent, compleatedSubtasks) {
                 </div>
                 <span class="kb-subtasks">${compleatedSubtasks || 0}/${task.subtasks.length || 0}</span>
               </div>
-  </articele>`;
+  `;
 }

@@ -127,7 +127,10 @@ function getPriority(taskPriority) {
   }
 }
 
+let currentTaskId;
+
 async function openTaskModal(taskId) {
+  currentTaskId = taskId;
   const task = await getData(`task/${taskId}`);
   if (!task) return;
 
@@ -139,14 +142,28 @@ async function openTaskModal(taskId) {
   document.getElementById("td-due").textContent = task.dueDate;
   document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(task.priority);
   document.getElementById("td-prio-icon").innerHTML = `<img src="./assets/img/${getPriority(task.priority)}">`;
-  await renderAvatars(task.assigned || [], taskId, "td-assignees");
+  await renderModalAvatars(task.assigned || []);
+  renderModalSubtasks(task.subtasks ? Object.values(task.subtasks) : []);
   document.getElementById("td-modal").classList.add("is-open");
-  renderModalSubtasks(task.subtasks);
+}
+
+async function renderModalAvatars(assigned) {
+  const container = document.getElementById("td-assignees");
+  container.innerHTML = "";
+  for (const assignee of assigned) {
+    const color = await getContactBg(assignee.initials);
+    container.innerHTML += `
+      <div class="td-person">
+        <div class="kb-avatar ${assignee.color || color}">${assignee.initials}</div>
+        <span class="td-person__name">${assignee.name}</span>
+      </div>
+    `;
+  }
 }
 
 function renderModalSubtasks(subtasks) {
-  document.getElementById("td-subtasks").hidden = !subtasks?.length;
-  document.getElementById("td-subtasks-list").innerHTML = (subtasks || []).map(sub => `
+  document.getElementById("td-subtasks").hidden = !subtasks.length;
+  document.getElementById("td-subtasks-list").innerHTML = subtasks.map(sub => `
     <li class="td-task ${sub.completed ? "is-done" : ""}">
       <span class="td-checkbox ${sub.completed ? "is-checked" : ""}"></span>
       <span class="td-task__label">${sub.title}</span>
@@ -156,4 +173,10 @@ function renderModalSubtasks(subtasks) {
 
 function closeTaskModal() {
   document.getElementById("td-modal").classList.remove("is-open");
+}
+
+async function deleteTask(taskId) {
+  await deleteData(`task/${taskId}`);
+  closeTaskModal();
+  initBoardSite();
 }
