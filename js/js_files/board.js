@@ -25,13 +25,19 @@ function dragLeave(taskId, event) {
 }
 
 function mouseHold(taskId, event) {
-  const taskCard = event.currentTarget;
-  taskCard.classList.add("rotateDraggedTask");
+  if (window.innerWidth >= 768) {
+    const taskCard = event.currentTarget;
+    taskCard.classList.add("rotateDraggedTask");
+  } else {
+    return;
+  }
 }
 
 function mouseRelease(taskId, event) {
-  const taskCard = event.currentTarget;
-  taskCard.classList.remove("rotateDraggedTask");
+  if (window.innerWidth >= 768) {
+    const taskCard = event.currentTarget;
+    taskCard.classList.remove("rotateDraggedTask");
+  }
 }
 
 async function moveTo(columnId) {
@@ -46,6 +52,19 @@ async function moveTo(columnId) {
     initBoardSite();
   }
 }
+
+async function moveToResp(columnId, taskId) {
+  const taskData = await getData("task");
+  if (!taskData) return;
+  const newStatus = setNewStatus(columnId);
+  const existingTask = taskData[taskId];
+  if (existingTask) {
+    existingTask.status = newStatus;
+    await putData(`task/${taskId}`, existingTask);
+    initBoardSite();
+  }
+}
+
 
 function setNewStatus(columnId) {
   switch (columnId) {
@@ -148,3 +167,29 @@ function getPriority(taskPriority) {
     return "kb-prio--default";
   }
 }
+
+function toggleOptions(key) {
+  let moveToMenu = document.getElementById(key);
+  if (moveToMenu.style.display === "none") {
+    moveToMenu.style.display = "flex";
+  } else {
+    moveToMenu.style.display = "none";
+  }
+}
+
+function closeAllOtherOptions(exceptKey) {
+  let allMenus = document.querySelectorAll(".responsiveMoveTo");
+  allMenus.forEach((menu) => {
+    if (menu.id !== exceptKey) {
+      menu.style.display = "none";
+    }
+  });
+}
+
+function closeAllOptionsOnclick() {
+  let allMenus = document.querySelectorAll(".responsiveMoveTo");
+  allMenus.forEach((menu) => {
+    menu.style.display = "none";
+  });
+}
+
