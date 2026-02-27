@@ -10,6 +10,9 @@ let ghostImage;
 
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
+  // let taskElement = document.getElementById(taskId);
+  // taskElement.classList.add("rotateDraggedTask");
+  event.dataTransfer.setData("text/plain", taskId);
 }
 
 function dragoverHandler(ev) {
@@ -21,14 +24,14 @@ function dragLeave(taskId, event) {
   taskElement.classList.remove("rotateDraggedTask");
 }
 
-function addRotate(taskId) {
-  let taskElement = document.getElementById(taskId);
-  taskElement.classList.add("rotateDraggedTask");
+function mouseHold(taskId, event) {
+  const taskCard = event.currentTarget;
+  taskCard.classList.add("rotateDraggedTask");
 }
 
-function removeRotate(taskId) {
-  let taskElement = document.getElementById(taskId);
-  taskElement.classList.remove("rotateDraggedTask");
+function mouseRelease(taskId, event) {
+  const taskCard = event.currentTarget;
+  taskCard.classList.remove("rotateDraggedTask");
 }
 
 async function moveTo(columnId) {
