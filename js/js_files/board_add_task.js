@@ -30,3 +30,4 @@ function closeAddTaskModal() {
   let dialog = document.getElementById("addTaskDialog");
   dialog.close();
 }
+

@@ -124,3 +124,12 @@
 .rotateDraggedTask {
   transform: rotate(5deg);
 }
+
+@media (min-width: 769px) {
+  .kb-card:active {
+    transform: rotate(5deg);
+  }
+  .dot {
+    display: none;
+  }
+}

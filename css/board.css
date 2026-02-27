@@ -200,18 +200,15 @@ body {
   cursor: pointer;
 }
 
-.kb-card:active {
-  rotate: 5deg;
-}
 
-.kb-card.kb-card::drag {
+.kb-card::drag {
   background: rgba(139, 26, 26, 0.35);
 }
 
 
 .kb-card-top {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .kb-chip {
@@ -408,3 +405,4 @@ button[id="at-close"] {
     display: none;
   }
 }
+

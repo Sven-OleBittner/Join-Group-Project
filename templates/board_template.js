@@ -1,9 +1,20 @@
 function getTasksTemplate(id, task, key, backgroundColor, priority) {
   return `
-  <article id="task-${key}" onmousedown="mouseHold('task-${key}', event)" onmouseup="mouseRelease('task-${key}', event)" ondragleave="dragLeave('task-${key}', event)" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
+  <article id="task-${key}"  ondragleave="dragLeave('task-${key}', event)" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
                 <span class="${backgroundColor} kb-chip">${(task.category && task.category.name) || 'Technical Task'}</span>
+                <div class="kb-card-options" onclick="event.stopPropagation()">
+                  <button onclick="toggleOptions('moveToMenu-${key}'); closeAllOtherOptions('moveToMenu-${key}')" class="kb-icon-options-menu">
+                    <span  class="dot">...</span>
+                  </button>
+                  <div id="moveToMenu-${key}" class="responsiveMoveTo" >
+                    <button class="moveToBtn" onclick="moveToResp('toDoTaskList', '${key}')">Move to ToDo</button>
+                    <button class="moveToBtn" onclick="moveToResp('inProgressTaskList', '${key}')">Move to In Progress</button>
+                    <button class="moveToBtn" onclick="moveToResp('awaitFeedbackTaskList', '${key}')">Move to Awaiting Feedback</button>
+                    <button class="moveToBtn" onclick="moveToResp('doneTaskList', '${key}')">Move to Done</button>
+                  </div>
+                </div>
               </div>
               <h3 class="kb-card-title">${task.title}</h3>
               <p class="kb-card-desc">${task.description}</p>
