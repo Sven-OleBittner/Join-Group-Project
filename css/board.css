@@ -181,6 +181,7 @@ body {
 
 .kb-card {
   width: 90%;
+  min-height: 200px;
   margin-top: 20px;
   background: #ffffff;
   border-radius: var(--kb-card-radius);
@@ -375,7 +376,7 @@ button[id="at-close"] {
   gap: 12px;
   overflow-y: auto;
   min-height: 64px;
-  max-height: 666px;
+  max-height: 590px;
   scrollbar-width: none; /* Firefox */
   padding: 0px 6px 20px 6px;
 }
