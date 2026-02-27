@@ -6,10 +6,13 @@ function initBoardSite() {
 }
 
 let currentDraggedTask;
+let ghostImage;
 
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
-  event.target.classList.add("rotateDraggedTask");
+  // let taskElement = document.getElementById(taskId);
+  // taskElement.classList.add("rotateDraggedTask");
+  event.dataTransfer.setData("text/plain", taskId);
 }
 
 function dragoverHandler(ev) {
@@ -18,7 +21,17 @@ function dragoverHandler(ev) {
 
 function dragLeave(taskId, event) {
   let taskElement = document.getElementById(taskId);
-  // taskElement.classList.remove("rotateDraggedTask");
+  taskElement.classList.remove("rotateDraggedTask");
+}
+
+function mouseHold(taskId, event) {
+  const taskCard = event.currentTarget;
+  taskCard.classList.add("rotateDraggedTask");
+}
+
+function mouseRelease(taskId, event) {
+  const taskCard = event.currentTarget;
+  taskCard.classList.remove("rotateDraggedTask");
 }
 
 async function moveTo(columnId) {
