@@ -1,9 +1,9 @@
 function getTasksTemplate(id, task, key, backgroundColor, priority) {
   return `
-  <article id="task-${key}"  ondragleave="dragLeave('task-${key}', event)" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
+  <article id="task-${key}"  ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ""}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
-                <span class="${backgroundColor} kb-chip">${(task.category && task.category.name) || 'Technical Task'}</span>
+                <span class="${backgroundColor} kb-chip">${(task.category && task.category.name) || "Technical Task"}</span>
                 <div class="kb-card-options" onclick="event.stopPropagation()">
                   <button onclick="toggleOptions('moveToMenu-${key}'); closeAllOtherOptions('moveToMenu-${key}')" class="kb-icon-options-menu">
                     <span  class="dot">...</span>
@@ -20,15 +20,14 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
               <p class="kb-card-desc">${task.description}</p>
               <div id="task-${key}-subtasks-container-${id}" class="kb-progress-row"></div>
               <footer class="kb-card-foot">
-                <div id="task-${key}-avatars-${id}" class="kb-avatars" data-assignees="${task.assigned || ''}"></div>
-                <div class="kb-prio kb-prio--${task.priority || 'urgent'}">
+                <div id="task-${key}-avatars-${id}" class="kb-avatars" data-assignees="${task.assigned || ""}"></div>
+                <div class="kb-prio kb-prio--${task.priority || "urgent"}">
                   <img src="./assets/img/${priority}" alt="${task.priority}-icon">
                 </div>
               </footer>
             </article>
   `;
 }
-
 
 function getSubTemplate(task, key, id, percent, compleatedSubtasks) {
   return `<div class="kb-progress">
