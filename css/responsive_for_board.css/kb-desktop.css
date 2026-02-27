@@ -38,6 +38,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 14px;
+    padding: 0px 8px 0px 8px;
   }
   .kb-col-title {
     margin: 0;
