@@ -126,3 +126,34 @@ function getPriority(taskPriority) {
     return "kb-prio--default";
   }
 }
+
+async function openTaskModal(taskId) {
+  const task = await getData(`task/${taskId}`);
+  if (!task) return;
+
+  const categoryName = task.category?.name || task.category;
+  document.getElementById("td-chip").textContent = categoryName;
+  document.getElementById("td-chip").className = `td-chip ${categoryName === "User Story" ? "color-blue" : "color-turquoise"}`;
+  document.getElementById("td-title").textContent = task.title;
+  document.getElementById("td-desc").textContent = task.description;
+  document.getElementById("td-due").textContent = task.dueDate;
+  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(task.priority);
+  document.getElementById("td-prio-icon").innerHTML = `<img src="./assets/img/${getPriority(task.priority)}">`;
+  await renderAvatars(task.assigned || [], taskId, "td-assignees");
+  document.getElementById("td-modal").classList.add("is-open");
+  renderModalSubtasks(task.subtasks);
+}
+
+function renderModalSubtasks(subtasks) {
+  document.getElementById("td-subtasks").hidden = !subtasks?.length;
+  document.getElementById("td-subtasks-list").innerHTML = (subtasks || []).map(sub => `
+    <li class="td-task ${sub.completed ? "is-done" : ""}">
+      <span class="td-checkbox ${sub.completed ? "is-checked" : ""}"></span>
+      <span class="td-task__label">${sub.title}</span>
+    </li>
+  `).join("");
+}
+
+function closeTaskModal() {
+  document.getElementById("td-modal").classList.remove("is-open");
+}
