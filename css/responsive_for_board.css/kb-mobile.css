@@ -38,7 +38,8 @@
   .kb-card {
     gap: 6px;
     margin-bottom: 16px;
-    min-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
   }
   .kb-card-title {
     font-size: 17px;
