@@ -10,34 +10,11 @@ let ghostImage;
 
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
-  // let taskElement = document.getElementById(taskId);
-  // taskElement.classList.add("rotateDraggedTask");
   event.dataTransfer.setData("text/plain", taskId);
 }
 
 function dragoverHandler(ev) {
   ev.preventDefault();
-}
-
-function dragLeave(taskId, event) {
-  let taskElement = document.getElementById(taskId);
-  taskElement.classList.remove("rotateDraggedTask");
-}
-
-function mouseHold(taskId, event) {
-  if (window.innerWidth >= 768) {
-    const taskCard = event.currentTarget;
-    taskCard.classList.add("rotateDraggedTask");
-  } else {
-    return;
-  }
-}
-
-function mouseRelease(taskId, event) {
-  if (window.innerWidth >= 768) {
-    const taskCard = event.currentTarget;
-    taskCard.classList.remove("rotateDraggedTask");
-  }
 }
 
 async function moveTo(columnId) {
@@ -64,7 +41,6 @@ async function moveToResp(columnId, taskId) {
     initBoardSite();
   }
 }
-
 
 function setNewStatus(columnId) {
   switch (columnId) {
@@ -120,11 +96,21 @@ function getCategoryColor(category) {
 }
 
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(`task-${key}-subtasks-container-${id}`);
+  const subTasksContainer = document.getElementById(
+    `task-${key}-subtasks-container-${id}`,
+  );
   if (task.subtasks != null && task.subtasks.length > 0) {
-    const compleatedSubtasks = task.subtasks.filter((subtask) => subtask.completed).length;
+    const compleatedSubtasks = task.subtasks.filter(
+      (subtask) => subtask.completed,
+    ).length;
     let percent = (compleatedSubtasks / task.subtasks.length) * 100;
-    subTasksContainer.innerHTML += getSubTemplate(task, key, id, percent, compleatedSubtasks);
+    subTasksContainer.innerHTML += getSubTemplate(
+      task,
+      key,
+      id,
+      percent,
+      compleatedSubtasks,
+    );
   } else {
     subTasksContainer.innerHTML = "";
   }
@@ -191,4 +177,3 @@ function closeAllOptionsOnclick() {
     menu.style.display = "none";
   });
 }
-
