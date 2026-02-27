@@ -240,6 +240,8 @@ body {
   font-size: 14px;
   color: #6b7280;
   margin: 0;
+  max-height: 20px;
+  overflow: hidden;
 }
 
 .kb-progress-row {
