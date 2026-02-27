@@ -19,11 +19,12 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
 }
 
 
-function getSubTemplate(task, percent, compleatedSubtasks) {
-  return `<div class="kb-progress">
-                  <div class="kb-progress-bar" style="width:${percent}%"></div>
-                </div>
-                <span class="kb-subtasks">${compleatedSubtasks || 0}/${task.subtasks.length || 0}</span>
-              </div>
+function getSubTemplate(subtasks, percent, completedSubtasks) {
+  console.log("percent:", percent, "completed:", completedSubtasks, "total:", subtasks.length);
+  return `
+    <div class="kb-progress">
+      <div class="kb-progress-bar" style="width:${percent}%"></div>
+    </div>
+    <span class="kb-subtasks">${completedSubtasks}/${subtasks.length}</span>
   `;
 }

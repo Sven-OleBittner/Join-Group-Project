@@ -80,13 +80,16 @@ function getCategoryColor(category) {
 
 function renderSubTask(id, task, key) {
   const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
-  if (task.subtasks != null && task.subtasks.length > 0) {
-    const compleatedSubtasks = task.subtasks.filter((subtask) => subtask.completed).length;
-    let percent = (compleatedSubtasks / task.subtasks.length) * 100;
-    subTasksContainer.innerHTML += getSubTemplate(task, percent, compleatedSubtasks);
-  } else {
+  if (!task.subtasks) {
     subTasksContainer.innerHTML = "";
+    return;
   }
+  const subtasks = Object.values(task.subtasks);
+  const completedSubtasks = subtasks.filter((sub) => 
+    typeof sub === "object" && sub.completed
+  ).length;
+  const percent = (completedSubtasks / subtasks.length) * 100;
+  subTasksContainer.innerHTML = getSubTemplate(subtasks, percent, completedSubtasks);
 }
 
 
@@ -163,12 +166,22 @@ async function renderModalAvatars(assigned) {
 
 function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks").hidden = !subtasks.length;
-  document.getElementById("td-subtasks-list").innerHTML = subtasks.map(sub => `
-    <li class="td-task ${sub.completed ? "is-done" : ""}">
-      <span class="td-checkbox ${sub.completed ? "is-checked" : ""}"></span>
-      <span class="td-task__label">${sub.title}</span>
-    </li>
-  `).join("");
+  document.getElementById("td-subtasks-list").innerHTML = subtasks.map((sub, index) => {
+    const label = typeof sub === "string" ? sub : sub.text;
+    const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";
+    return `
+      <li class="td-task" id="td-task-item-${index}">
+        <input type="checkbox" id="subtask-${index}" ${isChecked}
+          onchange="toggleSubtaskStyle(${index}, this.checked)">
+        <label for="subtask-${index}" class="td-task__label">${label}</label>
+      </li>
+    `;
+  }).join("");
+}
+
+function toggleSubtaskStyle(index, isChecked) {
+  const item = document.getElementById(`td-task-item-${index}`);
+  item.classList.toggle("is-done", isChecked);
 }
 
 function closeTaskModal() {
