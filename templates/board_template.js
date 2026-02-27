@@ -3,7 +3,7 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
   <article id="task-${key}"  ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ""}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
-                <span class="${backgroundColor} kb-chip">${(task.category && task.category.name) || "Technical Task"}</span>
+                <span class="${backgroundColor} kb-chip">${(task.category)}</span>
                 <div class="kb-card-options" onclick="event.stopPropagation()">
                   <button onclick="toggleOptions('moveToMenu-${key}'); closeAllOtherOptions('moveToMenu-${key}')" class="kb-icon-options-menu">
                     <span  class="dot">...</span>
