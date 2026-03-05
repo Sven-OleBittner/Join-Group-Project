@@ -155,7 +155,9 @@ function getPriority(taskPriority) {
 
 function toggleOptions(key) {
   let moveToMenu = document.getElementById(key);
-  if (moveToMenu.style.display === "none") {
+  if (!moveToMenu) return;
+  const currentDisplay = getComputedStyle(moveToMenu).display;
+  if (currentDisplay === "none") {
     moveToMenu.style.display = "flex";
   } else {
     moveToMenu.style.display = "none";

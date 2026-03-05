@@ -5,7 +5,7 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
               <div class="kb-card-top">
                 <span class="${backgroundColor} kb-chip">${(task.category)}</span>
                 <div class="kb-card-options" onclick="event.stopPropagation()">
-                  <button onclick="toggleOptions('moveToMenu-${key}'); closeAllOtherOptions('moveToMenu-${key}')" class="kb-icon-options-menu">
+                  <button onclick="toggleOptions('moveToMenu-${key}'); closeAllOtherOptions('moveToMenu-${key}'); event.stopPropagation();" class="kb-icon-options-menu">
                     <span  class="dot">...</span>
                   </button>
                   <div id="moveToMenu-${key}" class="responsiveMoveTo" >
