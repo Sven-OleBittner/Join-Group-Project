@@ -10,25 +10,25 @@
  * @returns {Promise<void>}
  */
 async function add_task_init() {
-    standartselectPriority();
-    await loadContactsForDropdown();
+  standartselectPriority();
+  await loadContactsForDropdown();
 }
 
 /**
  * Determines the task status based on the button ID from the URL.
  * On mobile redirect from the board page, the column button ID is passed.
- * @param {string} id - The button ID (e.g. 'addTaskInProgress', 'addTaskBoardAwaitingFeedback')
+ * @param {string} id - The button ID (e.g. 'addTaskBoardInProgress', 'addTaskBoardAwaitingFeedback')
  * @returns {string} The corresponding status
  */
 function getStatusByButtonId(id) {
-    switch (id) {
-        case "addTaskBoardInProgress":
-            return "inprogress";
-        case "addTaskBoardAwaitFeedback":
-            return "feedback";
-        default:
-            return "todo";
-    }
+  switch (id) {
+    case "addTaskBoardInProgress":
+      return "inprogress";
+    case "addTaskBoardAwaitingFeedback":
+      return "feedback";
+    default:
+      return "todo";
+  }
 }
 
 /**
@@ -36,9 +36,9 @@ function getStatusByButtonId(id) {
  * @returns {string} The status based on the ID or 'todo' as default
  */
 function getStatusFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    return getStatusByButtonId(id);
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  return getStatusByButtonId(id);
 }
 
 /**
@@ -46,9 +46,12 @@ function getStatusFromUrl() {
  * @returns {string} The selected priority ('urgent', 'medium', or 'low')
  */
 function getSelectedPriority() {
-  if (document.getElementById('priority-urgent').classList.contains('selected')) return 'urgent';
-  if (document.getElementById('priority-medium').classList.contains('selected')) return 'medium';
-  if (document.getElementById('priority-low').classList.contains('selected')) return 'low';
+  if (document.getElementById("priority-urgent").classList.contains("selected"))
+    return "urgent";
+  if (document.getElementById("priority-medium").classList.contains("selected"))
+    return "medium";
+  if (document.getElementById("priority-low").classList.contains("selected"))
+    return "low";
 }
 
 /**
@@ -57,11 +60,17 @@ function getSelectedPriority() {
  * @async
  * @returns {Promise<void>}
  */
-async function postNewTask() {
+async function postNewTask(buttonId) {
   if (!validateForm()) return;
-  const newTask = collectTaskFormData('title', 'description', 'date', 'category-selected');
+  const newTask = collectTaskFormData(
+    "title",
+    "description",
+    "date",
+    "category-selected",
+    buttonId
+  );
   try {
-    await postData('task', newTask);
+    await postData("task", newTask);
     clearForm();
     showTaskAddedNotification();
   } catch (error) {
@@ -75,10 +84,10 @@ async function postNewTask() {
  * @returns {void}
  */
 function showTaskAddedNotification() {
-  const body = document.querySelector('body');
-  body.insertAdjacentHTML('beforeend', getTaskAddedNotificationHTML());
+  const body = document.querySelector("body");
+  body.insertAdjacentHTML("beforeend", getTaskAddedNotificationHTML());
   setTimeout(() => {
-    window.location.href = 'board.html';
+    window.location.href = "board.html";
   }, 2000);
 }
 
@@ -101,9 +110,10 @@ function getTaskAddedNotificationHTML() {
  * @param {string} descId
  * @param {string} dateId
  * @param {string} categoryId
+ * @param {string} buttonId - Used to determine task status
  * @returns {Object} Task object
  */
-function collectTaskFormData(titleId, descId, dateId, categoryId) {
+function collectTaskFormData(titleId, descId, dateId, categoryId, buttonId) {
   const title = document.getElementById(titleId);
   const description = document.getElementById(descId);
   const dueDate = document.getElementById(dateId);
@@ -116,6 +126,18 @@ function collectTaskFormData(titleId, descId, dateId, categoryId) {
     assigned: getSelectedContacts(),
     category: category.textContent,
     subtasks: subtasks,
-    status: getStatusFromUrl()
+    status: getStatus(buttonId),
   };
+}
+
+/** * Determines the status for the new task based on the button ID or URL parameter
+ * @param {string} buttonId - The ID of the button that triggered task creation
+ * @returns {string} The status for the new task
+*/
+function getStatus(buttonId) {
+  if (window.innerWidth > 945) {
+    return getStatusByButtonId(buttonId);
+  } else {
+    return getStatusFromUrl();
+  }
 }

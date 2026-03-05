@@ -1,4 +1,4 @@
-function getAddTaskTemplate() {
+function getAddTaskTemplate(buttonId) {
   return `
  <div class="add-task-container">
           <div class="add-task-uppercontainer">
@@ -112,7 +112,7 @@ function getAddTaskTemplate() {
               <button type="button" class="clear-btn" id="clear-btn" onclick="clearForm()">
                 Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
               </button>
-              <button type="button" class="create-btn" id="create-btn" onclick="postNewTask()">
+              <button type="button" class="create-btn" id="create-btn" onclick="postNewTask('${buttonId}')">
                 Create Task <img src="./assets/img/check.svg" alt="check" />
               </button>
             </div>
