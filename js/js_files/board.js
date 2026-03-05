@@ -179,9 +179,15 @@ function renderModalSubtasks(subtasks) {
   }).join("");
 }
 
-function toggleSubtaskStyle(index, isChecked) {
-  const item = document.getElementById(`td-task-item-${index}`);
-  item.classList.toggle("is-done", isChecked);
+async function toggleSubtaskStyle(index, isChecked) {
+  document.getElementById(`td-task-item-${index}`).classList.toggle("is-done", isChecked);
+  const task = await getData(`task/${currentTaskId}`);
+  const key = Object.keys(task.subtasks)[index];
+  task.subtasks[key] = typeof task.subtasks[key] === "string"
+    ? { text: task.subtasks[key], completed: isChecked }
+    : { ...task.subtasks[key], completed: isChecked };
+  await putData(`task/${currentTaskId}`, task);
+  initBoardSite();
 }
 
 function closeTaskModal() {
@@ -191,5 +197,39 @@ function closeTaskModal() {
 async function deleteTask(taskId) {
   await deleteData(`task/${taskId}`);
   closeTaskModal();
+  initBoardSite();
+}
+
+async function editTask(taskId) {
+  const task = await getData(`task/${taskId}`);
+  closeTaskModal();
+  generateAddTaskModal();
+  document.getElementById("title").value = task.title || "";
+  document.getElementById("description").value = task.description || "";
+  document.getElementById("date").value = task.dueDate || "";
+  document.getElementById("category-selected").textContent = task.category || "";
+  standartselectPriority();
+  selectPriority(task.priority);
+  await loadContactsForDropdown();
+  (task.assigned || []).forEach(a => {
+    const c = currentData.find(c => c.initials === a.initials);
+    if (c) document.getElementById(`contact-${c.firebaseKey}`).checked = true;
+  });
+  updateSelectedContactsDisplay();
+  Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
+}
+
+async function saveEditTask(taskId) {
+  if (!validateForm()) return;
+  const task = await getData(`task/${taskId}`);
+  task.title = document.getElementById("title").value;
+  task.description = document.getElementById("description").value;
+  task.dueDate = document.getElementById("date").value;
+  task.priority = getSelectedPriority();
+  task.category = document.getElementById("category-selected").textContent;
+  task.assigned = getSelectedContacts();
+  task.subtasks = subtasks;
+  await putData(`task/${taskId}`, task);
+  closeAddTaskModal();
   initBoardSite();
 }

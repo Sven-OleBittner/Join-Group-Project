@@ -1,4 +1,4 @@
-function getTasksTemplate(id, task, key, backgroundColor, priority) {
+function getTasksTemplate(id, task, key, backgroundColor, priority, priorityOptions) {
   return `
   <article id="task-${key}" onclick="openTaskModal('${key}')" ondragstart="dragStart('task-${key}')" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>

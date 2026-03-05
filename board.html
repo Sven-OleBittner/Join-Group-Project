@@ -273,16 +273,14 @@
     </div>
 
     <div
-      id="td-modal"
-      class="td-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="td-title"
-    >
-      <div class="td-dialog" tabindex="-1">
-        <button class="td-close" type="button" data-td-close aria-label="Close" onclick="closeTaskModal()">
-          ×
-        </button>
+    id="td-modal"
+    class="td-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="td-title"
+    onclick="closeTaskModal()"
+  >
+  <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
 
         <div class="td-chipwrap">
           <span id="td-chip" class="td-chip">User Story</span>
