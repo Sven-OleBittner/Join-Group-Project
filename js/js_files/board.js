@@ -235,6 +235,33 @@ async function editTask(taskId) {
   Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
 }
 
+function capitalizeFirstLetter(string) {
+  if (!string) return "";
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function toggleOptions(menuId) {
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+function closeAllOtherOptions(currentMenuId) {
+  const allMenus = document.querySelectorAll(".responsiveMoveTo");
+  allMenus.forEach((menu) => {
+    if (menu.id !== currentMenuId) {
+      menu.style.display = "none";
+    }
+  });
+}
+
+function closeAllOptionsOnclick() {
+  const allMenus = document.querySelectorAll(".responsiveMoveTo");
+  allMenus.forEach((menu) => {
+    menu.style.display = "none";
+  });
+}
+
 async function saveEditTask(taskId) {
   if (!validateForm()) return;
   const task = await getData(`task/${taskId}`);
