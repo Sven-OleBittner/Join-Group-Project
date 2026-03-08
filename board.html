@@ -136,11 +136,13 @@
             <div class="kb-actions">
               <div class="kb-search">
                 <input
+                  id="searchInput"
                   type="text"
                   placeholder="Find Task"
                   aria-label="Find Task"
                 />
                 <img
+                  onclick="findTaskBy()"
                   class="kb-icon"
                   src="./assets/img/board_input_search_icon.svg"
                   alt="Search"

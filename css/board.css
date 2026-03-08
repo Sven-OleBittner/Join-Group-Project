@@ -64,8 +64,11 @@
   transform: translateY(-50%);
   width: 22px;
   height: 22px;
-  pointer-events: none;
   opacity: 0.8;
+}
+
+.kb-icon {
+  cursor: pointer;
 }
 
 .kb-add-btn {

@@ -3,6 +3,21 @@ function initBoardSite() {
   sortTaskByStatus("inProgressTaskList", "inprogress", "emptyInProgress");
   sortTaskByStatus("awaitFeedbackTaskList", "feedback", "emptyAwaitFeedback");
   sortTaskByStatus("doneTaskList", "done", "emptyDone");
+  setUpListeners();
+}
+
+function setUpListeners() {
+  // Attach Enter-only handler to search input (only once)
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput && !searchInput.dataset.enterListener) {
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        findTaskBy();
+      }
+    });
+    searchInput.dataset.enterListener = "true";
+  }
 }
 
 let currentDraggedTask;
@@ -96,17 +111,23 @@ function getCategoryColor(category) {
 }
 
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
+  const subTasksContainer = document.getElementById(
+    `task-${key}-subtasks-${id}`,
+  );
   if (!task.subtasks) {
     subTasksContainer.innerHTML = "";
     return;
   }
   const subtasks = Object.values(task.subtasks);
-  const completedSubtasks = subtasks.filter((sub) => 
-    typeof sub === "object" && sub.completed
+  const completedSubtasks = subtasks.filter(
+    (sub) => typeof sub === "object" && sub.completed,
   ).length;
   const percent = (completedSubtasks / subtasks.length) * 100;
-  subTasksContainer.innerHTML = getSubTemplate(subtasks, percent, completedSubtasks);
+  subTasksContainer.innerHTML = getSubTemplate(
+    subtasks,
+    percent,
+    completedSubtasks,
+  );
 }
 
 async function renderAvatars(taskAssigned, key, id) {
@@ -155,12 +176,16 @@ async function openTaskModal(taskId) {
 
   const categoryName = task.category?.name || task.category;
   document.getElementById("td-chip").textContent = categoryName;
-  document.getElementById("td-chip").className = `td-chip ${categoryName === "User Story" ? "color-blue" : "color-turquoise"}`;
+  document.getElementById("td-chip").className =
+    `td-chip ${categoryName === "User Story" ? "color-blue" : "color-turquoise"}`;
   document.getElementById("td-title").textContent = task.title;
   document.getElementById("td-desc").textContent = task.description;
   document.getElementById("td-due").textContent = task.dueDate;
-  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(task.priority);
-  document.getElementById("td-prio-icon").innerHTML = `<img src="./assets/img/${getPriority(task.priority)}">`;
+  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(
+    task.priority,
+  );
+  document.getElementById("td-prio-icon").innerHTML =
+    `<img src="./assets/img/${getPriority(task.priority)}">`;
   await renderModalAvatars(task.assigned || []);
   renderModalSubtasks(task.subtasks ? Object.values(task.subtasks) : []);
   document.getElementById("td-modal").classList.add("is-open");
@@ -182,26 +207,32 @@ async function renderModalAvatars(assigned) {
 
 function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks").hidden = !subtasks.length;
-  document.getElementById("td-subtasks-list").innerHTML = subtasks.map((sub, index) => {
-    const label = typeof sub === "string" ? sub : sub.text;
-    const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";
-    return `
+  document.getElementById("td-subtasks-list").innerHTML = subtasks
+    .map((sub, index) => {
+      const label = typeof sub === "string" ? sub : sub.text;
+      const isChecked =
+        typeof sub === "object" && sub.completed ? "checked" : "";
+      return `
       <li class="td-task" id="td-task-item-${index}">
         <input type="checkbox" id="subtask-${index}" ${isChecked}
           onchange="toggleSubtaskStyle(${index}, this.checked)">
         <label for="subtask-${index}" class="td-task__label">${label}</label>
       </li>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 async function toggleSubtaskStyle(index, isChecked) {
-  document.getElementById(`td-task-item-${index}`).classList.toggle("is-done", isChecked);
+  document
+    .getElementById(`td-task-item-${index}`)
+    .classList.toggle("is-done", isChecked);
   const task = await getData(`task/${currentTaskId}`);
   const key = Object.keys(task.subtasks)[index];
-  task.subtasks[key] = typeof task.subtasks[key] === "string"
-    ? { text: task.subtasks[key], completed: isChecked }
-    : { ...task.subtasks[key], completed: isChecked };
+  task.subtasks[key] =
+    typeof task.subtasks[key] === "string"
+      ? { text: task.subtasks[key], completed: isChecked }
+      : { ...task.subtasks[key], completed: isChecked };
   await putData(`task/${currentTaskId}`, task);
   initBoardSite();
 }
@@ -223,16 +254,20 @@ async function editTask(taskId) {
   document.getElementById("title").value = task.title || "";
   document.getElementById("description").value = task.description || "";
   document.getElementById("date").value = task.dueDate || "";
-  document.getElementById("category-selected").textContent = task.category || "";
+  document.getElementById("category-selected").textContent =
+    task.category || "";
   standartselectPriority();
   selectPriority(task.priority);
   await loadContactsForDropdown();
-  (task.assigned || []).forEach(a => {
-    const c = currentData.find(c => c.initials === a.initials);
+  (task.assigned || []).forEach((a) => {
+    const c = currentData.find((c) => c.initials === a.initials);
     if (c) document.getElementById(`contact-${c.firebaseKey}`).checked = true;
   });
   updateSelectedContactsDisplay();
-  Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
+  Object.assign(document.getElementById("create-btn"), {
+    innerHTML: "Save ✓",
+    onclick: () => saveEditTask(taskId),
+  });
 }
 
 function capitalizeFirstLetter(string) {
@@ -275,4 +310,49 @@ async function saveEditTask(taskId) {
   await putData(`task/${taskId}`, task);
   closeAddTaskModal();
   initBoardSite();
+}
+
+function getSearchQuery() {
+  return document.getElementById("searchInput").value.trim().toLowerCase();
+}
+
+function showAllTasks() {
+  document.querySelectorAll(".kb-card").forEach((t) => (t.style.display = ""));
+  updateEmptyPlaceholders();
+}
+
+function filterTasks(query) {
+  document.querySelectorAll(".kb-card").forEach((t) => {
+    const title = t.querySelector(".kb-card-title")?.textContent.toLowerCase() || "";
+    const desc = t.querySelector(".kb-card-desc")?.textContent.toLowerCase() || "";
+    t.style.display = title.includes(query) || desc.includes(query) ? "" : "none";
+  });
+  updateEmptyPlaceholders();
+}
+
+async function findTaskBy() {
+  const q = getSearchQuery();
+  if (!q) return showAllTasks();
+  filterTasks(q);
+}
+
+function isVisible(el) {
+  const cs = window.getComputedStyle(el);
+  return cs.display !== "none" && cs.visibility !== "hidden" && el.offsetWidth > 0 && el.offsetHeight > 0;
+}
+
+function updateEmptyPlaceholders() {
+  const cols = [
+    { id: "toDoTaskList", empty: "emptyToDo" },
+    { id: "inProgressTaskList", empty: "emptyInProgress" },
+    { id: "awaitFeedbackTaskList", empty: "emptyAwaitFeedback" },
+    { id: "doneTaskList", empty: "emptyDone" },
+  ];
+  cols.forEach(({ id, empty }) => {
+    const c = document.getElementById(id);
+    const e = document.getElementById(empty);
+    if (!c || !e) return;
+    const any = Array.from(c.querySelectorAll(".kb-card")).some(isVisible);
+    e.classList.toggle("d-none", any);
+  });
 }
