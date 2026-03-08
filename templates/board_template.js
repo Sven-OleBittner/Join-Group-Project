@@ -31,7 +31,6 @@ function getTasksTemplate(id, task, key, backgroundColor, priority, priorityOpti
 
 
 function getSubTemplate(subtasks, percent, completedSubtasks) {
-  console.log("percent:", percent, "completed:", completedSubtasks, "total:", subtasks.length);
   return `
     <div class="kb-progress">
       <div class="kb-progress-bar" style="width:${percent}%"></div>
