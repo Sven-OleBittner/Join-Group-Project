@@ -431,3 +431,9 @@ button[id="at-close"] {
   gap: 12px;
 }
 
+.add-task-uppercontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
