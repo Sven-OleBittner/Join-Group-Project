@@ -21,12 +21,24 @@ function showLogOutMenu() {
  * Logs out the current user and redirects to login page
  * Shows logout message after redirect
  */
-function loggingOutUser() {
-    //eventuell User beim Login in der Session speichern und hier entfernen
-    //sessionStorage.removeItem('loggingInUser');
+async function loggingOutUser() {
+    const logInUserDb = await getData((path = "loggingInUser"));
+    const loggingInUser = JSON.parse(sessionStorage.getItem('loggingInUser'));
+    if (loggingInUser && logInUserDb) {
+        const entries = Object.entries(logInUserDb);
+        for (const [key, value] of entries) {
+            const matchByName = value.name && loggingInUser.name && value.name === loggingInUser.name;
+            const matchByEmail = (!loggingInUser.email) || (value.email && value.email === loggingInUser.email);
+            if (matchByName && matchByEmail) {
+                await deleteData(`loggingInUser/${key}`);
+                break;
+            }
+        }
+        sessionStorage.removeItem('loggingInUser');
+    }
     setTimeout(() => {
         window.location.href = "index.html?msg=You have been logged out!";
-    }, 500);
+    }, 250);
 }
 
 /**

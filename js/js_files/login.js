@@ -15,11 +15,11 @@ async function login() {
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let user = users.find(
-    (u) => u.email == email.value && u.password == password.value
+    (u) => u.email == email.value && u.password == password.value,
   );
   if (user) {
     await loggingInUser(user);
-    sessionStorage.setItem('justLoggedIn', 'true');
+    sessionStorage.setItem("justLoggedIn", "true");
     window.location.href = "summary.html";
   } else {
     userNotFound();
@@ -44,6 +44,7 @@ function userNotFound() {
 }
 
 async function loggingInUser(user) {
+  sessionStorage.setItem("loggingInUser", JSON.stringify(user));
   await postData((path = "loggingInUser"), user);
 }
 
@@ -52,6 +53,6 @@ async function loginGuest() {
     name: "Guest",
   };
   await loggingInUser(guestUser);
-  sessionStorage.setItem('justLoggedIn', 'true');
+  sessionStorage.setItem("justLoggedIn", "true");
   window.location.href = "summary.html";
 }
