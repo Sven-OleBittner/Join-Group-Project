@@ -12,6 +12,43 @@
 async function add_task_init() {
   standartselectPriority();
   await loadContactsForDropdown();
+  const editKey = new URLSearchParams(window.location.search).get("editKey");
+  if (editKey) await prefillFormFromUrl(editKey);
+}
+
+/**
+ * Prefills the form with task data from the URL editKey parameter
+ * @async
+ * @param {string} taskId - The Firebase key of the task to edit
+ * @returns {Promise<void>}
+ */
+async function prefillFormFromUrl(taskId) {
+  const task = await getData(`task/${taskId}`);
+  if (!task) return;
+  fillTaskForm(task, taskId);
+}
+
+function fillTaskForm(task, taskId) {
+  document.getElementById("title").value = task.title || "";
+  document.getElementById("description").value = task.description || "";
+  document.getElementById("date").value = task.dueDate || "";
+  document.getElementById("category-selected").textContent = task.category || "";
+  selectPriority(task.priority);
+  prefillAssignees(task.assigned || []);
+  Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
+}
+
+/**
+ * Checks the assigned contacts in the dropdown and updates the display
+ * @param {Array} assigned - Array of assigned contact objects
+ * @returns {void}
+ */
+function prefillAssignees(assigned) {
+  assigned.forEach((a) => {
+    const c = currentData.find((c) => c.initials === a.initials);
+    if (c) document.getElementById(`contact-${c.firebaseKey}`).checked = true;
+  });
+  updateSelectedContactsDisplay();
 }
 
 /**
@@ -130,14 +167,35 @@ function collectTaskFormData(titleId, descId, dateId, categoryId, buttonId) {
   };
 }
 
-/** * Determines the status for the new task based on the button ID or URL parameter
+/**
+ * Determines the status for the new task based on the button ID or URL parameter
  * @param {string} buttonId - The ID of the button that triggered task creation
  * @returns {string} The status for the new task
-*/
+ */
 function getStatus(buttonId) {
   if (window.innerWidth > 945) {
     return getStatusByButtonId(buttonId);
   } else {
     return getStatusFromUrl();
   }
+}
+
+/**
+ * Saves the edited task to Firebase and redirects to board
+ * @async
+ * @param {string} taskId - The Firebase key of the task to save
+ * @returns {Promise<void>}
+ */
+async function saveEditTask(taskId) {
+  if (!validateForm()) return;
+  const task = await getData(`task/${taskId}`);
+  task.title = document.getElementById("title").value;
+  task.description = document.getElementById("description").value;
+  task.dueDate = document.getElementById("date").value;
+  task.priority = getSelectedPriority();
+  task.category = document.getElementById("category-selected").textContent;
+  task.assigned = getSelectedContacts();
+  task.subtasks = subtasks;
+  await putData(`task/${taskId}`, task);
+  showTaskAddedNotification();
 }

@@ -7,7 +7,6 @@ function initBoardSite() {
 }
 
 function setUpListeners() {
-  // Attach Enter-only handler to search input (only once)
   const searchInput = document.getElementById("searchInput");
   if (searchInput && !searchInput.dataset.enterListener) {
     searchInput.addEventListener("keydown", (e) => {
@@ -87,13 +86,7 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
     const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(
-      id,
-      task,
-      key,
-      backgroundColor,
-      priority,
-    );
+    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
     renderSubTask(id, task, key);
     await renderAvatars(task.assigned || [], key, id);
   }
@@ -101,8 +94,7 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
 }
 
 function getCategoryColor(category) {
-  const name =
-    category && typeof category === "object" ? category.name : category;
+  const name = category && typeof category === "object" ? category.name : category;
   if (name === "Technical Task") {
     return "color-turquoise";
   } else {
@@ -111,9 +103,7 @@ function getCategoryColor(category) {
 }
 
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(
-    `task-${key}-subtasks-${id}`,
-  );
+  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
   if (!task.subtasks) {
     subTasksContainer.innerHTML = "";
     return;
@@ -123,18 +113,13 @@ function renderSubTask(id, task, key) {
     (sub) => typeof sub === "object" && sub.completed,
   ).length;
   const percent = (completedSubtasks / subtasks.length) * 100;
-  subTasksContainer.innerHTML = getSubTemplate(
-    subtasks,
-    percent,
-    completedSubtasks,
-  );
+  subTasksContainer.innerHTML = getSubTemplate(subtasks, percent, completedSubtasks);
 }
 
 async function renderAvatars(taskAssigned, key, id) {
   let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
   if (!avatarsContainer) return;
   avatarsContainer.innerHTML = "";
-
   for (let i = 0; i < taskAssigned.length; i++) {
     const assignee = taskAssigned[i];
     const color = await getContactBg(assignee.initials);
@@ -149,9 +134,7 @@ async function renderAvatars(taskAssigned, key, id) {
 async function getContactBg(taskAssigned) {
   const contactDb = await getData("contacts");
   const contactArray = Object.values(contactDb);
-  let contact = contactArray.find(
-    (contact) => contact.initials === taskAssigned,
-  );
+  let contact = contactArray.find((contact) => contact.initials === taskAssigned);
   return contact ? contact.color : "color-default";
 }
 
@@ -173,22 +156,24 @@ async function openTaskModal(taskId) {
   currentTaskId = taskId;
   const task = await getData(`task/${taskId}`);
   if (!task) return;
-
-  const categoryName = task.category?.name || task.category;
-  document.getElementById("td-chip").textContent = categoryName;
-  document.getElementById("td-chip").className =
-    `td-chip ${categoryName === "User Story" ? "color-blue" : "color-turquoise"}`;
-  document.getElementById("td-title").textContent = task.title;
-  document.getElementById("td-desc").textContent = task.description;
-  document.getElementById("td-due").textContent = task.dueDate;
-  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(
-    task.priority,
-  );
-  document.getElementById("td-prio-icon").innerHTML =
-    `<img src="./assets/img/${getPriority(task.priority)}">`;
+  fillModalHeader(task);
   await renderModalAvatars(task.assigned || []);
   renderModalSubtasks(task.subtasks ? Object.values(task.subtasks) : []);
   document.getElementById("td-modal").classList.add("is-open");
+}
+
+function fillModalHeader(task) {
+  const categoryName = task.category?.name || task.category;
+  const chip = document.getElementById("td-chip");
+  chip.textContent = categoryName;
+  chip.className = "td-chip";
+  chip.style.background = categoryName === "User Story" ? "#0038FF" : "#1FD7C1";
+  chip.style.color = "#ffffff";
+  document.getElementById("td-title").textContent = task.title;
+  document.getElementById("td-desc").textContent = task.description;
+  document.getElementById("td-due").textContent = task.dueDate;
+  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(task.priority);
+  document.getElementById("td-prio-icon").innerHTML = `<img src="./assets/img/${getPriority(task.priority)}">`;
 }
 
 async function renderModalAvatars(assigned) {
@@ -210,8 +195,7 @@ function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks-list").innerHTML = subtasks
     .map((sub, index) => {
       const label = typeof sub === "string" ? sub : sub.text;
-      const isChecked =
-        typeof sub === "object" && sub.completed ? "checked" : "";
+      const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";
       return `
       <li class="td-task" id="td-task-item-${index}">
         <input type="checkbox" id="subtask-${index}" ${isChecked}
@@ -224,9 +208,7 @@ function renderModalSubtasks(subtasks) {
 }
 
 async function toggleSubtaskStyle(index, isChecked) {
-  document
-    .getElementById(`td-task-item-${index}`)
-    .classList.toggle("is-done", isChecked);
+  document.getElementById(`td-task-item-${index}`).classList.toggle("is-done", isChecked);
   const task = await getData(`task/${currentTaskId}`);
   const key = Object.keys(task.subtasks)[index];
   task.subtasks[key] =
@@ -250,24 +232,18 @@ async function deleteTask(taskId) {
 async function editTask(taskId) {
   const task = await getData(`task/${taskId}`);
   closeTaskModal();
-  generateAddTaskModal();
-  document.getElementById("title").value = task.title || "";
-  document.getElementById("description").value = task.description || "";
-  document.getElementById("date").value = task.dueDate || "";
-  document.getElementById("category-selected").textContent =
-    task.category || "";
+  if (window.innerWidth <= 945) {
+    window.location.href = `add_task.html?editKey=${taskId}`;
+    return;
+  }
+  generateAddTaskModal("addTaskBoard");
+  await prefillEditForm(task, taskId);
+}
+
+async function prefillEditForm(task, taskId) {
   standartselectPriority();
-  selectPriority(task.priority);
   await loadContactsForDropdown();
-  (task.assigned || []).forEach((a) => {
-    const c = currentData.find((c) => c.initials === a.initials);
-    if (c) document.getElementById(`contact-${c.firebaseKey}`).checked = true;
-  });
-  updateSelectedContactsDisplay();
-  Object.assign(document.getElementById("create-btn"), {
-    innerHTML: "Save ✓",
-    onclick: () => saveEditTask(taskId),
-  });
+  fillTaskForm(task, taskId);
 }
 
 function capitalizeFirstLetter(string) {
