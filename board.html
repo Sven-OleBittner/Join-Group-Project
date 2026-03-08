@@ -273,17 +273,15 @@
       </div>
     </div>
 
-    <!-- <div
-      id="td-modal"
-      class="td-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="td-title"
-    >
-      <div class="td-dialog" tabindex="-1">
-        <button class="td-close" type="button" data-td-close aria-label="Close">
-          ×
-        </button>
+    <div
+    id="td-modal"
+    class="td-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="td-title"
+    onclick="closeTaskModal()"
+  >
+  <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
 
         <div class="td-chipwrap">
           <span id="td-chip" class="td-chip">User Story</span>
@@ -314,7 +312,7 @@
         </div>
 
         <div class="td-footer td-actions">
-          <button class="td-action" type="button" id="td-delete">
+          <button class="td-action" type="button" id="td-delete" onclick="deleteTask(currentTaskId)">
             <img
               src="./assets/img/contact-main-delete.svg"
               alt=""
@@ -322,7 +320,7 @@
             />
             Delete
           </button>
-          <button class="td-action" type="button" id="td-edit">
+          <button class="td-action" type="button" id="td-edit"  onclick="editTask(currentTaskId)">
             <img
               src="./assets/img/contact-main-edit.svg"
               alt=""
@@ -332,7 +330,7 @@
           </button>
         </div>
       </div>
-    </div> -->
+    </div>
 
 
     <div class="footer">

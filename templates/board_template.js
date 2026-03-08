@@ -1,6 +1,6 @@
-function getTasksTemplate(id, task, key, backgroundColor, priority) {
+function getTasksTemplate(id, task, key, backgroundColor, priority, priorityOptions) {
   return `
-  <article id="task-${key}"  ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ""}"
+  <article id="task-${key}" onclick="openTaskModal('${key}')" ondragstart="dragStart('task-${key}')" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
               data-subtasks='${JSON.stringify(task.subtasks || [])}'>
               <div class="kb-card-top">
                 <span class="${backgroundColor} kb-chip">${(task.category)}</span>
@@ -29,11 +29,13 @@ function getTasksTemplate(id, task, key, backgroundColor, priority) {
   `;
 }
 
-function getSubTemplate(task, key, id, percent, compleatedSubtasks) {
-  return `<div class="kb-progress">
-                  <div class="kb-progress-bar" style="width:${percent}%"></div>
-                </div>
-                <span id="task-${key}-subtasks-${id}" class="kb-subtasks">${compleatedSubtasks || 0}/${task.subtasks.length || 0} Subtasks</span>
-              </div>
-  </article>`;
+
+function getSubTemplate(subtasks, percent, completedSubtasks) {
+  console.log("percent:", percent, "completed:", completedSubtasks, "total:", subtasks.length);
+  return `
+    <div class="kb-progress">
+      <div class="kb-progress-bar" style="width:${percent}%"></div>
+    </div>
+    <span class="kb-subtasks">${completedSubtasks}/${subtasks.length}</span>
+  `;
 }
