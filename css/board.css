@@ -412,3 +412,22 @@ button[id="at-close"] {
   }
 }
 
+.closeBtn {
+  cursor: pointer;
+  background: transparent;
+  border: unset;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.closeBtn:hover {
+  color: #ff4646;
+}
+
+.td-chipwrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
