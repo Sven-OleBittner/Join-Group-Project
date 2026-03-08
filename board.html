@@ -41,6 +41,7 @@
       initBoardSite();
       initSite();
     "
+    onclick=" closeAllOptionsOnclick()"
   >
     <dialog
       class="addTaskDialog"
@@ -223,7 +224,7 @@
             <section
               ondrop="moveTo('awaitFeedbackTaskList')"
               ondragover="dragoverHandler(event)"
-              id="addTaskBoardAwaitFeedback"
+              id="addTaskBoardAwaitingFeedback"
               class="kb-col"
               aria-label="Await feedback"
               data-status="feedback"
@@ -232,7 +233,7 @@
                 <h2 class="kb-col-title">Await feedback</h2>
                 <button
                   onclick="
-                    chooseAddTaskSite('addTaskBoardAwaitFeedback');
+                    chooseAddTaskSite('addTaskBoardAwaitingFeedback');
                     loadContactsForDropdown();
                   "
                   class="kb-col-add"
@@ -331,6 +332,7 @@
       </div>
     </div>
 
+
     <div class="footer">
       <nav class="footer-nav">
         <a href="summary.html" class="footer-nav-item">
@@ -358,6 +360,7 @@
     <script src="./general_script.js"></script>
     <script src="templates/board_template.js"></script>
     <script src="./templates/board_add_task_template.js"></script>
+    <script src="./templates/add-task_template.js"></script>
     <script src="./js/js_files/navigation.js"></script>
     <script src="./js/js_files/log_out.js"></script>
     <script src="./js/js_files/board_add_task.js"></script>

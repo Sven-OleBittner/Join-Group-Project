@@ -6,9 +6,11 @@ function initBoardSite() {
 }
 
 let currentDraggedTask;
+let ghostImage;
 
-function dragStart(taskId) {
+function dragStart(taskId, event) {
   currentDraggedTask = taskId;
+  event.dataTransfer.setData("text/plain", taskId);
 }
 
 function dragoverHandler(ev) {
@@ -24,7 +26,20 @@ async function moveTo(columnId) {
   if (existingTask) {
     existingTask.status = newStatus;
     await putData(`task/${taskId}`, existingTask);
-initBoardSite();  }
+    initBoardSite();
+  }
+}
+
+async function moveToResp(columnId, taskId) {
+  const taskData = await getData("task");
+  if (!taskData) return;
+  const newStatus = setNewStatus(columnId);
+  const existingTask = taskData[taskId];
+  if (existingTask) {
+    existingTask.status = newStatus;
+    await putData(`task/${taskId}`, existingTask);
+    initBoardSite();
+  }
 }
 
 function setNewStatus(columnId) {
@@ -40,16 +55,13 @@ function setNewStatus(columnId) {
   }
 }
 
-function capitalizeFirstLetter(str) {
-  if (!str) return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
   if (!tasksData) return renderTask(id, [], emptyColumnId);
   const taskEntries = Object.entries(tasksData);
-  const filteredTasks = taskEntries.filter(([, task]) => task.status === status);
+  const filteredTasks = taskEntries.filter(
+    ([, task]) => task.status === status,
+  );
   renderTask(id, filteredTasks, emptyColumnId);
 }
 
@@ -60,7 +72,13 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
     const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
+    container.innerHTML += getTasksTemplate(
+      id,
+      task,
+      key,
+      backgroundColor,
+      priority,
+    );
     renderSubTask(id, task, key);
     await renderAvatars(task.assigned || [], key, id);
   }
@@ -77,7 +95,6 @@ function getCategoryColor(category) {
   }
 }
 
-
 function renderSubTask(id, task, key) {
   const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
   if (!task.subtasks) {
@@ -91,7 +108,6 @@ function renderSubTask(id, task, key) {
   const percent = (completedSubtasks / subtasks.length) * 100;
   subTasksContainer.innerHTML = getSubTemplate(subtasks, percent, completedSubtasks);
 }
-
 
 async function renderAvatars(taskAssigned, key, id) {
   let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);

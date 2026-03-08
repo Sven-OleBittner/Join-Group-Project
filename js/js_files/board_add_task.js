@@ -8,19 +8,19 @@ function checkColumns(columnId, emptyColumnId) {
   }
 }
 
-function chooseAddTaskSite(id) {
+function chooseAddTaskSite(buttonId) {
   if (window.innerWidth > 945) {
-    generateAddTaskModal();
+    generateAddTaskModal(buttonId);
   } else {
-    window.location.href = `add_task.html?id=${id}`;
+    window.location.href = `add_task.html?id=${buttonId}`;
   }
 }
 
 
-function generateAddTaskModal() {
+function generateAddTaskModal(buttonId) {
   let dialog = document.getElementById("addTaskDialog");
   let dialogContent = document.getElementById("addTaskDialogContent");
-  dialogContent.innerHTML = getAddTaskTemplate();
+  dialogContent.innerHTML = getAddTaskTemplate(buttonId);
 
   // Show the dialog
   dialog.showModal();
@@ -30,3 +30,4 @@ function closeAddTaskModal() {
   let dialog = document.getElementById("addTaskDialog");
   dialog.close();
 }
+

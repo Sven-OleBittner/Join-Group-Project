@@ -38,6 +38,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 14px;
+    padding: 0px 8px 0px 8px;
   }
   .kb-col-title {
     margin: 0;
@@ -118,5 +119,18 @@
   .kb-columns {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+  }
+}
+
+.rotateDraggedTask {
+  transform: rotate(5deg);
+}
+
+@media (min-width: 769px) {
+  .kb-card:active {
+    transform: rotate(5deg);
+  }
+  .dot {
+    display: none;
   }
 }

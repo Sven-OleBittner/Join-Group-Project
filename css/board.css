@@ -181,6 +181,7 @@ body {
 
 .kb-card {
   width: 90%;
+  min-height: 200px;
   margin-top: 20px;
   background: #ffffff;
   border-radius: var(--kb-card-radius);
@@ -200,9 +201,15 @@ body {
   cursor: pointer;
 }
 
+
+.kb-card::drag {
+  background: rgba(139, 26, 26, 0.35);
+}
+
+
 .kb-card-top {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .kb-chip {
@@ -233,6 +240,8 @@ body {
   font-size: 14px;
   color: #6b7280;
   margin: 0;
+  max-height: 20px;
+  overflow: hidden;
 }
 
 .kb-progress-row {
@@ -258,14 +267,16 @@ body {
 
 .kb-subtasks {
   font-size: 12px;
-  color: #6b7280;
+  color: black;
   white-space: nowrap;
 }
+
 
 .kb-subtasks img {
   margin-right: 6px;
   vertical-align: middle;
 }
+
 
 .kb-card-foot {
   display: flex;
@@ -367,7 +378,7 @@ button[id="at-close"] {
   gap: 12px;
   overflow-y: auto;
   min-height: 64px;
-  max-height: 666px;
+  max-height: 600px;
   scrollbar-width: none; /* Firefox */
   padding: 0px 6px 20px 6px;
 }
@@ -397,3 +408,4 @@ button[id="at-close"] {
     display: none;
   }
 }
+
