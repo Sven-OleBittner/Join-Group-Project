@@ -128,12 +128,10 @@ body {
 }
 
 .summary-container:hover .urgent-container {
-  background-color: var(--darkblue-light-color);
   color: white;
 }
 
 .summary-container:hover .summary-mid-right {
-  background-color: var(--darkblue-light-color);
   color: white;
   border-left: 2px solid var(--white-color);
 }
@@ -237,7 +235,7 @@ body {
   padding: 0px 24px;
   background-color: transparent;
   color: inherit;
-  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  transition: background-color 100ms ease-in-out, color 300ms ease-in-out;
   pointer-events: none;
 }
 
