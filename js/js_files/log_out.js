@@ -87,6 +87,5 @@ function _logoutOnCloseKeepalive() {
     } catch (e) {}
 }
 
-// Attach handlers: `pagehide` covers navigations/unload in modern browsers, `beforeunload` as fallback
 window.addEventListener('pagehide', _logoutOnCloseKeepalive);
 window.addEventListener('beforeunload', _logoutOnCloseKeepalive);
