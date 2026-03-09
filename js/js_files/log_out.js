@@ -76,12 +76,13 @@ function getMobileLogOutMenuHTML() {
     `;
 }
 
-// Auto-logout when page/tab/window is closed or hidden.
-// Uses fetch with `keepalive` so the DELETE request can complete during unload.
+/**
+ * Handles auto-logout when page is closed or hidden
+ * Uses fetch with `keepalive` to ensure logout request completes during unload
+ * Attempts to delete remote `loggingInUser` entry on pagehide or beforeunload
+ */
 function _logoutOnCloseKeepalive() {
     try {
-        // // attempt to delete remote `loggingInUser` entry; keepalive allows the request during unload
-        // fetch(BASE_URL + "loggingInUser.json", { method: "DELETE", keepalive: true });
             deleteData("loggingInUser");
     } catch (e) {}
 }
