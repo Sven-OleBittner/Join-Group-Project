@@ -197,12 +197,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   color: var(--darkblue-light-color);
   background-color: transparent;
   border-left: 2px solid var(--dark-grey-color);
-  padding: 20px 20px 20px 60px;
+  padding: 20px 24px 20px 48px;
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-left-color 300ms ease-in-out;
   pointer-events: none;
+  height: 124px;
 }
 
 .date {
