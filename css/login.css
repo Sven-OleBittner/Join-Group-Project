@@ -304,7 +304,7 @@ form#login-form {
     align-items: center;
     gap: 8px;
     margin: 24px auto 0 auto;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .logo {
@@ -315,6 +315,13 @@ form#login-form {
   .signup-btn {
     padding: 6px 12px;
     font-size: 14px;
+    width: 64px;
+    height: 32px;
+    /* align-self: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
   }
 
   .login-main {
