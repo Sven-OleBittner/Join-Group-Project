@@ -61,7 +61,7 @@ function validateName() {
 }
 
 /** Validiert das Email-Feld */
-function validateEmail() {
+function validateSignupEmail() {
   const email = document.getElementById("signup-email");
   const emailError = document.getElementById("email-error");
   const icon = document.getElementById("email-pic");
@@ -73,7 +73,7 @@ function validateEmail() {
   return isValid;
 }
 
-function validatePassword() {
+function validateSignupPassword() {
     const passwordInput = document.getElementById("signup-password");
     const passwordError = document.getElementById("password-error");
     const icon = document.getElementById("lock-signup-password");

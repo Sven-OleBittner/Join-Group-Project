@@ -35,12 +35,12 @@
             <div class="error-text" id="name-error">Please enter your name.</div>
           </div>
           <div class="input-group">
-            <input onblur="validateEmail()" type="email" id="signup-email" placeholder="Email" required />
+            <input onblur="validateSignupEmail()" type="email" id="signup-email" placeholder="Email" required />
             <img src="./assets/img/mail.svg" id="email-pic" class="input-icon" alt="Email" />
             <div class="error-text" id="email-error">Please enter a valid email.</div>
           </div>
           <div class="input-group">
-            <input onblur="validatePassword()" type="password" id="signup-password" placeholder="Password" required />
+            <input onblur="validateSignupPassword()" type="password" id="signup-password" placeholder="Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-signup-password" alt="Password" />
             <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-signup-password" style="display: none;" />
             <div class="error-text" id="password-error">Your password must be at least 8 characters long and include a mix of uppercase, lowercase, numbers.</div>
