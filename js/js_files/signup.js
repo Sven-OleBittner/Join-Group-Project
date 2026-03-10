@@ -51,8 +51,11 @@ function initPasswordVisibilityToggle() {
 function validateName() {
   const name = document.getElementById("signup-name");
   const nameError = document.getElementById("name-error");
+  const icon = document.getElementById("name-pic");
   const isValid = name.value.trim() !== "";
   name.classList.toggle("error", !isValid);
+  icon.classList.toggle("input-icon", isValid);
+  icon.classList.toggle("input-icon-error", !isValid);
   nameError.style.display = isValid ? "none" : "block";
   return isValid;
 }
@@ -61,8 +64,11 @@ function validateName() {
 function validateEmail() {
   const email = document.getElementById("signup-email");
   const emailError = document.getElementById("email-error");
+  const icon = document.getElementById("email-pic");
   const isValid = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/i.test(email.value);
   email.classList.toggle("error", !isValid);
+  icon.classList.toggle("input-icon", isValid);
+  icon.classList.toggle("input-icon-error", !isValid);
   emailError.style.display = isValid ? "none" : "block";
   return isValid;
 }
@@ -70,8 +76,14 @@ function validateEmail() {
 function validatePassword() {
     const passwordInput = document.getElementById("signup-password");
     const passwordError = document.getElementById("password-error");
+    const icon = document.getElementById("lock-signup-password");
+    const toggleIcon = document.getElementById("toggle-signup-password");
     const isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/m.test(passwordInput.value);
     passwordInput.classList.toggle("error", !isValid);
+    icon.classList.toggle("input-icon", isValid);
+    icon.classList.toggle("input-icon-error", !isValid);
+    toggleIcon.classList.toggle("toggle-password-icon", isValid);
+    toggleIcon.classList.toggle("toggle-password-icon-error", !isValid);
     passwordError.style.display = isValid ? "none" : "block";
     return isValid;
 }
@@ -81,9 +93,15 @@ function validatePasswordMatch() {
   const passwordInput = document.getElementById("signup-password");
   const confirmInput = document.getElementById("confirm-password");
   const passwordConfirmError = document.getElementById("password-confirm-error");
+  const icon = document.getElementById("toggle-signup-password");
+  const toggleIcon = document.getElementById("toggle-confirm-password");
   const isValid = passwordInput.value === confirmInput.value;
   passwordInput.classList.toggle("error", !isValid);
   confirmInput.classList.toggle("error", !isValid);
+  icon.classList.toggle("input-icon", isValid);
+  icon.classList.toggle("input-icon-error", !isValid);
+  toggleIcon.classList.toggle("toggle-password-icon", isValid);
+  toggleIcon.classList.toggle("toggle-password-icon-error", !isValid);
   passwordConfirmError.style.display = isValid ? "none" : "block";
   return isValid;
 }
