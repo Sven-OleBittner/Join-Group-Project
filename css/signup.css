@@ -8,18 +8,32 @@ html, body {
   box-sizing: border-box;
 }
 
-/* === PAGE LAYOUT === */
+/* FIX: Added max-width: 1440px + margin: 0 auto for proper widescreen centering */
+/* FIX: Added width: 100% so it doesn't collapse on wide screens */
 .signup-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #f6f7f8;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* === HEADER === */
+/* FIX: Header now matches login header — logo left, consistent position */
+/* FIX: Added box-sizing: border-box so padding doesn't overflow */
 .signup-header {
   width: 100%;
-  padding: 30px 40px;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* FIX: Logo size consistent with login page (87px) */
+.signup-header .logo {
+  width: 87px;
 }
 
 /* === MAIN === */
@@ -28,13 +42,15 @@ html, body {
   justify-content: center;
   align-items: center;
   flex: 1;
+  padding: 40px 10px;
+  box-sizing: border-box;
 }
 
 /* === SIGNUP BOX === */
 .signup-box {
   background: white;
   border-radius: 24px;
-  padding: 64px 32px;
+  padding: 48px 61px;
   width: 100%;
   max-width: 460px;
   display: flex;
@@ -42,6 +58,7 @@ html, body {
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   gap: 24px;
+  box-sizing: border-box;
 }
 
 .signup-box h1 {
@@ -136,6 +153,15 @@ form#signup-form {
   display: block;
   margin: 24px auto 0 auto;
   text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #29abe2;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
 
 /* === FOOTER === */
@@ -148,6 +174,8 @@ form#signup-form {
   gap: 24px;
   margin-top: auto;
   background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .signup-footer a {
@@ -196,7 +224,7 @@ form#signup-form {
 .toggle-password-icon {
   position: absolute;
   top: 50%;
-  right: 40px;
+  right: 16px;
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
@@ -212,7 +240,7 @@ form#signup-form {
   opacity: 1;
 }
 
-/* === RESPONSIVE === */
+/* === MOBILE === */
 @media (max-width: 480px) {
   .signup-box {
     padding: 12px 20px;
@@ -269,5 +297,13 @@ form#signup-form {
     font-size: 12px;
     gap: 4px;
     padding: 16px 0;
+  }
+
+  .signup-header {
+    padding: 16px 20px;
+  }
+
+  .signup-header .logo {
+    width: 60px;
   }
 }
