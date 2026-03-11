@@ -33,16 +33,13 @@ function showMsg() {
   const msg = urlParams.get("msg");
   if (msg) {
     msgBoxText.innerHTML = msg;
+    msgBoxText.style.display = "";
+    msgBox.style.display = "";
+    removeMsgFromUrl();
   } else {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
   }
-}
-
-function clearMsg() {
-  if (window.location.reload()) {
-    window.location.search = "index.html";
-  } else {showMsg();}
 }
 
 function userNotFound() {

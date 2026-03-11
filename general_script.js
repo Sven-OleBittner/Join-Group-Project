@@ -36,3 +36,11 @@ function showUserInitials(logInUser) {
     .substring(0, 2);
   userInitials.innerHTML = initials;
 }
+
+function removeMsgFromUrl() {
+    const url = new URL(window.location);
+    url.searchParams.delete("msg");
+    const newUrl = url.pathname + (url.search ? url.search : "") + (url.hash ? url.hash : "");
+    window.history.replaceState(null, document.title, newUrl);
+}
+
