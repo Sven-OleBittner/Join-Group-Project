@@ -245,9 +245,9 @@ form#login-form {
 
 .error-text {
   color: #e74c3c;
-  font-size: 13px;
-  margin-top: 6px;
-  padding-left: 4px;
+  font-size: 16px;
+  padding: 12px;
+  justify-content: center;
   display: none;
   font-weight: 500;
 }
@@ -256,7 +256,7 @@ form#login-form {
 .toggle-password {
   position: absolute;
   top: 50%;
-  right: 40px;
+  right: 16px;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 16px;
@@ -269,11 +269,21 @@ form#login-form {
   top: 50%;
   right: 16px;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   opacity: 0.7;
-  z-index: 2;
+}
+
+.toggle-password-icon-error {
+  position: absolute;
+  top: 28%;
+  right: 50px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .toggle-password:hover {
@@ -320,7 +330,7 @@ form#login-form {
     align-items: center;
     gap: 8px;
     margin: 24px auto 0 auto;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .logo {
@@ -331,6 +341,13 @@ form#login-form {
   .signup-btn {
     padding: 6px 12px;
     font-size: 14px;
+    width: 64px;
+    height: 32px;
+    /* align-self: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
   }
 
   .login-main {

@@ -17,7 +17,7 @@ async function login() {
   let user = users.find(
     (u) => u.email == email.value && u.password == password.value,
   );
-  if (user) {
+  if (user != undefined && user != null) {
     await loggingInUser(user);
     sessionStorage.setItem("justLoggedIn", "true");
     window.location.href = "summary.html";
@@ -33,6 +33,9 @@ function showMsg() {
   const msg = urlParams.get("msg");
   if (msg) {
     msgBoxText.innerHTML = msg;
+    msgBoxText.style.display = "";
+    msgBox.style.display = "";
+    removeMsgFromUrl();
   } else {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
@@ -40,7 +43,12 @@ function showMsg() {
 }
 
 function userNotFound() {
-  window.location = "index.html?msg=User not Found";
+  let errorBox = document.getElementById("password-error");
+  let toggleIcon = document.getElementById("toggle-password");
+  let lockIcon = document.getElementById("lock-password");
+  errorBox.style.display = "block";
+  lockIcon.classList.toggle("toggle-password-icon");
+  toggleIcon.classList.toggle("toggle-password-icon-error");
 }
 
 async function loggingInUser(user) {
@@ -56,3 +64,4 @@ async function loginGuest() {
   sessionStorage.setItem("justLoggedIn", "true");
   window.location.href = "summary.html";
 }
+

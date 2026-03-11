@@ -128,12 +128,10 @@ body {
 }
 
 .summary-container:hover .urgent-container {
-  background-color: var(--darkblue-light-color);
   color: white;
 }
 
 .summary-container:hover .summary-mid-right {
-  background-color: var(--darkblue-light-color);
   color: white;
   border-left: 2px solid var(--white-color);
 }
@@ -199,12 +197,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   color: var(--darkblue-light-color);
   background-color: transparent;
   border-left: 2px solid var(--dark-grey-color);
-  padding: 20px 20px 20px 60px;
+  padding: 20px 24px 20px 48px;
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-left-color 300ms ease-in-out;
   pointer-events: none;
+  height: 124px;
 }
 
 .date {
@@ -237,7 +237,7 @@ body {
   padding: 0px 24px;
   background-color: transparent;
   color: inherit;
-  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  transition: background-color 100ms ease-in-out, color 300ms ease-in-out;
   pointer-events: none;
 }
 

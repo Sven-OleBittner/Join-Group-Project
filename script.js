@@ -59,9 +59,9 @@ function validateForm() {
     const emailValid = els.email.value.includes("@");
     const passValid = els.password.value.length >= 6;
     els.email.classList.toggle("error", !emailValid);
-    els.emailError.style.display = emailValid ? "none" : "block";
+    // els.emailError.style.display = emailValid ? "none" : "block";
     els.password.classList.toggle("error", !passValid);
-    els.passwordError.style.display = passValid ? "none" : "block";
+    els.passwordError.style.display = passValid ? "none" : "flex";
     if (emailValid && passValid) console.log("Log in successful!");
   });
 }

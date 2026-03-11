@@ -30,39 +30,44 @@
     
         <form id="signup-form">
           <div class="input-group">
-            <input type="text" id="signup-name" placeholder="Name" required />
-            <img src="./assets/img/person.svg" class="input-icon" alt="Name" />
+            <input onblur="validateName()" type="text" id="signup-name" placeholder="Name" required />
+            <img src="./assets/img/person.svg" id="name-pic" class="input-icon" alt="Name" />
+            <div class="error-text" id="name-error">Please enter your name.</div>
           </div>
           <div class="input-group">
-            <input type="email" id="signup-email" placeholder="Email" required />
-            <img src="./assets/img/mail.svg" class="input-icon" alt="Email" />
+            <input onblur="validateSignupEmail()" type="email" id="signup-email" placeholder="Email" required />
+            <img src="./assets/img/mail.svg" id="email-pic" class="input-icon" alt="Email" />
             <div class="error-text" id="email-error">Please enter a valid email.</div>
           </div>
           <div class="input-group">
-            <input type="password" id="signup-password" placeholder="Password" required />
+            <input onblur="validateSignupPassword()" type="password" id="signup-password" placeholder="Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-signup-password" alt="Password" />
             <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-signup-password" style="display: none;" />
+            <div class="error-text" id="password-error">Your password must be at least 8 characters long, include a mix of uppercase, lowercase, numbers and special characters.</div>
           </div>
           <div class="input-group">
-            <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+            <input onblur="validatePasswordMatch(); enablePolicyCheckbox()" type="password" id="confirm-password" placeholder="Confirm Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-confirm-password" alt="Confirm Password" />
             <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-confirm-password" style="display: none;" />
-            <div class="error-text" id="password-error">Your passwords don’t match. Please try again.</div>
+            <div class="error-text" id="password-confirm-error">Your passwords don’t match. Please try again.</div>
           </div>
+
+          <div class="note">* You must fill out all required fields before you can accept the Privacy Policy.</div>
+          <div class="note">* You must accept the Privacy Policy to continue.</div  >
         
           <label class="checkbox-wrapper">
-            <input type="checkbox" required />
+            <input onclick="enableSignupBtn()" id="privacy-policy-checkbox" type="checkbox" class="privacy-policy-checkbox" disabled />
             I accept the <a href="./privacy_policy_before_logged_in.html">Privacy policy</a>
           </label>
         
-          <button type="submit" class="signup-btn">Sign up</button>
+          <button onclick="signUp()" id="signup-btn" type="submit" class="signup-btn" disabled>Sign up</button>
         </form>
       </div>
     </main>
     
     <footer class="signup-footer">
-      <a href="privacy_policy.html">Privacy Policy</a>
-      <a href="legal_notice.html">Legal notice</a>
+      <a href="privacy_policy_before_logged_in.html">Privacy Policy</a>
+      <a href="legal_notice_before_logged_in.html">Legal notice</a>
     </footer>
   </div>
   <script src="./general_script.js"></script>

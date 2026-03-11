@@ -26,9 +26,9 @@
   }
   
 /* From Checklist */
-button {
+/* button {
     cursor: pointer;
-}
+} */
 
 button:hover {
     transition: ease-in-out 150ms;

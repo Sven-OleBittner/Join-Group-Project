@@ -22,20 +22,21 @@ function showLogOutMenu() {
  * Shows logout message after redirect
  */
 async function loggingOutUser() {
-    const logInUserDb = await getData((path = "loggingInUser"));
-    const loggingInUser = JSON.parse(sessionStorage.getItem('loggingInUser'));
-    if (loggingInUser && logInUserDb) {
-        const entries = Object.entries(logInUserDb);
-        for (const [key, value] of entries) {
-            const matchByName = value.name && loggingInUser.name && value.name === loggingInUser.name;
-            const matchByEmail = (!loggingInUser.email) || (value.email && value.email === loggingInUser.email);
-            if (matchByName && matchByEmail) {
-                await deleteData(`loggingInUser/${key}`);
-                break;
-            }
-        }
-        sessionStorage.removeItem('loggingInUser');
-    }
+    // const logInUserDb = await getData((path = "loggingInUser"));
+    // const loggingInUser = JSON.parse(sessionStorage.getItem('loggingInUser'));
+    // if (loggingInUser && logInUserDb) {
+    //     const entries = Object.entries(logInUserDb);
+    //     for (const [key, value] of entries) {
+    //         const matchByName = value.name && loggingInUser.name && value.name === loggingInUser.name;
+    //         const matchByEmail = (!loggingInUser.email) || (value.email && value.email === loggingInUser.email);
+    //         if (matchByName && matchByEmail) {
+    //             await deleteData(`loggingInUser/${key}`);
+    //             break;
+    //         }
+    //     }
+    //     sessionStorage.removeItem('loggingInUser');
+    // }
+    deleteData("loggingInUser");
     setTimeout(() => {
         window.location.href = "index.html?msg=You have been logged out!";
     }, 250);
@@ -74,3 +75,17 @@ function getMobileLogOutMenuHTML() {
     </div>
     `;
 }
+
+/**
+ * Handles auto-logout when page is closed or hidden
+ * Uses fetch with `keepalive` to ensure logout request completes during unload
+ * Attempts to delete remote `loggingInUser` entry on pagehide or beforeunload
+ */
+function _logoutOnCloseKeepalive() {
+    try {
+            deleteData("loggingInUser");
+    } catch (e) {}
+}
+
+window.addEventListener('pagehide', _logoutOnCloseKeepalive);
+window.addEventListener('beforeunload', _logoutOnCloseKeepalive);

@@ -37,16 +37,15 @@
         <div class="underline"></div>
         <form id="login-form" onsubmit="login(); return false">
           <div class="input-group">
-            <input type="email" id="email" placeholder="Email" required />
-            <img src="./assets/img/mail.svg" class="input-icon" alt="Email" />
-            <div class="error-text" id="email-error">Please enter a valid email.</div>
+            <input  type="text" id="email" placeholder="Email" required />
+            <img src="./assets/img/mail.svg" id="email-icon" class="input-icon" alt="Email" />
           </div>
           <div class="input-group">
             <input type="password" id="password" placeholder="Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-password" alt="Password" />
             <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-password"
               style="display: none;" alt="Show password" />
-            <div class="error-text" id="password-error">Password must be at least 6 characters.</div>
+            <div class="error-text" id="password-error">E-Mail or Password are wrong. Try again!</div>
           </div>
           <div class="button-group">
             <button type="submit" class="login-btn">Log in</button>
@@ -66,7 +65,7 @@
 
     <footer class="login-footer">
       <a href="privacy_policy_before_logged_in.html">Privacy Policy</a>
-      <a href="legal_notice.html">Legal notice</a>
+      <a href="legal_notice_before_logged_in.html">Legal notice</a>
     </footer>
   </div>
   <script src="./general_script.js"></script>
