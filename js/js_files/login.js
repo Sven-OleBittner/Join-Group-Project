@@ -17,7 +17,7 @@ async function login() {
   let user = users.find(
     (u) => u.email == email.value && u.password == password.value,
   );
-  if (user) {
+  if (user != undefined && user != null) {
     await loggingInUser(user);
     sessionStorage.setItem("justLoggedIn", "true");
     window.location.href = "summary.html";
@@ -37,6 +37,12 @@ function showMsg() {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
   }
+}
+
+function clearMsg() {
+  if (window.location.reload()) {
+    window.location.search = "index.html";
+  } else {showMsg();}
 }
 
 function userNotFound() {
