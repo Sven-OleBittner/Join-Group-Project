@@ -164,11 +164,6 @@ form#signup-form {
   display: block;
   margin: 24px auto 0 auto;
   text-align: center;
-
-.privacy-policy-checkbox {
-  width: 16px;
-  height: 16px;
-  cursor: not-allowed;
 }
 
 .privacy-policy-checkbox {
