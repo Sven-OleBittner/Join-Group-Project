@@ -149,7 +149,7 @@ function enableSignupBtn() {
 
 function enablePolicyCheckbox() {
   const checkbox = document.getElementById("privacy-policy-checkbox");
-  checkbox.disabled = !(validateEmail() && validatePassword() && validatePasswordMatch());
+  checkbox.disabled = !(validateSignupEmail() && validateSignupPassword() && validatePasswordMatch());
   if (!checkbox.disabled) {
     checkbox.style.cursor = "pointer";
   } else {

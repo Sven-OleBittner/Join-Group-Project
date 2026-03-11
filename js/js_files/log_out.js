@@ -76,16 +76,16 @@ function getMobileLogOutMenuHTML() {
     `;
 }
 
-/**
- * Handles auto-logout when page is closed or hidden
- * Uses fetch with `keepalive` to ensure logout request completes during unload
- * Attempts to delete remote `loggingInUser` entry on pagehide or beforeunload
- */
-function _logoutOnCloseKeepalive() {
-    try {
-            deleteData("loggingInUser");
-    } catch (e) {}
-}
+// /**
+//  * Handles auto-logout when page is closed or hidden
+//  * Uses fetch with `keepalive` to ensure logout request completes during unload
+//  * Attempts to delete remote `loggingInUser` entry on pagehide or beforeunload
+//  */
+// function _logoutOnCloseKeepalive() {
+//     try {
+//             deleteData("loggingInUser");
+//     } catch (e) {}
+// }
 
-window.addEventListener('pagehide', _logoutOnCloseKeepalive);
-window.addEventListener('beforeunload', _logoutOnCloseKeepalive);
+// window.addEventListener('pagehide', _logoutOnCloseKeepalive);
+// window.addEventListener('beforeunload', _logoutOnCloseKeepalive);
