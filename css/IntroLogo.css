@@ -6,65 +6,36 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  opacity: 1;
-  transition: background-color 0.5s ease;
+  pointer-events: none;
 }
 
-.logo {
+/* Header logo hidden until JS swap */
+.login-header .logo {
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
+/* Стартова позиція — по центру, великий розмір */
 .intro-logo {
-  position: absolute;
+  position: fixed;
   width: 273px;
   height: 334px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   z-index: 10000;
-  animation: moveLogoToCorner 2s ease forwards;
-}
-
-@keyframes moveLogoToCorner {
-  0% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    top: -5%;
-    left: 5%;
-    transform: translate(0, 0) scale(0.28);
-  }
+  /* Один плавний transition від старту до хедера */
+  transition: top 0.7s ease, left 0.7s ease,
+              width 0.7s ease, height 0.7s ease,
+              transform 0.7s ease, opacity 0.2s ease;
 }
 
 .login-page {
-  display: flex;
-  flex-direction: column;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
 }
 
 @media (max-width: 480px) {
-  .intro-logo {
-    animation: moveLogoToCornerMobile 1s ease forwards;
-    z-index: 10001;
-  }
-
-  @keyframes moveLogoToCornerMobile {
-    0% {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-      top: -80px;
-      left: -60px;
-      transform: translate(0, 0) scale(0.25);
-    }
-  }
-  
   #intro {
     background-color: #2A3647;
   }
