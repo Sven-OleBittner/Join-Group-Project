@@ -7,7 +7,6 @@ body, html {
   background-color: #F6F7F8;
 }
 
-/* login-page: 1440px контейнер, центрований у viewport */
 .login-page {
   display: flex;
   flex-direction: column;
@@ -16,10 +15,8 @@ body, html {
   max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
-  /* opacity керується через IntroLogo.css + JS */
 }
 
-/* Лого зліва, Sign up справа — обидва в межах 1440px */
 .login-header {
   width: 100%;
   padding: 32px 40px;

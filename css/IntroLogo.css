@@ -15,7 +15,6 @@
   transition: opacity 0.2s ease;
 }
 
-/* Стартова позиція — по центру, великий розмір */
 .intro-logo {
   position: fixed;
   width: 273px;
@@ -24,7 +23,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10000;
-  /* Один плавний transition від старту до хедера */
   transition: top 0.7s ease, left 0.7s ease,
               width 0.7s ease, height 0.7s ease,
               transform 0.7s ease, opacity 0.2s ease;
