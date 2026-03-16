@@ -89,5 +89,3 @@ function getMobileLogOutMenuHTML() {
 
 // window.addEventListener('pagehide', _logoutOnCloseKeepalive);
 // window.addEventListener('beforeunload', _logoutOnCloseKeepalive);
-// window.addEventListener('pagehide', _logoutOnCloseKeepalive);
-// window.addEventListener('beforeunload', _logoutOnCloseKeepalive);
