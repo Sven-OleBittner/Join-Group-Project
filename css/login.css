@@ -72,7 +72,7 @@ body, html {
   padding: 40px 20px;
   box-sizing: border-box;
   width: 100%;
-  gap: 16px;
+  gap: 24px;
 }
 
 /* === LOGIN BOX === */
@@ -268,6 +268,22 @@ form#login-form {
 
 /* === MOBILE ≤ 580px === */
 @media (max-width: 580px) {
+
+  .login-box {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 32px 24px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
   .login-header {
     padding: 16px 20px;
   }
@@ -297,9 +313,17 @@ form#login-form {
     font-size: 16px;
   }
 
-  .login-box {
-    padding: 32px 24px;
-    border-radius: 24px;
+  .login-main {
+    margin-top: 150px;
+    width: 100%;
+    display: grid;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .login-footer {
+    display: flex;
+    justify-content: center;
     gap: 24px;
   }
 
