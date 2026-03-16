@@ -204,7 +204,7 @@ body {
   padding: 20px 24px 20px 48px;
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-left-color 300ms ease-in-out;
   pointer-events: none;
-  height: 124px;
+  height: 98px;
 }
 
 .date {
