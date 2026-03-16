@@ -43,7 +43,7 @@
             <input onblur="validateSignupPassword()" type="password" id="signup-password" placeholder="Password" required />
             <img src="./assets/img/lock.svg" class="input-icon" id="lock-signup-password" alt="Password" />
             <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-signup-password" style="display: none;" />
-            <div class="error-text" id="password-error">Your password must be at least 8 characters long, include a mix of uppercase, lowercase, numbers and special characters.</div>
+            <div class="error-text" id="password-error">Use at least 8 characters with mixed case, digits, and symbols.</div>
           </div>
           <div class="input-group">
             <input onblur="validatePasswordMatch(); enablePolicyCheckbox()" type="password" id="confirm-password" placeholder="Confirm Password" required />
@@ -52,8 +52,8 @@
             <div class="error-text" id="password-confirm-error">Your passwords don’t match. Please try again.</div>
           </div>
 
-          <div class="note">* You must fill out all required fields before you can accept the Privacy Policy.</div>
-          <div class="note">* You must accept the Privacy Policy to continue.</div  >
+          <div class="note">* Fill all fields to enable Privacy Policy.</div>
+          <!-- <div class="note">* You must accept the Privacy Policy to continue.</div  > -->
         
           <label class="checkbox-wrapper">
             <input onclick="enableSignupBtn()" id="privacy-policy-checkbox" type="checkbox" class="privacy-policy-checkbox" disabled />

@@ -278,7 +278,7 @@ form#login-form {
 .toggle-password-icon-error {
   position: absolute;
   top: 28%;
-  right: 50px;
+  right: 16px;
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
