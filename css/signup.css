@@ -1,9 +1,10 @@
 /* === RESET === */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #f6f7f8;
 }
 
@@ -106,7 +107,7 @@ form#signup-form {
   width: 100%;
   padding: 14px 44px 14px 16px;
   font-size: 16px;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   box-sizing: border-box;
 }
@@ -158,8 +159,6 @@ form#signup-form {
   display: block;
   margin: 24px auto 0 auto;
   text-align: center;
-
-
 }
 
 .privacy-policy-checkbox {
@@ -172,7 +171,7 @@ form#signup-form {
 .signup-footer {
   padding: 20px;
   font-size: 14px;
-  color: #A8A8A8;
+  color: #a8a8a8;
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -183,7 +182,7 @@ form#signup-form {
 }
 
 .signup-footer a {
-  color: #A8A8A8;
+  color: #a8a8a8;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -269,6 +268,22 @@ form#signup-form {
   .note {
     display: flex;
   }
+  
+  .signup-footer {
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    gap: 4px;
+    padding: 16px 0;
+  }
+
+  .signup-header {
+    padding: 16px 20px;
+  }
+
+  .signup-header .logo {
+    width: 60px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -320,21 +335,5 @@ form#signup-form {
   .signup-btn {
     font-size: 14px;
     padding: 12px;
-  }
-
-  .signup-footer {
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-    gap: 4px;
-    padding: 16px 0;
-  }
-
-  .signup-header {
-    padding: 16px 20px;
-  }
-
-  .signup-header .logo {
-    width: 60px;
   }
 }
