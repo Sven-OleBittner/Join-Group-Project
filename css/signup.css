@@ -5,23 +5,20 @@ html, body {
   height: 100%;
   font-family: 'Inter', sans-serif;
   background-color: #f6f7f8;
-  box-sizing: border-box;
 }
 
-/* FIX: Added max-width: 1440px + margin: 0 auto for proper widescreen centering */
-/* FIX: Added width: 100% so it doesn't collapse on wide screens */
+/* signup-page: 1440px container, centered in viewport */
 .signup-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f6f7f8;
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* FIX: Header now matches login header — logo left, consistent position */
-/* FIX: Added box-sizing: border-box so padding doesn't overflow */
+/* Logo stays in the top-left of the 1440px container on all screen sizes */
 .signup-header {
   width: 100%;
   padding: 32px 40px;
@@ -31,7 +28,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* FIX: Logo size consistent with login page (87px) */
 .signup-header .logo {
   width: 87px;
 }
@@ -133,7 +129,6 @@ form#signup-form {
   height: 20px;
   opacity: 0.7;
 }
-
 
 /* === CHECKBOX === */
 .checkbox-wrapper {
@@ -251,7 +246,6 @@ form#signup-form {
   cursor: pointer;
   opacity: 0.7;
 }
-
 
 .toggle-password:hover {
   opacity: 1;

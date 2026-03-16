@@ -12,7 +12,7 @@ const els = {
   passwordError: document.getElementById("password-error")
 };
 
-/* Set initial logo and background for intro */
+/* Set initial logo src and background color based on screen size */
 function setIntro() {
   if (!els.intro || !els.loginPage || !els.introLogo) return;
   const isMobile = window.innerWidth <= 480;
@@ -20,18 +20,52 @@ function setIntro() {
   els.intro.style.backgroundColor = isMobile ? "#2A3647" : "transparent";
 }
 
-/* Show login page after 1-second delay */
+/* Prepare the login page (invisible) so the header occupies its position in DOM */
+function prepareLoginPage() {
+  els.loginPage.style.opacity = "0";
+  els.loginPage.style.visibility = "visible";
+  void els.introLogo.offsetWidth;
+}
+
+/* Move intro logo directly to the exact position of the header logo */
+function flyLogoToHeader(rect) {
+  els.introLogo.style.top = rect.top + 'px';
+  els.introLogo.style.left = rect.left + 'px';
+  els.introLogo.style.width = rect.width + 'px';
+  els.introLogo.style.height = rect.height + 'px';
+  els.introLogo.style.transform = 'none';
+}
+
+/* Fade in the login page and clear the intro background */
+function revealPage() {
+  els.introLogo.src = "./assets/img/Capa 2.svg";
+  els.intro.style.backgroundColor = "transparent";
+  els.intro.style.pointerEvents = "none";
+  setTimeout(() => { els.loginPage.style.opacity = "1"; }, 200);
+}
+
+/* Swap intro logo with header logo seamlessly after flight */
+function swapLogo(headerLogo) {
+  setTimeout(() => {
+    headerLogo.style.opacity = "1";
+    els.introLogo.style.opacity = "0";
+  }, 700);
+}
+
+/* Orchestrate the full intro-to-login transition */
 function showLogin() {
   if (!els.intro || !els.loginPage || !els.introLogo) return;
   setTimeout(() => {
-    els.introLogo.src = "./assets/img/Capa 2.svg";
-    els.intro.style.backgroundColor = "transparent";
-    els.intro.style.pointerEvents = "none";
-    els.loginPage.style.opacity = "1";
-  }, 1000);
+    const headerLogo = document.querySelector('.login-header .logo');
+    if (!headerLogo) return;
+    prepareLoginPage();
+    flyLogoToHeader(headerLogo.getBoundingClientRect());
+    revealPage();
+    swapLogo(headerLogo);
+  }, 100);
 }
 
-/* Toggle password field between text and password */
+/* Toggle password field visibility and update icon */
 function togglePasswordVisibility() {
   if (!els.password || !els.toggle) return;
   els.toggle.addEventListener("click", () => {
@@ -41,7 +75,7 @@ function togglePasswordVisibility() {
   });
 }
 
-/* Show/hide password icons based on input */
+/* Show eye icon when password has input, show lock icon when empty */
 function updatePasswordIcons() {
   if (!els.password || !els.toggle || !els.lock) return;
   els.password.addEventListener("input", () => {
@@ -51,7 +85,7 @@ function updatePasswordIcons() {
   });
 }
 
-/* Validate form on submit and show errors */
+/* Validate email and password on form submit, show error messages */
 function validateForm() {
   if (!els.form) return;
   els.form.addEventListener("submit", (e) => {
@@ -59,7 +93,6 @@ function validateForm() {
     const emailValid = els.email.value.includes("@");
     const passValid = els.password.value.length >= 6;
     els.email.classList.toggle("error", !emailValid);
-    // els.emailError.style.display = emailValid ? "none" : "block";
     els.password.classList.toggle("error", !passValid);
     els.passwordError.style.display = passValid ? "none" : "flex";
     if (emailValid && passValid) console.log("Log in successful!");
@@ -68,11 +101,11 @@ function validateForm() {
 
 /* Initialize all page functionality */
 function init() {
-  setIntro(); // Start intro with logo and background
-  showLogin(); // Transition to login page
-  togglePasswordVisibility(); // Enable password toggle
-  updatePasswordIcons(); // Manage password icon visibility
-  validateForm(); // Set up form validation
+  setIntro();
+  showLogin();
+  togglePasswordVisibility();
+  updatePasswordIcons();
+  validateForm();
 }
 
-init(); // Run all initialization
+init();
