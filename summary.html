@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./assets/fonts/fonts.css">
 </head>
 
-<body onload="initSummary(); searchForLoginUser();">
+<body onload="initSummary(); searchForLoginUser();" onclick="closeLogOutMenu();">
   <div class="sidebar">
     <div class="frame">
       <div class="capa2">
@@ -66,7 +66,7 @@
         </div>
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar"></div>
+          <div onclick="showLogOutMenu();  event.stopPropagation()" id="userInitials" class="user-avatar"></div>
         </div>
       </header>
     <div class="greeting-container">

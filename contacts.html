@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./css/contact-forms.css" />
     <title id="title">Join</title>
   </head>
-  <body onload="loadContactList(),initSite();">
+  <body onload="loadContactList(),initSite();" onclick="closeLogOutMenu()">
     <!-- Contact overlay for add/edit forms -->
     <div id="contact-overlay"></div>
     
@@ -93,7 +93,7 @@
         </div>
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar"></div>
+          <div onclick="showLogOutMenu(); event.stopPropagation()" id="userInitials" class="user-avatar"></div>
         </div>
       </header>
 

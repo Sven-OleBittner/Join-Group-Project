@@ -17,25 +17,19 @@ function showLogOutMenu() {
     }
 }
 
+function closeLogOutMenu() {
+    const existingMenu = document.getElementById('logout-menu-overlay');
+    if (existingMenu) {
+        existingMenu.remove();
+    }
+}
+
+
 /**
  * Logs out the current user and redirects to login page
  * Shows logout message after redirect
  */
 async function loggingOutUser() {
-    // const logInUserDb = await getData((path = "loggingInUser"));
-    // const loggingInUser = JSON.parse(sessionStorage.getItem('loggingInUser'));
-    // if (loggingInUser && logInUserDb) {
-    //     const entries = Object.entries(logInUserDb);
-    //     for (const [key, value] of entries) {
-    //         const matchByName = value.name && loggingInUser.name && value.name === loggingInUser.name;
-    //         const matchByEmail = (!loggingInUser.email) || (value.email && value.email === loggingInUser.email);
-    //         if (matchByName && matchByEmail) {
-    //             await deleteData(`loggingInUser/${key}`);
-    //             break;
-    //         }
-    //     }
-    //     sessionStorage.removeItem('loggingInUser');
-    // }
     deleteData("loggingInUser");
     setTimeout(() => {
         window.location.href = "index.html?msg=You have been logged out!";

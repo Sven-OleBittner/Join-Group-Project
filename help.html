@@ -17,7 +17,7 @@
     </script>
     <title>Join</title>
   </head>
-  <body onload="initSite()">
+  <body onload="initSite()" onclick="closeLogOutMenu()">
     <div class="sidebar">
       <div class="frame">
         <div class="capa2">
@@ -79,7 +79,7 @@
       </div>
       <div class="header-right">
         <a href="./help.html" class="help-icon">?</a>
-        <div onclick="showLogOutMenu()" id="userInitials" class="user-avatar">SM</div>
+        <div onclick="showLogOutMenu(); event.stopPropagation()" id="userInitials" class="user-avatar">SM</div>
       </div>
     </header>
     <div class="main-content">

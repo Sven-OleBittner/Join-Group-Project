@@ -41,7 +41,7 @@
       initBoardSite();
       initSite();
     "
-    onclick=" closeAllOptionsOnclick()"
+    onclick=" closeAllOptionsOnclick(); closeLogOutMenu();"
   >
     <dialog
       class="addTaskDialog"
@@ -122,7 +122,7 @@
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
           <div
-            onclick="showLogOutMenu()"
+            onclick="showLogOutMenu(); event.stopPropagation()"
             id="userInitials"
             class="user-avatar"
           ></div>

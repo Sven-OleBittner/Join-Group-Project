@@ -14,6 +14,16 @@ function toggleDropdown(id) {
 }
 
 /**
+ * Closes a dropdown menu
+ * @param {string} id - The ID of the dropdown to close
+ * @returns {void}
+ */
+function closeDropdown(id) {
+  const dropdown = document.getElementById(id);
+  dropdown.classList.add('select-hide');
+}
+
+/**
  * Selects a category option and closes the category dropdown
  * @param {string} value - The category value to select
  * @returns {void}
