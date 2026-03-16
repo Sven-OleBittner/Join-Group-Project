@@ -314,7 +314,6 @@ form#login-form {
   }
 
   .login-main {
-    margin-top: 150px;
     width: 100%;
     display: grid;
     padding: 16px;
