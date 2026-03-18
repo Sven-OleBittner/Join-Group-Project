@@ -78,7 +78,7 @@ function validateSignupPassword() {
     const passwordError = document.getElementById("password-error");
     const icon = document.getElementById("lock-signup-password");
     const toggleIcon = document.getElementById("toggle-signup-password");
-    const isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/m.test(passwordInput.value);
+    const isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/m.test(passwordInput.value);
     passwordInput.classList.toggle("error", !isValid);
     icon.classList.toggle("input-icon", isValid);
     icon.classList.toggle("input-icon-error", !isValid);
