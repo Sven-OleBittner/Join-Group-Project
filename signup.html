@@ -7,7 +7,7 @@
 
     <!-- ICON TITLE -->
     <link rel="icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
-    
+
     <link rel="stylesheet" href="./css/signup.css" />
     <link rel="stylesheet" href="./css/color.css" />
     <link rel="stylesheet" href="./css/standard.css" />
@@ -33,7 +33,7 @@
           </div>
           <div class="underline"></div>
 
-          <form id="signup-form">
+          <form id="signup-form" onsubmit="signUp()">
             <div class="input-group">
               <input
                 onblur="validateName()"
@@ -96,8 +96,7 @@
               />
               <div class="error-box">
                 <span class="error-text" id="password-error"
-                  >Use at least 6 characters with mixed case, digits, and
-                  symbols.</span
+                  >Use at least 6 characters.</span
                 >
               </div>
             </div>
@@ -149,7 +148,6 @@
             </label>
 
             <button
-              onclick="signUp()"
               id="signup-btn"
               type="submit"
               class="signup-btn"
