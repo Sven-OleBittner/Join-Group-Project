@@ -129,6 +129,7 @@
   }
   .kb-col {
     min-width: 0;
+    height: unset;
   }
   .kb-col-head {
     margin-bottom: 8px;
