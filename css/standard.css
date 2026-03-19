@@ -111,6 +111,15 @@ a {
   align-items: center;
 }
 
+.max-w-1440 {
+  max-width: 1440px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+
 
 
 

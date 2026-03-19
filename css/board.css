@@ -115,9 +115,8 @@
   gap: var(--kb-gap);
 }
 
-/* .kb-col {
-  min-width: 260px;
-} */
+.kb-col {
+height: 100vh;}
 
 body {
   overflow: hidden;
@@ -240,10 +239,9 @@ body {
 }
 
 .kb-card-desc {
-  font-size: 14px;
   color: #6b7280;
   margin: 0;
-  max-height: 20px;
+  height: 20px;
   overflow: hidden;
 }
 
@@ -381,14 +379,9 @@ button[id="at-close"] {
   gap: 12px;
   overflow-y: auto;
   min-height: 64px;
-  max-height: 600px;
-  scrollbar-width: none; /* Firefox */
   padding: 0px 6px 20px 6px;
 }
 
-.kb-card-list[data-cards]::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
 
 .kb-empty {
   display: flex;

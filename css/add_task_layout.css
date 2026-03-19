@@ -9,10 +9,14 @@
    Seitenlayout-Wrapper
    ------------------------------------------------------- */
 
+.add-task-title {
+  font-size: 64px;
+}
+
 /* Vertikaler Trenner zwischen linker und rechter Form-Spalte */
 .form-divider {
   width: 1px;
-  background-color: var(--divider-color);
+  background-color:#D1D1D1;
   margin: 0 20px;
 }
 
@@ -60,14 +64,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 48px 60px 12px;
+  padding: 1px 60px 12px;
   height: 100%;
 }
 
 /* Zweispaltiges Formular (links + rechts) */
 .task-form {
   display: flex;
-  padding-top: 70px;
+  padding-top: 48px;
   row-gap: 40px;
   column-gap: 40px;
 }

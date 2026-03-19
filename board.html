@@ -41,7 +41,10 @@
       initBoardSite();
       initSite();
     "
-    onclick=" closeAllOptionsOnclick(); closeLogOutMenu();"
+    onclick="
+      closeAllOptionsOnclick();
+      closeLogOutMenu();
+    "
   >
     <dialog
       class="addTaskDialog"
@@ -113,24 +116,29 @@
 
     <div class="headercontainer">
       <header class="header">
-        <div class="header-left">
-          <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
-        </div>
-        <div class="title-container">
-          <p class="title">Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div
-            onclick="showLogOutMenu(); event.stopPropagation()"
-            id="userInitials"
-            class="user-avatar"
-          ></div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
 
       <div class="main-content">
-        <section class="kb">
+        <section class="kb max-w-1440">
           <div class="kb-toolbar">
             <h1 class="kb-title">Board</h1>
             <div class="kb-actions">
@@ -299,15 +307,14 @@
     </div>
 
     <div
-    id="td-modal"
-    class="td-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="td-title"
-    onclick="closeTaskModal()"
-  >
-  <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
-
+      id="td-modal"
+      class="td-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="td-title"
+      onclick="closeTaskModal()"
+    >
+      <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
         <div class="td-chipwrap">
           <span id="td-chip" class="td-chip">User Story</span>
           <button class="closeBtn" onclick="closeTaskModal()">X</button>
@@ -338,7 +345,12 @@
         </div>
 
         <div class="td-footer td-actions">
-          <button class="td-action" type="button" id="td-delete" onclick="deleteTask(currentTaskId)">
+          <button
+            class="td-action"
+            type="button"
+            id="td-delete"
+            onclick="deleteTask(currentTaskId)"
+          >
             <img
               src="./assets/img/contact-main-delete.svg"
               alt=""
@@ -346,7 +358,12 @@
             />
             Delete
           </button>
-          <button class="td-action" type="button" id="td-edit"  onclick="editTask(currentTaskId)">
+          <button
+            class="td-action"
+            type="button"
+            id="td-edit"
+            onclick="editTask(currentTaskId)"
+          >
             <img
               src="./assets/img/contact-main-edit.svg"
               alt=""
@@ -357,7 +374,6 @@
         </div>
       </div>
     </div>
-
 
     <script src="./js/js_files/db.js"></script>
     <script src="./general_script.js"></script>
