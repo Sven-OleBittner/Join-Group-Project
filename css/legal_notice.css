@@ -1,37 +1,47 @@
 .headercontainer {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .main-content {
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .main-content-privacy {
-    padding: 64px 75px 32px 80px;
-    overflow-y: auto;
-    height: 100%;
+  padding: 64px 75px 32px 80px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .main-content-privacy a {
-    color: #75c7ea;
+  color: #75c7ea;
 }
 
 .main-content-privacy h3 {
-    margin-top: 24px;
-    margin-bottom: 8px;
-    font-size: 18px;
-    font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .main-content-privacy p {
-    margin-bottom: 16px;
-    line-height: 1.5;
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
 
 .main-content-privacy ul {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
 }

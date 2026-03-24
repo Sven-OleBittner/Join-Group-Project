@@ -184,13 +184,14 @@ a.nav-item {
   padding: 110px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 90vh;
+  max-height: 89vh;
 }
 
 .main-content-privacy h2 {
   margin-top: 30px;
   padding-top: 15px;
   border-top: 1px solid #eee;
+  font-size: 24px;
 }
 
 .main-content-privacy ul {
