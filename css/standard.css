@@ -63,6 +63,10 @@ a {
   width: 100%;
 }
 
+.w0 {
+  width: 0;
+}
+
 .d-none {
   display: none;
 }

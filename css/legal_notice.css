@@ -45,3 +45,11 @@ h3 {
   font-size: 18px;
   font-weight: bold;
 }
+
+@media (max-width: 480px) {
+  .main-content-privacy {
+    padding: 32px 20px;
+    overflow-y: auto;
+    height: 100%;
+    }
+}

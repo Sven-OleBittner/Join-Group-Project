@@ -125,7 +125,7 @@ body {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  width: 100%;
+  /* width: 100%; */
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease;

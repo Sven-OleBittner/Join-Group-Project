@@ -15,7 +15,7 @@ async function searchForLoginUser() {
     "index.html",
     "signup.html",
     "privacy_policy_before_logged_in.html",
-    "legal_notice.html",
+    "legal_notice_before_logged_in.html",
   ];
   const currentPage = window.location.pathname.split("/").pop();
   if (publicPages.includes(currentPage)) {
