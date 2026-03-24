@@ -301,12 +301,11 @@ form#login-form {
 
   .signup-btn {
     padding: 6px 12px;
-    width: 64px;
-    height: 32px;
+    height: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .login-main {
