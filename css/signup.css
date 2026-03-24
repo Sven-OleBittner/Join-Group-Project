@@ -39,7 +39,7 @@ body {
   justify-content: center;
   align-items: center;
   flex: 1;
-  padding: 4px 10px;
+  padding: 2px 10px;
   box-sizing: border-box;
 }
 
@@ -47,7 +47,7 @@ body {
 .signup-box {
   background: white;
   border-radius: 24px;
-  padding: 48px 61px;
+  padding: 24px 61px;
   width: 100%;
   max-width: 460px;
   display: flex;
@@ -157,8 +157,9 @@ form#signup-form {
   border-radius: 8px;
   cursor: not-allowed;
   display: block;
-  margin: 24px auto 0 auto;
   text-align: center;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .privacy-policy-checkbox {
@@ -266,14 +267,13 @@ form#signup-form {
   }
 
   .signup-footer {
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 16px 0;
+    gap: 16px;
+    padding: 12px 0;
   }
 
   .signup-header {
-    padding: 16px 20px;
+    padding: 2px 20px;
   }
 
   .signup-header .logo {
@@ -325,7 +325,9 @@ form#signup-form {
     flex-wrap: wrap;
   }
 
-  .signup-btn {
+  /* .signup-btn {
     padding: 12px;
-  }
+    margin: 0 auto 0 auto;
+    width: 90%;
+  } */
 }
