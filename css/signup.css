@@ -116,7 +116,7 @@ form#signup-form {
 
 .input-icon {
   position: absolute;
-  top: 50%;
+  top: 35%;
   right: 16px;
   transform: translateY(-50%);
   height: 20px;
@@ -126,7 +126,7 @@ form#signup-form {
 
 .input-icon-error {
   position: absolute;
-  top: 32%;
+  top: 35%;
   right: 16px;
   transform: translateY(-50%);
   height: 20px;
@@ -193,13 +193,13 @@ form#signup-form {
 
 /* === INPUT STATES === */
 .input-group input:focus {
-  border: 2px solid #4a90e2;
+  border: 1px solid #4a90e2;
   outline: none;
   background-color: #fff;
 }
 
 .input-group input.error {
-  border: 2px solid #e74c3c;
+  border: 1px solid #e74c3c;
   background-color: #fff5f5;
 }
 
@@ -214,7 +214,7 @@ form#signup-form {
 /* === TOGGLE PASSWORD ICON === */
 .toggle-password {
   position: absolute;
-  top: 50%;
+  top: 35%;
   right: 16px;
   transform: translateY(-50%);
   cursor: pointer;
@@ -224,7 +224,7 @@ form#signup-form {
 
 .toggle-password-icon {
   position: absolute;
-  top: 50%;
+  top: 35%;
   right: 16px;
   transform: translateY(-50%);
   width: 24px;
@@ -235,7 +235,7 @@ form#signup-form {
 
 .toggle-password-icon-error {
   position: absolute;
-  top: 30%;
+  top: 35%;
   right: 16px;
   transform: translateY(-50%);
   width: 24px;
