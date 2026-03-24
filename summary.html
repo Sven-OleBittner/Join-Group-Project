@@ -58,15 +58,24 @@
 
   <div class="headercontainer">
       <header class="header">
-      <div class="header-left">
-        <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
-      </div>
-        <div class="title-container">
-          <p class="title">Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div onclick="showLogOutMenu();  event.stopPropagation()" id="userInitials" class="user-avatar"></div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
     <div class="greeting-container">
@@ -135,7 +144,7 @@
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
                     <span id="awaitingFeedbackCount" class="task-count">2</span>
-                    <span class="text-align-center resp-size">Awaiting Feedback</span>
+                    <span class="text-align-center resp-size">Awaiting <br> Feedback</span>
                   </div>
                 </a>
               </section>

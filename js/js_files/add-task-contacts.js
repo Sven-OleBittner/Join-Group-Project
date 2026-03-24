@@ -42,7 +42,7 @@ async function fetchContactsFromDatabase() {
  */
 function getContacts(contact) {
   return `
-    <div class="contact-option" onclick="toggleContactSelection('${contact.firebaseKey}')">
+    <div class="contact-option" onclick="toggleContactSelection('${contact.firebaseKey}'); event.stopPropagation()">
       <div class="avatar ${contact.color}">${contact.initials}</div>
       <span class="name">${contact.name}</span>
       <input type="checkbox" id="contact-${contact.firebaseKey}" onclick="event.stopPropagation()">

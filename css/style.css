@@ -253,3 +253,8 @@ a.nav-item {
     width: 180px;
   }
 }
+
+@media (min-width: 2560px) {
+.logout-menu {
+  right: 875px;}
+}
