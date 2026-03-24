@@ -38,7 +38,7 @@ input::placeholder {
 /* Error message styling */
 .error-message {
     color: red;
-    font-size: 12px;
+    font-size: 16px;
     height: 27px;
 }
 

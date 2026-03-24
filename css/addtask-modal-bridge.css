@@ -46,7 +46,6 @@
 .td-modal .field__label,
 .td-modal .td-label {
   color: var(--at-muted);
-  font-size: 14px;
 }
 
 /* === INPUTS === */
@@ -61,7 +60,6 @@
   border: 1px solid var(--at-border);
   border-radius: var(--at-radius);
   padding: 10px 12px;
-  font-size: 16px;
   background: #fff;
   outline: none;
   box-sizing: border-box;
@@ -184,7 +182,6 @@
   border-radius: 8px;
   background: #fff;
   margin-bottom: 6px;
-  font-size: 14px;
 }
 
 /* === ACTION BUTTONS === */

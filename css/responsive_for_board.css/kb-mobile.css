@@ -45,10 +45,10 @@
     font-size: 17px;
   }
   .kb-card-desc {
-    font-size: 13px;
+    font-size: 16px;
   }
   .kb-chip {
-    font-size: 13px;
+    font-size: 16px;
     height: 28px;
     width: auto;
     padding: 5px 10px;
@@ -120,7 +120,7 @@
   }
   .kb-search input {
     height: 44px;
-    font-size: 15px;
+    font-size: 16px;
     padding: 0 42px 0 14px;
   }
   .kb-columns {
@@ -163,7 +163,7 @@
   }
   .kb-empty {
     height: 56px;
-    font-size: 13px;
+    font-size: 16px;
   }
   .kb-card {
     padding: 14px;
@@ -174,18 +174,18 @@
     font-size: 16px;
   }
   .kb-card-desc {
-    font-size: 13px;
+    font-size: 16px;
   }
   .kb-progress-row {
     gap: 10px;
   }
   .kb-subtasks {
-    font-size: 11px;
+    font-size: 16px;
   }
   .kb-avatar {
     width: 28px;
     height: 28px;
-    font-size: 11px;
+    font-size: 16px;
   }
   .kb-prio {
     min-width: 20px;
@@ -223,13 +223,13 @@
     border-radius: 14px;
   }
   .kb-card-title {
-    font-size: 15px;
+    font-size: 16px;
   }
   .kb-card-desc {
-    font-size: 12px;
+    font-size: 16px;
   }
   .kb-chip {
-    font-size: 12px;
+    font-size: 16px;
     padding: 4px 8px;
     height: 24px;
   }
@@ -248,7 +248,7 @@
   }
   .kb-search input {
     height: 42px;
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 38px 0 12px;
   }
   .kb-add-btn {
@@ -264,7 +264,7 @@
   }
   .kb-empty {
     height: 52px;
-    font-size: 12px;
+    font-size: 16px;
   }
   .kb-card {
     gap: 6px;
@@ -272,21 +272,21 @@
     border-radius: 12px;
   }
   .kb-card-title {
-    font-size: 14.5px;
+    font-size: 16px;
   }
   .kb-card-desc {
-    font-size: 12px;
+    font-size: 16px;
   }
   .kb-progress-row {
     gap: 8px;
   }
   .kb-subtasks {
-    font-size: 10.5px;
+    font-size: 16px;
   }
   .kb-avatar {
     width: 26px;
     height: 26px;
-    font-size: 10px;
+    font-size: 16px;
   }
   .kb-prio__icon {
     width: 18px;
@@ -331,10 +331,10 @@
     margin: 18px 0 8px;
   }
   .td-desc {
-    font-size: 14px;
+    font-size: 16px;
   }
   .td-chip {
-    font-size: 14px;
+    font-size: 16px;
     padding: 5px 10px;
     border-radius: 8px;
   }
@@ -344,10 +344,10 @@
   }
   .td-label {
     min-width: 84px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .td-value {
-    font-size: 14px;
+    font-size: 16px;
   }
   #td-subtasks {
     margin-top: 12px;
@@ -356,7 +356,7 @@
     gap: 10px;
   }
   .td-task__label {
-    font-size: 14px;
+    font-size: 16px;
   }
   .td-checkbox {
     width: 20px;
@@ -370,7 +370,7 @@
   .td-action {
     padding: 8px 12px;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 

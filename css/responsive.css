@@ -123,9 +123,9 @@
 }
 
 @media (max-width: 945px) {
-  .main-content {
-    /* padding-bottom: 120px; Increased padding */
-  }
+  /* .main-content {
+    padding-bottom: 120px; Increased padding
+  } */
 
   .main-content-privacy {
     padding: 110px;
