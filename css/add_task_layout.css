@@ -34,14 +34,16 @@
    Seitenheader
    ------------------------------------------------------- */
 
-.header {
+/* .header {
   background-color: #ffffff;
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dddddd;
-}
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+} */
 
 /* Runder Nutzer-Avatar im Header */
 .user-circle {

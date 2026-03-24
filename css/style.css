@@ -6,17 +6,14 @@ body {
 }
 
 .header {
-  border-bottom: 0.2rem solid rgb(236, 236, 236);
-  box-shadow: 0 4px 2px -2px rgb(238, 237, 237);
-  color: black;
-  height: 96px;
-  width: 100%;
+  background-color: #ffffff;
+  padding: 16px 32px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  box-sizing: border-box;
-  background-color: white;
+  align-items: center;
+  border-bottom: 1px solid #dddddd;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 
 .headercontainer {
@@ -183,7 +180,6 @@ a.nav-item {
 .main-content-privacy {
   padding: 110px;
   overflow-y: auto;
-  overflow-x: hidden;
   max-height: 89vh;
 }
 
