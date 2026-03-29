@@ -173,9 +173,6 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
-              ondrop="moveTo('toDoTaskList'); dragLeaveHandler(event)"
-              ondragover="dragoverHandler(event)"
-              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardToDo"
               class="kb-col"
               aria-label="To do"
@@ -193,7 +190,17 @@
                   aria-label="Add task to To do"
                 ></button>
               </header>
-              <div id="toDoTaskList" class="kb-card-list" data-cards></div>
+              <div
+                ondrop="
+                  moveTo('toDoTaskList');
+                  dragLeaveHandler(event);
+                "
+                ondragover="dragoverHandler(event)"
+                ondragleave="dragLeaveHandler(event)"
+                id="toDoTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
               <div id="emptyToDo" class="kb-empty">
                 <span>No tasks To do</span>
               </div>
@@ -201,9 +208,6 @@
 
             <!-- In progress -->
             <section
-              ondrop="moveTo('inProgressTaskList'); dragLeaveHandler(event)"
-              ondragover="dragoverHandler(event)"
-              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardInProgress"
               class="kb-col"
               aria-label="In progress"
@@ -222,6 +226,12 @@
                 ></button>
               </header>
               <div
+                ondrop="
+                  moveTo('inProgressTaskList');
+                  dragLeaveHandler(event);
+                "
+                ondragover="dragoverHandler(event)"
+                ondragleave="dragLeaveHandler(event)"
                 id="inProgressTaskList"
                 class="kb-card-list"
                 data-cards
@@ -233,9 +243,6 @@
 
             <!-- Await feedback -->
             <section
-              ondrop="moveTo('awaitFeedbackTaskList'); dragLeaveHandler(event)"
-              ondragover="dragoverHandler(event)"
-              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardAwaitingFeedback"
               class="kb-col"
               aria-label="Await feedback"
@@ -254,6 +261,12 @@
                 ></button>
               </header>
               <div
+                ondrop="
+                  moveTo('awaitFeedbackTaskList');
+                  dragLeaveHandler(event);
+                "
+                ondragover="dragoverHandler(event)"
+                ondragleave="dragLeaveHandler(event)"
                 id="awaitFeedbackTaskList"
                 class="kb-card-list"
                 data-cards
@@ -265,9 +278,6 @@
 
             <!-- Done -->
             <section
-              ondrop="moveTo('doneTaskList'); dragLeaveHandler(event)"
-              ondragover="dragoverHandler(event)"
-              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardDone"
               class="kb-col"
               aria-label="Done"
@@ -276,7 +286,17 @@
               <header class="kb-col-head">
                 <h2 class="kb-col-title">Done</h2>
               </header>
-              <div id="doneTaskList" class="kb-card-list" data-cards></div>
+              <div
+                ondrop="
+                  moveTo('doneTaskList');
+                  dragLeaveHandler(event);
+                "
+                ondragover="dragoverHandler(event)"
+                ondragleave="dragLeaveHandler(event)"
+                id="doneTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
               <div id="emptyDone" class="kb-empty">
                 <span>No tasks Done</span>
               </div>
