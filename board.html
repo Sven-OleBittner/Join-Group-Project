@@ -41,7 +41,10 @@
       initBoardSite();
       initSite();
     "
-    onclick=" closeAllOptionsOnclick(); closeLogOutMenu();"
+    onclick="
+      closeAllOptionsOnclick();
+      closeLogOutMenu();
+    "
   >
     <dialog
       class="addTaskDialog"
@@ -122,7 +125,10 @@
         <div class="header-right">
           <div onclick="goToPage('./help.html')" class="help-icon">?</div>
           <div
-            onclick="showLogOutMenu(); event.stopPropagation()"
+            onclick="
+              showLogOutMenu();
+              event.stopPropagation();
+            "
             id="userInitials"
             class="user-avatar"
           ></div>
@@ -166,8 +172,9 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
-              ondrop="moveTo('toDoTaskList')"
+              ondrop="moveTo('toDoTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardToDo"
               class="kb-col"
               aria-label="To do"
@@ -193,8 +200,9 @@
 
             <!-- In progress -->
             <section
-              ondrop="moveTo('inProgressTaskList')"
+              ondrop="moveTo('inProgressTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardInProgress"
               class="kb-col"
               aria-label="In progress"
@@ -224,8 +232,9 @@
 
             <!-- Await feedback -->
             <section
-              ondrop="moveTo('awaitFeedbackTaskList')"
+              ondrop="moveTo('awaitFeedbackTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardAwaitingFeedback"
               class="kb-col"
               aria-label="Await feedback"
@@ -255,8 +264,9 @@
 
             <!-- Done -->
             <section
-              ondrop="moveTo('doneTaskList')"
+              ondrop="moveTo('doneTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardDone"
               class="kb-col"
               aria-label="Done"
@@ -299,15 +309,14 @@
     </div>
 
     <div
-    id="td-modal"
-    class="td-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="td-title"
-    onclick="closeTaskModal()"
-  >
-  <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
-
+      id="td-modal"
+      class="td-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="td-title"
+      onclick="closeTaskModal()"
+    >
+      <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
         <div class="td-chipwrap">
           <span id="td-chip" class="td-chip">User Story</span>
           <button class="closeBtn" onclick="closeTaskModal()">X</button>
@@ -338,7 +347,12 @@
         </div>
 
         <div class="td-footer td-actions">
-          <button class="td-action" type="button" id="td-delete" onclick="deleteTask(currentTaskId)">
+          <button
+            class="td-action"
+            type="button"
+            id="td-delete"
+            onclick="deleteTask(currentTaskId)"
+          >
             <img
               src="./assets/img/contact-main-delete.svg"
               alt=""
@@ -346,7 +360,12 @@
             />
             Delete
           </button>
-          <button class="td-action" type="button" id="td-edit"  onclick="editTask(currentTaskId)">
+          <button
+            class="td-action"
+            type="button"
+            id="td-edit"
+            onclick="editTask(currentTaskId)"
+          >
             <img
               src="./assets/img/contact-main-edit.svg"
               alt=""
@@ -357,7 +376,6 @@
         </div>
       </div>
     </div>
-
 
     <script src="./js/js_files/db.js"></script>
     <script src="./general_script.js"></script>

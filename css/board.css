@@ -381,13 +381,12 @@ button[id="at-close"] {
   gap: 12px;
   overflow-y: auto;
   min-height: 64px;
-  max-height: 600px;
-  scrollbar-width: none; /* Firefox */
+  max-height: 654px;
   padding: 0px 6px 20px 6px;
 }
 
-.kb-card-list[data-cards]::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+.kb-col {
+  height: 100vh;
 }
 
 .kb-empty {
