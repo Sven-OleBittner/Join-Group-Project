@@ -78,9 +78,7 @@ function validateSignupPassword() {
   const passwordError = document.getElementById("password-error");
   const icon = document.getElementById("lock-signup-password");
   const toggleIcon = document.getElementById("toggle-signup-password");
-  const isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/m.test(
-    passwordInput.value,
-  );
+  const isValid = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/m.test(passwordInput.value);
   passwordInput.classList.toggle("error", !isValid);
   icon.classList.toggle("input-icon", isValid);
   icon.classList.toggle("input-icon-error", !isValid);
@@ -111,13 +109,18 @@ function validatePasswordMatch() {
 }
 
 /** Initialisiert die Formular-Validierung */
-async function signUp() {
+async function signUp(event) {
+  event.preventDefault()
   let userName = document.getElementById("signup-name");
   let email = document.getElementById("signup-email");
   let passwordInput = document.getElementById("signup-password");
   let confirmInput = document.getElementById("confirm-password");
   if (passwordInput.value === confirmInput.value) {
     await regDataToBackend(userName, email, passwordInput);
+
+    setTimeout(() => {
+      window.location.href = "index.html?msg=Registration successful!";
+    }, 1000);
   } else {
     return;
   }
@@ -136,20 +139,12 @@ async function regDataToBackend(userName, email, passwordInput) {
     password: passwordInput.value,
   };
   await postData("user", user);
-  setTimeout(() => {
-    window.location.href = "index.html?msg=Registration successful!";
-  }, 250);
 }
 
 function enableSignupBtn() {
   const checkbox = document.getElementById("privacy-policy-checkbox");
   const signupBtn = document.getElementById("signup-btn");
   signupBtn.disabled = !checkbox.checked;
-  if (!signupBtn.disabled) {
-    signupBtn.style.cursor = "pointer";
-  } else {
-    signupBtn.style.cursor = "not-allowed";
-  }
 }
 
 function enablePolicyCheckbox() {
@@ -159,9 +154,4 @@ function enablePolicyCheckbox() {
     validateSignupPassword() &&
     validatePasswordMatch()
   );
-  if (!checkbox.disabled) {
-    checkbox.style.cursor = "pointer";
-  } else {
-    checkbox.style.cursor = "not-allowed";
-  }
 }

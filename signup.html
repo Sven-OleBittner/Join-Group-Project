@@ -33,7 +33,7 @@
           </div>
           <div class="underline"></div>
 
-          <form id="signup-form" onsubmit="signUp()">
+          <form id="signup-form" onsubmit="signUp(event)">
             <div class="input-group">
               <input
                 onblur="validateName()"
@@ -96,7 +96,7 @@
               />
               <div class="error-box">
                 <span class="error-text" id="password-error"
-                  >Use at least 6 characters.</span
+                  >Minimum 6 Characters including letters and numbers.</span
                 >
               </div>
             </div>

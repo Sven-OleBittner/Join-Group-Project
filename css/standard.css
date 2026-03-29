@@ -32,7 +32,7 @@
 } */
 
 .error-box {
-  height: 20px;
+  height: 28px;
 }
 
 button:hover {
@@ -160,6 +160,14 @@ a {
   background: linear-gradient(180deg, #1976a3 0%, #151e28 100%);
 }
 
+button:disabled {
+  background-color: #949292;
+  color: #a8a8a8;
+  cursor: not-allowed;
+}
 
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
 
 

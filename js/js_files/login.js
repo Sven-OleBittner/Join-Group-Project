@@ -36,6 +36,10 @@ function showMsg() {
     msgBoxText.style.display = "";
     msgBox.style.display = "";
     removeMsgFromUrl();
+    // setTimeout(() => {
+    //   msgBoxText.style.display = "none";
+    //   msgBox.style.display = "none";
+    // }, 2000);
   } else {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
