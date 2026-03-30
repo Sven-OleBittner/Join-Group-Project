@@ -36,10 +36,6 @@ function showMsg() {
     msgBoxText.style.display = "";
     msgBox.style.display = "";
     removeMsgFromUrl();
-    // setTimeout(() => {
-    //   msgBoxText.style.display = "none";
-    //   msgBox.style.display = "none";
-    // }, 2000);
   } else {
     msgBoxText.style.display = "none";
     msgBox.style.display = "none";
@@ -69,3 +65,31 @@ async function loginGuest() {
   window.location.href = "summary.html";
 }
 
+function validateInput(inputId) {
+  let input = document.getElementById(inputId);
+  let errorBox = document.getElementById(`${inputId}-error`);
+  let regEx = chooseInput(inputId);
+  let isValid = regEx.test(input.value);
+  errorBox.innerHTML = chooseError(inputId);
+  input.classList.toggle("error", !isValid);
+  errorBox.style.display = isValid ? "none" : "block";
+  return isValid;
+}
+
+function chooseInput(inputId) {
+  switch (inputId) {
+    case "email":
+      return /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/i;
+    case "password":
+      return /^(?=.*[A-Za-z])(?=.*\d).{6,}$/m;
+  }
+}
+
+function chooseError(inputId) {
+  switch (inputId) {
+    case "email":
+      return "Please enter a valid email.";
+    case "password":
+      return "Please enter a valid password.";
+  }
+}

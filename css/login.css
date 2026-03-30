@@ -220,7 +220,7 @@ form#login-form {
 
 .error-text {
   color: #e74c3c;
-  padding: 12px;
+  padding: 8px;
   justify-content: center;
   display: none;
   font-weight: 500;

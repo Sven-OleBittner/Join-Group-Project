@@ -48,7 +48,7 @@
             "
           >
             <div class="input-group">
-              <input type="text" id="email" placeholder="Email" />
+              <input onblur="validateInput('email')" type="text" id="email" placeholder="Email" />
               <img
                 src="./assets/img/mail.svg"
                 id="email-icon"
@@ -62,7 +62,7 @@
               </div>
             </div>
             <div class="input-group">
-              <input type="password" id="password" placeholder="Password" />
+              <input onblur="validateInput('password')" type="password" id="password" placeholder="Password" />
               <img
                 src="./assets/img/lock.svg"
                 class="input-icon"
@@ -78,7 +78,7 @@
               />
               <div class="error-box">
                 <span class="error-text" id="password-error"
-                  >Please enter a valid password.</span
+                  >Check your email and your password. Please try again.</span
                 >
               </div>
             </div>
