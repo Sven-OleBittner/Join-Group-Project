@@ -275,46 +275,6 @@
   vertical-align: middle;
 }
 
-.td-person__circle {
-  background: #8ca3b8;
-}
-
-.td-person__circle--EM {
-  background: #16c6c0 !important;
-}
-
-.td-person__circle--MB {
-  background: #5b4db2 !important;
-}
-
-.td-person__circle--AM {
-  background: #0a6bff !important;
-}
-
-.td-person__circle--DE {
-  background: #24c3a9 !important;
-}
-
-.td-person__circle--BZ {
-  background: #1e63ff !important;
-}
-
-.td-person__circle--AS {
-  background: #ff5aa0 !important;
-}
-
-.td-person__circle--EF {
-  background: #ffc701 !important;
-}
-
-.td-person__circle--TW {
-  background: #ff4646 !important;
-}
-
-.td-person__circle--SM {
-  background: #00bee8 !important;
-}
-
 .kb-priority {
   display: flex;
   align-items: center;
@@ -426,4 +386,9 @@
 
 .header .header-logo {
   display: none;
+}
+
+.drag-over {
+  background: rgba(54, 54, 54, 0.123);
+  border-radius: 12px;
 }

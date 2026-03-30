@@ -29,6 +29,12 @@ function dragStart(taskId, event) {
 
 function dragoverHandler(ev) {
   ev.preventDefault();
+  ev.currentTarget.classList.add("drag-over");
+}
+
+function dragLeaveHandler(ev) {
+  ev.preventDefault();
+  ev.currentTarget.classList.remove("drag-over");
 }
 
 async function moveTo(columnId) {
@@ -42,6 +48,7 @@ async function moveTo(columnId) {
     await putData(`task/${taskId}`, existingTask);
     initBoardSite();
   }
+
 }
 
 async function moveToResp(columnId, taskId) {

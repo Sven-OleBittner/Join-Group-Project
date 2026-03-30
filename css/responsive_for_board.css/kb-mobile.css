@@ -206,6 +206,7 @@
   }
   .kb-col {
     overflow-x: hidden;
+    height: unset;
   }
   .kb-card {
     overflow-x: hidden;

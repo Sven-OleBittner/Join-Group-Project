@@ -45,6 +45,10 @@
       closeAllOptionsOnclick();
       closeLogOutMenu();
     "
+    onclick="
+      closeAllOptionsOnclick();
+      closeLogOutMenu();
+    "
   >
     <dialog
       class="addTaskDialog"
@@ -148,6 +152,7 @@
                   type="text"
                   placeholder="Find Task"
                   aria-label="Find Task"
+                  onkeyup="findTaskBy()"
                 />
                 <img
                   onclick="findTaskBy()"
@@ -174,8 +179,9 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
-              ondrop="moveTo('toDoTaskList')"
+              ondrop="moveTo('toDoTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardToDo"
               class="kb-col"
               aria-label="To do"
@@ -201,8 +207,9 @@
 
             <!-- In progress -->
             <section
-              ondrop="moveTo('inProgressTaskList')"
+              ondrop="moveTo('inProgressTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardInProgress"
               class="kb-col"
               aria-label="In progress"
@@ -232,8 +239,9 @@
 
             <!-- Await feedback -->
             <section
-              ondrop="moveTo('awaitFeedbackTaskList')"
+              ondrop="moveTo('awaitFeedbackTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardAwaitingFeedback"
               class="kb-col"
               aria-label="Await feedback"
@@ -263,8 +271,9 @@
 
             <!-- Done -->
             <section
-              ondrop="moveTo('doneTaskList')"
+              ondrop="moveTo('doneTaskList'); dragLeaveHandler(event)"
               ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardDone"
               class="kb-col"
               aria-label="Done"
