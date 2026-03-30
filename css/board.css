@@ -394,11 +394,6 @@ button[id="at-close"] {
   display: none !important;
 }
 
-@media (max-width: 1024px) {
-  .title {
-    display: none;
-  }
-}
 
 .closeBtn {
   cursor: pointer;

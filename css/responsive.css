@@ -154,14 +154,8 @@
 
 }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1024px) {
  .logout-menu {
-   top: 90px;
-  }
-}
-
-@media (min-width: 1201px) {
-  .logout-menu {
-    top: 112px;
+   top: 112px;
   }
 }
