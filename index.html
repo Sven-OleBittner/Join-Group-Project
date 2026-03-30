@@ -48,7 +48,12 @@
             "
           >
             <div class="input-group">
-              <input onblur="validateInput('email')" type="text" id="email" placeholder="Email" />
+              <input
+                onblur="validateInput('email')"
+                type="text"
+                id="email"
+                placeholder="Email"
+              />
               <img
                 src="./assets/img/mail.svg"
                 id="email-icon"
@@ -56,13 +61,16 @@
                 alt="Email"
               />
               <div class="error-box">
-                <span class="error-text" id="email-error"
-                  >Please enter a valid email.</span
-                >
+                <span class="error-text" id="email-error"></span>
               </div>
             </div>
             <div class="input-group">
-              <input onblur="validateInput('password')" type="password" id="password" placeholder="Password" />
+              <input
+                onblur="validateInput('password')"
+                type="password"
+                id="password"
+                placeholder="Password"
+              />
               <img
                 src="./assets/img/lock.svg"
                 class="input-icon"
@@ -77,13 +85,13 @@
                 alt="Show password"
               />
               <div class="error-box">
-                <span class="error-text" id="password-error"
-                  >Check your email and your password. Please try again.</span
-                >
+                <span class="error-text" id="password-error"></span>
               </div>
             </div>
             <div class="button-group">
-              <button type="submit" class="login-btn" id="login-btn" disabled>Log in</button>
+              <button type="submit" class="login-btn" id="login-btn" disabled>
+                Log in
+              </button>
               <button onclick="loginGuest()" type="button" class="guest-btn">
                 Guest Log in
               </button>

@@ -2,7 +2,7 @@ let users = [];
 let loginUser;
 
 function init() {
-  initEventListeners()
+  initEventListeners();
   dataToUsers();
   showMsg();
 }
@@ -44,10 +44,12 @@ function showMsg() {
 }
 
 function userNotFound() {
-  let errorBox = document.getElementById("password-error");
+  let passwordError = document.getElementById("password-error");
   let toggleIcon = document.getElementById("toggle-password");
   let lockIcon = document.getElementById("lock-password");
-  errorBox.style.display = "block";
+  passwordError.innerHTML =
+    "Check your email and your password. Please try again.";
+  passwordError.style.display = "block";
   lockIcon.classList.toggle("toggle-password-icon");
   toggleIcon.classList.toggle("toggle-password-icon-error");
 }
@@ -71,7 +73,7 @@ function validateInput(inputId) {
   let errorBox = document.getElementById(`${inputId}-error`);
   let regEx = chooseInput(inputId);
   let isValid = regEx.test(input.value);
-  errorBox.innerHTML = chooseError(inputId);
+  errorBox.innerHTML = chooseErrorInput(inputId);
   input.classList.toggle("error", !isValid);
   errorBox.style.display = isValid ? "none" : "block";
   return isValid;
@@ -86,7 +88,7 @@ function chooseInput(inputId) {
   }
 }
 
-function chooseError(inputId) {
+function chooseErrorInput(inputId) {
   switch (inputId) {
     case "email":
       return "Please enter a valid email.";
