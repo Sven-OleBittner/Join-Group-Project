@@ -42,8 +42,8 @@ async function loggingOutUser() {
  */
 function getDesktopLogOutMenuHTML() {
     return `
-    <div id="logout-menu-overlay">
-        <div class="logout-menu">
+    <div id="logout-menu-overlay" class="max-w-1440">
+        <div class="logout-menu max-w-1440">
             <a href="./legal_notice.html" class="menu-item">Legal Notice</a>
             <a href="./privacy_policy.html" class="menu-item">Privacy Policy</a>
             <a onclick="loggingOutUser()" class="menu-item">Log out</a>

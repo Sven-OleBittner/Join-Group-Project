@@ -384,10 +384,6 @@
   background-image: url("../assets/img/red_high_urgent.svg");
 }
 
-.header .header-logo {
-  display: none;
-}
-
 .drag-over {
   background: rgba(54, 54, 54, 0.123);
   border-radius: 12px;
