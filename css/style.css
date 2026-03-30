@@ -135,7 +135,7 @@ a.nav-item {
   font-family: 'Inter', sans-serif;
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-item.active {
   background-color: #091931;
 }
 
@@ -241,6 +241,7 @@ a.nav-item {
 @media (min-width: 947px) {
   .menu-item:hover {
     background-color: rgba(41, 171, 226, 0.15);
+    border-radius: 8px;
   }
 
   .help-icon {
