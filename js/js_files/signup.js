@@ -110,7 +110,7 @@ function validatePasswordMatch() {
 
 /** Initialisiert die Formular-Validierung */
 async function signUp(event) {
-  event.preventDefault()
+  event.preventDefault();
   let userName = document.getElementById("signup-name");
   let email = document.getElementById("signup-email");
   let passwordInput = document.getElementById("signup-password");

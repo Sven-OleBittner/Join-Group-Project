@@ -2,6 +2,7 @@ let users = [];
 let loginUser;
 
 function init() {
+  initEventListeners()
   dataToUsers();
   showMsg();
 }
@@ -92,4 +93,18 @@ function chooseError(inputId) {
     case "password":
       return "Please enter a valid password.";
   }
+}
+
+function updateLoginState() {
+  const loginBtn = document.getElementById("login-btn");
+  const ok = validateInput("email") && validateInput("password");
+  loginBtn.disabled = !ok;
+  loginBtn.classList.toggle("disabled", !ok);
+}
+
+function initEventListeners() {
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  email.addEventListener("input", updateLoginState);
+  password.addEventListener("input", updateLoginState);
 }

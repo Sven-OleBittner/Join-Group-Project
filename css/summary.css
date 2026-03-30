@@ -181,8 +181,13 @@ body {
   color: var(--darkblue-light-color);
 }
 
+.greeting-text {
+  font-size: 35px;
+}
+
 .greetingName {
   color: var(--lightblue-color);
+  font-size: 47px;
 }
 
 .urgent {

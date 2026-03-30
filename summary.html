@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join</title>
   <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
   <link rel="stylesheet" href="./css/standard.css">
   <link rel="stylesheet" href="./css/color.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/summary.css">
   <link rel="stylesheet" href="./css/summary_responsive.css">
   <link rel="stylesheet" href="./css/responsive.css">
-  <link rel="stylesheet" href="./assets/fonts/fonts.css">
 </head>
 
 <body onload="initSummary(); searchForLoginUser();" onclick="closeLogOutMenu();">
@@ -79,7 +79,7 @@
         </div>
       </header>
     <div class="greeting-container">
-      <span id="greetingText" class="greeting-text"><span id="greetingResp"></span><br> <span class="greetingName" id="greetingNameResp"></span>!</span>
+      <span id="greetingText" class="greeting-text"><span id="greetingResp" class="greetingResp"></span><br> <span class="greetingName" id="greetingNameResp"></span>!</span>
     </div>
     <div class="main-content">
       <main class="max-w-1440">
@@ -150,7 +150,7 @@
               </section>
             </section>
             <section class="summary-right">
-              <span id="greetingBox" class="greeting-box"><span id="greeting"></span> <br> <span class="greetingName" id="greetingName"></span>!</span>
+              <span id="greetingBox" class="greeting-box"><span id="greeting" class="greeting-text"></span> <br> <span class="greetingName" id="greetingName"></span>!</span>
             </section>
           </section>
       </main>

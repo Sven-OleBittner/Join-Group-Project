@@ -4,9 +4,13 @@
         position: absolute;
         align-self: center;
         height: 78vh;
-        font-size: 32px;
         animation: greeting 3.5s ease-out forwards;
     }
+
+        .greetingResp, .greetingName, .greeting-text {
+        font-size: 35px;
+    }
+
 
     .greeting-container.no-animation {
         display: none;
@@ -160,7 +164,7 @@
     }
 }
 
-@media (min-width:1023px) and (max-width: 1440px) {
+@media (min-width: 1024px) and (max-width: 1099px) {
 
     .summary-left {
         padding-left: 64px;
@@ -168,7 +172,20 @@
         padding-right: 64px;
     }
 
-    .greeting-box {
+    .greeting, .greetingName {
+        font-size: 30px;
+    }
+}
+
+@media (min-width:1100px) and (max-width: 1440px) {
+
+    .summary-left {
+        padding-left: 64px;
+        padding-top: 32px;
+        padding-right: 64px;
+    }
+
+    .greeting, .greetingName {
         font-size: 40px;
     }
 }
