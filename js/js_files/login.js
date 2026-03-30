@@ -103,8 +103,6 @@ function updateLoginState() {
 }
 
 function initEventListeners() {
-  const email = document.getElementById("email");
   const password = document.getElementById("password");
-  email.addEventListener("input", updateLoginState);
   password.addEventListener("input", updateLoginState);
 }
