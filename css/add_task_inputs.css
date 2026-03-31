@@ -213,7 +213,6 @@ filter: brightness(0) invert(1); ;
 #date {
   padding: 10px 40px 10px 10px;
   font-size: 16px;
-  cursor: pointer;
   width: 100%;
   border: 1px solid #cccccc;
   border-radius: 8px;

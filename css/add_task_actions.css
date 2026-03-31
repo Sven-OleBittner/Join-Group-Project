@@ -93,9 +93,7 @@
 .clear-btn:hover {
   border-color: #29ABE2;
   color: #29ABE2;
-  background: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+  background-color: #fff;
 }
 
 /* Icon-Übergang vorbereiten */
@@ -108,12 +106,12 @@
   filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
 }
 
-/* Erstellen-Button Hover: blauer Hintergrund */
+/* Erstellen-Button Hover: blauer Hintergrund
 .create-btn:hover {
   background: #29ABE2;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
-}
+} */
 
 
 /* -------------------------------------------------------
