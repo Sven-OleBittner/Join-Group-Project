@@ -65,15 +65,23 @@ function toggleContactSelection(firebaseKey) {
  * Updates the display of selected contacts as avatar chips below the dropdown
  * @returns {void}
  */
+function renderChip(container, contact) {
+  container.innerHTML += `<div class="avatar-chip ${contact.color}">${contact.initials}</div>`;
+}
+
+function renderOverflow(container, count) {
+  container.innerHTML += `<div class="avatar-chip color-aquamarine overflow">+${count}</div>`;
+}
+
 function updateSelectedContactsDisplay() {
-  const selectedContacts = getSelectedContacts();
-  const chipsContainer = document.getElementById('assigned-chips');
-  chipsContainer.innerHTML = '';
-  selectedContacts.forEach(contact => {
-    chipsContainer.innerHTML += `
-      <div class="avatar-chip ${contact.color}">${contact.initials}</div>
-    `;
-  });
+  const sel = getSelectedContacts();
+  const c = document.getElementById('assigned-chips');
+  c.innerHTML = '';
+  if (!sel.length) return;
+  const maxVisible = 4;
+  if (sel.length <= maxVisible) { sel.forEach(s => renderChip(c, s)); return; }
+  sel.slice(0, maxVisible - 1).forEach(s => renderChip(c, s));
+  renderOverflow(c, sel.length - (maxVisible - 1));
 }
 
 /**

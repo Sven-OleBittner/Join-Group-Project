@@ -48,7 +48,6 @@ async function moveTo(columnId) {
     await putData(`task/${taskId}`, existingTask);
     initBoardSite();
   }
-
 }
 
 async function moveToResp(columnId, taskId) {
@@ -93,15 +92,31 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
     const [key, task] = filteredTasks[i];
     let backgroundColor = getCategoryColor(task.category);
     let priority = getPriority(task.priority);
-    container.innerHTML += getTasksTemplate(id, task, key, backgroundColor, priority);
+    container.innerHTML += getTasksTemplate(
+      id,
+      task,
+      key,
+      backgroundColor,
+      priority,
+    );
     renderSubTask(id, task, key);
     await renderAvatars(task.assigned || [], key, id);
   }
   checkColumns(id, emptyColumnId);
 }
 
+function checkAssignedContacts(id, task, key) {
+  const avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
+  if (!avatarsContainer) return;
+  const assigned = task.assigned || [];
+  if (assigned.length > 4) {
+    avatarsContainer.innerHTML = "";
+  }
+}
+
 function getCategoryColor(category) {
-  const name = category && typeof category === "object" ? category.name : category;
+  const name =
+    category && typeof category === "object" ? category.name : category;
   if (name === "Technical Task") {
     return "color-turquoise";
   } else {
@@ -110,7 +125,9 @@ function getCategoryColor(category) {
 }
 
 function renderSubTask(id, task, key) {
-  const subTasksContainer = document.getElementById(`task-${key}-subtasks-${id}`);
+  const subTasksContainer = document.getElementById(
+    `task-${key}-subtasks-${id}`,
+  );
   if (!task.subtasks) {
     subTasksContainer.innerHTML = "";
     return;
@@ -120,7 +137,11 @@ function renderSubTask(id, task, key) {
     (sub) => typeof sub === "object" && sub.completed,
   ).length;
   const percent = (completedSubtasks / subtasks.length) * 100;
-  subTasksContainer.innerHTML = getSubTemplate(subtasks, percent, completedSubtasks);
+  subTasksContainer.innerHTML = getSubTemplate(
+    subtasks,
+    percent,
+    completedSubtasks,
+  );
 }
 
 async function renderAvatars(taskAssigned, key, id) {
@@ -130,18 +151,27 @@ async function renderAvatars(taskAssigned, key, id) {
   for (let i = 0; i < taskAssigned.length; i++) {
     const assignee = taskAssigned[i];
     const color = await getContactBg(assignee.initials);
-    avatarsContainer.innerHTML += `
+    if (i >= 4) {
+      avatarsContainer.innerHTML += `
+        <div class="kb-avatar color-aquamarine">+${taskAssigned.length - 4}</div>
+      `;
+      break;
+    } else {
+      avatarsContainer.innerHTML += `
       <div class="kb-avatar ${assignee.color || color}" title="${assignee.initials}">
         ${assignee.initials}
       </div>
     `;
+    }
   }
 }
 
 async function getContactBg(taskAssigned) {
   const contactDb = await getData("contacts");
   const contactArray = Object.values(contactDb);
-  let contact = contactArray.find((contact) => contact.initials === taskAssigned);
+  let contact = contactArray.find(
+    (contact) => contact.initials === taskAssigned,
+  );
   return contact ? contact.color : "color-default";
 }
 
@@ -179,8 +209,11 @@ function fillModalHeader(task) {
   document.getElementById("td-title").textContent = task.title;
   document.getElementById("td-desc").textContent = task.description;
   document.getElementById("td-due").textContent = task.dueDate;
-  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(task.priority);
-  document.getElementById("td-prio-icon").innerHTML = `<img src="./assets/img/${getPriority(task.priority)}">`;
+  document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(
+    task.priority,
+  );
+  document.getElementById("td-prio-icon").innerHTML =
+    `<img src="./assets/img/${getPriority(task.priority)}">`;
 }
 
 async function renderModalAvatars(assigned) {
@@ -202,7 +235,8 @@ function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks-list").innerHTML = subtasks
     .map((sub, index) => {
       const label = typeof sub === "string" ? sub : sub.text;
-      const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";
+      const isChecked =
+        typeof sub === "object" && sub.completed ? "checked" : "";
       return `
       <li class="td-task" id="td-task-item-${index}">
         <input type="checkbox" id="subtask-${index}" ${isChecked}
@@ -215,7 +249,9 @@ function renderModalSubtasks(subtasks) {
 }
 
 async function toggleSubtaskStyle(index, isChecked) {
-  document.getElementById(`td-task-item-${index}`).classList.toggle("is-done", isChecked);
+  document
+    .getElementById(`td-task-item-${index}`)
+    .classList.toggle("is-done", isChecked);
   const task = await getData(`task/${currentTaskId}`);
   const key = Object.keys(task.subtasks)[index];
   task.subtasks[key] =
@@ -306,9 +342,12 @@ function showAllTasks() {
 
 function filterTasks(query) {
   document.querySelectorAll(".kb-card").forEach((t) => {
-    const title = t.querySelector(".kb-card-title")?.textContent.toLowerCase() || "";
-    const desc = t.querySelector(".kb-card-desc")?.textContent.toLowerCase() || "";
-    t.style.display = title.includes(query) || desc.includes(query) ? "" : "none";
+    const title =
+      t.querySelector(".kb-card-title")?.textContent.toLowerCase() || "";
+    const desc =
+      t.querySelector(".kb-card-desc")?.textContent.toLowerCase() || "";
+    t.style.display =
+      title.includes(query) || desc.includes(query) ? "" : "none";
   });
   updateEmptyPlaceholders();
 }
@@ -321,7 +360,12 @@ async function findTaskBy() {
 
 function isVisible(el) {
   const cs = window.getComputedStyle(el);
-  return cs.display !== "none" && cs.visibility !== "hidden" && el.offsetWidth > 0 && el.offsetHeight > 0;
+  return (
+    cs.display !== "none" &&
+    cs.visibility !== "hidden" &&
+    el.offsetWidth > 0 &&
+    el.offsetHeight > 0
+  );
 }
 
 function updateEmptyPlaceholders() {
