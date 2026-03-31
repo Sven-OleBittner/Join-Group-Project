@@ -58,7 +58,6 @@ body, html {
 
 .signup-btn:hover {
   background-color: #29abe2;
-  transform: translateY(-2px);
   box-shadow: var(--box-shadow-color);
 }
 
@@ -161,7 +160,6 @@ form#login-form {
 
 .login-btn:enabled:hover {
   background-color: #29ABE2;
-  transform: translateY(-2px);
   box-shadow: var(--box-shadow-color);
 }
 
@@ -182,7 +180,6 @@ form#login-form {
   border-color: #29ABE2;
   color: #29ABE2;
   background: white;
-  transform: translateY(-2px);
   box-shadow: var(--box-shadow-color);
 }
 
