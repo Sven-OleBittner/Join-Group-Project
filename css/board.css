@@ -372,6 +372,7 @@ button[id="at-close"] {
 
 .kb-col {
   height: 80vh;
+  padding: 8px 0px;
 }
 
 .kb-empty {
