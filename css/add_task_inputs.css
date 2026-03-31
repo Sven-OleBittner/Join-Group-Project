@@ -107,11 +107,11 @@ textarea:focus {
 }
 
 .select-items .contact-option:hover {
-  background-color: #f6f7f8;
+  background-color: var(--light-grey-color);
 }
 
 .contact-option:has(input[type="checkbox"]:checked) {
-  background-color: #2A3647;
+  background-color: var(--subtitle-color);
 }
 
 .contact-option:has(input[type="checkbox"]:checked) .name {
@@ -124,7 +124,7 @@ filter: brightness(0) invert(1); ;
 
 
 .contact-option:has(input[type="checkbox"]:checked):hover {
-  background-color: #091931;
+  background-color: var(--darkblue-color);
 }
 
 
