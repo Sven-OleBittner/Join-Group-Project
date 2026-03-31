@@ -223,7 +223,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (min-width: 320px) {
   .kb {
     padding: 12px 10px 96px;
   }
@@ -261,11 +261,14 @@
   }
   .kb-card-title {
     font-size: 16px;
-    overflow: hidden;
   }
   .kb-card-desc {
     font-size: 16px;
+  }
+
+  .kb-card-title, .kb-card-desc {
     overflow: hidden;
+    text-wrap: auto;
   }
   .kb-progress-row {
     gap: 8px;
