@@ -115,7 +115,7 @@
     gap: 10px;
     border-width: 1px;
     font-weight: bold;
-    background-color: var(--darkblue-color);
+    background-color: var(--subtitle-color);
     color: var(--white-color);
     display: flex;
     align-items: center;
@@ -133,7 +133,7 @@
 
 /* Add contact button active state */
 .add-contact-btn:active {
-    scale: 0.98;
+    background-color: var(--darkblue-color);
 }
 
 /* Icon inside add contact button */

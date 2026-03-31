@@ -62,6 +62,7 @@ input::placeholder {
     padding: 15px 23.5px;
     gap: 10px;
     border-width: 1px;
+    cursor: pointer;
 }
 
 .contact-delete {
@@ -74,11 +75,12 @@ input::placeholder {
 .contact-delete:hover {
     border-color: var(--lightblue-color);
     color: var(--lightblue-color);
+    background-color: var(--white-color);
 }
 
 .contact-save {
     font-weight: bold;
-    background-color: var(--darkblue-color);
+    background-color: var(--subtitle-color);
     color: var(--white-color);
 }
 
@@ -102,13 +104,22 @@ input::placeholder {
 
 .contact-delete:hover,
 .contact-save:hover {
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-    scale: 1.02;
+    box-shadow:var(--box-shadow-color);
+}
+
+.contact-save:active {
+    background-color: var(--darkblue-color);
 }
 
 .contact-delete:active,
 .contact-save:active {
-    scale: 0.98;
+    box-shadow: var(--box-shadow-color);
+}
+
+.contact-delete:active {
+    background-color: var(--white-color);
+    border-color: var(--darkblue-light-color);
+    color: var(--darkblue-color);
 }
 
 .contact-delete:hover .fill-hover {
@@ -119,11 +130,11 @@ input::placeholder {
     filter: brightness(0) saturate(100%) invert(74%) sepia(12%) saturate(2613%) hue-rotate(177deg) brightness(101%) contrast(92%);
 }
 
-.contact-delete:active,
+/* .contact-delete:active,
 .contact-save:active {
     box-shadow: none;
     scale: 0.98;
-}
+} */
 
 /* ===================================================================
    RESPONSIVE STYLES - FORMS
