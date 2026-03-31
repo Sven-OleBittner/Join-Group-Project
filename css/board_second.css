@@ -6,8 +6,8 @@
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  border: 2px solid #2a3647;
-  background: #ffffff;
+  border: 2px solid var(--subtitle-color);
+  background: var(--white-color);
   display: inline-grid;
   place-items: center;
   line-height: 1;
@@ -19,12 +19,17 @@
   display: inline-block;
   font-size: 22px;
   font-weight: 700;
-  color: #2a3647;
-  transform: translateY(-1px);
+  color: var(--darkblue-color);
 }
 
 .kb-col-add:hover::after {
-  color: #29abe2;
+  color:var(--lightblue-color);
+  background-color: var(--white-color);
+}
+
+.kb-col-add:active {
+  color: var(--darkblue-color);
+  background-color: var(--white-color);
 }
 
 .at-overlay {

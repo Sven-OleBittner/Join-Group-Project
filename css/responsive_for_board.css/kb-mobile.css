@@ -130,8 +130,8 @@
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    border: 2px solid #2a3647;
-    background: #ffffff;
+    border: 2px solid var(--subtitle-color);
+    background: var(--white-color);
     display: inline-grid;
     place-items: center;
     line-height: 1;
@@ -141,12 +141,12 @@
     content: "+";
     font-weight: 700;
     font-size: 18px;
-    color: #2a3647;
+    color: var(--darkblue-color);
     transform: translateY(-1px);
   }
   .kb-col-add:hover {
-    border-color: #29abe2;
-    background: #ffffff;
+    border-color: var(--lightblue-color);
+    background-color: var(--white-color);
   }
   .kb-empty {
     height: 56px;

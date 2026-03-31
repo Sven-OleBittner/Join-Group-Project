@@ -34,12 +34,12 @@ function guestGreeting() {
   const currentHour = new Date().getHours();
   const greeting =
     currentHour < 12
-      ? "Good Morning !"
+      ? "Good morning!"
       : currentHour < 16
-        ? "Good Day !"
+        ? "Good day!"
         : currentHour < 18
-          ? "Good Afternoon !"
-          : "Good Evening !";
+          ? "Good afternoon!"
+          : "Good evening!";
   document.getElementById("greetingText").innerHTML = greeting;
   document.getElementById("greetingBox").innerHTML = greeting;
 }
