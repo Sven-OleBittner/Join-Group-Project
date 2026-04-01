@@ -28,13 +28,14 @@
 .error-message {
   color: var(--required-color);
   font-size: 16px;
-  display: none;
+  display: block;
   margin-top: -12px;
+  opacity: 0;
 }
 
 /* Fehlermeldung sichtbar schalten */
 .error-message.visible {
-  display: block;
+  opacity: 1;
 }
 
 

@@ -10,7 +10,7 @@ function getAddTaskTemplate(buttonId) {
           <form class="task-form" id="task-form">
             <div class="form-left">
               <label for="title">Title<span class="required">*</span></label>
-              <input type="text" id="title" placeholder="Enter a title" oninput="validateTitle()" />
+              <input type="text" id="title" placeholder="Enter a title" oninput="validateTitle()" onblur="validateTitle()" />
               <span class="error-message" id="title-error">This field is required</span>
 
               <label for="description">Description</label>
@@ -23,7 +23,7 @@ function getAddTaskTemplate(buttonId) {
                 >Due date<span class="required">*</span></label
               >
               <div class="date-wrapper">
-                <input type="text" id="date" placeholder="dd/mm/yyyy" oninput="validateDate()" />
+                <input type="text" id="date" placeholder="dd/mm/yyyy" oninput="validateDate()" onblur="validateDate()" />
                 <img
                   src="./assets/img/add_task_due_date_calendar_icon.svg"
                   class="icon-calendar"

@@ -125,6 +125,7 @@ function validateDate() {
   resetDateErrors();
   if (!value) return showDateError('date-error', date);
   if (!isValidDateFormat(value)) return showDateError('date-format-error', date);
+  if (!isPossibleDate(value)) return showDateError('date-possible-error', date);
   date.classList.remove('input-error');
   return true;
 }
@@ -145,6 +146,17 @@ function isValidDateFormat(value) {
   return /^\d{2}\/\d{2}\/\d{4}$/.test(value);
 }
 
+function isPossibleDate(value) {
+  const [day, month, year] = value.split('/').map(Number);
+  const date = new Date(year, month - 1, day);
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day &&
+    date >= new Date()
+  );
+}
+
 /**
  * Resets all date error messages
  * @returns {void}
@@ -152,6 +164,7 @@ function isValidDateFormat(value) {
 function resetDateErrors() {
   document.getElementById('date-error').classList.remove('visible');
   document.getElementById('date-format-error').classList.remove('visible');
+  document.getElementById('date-possible-error').classList.remove('visible');
 }
 
 /**
@@ -183,3 +196,17 @@ function validateCategory() {
   error.classList.remove('visible');
   return true;
 }
+
+/**
+ * Enables the Create Task button if all required fields are valid
+ */
+function enableCreateButton() {
+  const createBtn = document.getElementById('create-btn');
+  if (validateTitle() && validateDate() && validateCategory()) {
+    createBtn.disabled = false;
+  } else {
+    createBtn.disabled = true;
+  }
+}
+
+

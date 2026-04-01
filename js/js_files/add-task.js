@@ -28,6 +28,12 @@ async function prefillFormFromUrl(taskId) {
   fillTaskForm(task, taskId);
 }
 
+/**
+ * Fills the form fields with the provided task data
+ * @param {Object} task - The task object containing the data to fill
+ * @param {string} taskId - The Firebase key of the task being edited
+ * @returns {void}
+ */
 function fillTaskForm(task, taskId) {
   document.getElementById("title").value = task.title || "";
   document.getElementById("description").value = task.description || "";
@@ -35,6 +41,7 @@ function fillTaskForm(task, taskId) {
   document.getElementById("category-selected").textContent = task.category || "";
   selectPriority(task.priority);
   prefillAssignees(task.assigned || []);
+  enableCreateButton();
   Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
 }
 
