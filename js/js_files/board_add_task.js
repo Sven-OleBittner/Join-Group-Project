@@ -31,3 +31,16 @@ function closeAddTaskModal() {
   dialog.close();
 }
 
+/**
+ * Renders all subtasks in the subtask list
+ * @returns {void}
+ */
+function preFillSubtasks(subtasks) {
+  const list = document.getElementById('subtask-list');
+  list.innerHTML = '';
+  subtasks.forEach((subtask, index) => {
+    list.innerHTML += getSubtaskHTML(subtask, index);
+  });
+}
+
+
