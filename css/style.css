@@ -209,7 +209,7 @@ a.nav-item {
 .logout-menu {
   position: absolute;
   top: 88px;
-  right: 16px;
+  right: max(16px, calc(100vw - 1668px));
   background-color: var(--darkblue-light-color);
   width: 146px;
   border-radius: 20px 0px 20px 20px;
@@ -219,6 +219,7 @@ a.nav-item {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   transition: all 150ms ease-in-out;
+  z-index: 100;
 }
 
 .menu-item {
@@ -253,7 +254,4 @@ a.nav-item {
   }
 }
 
-@media (min-width: 2560px) {
-.logout-menu {
-  right: 875px;}
-}
+
