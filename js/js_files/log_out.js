@@ -4,36 +4,35 @@
  * Removes menu if already open, adds it if closed
  */
 function showLogOutMenu() {
-    const existingMenu = document.getElementById('logout-menu-overlay');
-    const body = document.querySelector("body");
-    if (existingMenu) {
-        existingMenu.remove();
+  const existingMenu = document.getElementById("logout-menu-overlay");
+  const body = document.querySelector("body");
+  if (existingMenu) {
+    existingMenu.remove();
+  } else {
+    if (window.innerWidth <= 946) {
+      body.insertAdjacentHTML("beforeend", getMobileLogOutMenuHTML());
     } else {
-        if (window.innerWidth <= 946) {
-            body.insertAdjacentHTML('beforeend', getMobileLogOutMenuHTML());
-        } else {
-            body.insertAdjacentHTML('beforeend', getDesktopLogOutMenuHTML());
-        }
+      body.insertAdjacentHTML("beforeend", getDesktopLogOutMenuHTML());
     }
+  }
 }
 
 function closeLogOutMenu() {
-    const existingMenu = document.getElementById('logout-menu-overlay');
-    if (existingMenu) {
-        existingMenu.remove();
-    }
+  const existingMenu = document.getElementById("logout-menu-overlay");
+  if (existingMenu) {
+    existingMenu.remove();
+  }
 }
-
 
 /**
  * Logs out the current user and redirects to login page
  * Shows logout message after redirect
  */
 async function loggingOutUser() {
-    deleteData("loggingInUser");
-    setTimeout(() => {
-        window.location.href = "index.html?msg=You have been logged out!";
-    }, 250);
+  deleteData("loggingInUser");
+  setTimeout(() => {
+    window.location.href = "index.html?msg=You have been logged out!";
+  }, 250);
 }
 
 /**
@@ -41,7 +40,7 @@ async function loggingOutUser() {
  * @returns {string} HTML template for desktop logout menu
  */
 function getDesktopLogOutMenuHTML() {
-    return `
+  return `
     <div id="logout-menu-overlay" class="max-w-1440">
         <div class="logout-menu max-w-1440">
             <a href="./legal_notice.html" class="menu-item">Legal Notice</a>
@@ -58,7 +57,7 @@ function getDesktopLogOutMenuHTML() {
  * @returns {string} HTML template for mobile logout menu
  */
 function getMobileLogOutMenuHTML() {
-    return `
+  return `
     <div id="logout-menu-overlay">
         <div class="logout-menu">
             <a href="./help.html" class="menu-item">Help</a>

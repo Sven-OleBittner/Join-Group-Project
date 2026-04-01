@@ -10,6 +10,7 @@
  * @returns {Promise<void>}
  */
 async function add_task_init() {
+  enableCreateButton();
   standartselectPriority();
   await loadContactsForDropdown();
   const editKey = new URLSearchParams(window.location.search).get("editKey");
