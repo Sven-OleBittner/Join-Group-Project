@@ -56,7 +56,11 @@
       onclick="closeAddTaskModal()"
     >
       <div
-        onclick="event.stopPropagation()"
+        onclick="
+      closeDropdown('assignees-items');
+      closeDropdown('category-items');
+          event.stopPropagation();
+        "
         id="addTaskDialogContent"
         class="addTaskDialogContent"
       ></div>
@@ -93,7 +97,10 @@
             </button>
           </li>
           <li>
-            <button class="nav-item w100 active" onclick="goToPage('./board.html')">
+            <button
+              class="nav-item w100 active"
+              onclick="goToPage('./board.html')"
+            >
               <span class="icon"
                 ><img src="./assets/img/sidebar_board_icon.svg" alt="Board"
               /></span>
@@ -179,7 +186,10 @@
           <div class="kb-columns">
             <!-- To do -->
             <section
-              ondrop="moveTo('toDoTaskList'); dragLeaveHandler(event)"
+              ondrop="
+                moveTo('toDoTaskList');
+                dragLeaveHandler(event);
+              "
               ondragover="dragoverHandler(event)"
               ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardToDo"
@@ -207,7 +217,10 @@
 
             <!-- In progress -->
             <section
-              ondrop="moveTo('inProgressTaskList'); dragLeaveHandler(event)"
+              ondrop="
+                moveTo('inProgressTaskList');
+                dragLeaveHandler(event);
+              "
               ondragover="dragoverHandler(event)"
               ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardInProgress"
@@ -239,7 +252,10 @@
 
             <!-- Await feedback -->
             <section
-              ondrop="moveTo('awaitFeedbackTaskList'); dragLeaveHandler(event)"
+              ondrop="
+                moveTo('awaitFeedbackTaskList');
+                dragLeaveHandler(event);
+              "
               ondragover="dragoverHandler(event)"
               ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardAwaitingFeedback"
@@ -271,7 +287,10 @@
 
             <!-- Done -->
             <section
-              ondrop="moveTo('doneTaskList'); dragLeaveHandler(event)"
+              ondrop="
+                moveTo('doneTaskList');
+                dragLeaveHandler(event);
+              "
               ondragover="dragoverHandler(event)"
               ondragleave="dragLeaveHandler(event)"
               id="addTaskBoardDone"
