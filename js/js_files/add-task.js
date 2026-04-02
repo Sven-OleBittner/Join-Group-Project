@@ -36,6 +36,7 @@ async function prefillFormFromUrl(taskId) {
  * @returns {void}
  */
 async function fillTaskForm(task, taskId) {
+  prefillSubtasks.push(task.subtasks || []);
   document.getElementById("title").value = task.title || "";
   document.getElementById("description").value = task.description || "";
   document.getElementById("date").value = task.dueDate || "";
