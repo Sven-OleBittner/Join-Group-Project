@@ -1,20 +1,20 @@
 /* === ROOT VARIABLES === */
 :root {
-  --at-bg: #F5F6F8;
+  --at-bg: #f5f6f8;
   --at-card: #ffffff;
   --at-text: #0f172a;
-  --at-muted: #6B7280;
-  --at-border: #D1D5DB;
+  --at-muted: #6b7280;
+  --at-border: #d1d5db;
   --at-border-2: #e5e7eb;
   --at-brand: #2a3647;
-  --at-brand-acc: #29ABE2;
-  --at-prio-urgent: #FF3B3B;
-  --at-prio-medium: #FFA800;
-  --at-prio-low: #7AE229;
+  --at-brand-acc: #29abe2;
+  --at-prio-urgent: #ff3b3b;
+  --at-prio-medium: #ffa800;
+  --at-prio-low: #7ae229;
   --at-chip-bg: #eef1f6;
   --at-radius: 10px;
   --at-radius-lg: 12px;
-  --at-shadow: 0 8px 24px rgba(0,0,0,.08);
+  --at-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* === MODAL DIALOG === */
@@ -72,8 +72,8 @@
 .td-modal input[type="date"]:focus,
 .td-modal textarea:focus,
 .td-modal select:focus {
-  border-color: #2563EB;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 /* === DATE INPUT === */
@@ -90,7 +90,7 @@
 /* === TEXT COLORS === */
 .td-modal .hint,
 .td-modal .req {
-  color: #EF4444;
+  color: #ef4444;
 }
 
 /* === PRIORITY BUTTONS === */
@@ -101,21 +101,25 @@
 
 .td-modal .priority__btn {
   border: 0;
-  background: #F6F7F8;
+  background: #f6f7f8;
   color: #000;
   font-weight: 600;
   border-radius: 10px;
   padding: 10px 16px;
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .td-modal .priority__btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* ACTIVE COLORS */
@@ -139,23 +143,27 @@
   content: "";
   width: 14px;
   height: 14px;
-  display: inline-block;
+  display: block;
   filter: brightness(0) saturate(100%) invert(0);
 }
 
 .td-modal .priority__btn[data-value="urgent"]::after {
   background: url("./assets/img/red_high_urgent.svg") no-repeat center / contain;
-  filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
+  filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%)
+    hue-rotate(356deg) brightness(101%) contrast(105%);
 }
 
 .td-modal .priority__btn[data-value="medium"]::after {
   background: url("./assets/img/=_for yellow.svg") no-repeat center / contain;
-  filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
+  filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%)
+    hue-rotate(1deg) brightness(105%) contrast(104%);
 }
 
 .td-modal .priority__btn[data-value="low"]::after {
-  background: url("./assets/img/green_low_urgent.svg") no-repeat center / contain;
-  filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
+  background: url("./assets/img/green_low_urgent.svg") no-repeat center /
+    contain;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%)
+    hue-rotate(76deg) brightness(91%) contrast(98%);
 }
 
 .td-modal .priority__btn.selected::after {
@@ -165,6 +173,14 @@
 /* === SUBTASKS === */
 .td-modal [data-subtasks] .input {
   padding: 10px 12px;
+}
+
+.td-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 28px;
+  height: 32px;
 }
 
 .td-modal .subtasks__list {
@@ -184,37 +200,53 @@
   margin-bottom: 6px;
 }
 
-/* === ACTION BUTTONS === */
-.td-modal .td-actions .td-action {
-  border: 1px solid var(--at-border-2);
-  background: #F9FAFB;
-  border-radius: 12px;
+.td-delete,
+.td-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F5F6F8;
+  gap: 8px;
   padding: 10px 16px;
   cursor: pointer;
-  transition: background .15s ease;
+  appearance: none;
 }
 
-.td-modal .td-actions .td-action:hover {
-  background: #F3F4F6;
+.delete-icon {
+  content: url("../assets/icons/delete.svg");
+}
+
+.td-delete:hover .delete-icon {
+  content: url("../assets/icons/delete_hover.svg");
+}
+
+.edit-icon {
+  content: url("../assets/icons/edit.svg");
+}
+
+.td-edit:hover .edit-icon {
+  content: url("../assets/icons/edit_hover.svg");
+}
+
+.td-delete:hover,
+.td-edit:hover {
+  background: #f3f4f6;
+  color: var(--lightblue-color);
+  box-shadow: none;
 }
 
 /* PRIMARY BUTTONS */
-.td-modal #td-edit,
+.td-modal,
 .td-modal .btn-primary,
 .td-modal #at-create {
-  background: var(--at-brand);
-  color: #fff !important;
-  border: 1px solid var(--at-brand);
+  color: var(--darkblue-light-color);
 }
 
-.td-modal #td-edit:hover,
+/* .td-modal #td-edit:hover,
 .td-modal .btn-primary:hover,
 .td-modal #at-create:hover {
-  background: var(--at-brand-acc);
-  border-color: var(--at-brand-acc);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,.08);
-}
+} */
 
 /* === GRID === */
 #at-modal .at-grid {
@@ -250,4 +282,3 @@
   position: static;
   box-shadow: none;
 }
-

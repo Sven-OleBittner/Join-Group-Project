@@ -89,7 +89,7 @@
 }
 
 #at-modal .priority__btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 8px;
@@ -170,4 +170,27 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0,0,0,.16);
   z-index: 1;
+}
+
+.close-btn-modal {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #6B7280;
+  cursor: pointer;
+  transition: color .1s ease;
+  color: var(--darkblue-light-color);
+}
+
+.close-btn-modal:hover {
+  color: var(--lightblue-color);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.close-btn-modal:active {
+  color: var(--darkblue-color);
+  background-color: transparent;
+  box-shadow: none;
 }

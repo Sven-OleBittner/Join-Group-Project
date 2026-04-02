@@ -49,13 +49,17 @@
 
 .td-modal {
   position: fixed;
-  inset: 0;
   display: grid;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   place-items: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.1s ease;
   z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .td-modal.is-open {
@@ -67,7 +71,7 @@
   display: flex;
   flex-direction: column;
   width: 525px;
-  height: 931px;
+  height: 80%;
   background: #fff;
   border-radius: 22px;
   box-shadow: 0 30px 80px rgba(17, 24, 39, 0.35);
@@ -94,6 +98,7 @@
 
 .td-footer.td-actions {
   margin-top: 12px;
+  height: 32px;
 }
 
 .td-chip {
@@ -255,22 +260,22 @@
   margin-top: 24px;
 }
 
-.td-action {
+/* .td-action {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 14px;
   border-radius: 12px;
-  background: #f3f5f7;
-  color: #2b3a4a;
+  color: var(--darkblue-light-color);
   border: unset;
-  border: 1px solid #e4e8ee;
   cursor: pointer;
   transition: background 0.1s ease;
-}
+} */
 
 .td-action:hover {
-  background: #edeff3;
+  background: #f3f4f6;
+  color: var(--lightblue-color);
+  box-shadow: none;
 }
 
 .td-prio-img {

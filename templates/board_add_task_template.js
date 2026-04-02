@@ -3,6 +3,13 @@ function getAddTaskTemplate(buttonId) {
         <div class="add-task-container max-w-1440">
           <div class="add-task-uppercontainer">
             <h1 class="add-task-title">Add Task</h1>
+            <button
+              type="button"
+              class="close-btn-modal"
+              onclick="closeAddTaskModal()"
+            >
+              &times;
+            </button>
           </div>
           <form class="task-form" id="task-form">
             <div class="form-left">

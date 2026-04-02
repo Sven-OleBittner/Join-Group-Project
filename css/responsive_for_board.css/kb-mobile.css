@@ -288,6 +288,11 @@
 }
 
 @media (max-width: 768px) {
+    body:has(.td-modal.is-open .td-dialog) {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
   #at-modal .at-dialog {
     width: 100vw;
     height: 100vh;
@@ -315,7 +320,7 @@
 @media (max-width: 600px) {
   .td-dialog {
     width: 100vw;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 192px);
     border-radius: 16px;
     padding: 18px 14px 12px;
   }

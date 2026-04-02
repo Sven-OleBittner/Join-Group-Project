@@ -57,8 +57,8 @@
     >
       <div
         onclick="
-      closeDropdown('assignees-items');
-      closeDropdown('category-items');
+          closeDropdown('assignees-items');
+          closeDropdown('category-items');
           event.stopPropagation();
         "
         id="addTaskDialogContent"
@@ -345,7 +345,7 @@
       <div class="td-dialog" tabindex="-1" onclick="event.stopPropagation()">
         <div class="td-chipwrap">
           <span id="td-chip" class="td-chip">User Story</span>
-          <button class="closeBtn" onclick="closeTaskModal()">X</button>
+          <button class="close-btn-modal" onclick="closeTaskModal()"> &times;</button>
         </div>
 
         <h2 id="td-title" class="td-title"></h2>
@@ -372,32 +372,27 @@
           <ul id="td-subtasks-list" class="td-subtasks__list"></ul>
         </div>
 
-        <div class="td-footer td-actions">
+        <div class="td-footer">
           <button
-            class="td-action"
+            class="td-delete"
             type="button"
             id="td-delete"
             onclick="deleteTask(currentTaskId)"
           >
-            <img
-              src="./assets/img/contact-main-delete.svg"
-              alt=""
-              class="td-action__icon"
-            />
-            Delete
+            <img alt="Delete" class="delete-icon">
+            <span>Delete</span>
           </button>
           <button
-            class="td-action"
+            class="td-edit"
             type="button"
             id="td-edit"
             onclick="editTask(currentTaskId)"
           >
             <img
-              src="./assets/img/contact-main-edit.svg"
-              alt=""
-              class="td-action__icon"
+              alt="Edit"
+              class="edit-icon"
             />
-            Edit
+            <span>Edit</span>
           </button>
         </div>
       </div>
