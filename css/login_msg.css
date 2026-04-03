@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeInOut 3000ms ease-in-out forwards;
+  opacity: 0;
 }
 
 .msg {
@@ -17,11 +17,18 @@
   font-size: 20px;
 }
 
-@media (max-width: 400px) {
+@media (min-width: 768px) {
+  .msg__Box {
+      animation: fadeInOut 2000ms ease-in-out;
+  }
+}
+
+@media (max-width: 767px) {
   .msg__Box {
     width: 100%;
     padding: 8px;
-    box-sizing: border-box;
+    margin: 16px 16px;
+    animation: slideInResponsive 3000ms ease-in-out;
   }
 
   .msg {
@@ -37,6 +44,21 @@
     opacity: 1;
   }
   100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInResponsive {
+  0% {
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-250px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
     opacity: 0;
   }
 }

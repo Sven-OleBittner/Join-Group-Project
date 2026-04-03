@@ -32,7 +32,7 @@
 } */
 
 .error-box {
-  height: 28px;
+  height: 18px;
 }
 
 button:hover {
@@ -109,6 +109,14 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+}
+
+.d-flex-c-fs-fs-gap8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .d-flex-c-sb {

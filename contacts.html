@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="./css/responsive.css" />
     <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./css/standard.css">
+    <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/color.css" />
     <!-- Contact CSS Modules -->
     <link rel="stylesheet" href="./css/contact-base.css" />
     <link rel="stylesheet" href="./css/contact-list.css" />
     <link rel="stylesheet" href="./css/contact-details.css" />
-    <link rel="stylesheet" href="./css/contact-mobile.css" />
-    <link rel="stylesheet" href="./css/contact-overlay.css" />
     <link rel="stylesheet" href="./css/contact-forms.css" />
+    <link rel="stylesheet" href="./css/contact-overlay.css" />
+    <link rel="stylesheet" href="./css/contact-mobile.css" />
     <title id="title">Join</title>
   </head>
-  <body onload="loadContactList(),initSite();" onclick="closeLogOutMenu()">
+  <body onload="(loadContactList(), initSite())" onclick="closeLogOutMenu()">
     <!-- Contact overlay for add/edit forms -->
-    <div id="contact-overlay"></div>
-    
+    <div id="contact-overlay" class="contact-overlay d-none"></div>
+
     <!-- Sidebar Navigation -->
     <div class="sidebar">
       <div class="frame">
@@ -41,10 +41,7 @@
             </button>
           </li>
           <li>
-            <button
-              class="nav-item w100"
-              onclick="goToPage('./add_task.html')"
-            >
+            <button class="nav-item w100" onclick="goToPage('./add_task.html')">
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_add_task_icon.svg"
@@ -63,7 +60,10 @@
             </button>
           </li>
           <li>
-            <button class="nav-item w100 active" onclick="goToPage('./contacts.html')">
+            <button
+              class="nav-item w100 active"
+              onclick="goToPage('./contacts.html')"
+            >
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_contact_calendar_icon.svg"
@@ -110,17 +110,37 @@
       <div class="main-content">
         <!-- Contact List Panel -->
         <div class="contact-list-container max-w-1440">
-          <button onclick="openAddContactOverlay()" class="add-contact-btn">Add new contact
-            <img class="add-contact-img" src="./assets/img/contact_add.svg" alt="Add Contact">
+          <button onclick="openAddContactOverlay()" class="add-contact-btn">
+            Add new contact
+            <img
+              class="add-contact-img"
+              src="./assets/img/contact_add.svg"
+              alt="Add Contact"
+            />
           </button>
           <div id="contact-list"></div>
         </div>
-        
+
         <!-- Contact Details Panel -->
         <div class="show-contact-container">
-          <div onclick="hideMobileContactDetails()" class="mobile-back-arrow hidden">
-            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 12.5H5M5 12.5L12.5 20M5 12.5L12.5 5" stroke="#29ABE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <div
+            onclick="hideMobileContactDetails()"
+            class="mobile-back-arrow hidden"
+          >
+            <svg
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 12.5H5M5 12.5L12.5 20M5 12.5L12.5 5"
+                stroke="#29ABE2"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </div>
           <div class="contact-team-container">
@@ -129,22 +149,32 @@
             <p>Better with a team</p>
           </div>
           <div id="contact-details-section" class="contact-form-control hidden">
-            <div id="contact-initials-circle" class="contact-form-circle d-flex-c"></div>
+            <div
+              id="contact-initials-circle"
+              class="contact-form-circle d-flex-c"
+            ></div>
             <div class="contact-form-description">
-              <h1 id="contact-display-name" class="contact-form-name">Select a contact</h1>
+              <h1 id="contact-display-name" class="contact-form-name">
+                Select a contact
+              </h1>
               <div class="contact-form-edit-delete">
                 <div onclick="openEditContactOverlay()" class="d-flex-c g-8">
-                  <img src="./assets/img/contact-main-edit.svg" alt="Edit">
+                  <img src="./assets/img/contact-main-edit.svg" alt="Edit" />
                   <span>Edit</span>
                 </div>
                 <div class="d-flex-c g-8" onclick="deleteSelectedContact()">
-                  <img src="./assets/img/contact-main-delete.svg" alt="Delete">
+                  <img
+                    src="./assets/img/contact-main-delete.svg"
+                    alt="Delete"
+                  />
                   <span>Delete</span>
                 </div>
               </div>
             </div>
           </div>
-          <span id="contact-info-label" class="contact-info hidden">Contact information</span>
+          <span id="contact-info-label" class="contact-info hidden"
+            >Contact information</span
+          >
           <div id="contact-email-section" class="contact-email-frame hidden">
             <h3 class="fs-b-16">Email</h3>
             <a id="contact-email-link" href="mailto:"></a>
@@ -155,15 +185,21 @@
           </div>
         </div>
       </div>
-      <div onclick="openAddContactOverlay()" class="add-contact-mobile d-flex-c c-pointer">
-        <img src="./assets/img/contact-add-person.svg" alt="Add contact">
+      <div
+        onclick="openAddContactOverlay()"
+        class="add-contact-mobile d-flex-c c-pointer"
+      >
+        <img src="./assets/img/contact-add-person.svg" alt="Add contact" />
       </div>
-      <div id="edit-contact-mobile" class="edit-contact-mobile d-flex-c c-pointer hidden" onclick="openMobileEditMenu()">
+      <div
+        id="edit-contact-mobile"
+        class="edit-contact-mobile d-flex-c c-pointer hidden"
+        onclick="openMobileEditMenu()"
+      >
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
-
     </div>
     <div class="footer">
       <nav class="footer-nav">
@@ -205,12 +241,15 @@
           <span>Board</span>
         </a>
         <a href="./contacts.html" class="footer-nav-item active">
-          <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+          <img
+            src="./assets/img/sidebar_contact_calendar_icon.svg"
+            alt="Contacts"
+          />
           <span>Contacts</span>
         </a>
       </nav>
     </div>
-        <!-- JavaScript -->
+    <!-- JavaScript -->
     <!-- Base Database Functions -->
     <script src="./js/js_files/db.js"></script>
     <!-- Contact Modules -->

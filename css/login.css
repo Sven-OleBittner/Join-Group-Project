@@ -112,7 +112,7 @@ body, html {
 form#login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* gap: 20px; */
   width: 100%;
 }
 
@@ -134,7 +134,7 @@ form#login-form {
 
 .input-icon {
   position: absolute;
-  top: 25%;
+  top: 20%;
   right: 16px;
   height: 20px;
   opacity: 0.7;
@@ -221,8 +221,6 @@ form#login-form {
 
 .error-text {
   color: #e74c3c;
-  padding: 8px;
-  justify-content: center;
   display: none;
   font-weight: 500;
 }
@@ -311,9 +309,8 @@ form#login-form {
 
   .login-main {
     width: 100%;
-    display: grid;
     padding: 16px;
-    gap: 16px;
+    gap: 0px;
   }
 
   .login-footer {
@@ -323,7 +320,6 @@ form#login-form {
   }
 
   .login-box h1 { font-size: 28px; }
-  .login-main { padding: 16px; }
   .login-footer { flex-wrap: wrap; }
 
   .input-group input {

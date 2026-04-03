@@ -252,7 +252,7 @@
 
     /* Mobile contact details styling when shown */
     .main-content.mobile-showing-details .contact-team-container {
-        margin-bottom: 32px;
+        margin-bottom: 20px;
         margin-top: 60px; /* Space for back arrow */
         flex-direction: column;
         align-items: flex-start;
@@ -261,12 +261,11 @@
     }
 
     .main-content.mobile-showing-details .contact-team-container h1 {
-        font-size: 48px;
+        font-size: 40px;
         font-weight: 700;
     }
 
     .main-content.mobile-showing-details .contact-team-container p {
-        font-size: 20px;
         font-weight: 400;
     }
 
@@ -293,7 +292,7 @@
     .main-content.mobile-showing-details .contact-form-control {
         flex-direction: row;
         align-items: center;
-        margin-bottom: 32px;
+        margin-bottom: 12px;
     }
 
     .main-content.mobile-showing-details .contact-form-name {

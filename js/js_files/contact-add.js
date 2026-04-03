@@ -7,8 +7,11 @@
  * Opens the add contact overlay with the contact form template
  */
 function openAddContactOverlay() {
-    const contactOverlay = document.getElementById("contact-overlay");
-    contactOverlay.innerHTML = addContactTemplate();
+  const contactOverlay = document.getElementById("contact-overlay");
+  contactOverlay.classList.remove("d-none");
+  contactOverlay.classList.add("d-flex-c");
+
+  contactOverlay.innerHTML = addContactTemplate();
 }
 
 /**
@@ -17,9 +20,12 @@ function openAddContactOverlay() {
  * @returns {Promise<void>}
  */
 async function closeAddContactOverlay() {
-    const contactOverlay = document.getElementById("contact-overlay");
-    contactOverlay.innerHTML = "";
-    await loadContactList();
+  const contactOverlay = document.getElementById("contact-overlay");
+  contactOverlay.classList.add("d-none");
+  contactOverlay.classList.remove("d-flex-c");
+
+  contactOverlay.innerHTML = "";
+  await loadContactList();
 }
 
 /**
@@ -27,19 +33,19 @@ async function closeAddContactOverlay() {
  * @returns {boolean} True if all validations pass, false otherwise
  */
 function validationAddContactInput() {
-    const addName = document.getElementById("add-name");
-    const addEmail = document.getElementById("add-email");
-    const addPhone = document.getElementById("add-phone");
-    const addNameValidation = document.getElementById("add-name-validation");
-    const addEmailValidation = document.getElementById("add-email-validation");
-    const addPhoneValidation = document.getElementById("add-phone-validation");
-    const nameError = validateName(addName.value, true);
-    const emailError = validateEmail(addEmail.value, true);
-    const phoneError = validatePhone(addPhone.value, true);
-    setValidationMessage(addNameValidation, nameError);
-    setValidationMessage(addEmailValidation, emailError);
-    setValidationMessage(addPhoneValidation, phoneError);
-    return nameError === true && emailError === true && phoneError === true;
+  const addName = document.getElementById("add-name");
+  const addEmail = document.getElementById("add-email");
+  const addPhone = document.getElementById("add-phone");
+  const addNameValidation = document.getElementById("add-name-validation");
+  const addEmailValidation = document.getElementById("add-email-validation");
+  const addPhoneValidation = document.getElementById("add-phone-validation");
+  const nameError = validateName(addName.value, true);
+  const emailError = validateEmail(addEmail.value, true);
+  const phoneError = validatePhone(addPhone.value, true);
+  setValidationMessage(addNameValidation, nameError);
+  setValidationMessage(addEmailValidation, emailError);
+  setValidationMessage(addPhoneValidation, phoneError);
+  return nameError === true && emailError === true && phoneError === true;
 }
 
 /**
@@ -48,26 +54,26 @@ function validationAddContactInput() {
  * @returns {Promise<void>}
  */
 async function postNewContact() {
-    if (!validationAddContactInput()) {
-        return;
-    }
-    const addName = document.getElementById("add-name");
-    const addEmail = document.getElementById("add-email");
-    const addPhone = document.getElementById("add-phone");
-    const initials = getInitials(addName.value);
-    const color = getRandomColorClass();
-    const newContact = {
-        name: addName.value,
-        email: addEmail.value,
-        phone: addPhone.value,
-        initials: initials,
-        color: color
-    };
-    try {
-        await postData("contacts", newContact);
-        await closeAddContactOverlay();
-        getSuccessfullyContactCreated();
-    } catch (error) {
-        console.error("Error posting new contact:", error);
-    }
+  if (!validationAddContactInput()) {
+    return;
+  }
+  const addName = document.getElementById("add-name");
+  const addEmail = document.getElementById("add-email");
+  const addPhone = document.getElementById("add-phone");
+  const initials = getInitials(addName.value);
+  const color = getRandomColorClass();
+  const newContact = {
+    name: addName.value,
+    email: addEmail.value,
+    phone: addPhone.value,
+    initials: initials,
+    color: color,
+  };
+  try {
+    await postData("contacts", newContact);
+    await closeAddContactOverlay();
+    getSuccessfullyContactCreated();
+  } catch (error) {
+    console.error("Error posting new contact:", error);
+  }
 }
