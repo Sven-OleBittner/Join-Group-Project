@@ -200,6 +200,7 @@
 
 #td-subtasks {
   margin-top: auto;
+  overflow-y: auto;
 }
 
 #td-subtasks-list {
