@@ -21,7 +21,7 @@
 .td-modal .td-dialog {
   background: var(--at-bg);
   border-radius: 24px;
-  padding: 32px;
+  padding: 24px;
   box-shadow: var(--at-shadow);
 }
 

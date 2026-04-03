@@ -76,7 +76,7 @@ function getAddTaskTemplate(buttonId) {
                 </button>
                 <button
                   type="button"
-                  class="priority medium"
+                  class="priority medium selected"
                   id="priority-medium"
                   onclick="selectPriority('medium')"
                 >
