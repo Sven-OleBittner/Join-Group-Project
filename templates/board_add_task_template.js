@@ -61,7 +61,7 @@ function getAddTaskTemplate(buttonId) {
 
             <div class="form-right">
               <label>Priority</label>
-              <div class="priority-options">
+              <div id="priority" class="priority-options">
                 <button
                   type="button"
                   class="priority urgent"
@@ -144,8 +144,8 @@ function getAddTaskTemplate(buttonId) {
                 >This field is required</span
               >
 
-              <label>Subtasks</label>
-              <div class="subtasks">
+              <label for="subtask-input">Subtasks</label>
+              <div id="subtasks" class="subtasks">
                 <input
                   type="text"
                   id="subtask-input"
