@@ -213,3 +213,10 @@
     display: none;
   }
 }
+
+@media (min-width:1441px) {
+  .td-modal.is-open {
+    justify-content: flex-start;
+    padding-left: 500px;
+}
+}

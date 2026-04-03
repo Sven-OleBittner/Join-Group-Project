@@ -13,7 +13,7 @@
 .priority-options {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 /* Einzelner Prioritäts-Button */

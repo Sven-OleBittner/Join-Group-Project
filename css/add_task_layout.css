@@ -17,7 +17,7 @@
 .form-divider {
   width: 1px;
   background-color:#D1D1D1;
-  margin: 0 20px;
+  margin: 0 4px;
 }
 
 /* Hauptinhalt-Bereich (wächst / schrumpft flexibel) */
@@ -66,16 +66,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1px 60px 12px;
+  padding: 2px 32px 2px;
   height: 100%;
 }
 
 /* Zweispaltiges Formular (links + rechts) */
 .task-form {
   display: flex;
-  padding-top: 48px;
+  padding-top: 24px;
   row-gap: 40px;
-  column-gap: 40px;
+  column-gap: 16px;
 }
 
 /* Linke und rechte Formular-Spalte */
@@ -92,7 +92,7 @@
 .form-footer {
   display: flex;
   justify-content: space-between;
-  padding-top: 14px;
+  padding-top: 8px;
 }
 
 
