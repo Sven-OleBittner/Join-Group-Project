@@ -39,7 +39,7 @@
     text-align: start;
     padding-left: 12px;
     padding-right: 12px;
-    padding-top: 40px;
+    padding-top: 32px;
     gap: 8px;
   }
 
@@ -76,8 +76,7 @@
   }
 
   .task-count {
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 32px;
   }
 
   .resp-size {
@@ -165,11 +164,33 @@
   }
 }
 
+@media (max-width: 768px) {
+  .d-flex {
+    justify-content: center;
+  }
+
+  .greeting-container.no-animation {
+    display: none;
+  }
+
+  .main-content {
+    opacity: 0;
+    animation: main_fadeIn 1500ms ease-in forwards;
+    animation-delay: 3s;
+  }
+
+  .main-content.no-animation {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 @media (min-width: 946px) and (max-width: 1023px) {
   .summary-left {
     padding-left: 64px;
     padding-top: 32px;
     padding-right: 24px;
+    gap: 12px;
   }
 
   .greeting,
@@ -186,7 +207,7 @@
 @media (min-width: 1024px) and (max-width: 1133px) {
   .summary-left {
     padding-left: 64px;
-    padding-top: 32px;
+    padding-top: 24px;
     padding-right: 24px;
   }
 
@@ -204,7 +225,7 @@
 @media (min-width: 1100px) and (max-width: 1440px) {
   .summary-left {
     padding-left: 64px;
-    padding-top: 32px;
+    padding-top: 24px;
     padding-right: 18px;
   }
 

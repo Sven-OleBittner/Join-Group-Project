@@ -9,8 +9,6 @@
 function openAddContactOverlay() {
   const contactOverlay = document.getElementById("contact-overlay");
   contactOverlay.classList.remove("d-none");
-  contactOverlay.classList.add("d-flex-c");
-
   contactOverlay.innerHTML = addContactTemplate();
 }
 
@@ -22,8 +20,6 @@ function openAddContactOverlay() {
 async function closeAddContactOverlay() {
   const contactOverlay = document.getElementById("contact-overlay");
   contactOverlay.classList.add("d-none");
-  contactOverlay.classList.remove("d-flex-c");
-
   contactOverlay.innerHTML = "";
   await loadContactList();
 }

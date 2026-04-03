@@ -216,35 +216,45 @@ function fillModalHeader(task) {
     `<img src="./assets/img/${getPriority(task.priority)}">`;
 }
 
+
+
 async function renderModalAvatars(assigned) {
   const container = document.getElementById("td-assignees");
   container.innerHTML = "";
-  for (const assignee of assigned) {
-    const color = await getContactBg(assignee.initials);
-    container.innerHTML += `
-      <div class="td-person">
-        <div class="kb-avatar ${assignee.color || color}">${assignee.initials}</div>
-        <span class="td-person__name">${assignee.name}</span>
-      </div>
-    `;
+  if (!assigned || !assigned.length) return;
+  const maxVisible = 2;
+  if (assigned.length <= maxVisible) {
+    await renderAllModalAvatars(container, assigned);
+    return;
   }
+  await renderLimitedModalAvatars(container, assigned, maxVisible);
+}
+
+async function renderSingleModalAvatar(container, assignee) {
+  const color = await getContactBg(assignee.initials);
+  container.innerHTML += renderSingleModalAvatarTemplate(container, assignee, color);
+}
+
+function renderOverflowModal(container, remaining) {
+  container.innerHTML +=renderOverflowModalTemplate(remaining);
+}
+
+async function renderAllModalAvatars(container, assigned) {
+  for (const assignee of assigned) await renderSingleModalAvatar(container, assignee);
+}
+
+async function renderLimitedModalAvatars(container, assigned, maxVisible) {
+  const visibleCount = maxVisible - 1;
+  for (let i = 0; i < visibleCount; i++) await renderSingleModalAvatar(container, assigned[i]);
+  const remaining = assigned.length - visibleCount;
+  renderOverflowModal(container, remaining);
 }
 
 function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks").hidden = !subtasks.length;
-  document.getElementById("td-subtasks-list").innerHTML = subtasks
-    .map((sub, index) => {
-      const label = typeof sub === "string" ? sub : sub.text;
-      const isChecked =
-        typeof sub === "object" && sub.completed ? "checked" : "";
-      return `
-      <li class="td-task" id="td-task-item-${index}">
-        <input type="checkbox" id="subtask-${index}" ${isChecked}
-          onchange="toggleSubtaskStyle(${index}, this.checked)">
-        <label for="subtask-${index}" class="td-task__label">${label}</label>
-      </li>
-    `;
-    })
+  const list = document.getElementById("td-subtasks-list");
+  list.innerHTML = (subtasks || [])
+    .map((sub, index) => getModalSubtaskTemplate(sub, index))
     .join("");
 }
 

@@ -35,6 +35,9 @@
 .add-contact-container {
   width: 1212px;
   height: 594px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /* ===================================================================
@@ -178,12 +181,10 @@
 }
 
 @media (max-width: 1230px) {
-  .add-contact-container,
-  .edit-add-contact-container,
-  .contact-circle-container,
+  /* .contact-circle-container,
   .input-add-contact-container {
     height: 520px;
-  }
+  } */
 
   .add-contact-container {
     width: 100%;
@@ -243,7 +244,6 @@
   }
 
   .add-contact-container {
-    height: 760px;
     width: 300px;
     flex-direction: column;
   }

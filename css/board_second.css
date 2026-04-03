@@ -79,6 +79,7 @@
   position: relative;
   transform: translateY(6px);
   transition: transform 0.1s ease;
+  justify-content: space-around;
 }
 
 .td-modal.is-open .td-dialog {

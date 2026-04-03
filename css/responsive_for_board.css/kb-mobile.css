@@ -319,8 +319,8 @@
 
 @media (max-width: 600px) {
   .td-dialog {
-    width: 100vw;
-    height: calc(100vh - 192px);
+    width: 96vw;
+    height: calc(100vh - 180px);
     border-radius: 16px;
     padding: 18px 14px 12px;
   }

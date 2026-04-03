@@ -137,6 +137,11 @@
     .mobile-edit-delete {
         bottom: 120px;
     }
+
+    html, body {
+    height: 93%;
+}
+
 }
 
 /* Animation for menu appearance */
@@ -230,10 +235,10 @@
         min-width: 100%;
     }
 
-    .first-letter-container,
+    /* .first-letter-container,
     .personal-ad {
         width: 90%;
-    }
+    } */
 
     .person-circle {
         height: 42px !important;

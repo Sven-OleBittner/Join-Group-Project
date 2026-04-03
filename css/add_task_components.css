@@ -12,7 +12,8 @@
 /* Wrapper für die drei Prioritäts-Buttons */
 .priority-options {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 16px;
 }
 
 /* Einzelner Prioritäts-Button */
@@ -24,10 +25,12 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 32px;
   cursor: pointer;
   transition: all 0.1s ease;
-  min-width: 96px;
+  max-width: 200px;
+  min-width: 88px;
+  flex-grow: 1;
 }
 
 /* Hover: leicht vergößern und Schatten zeigen */
@@ -48,7 +51,7 @@
 
 .priority.medium img {
   filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
-  width: 20px;
+  width: 16px;
 }
 
 .priority.low img {
@@ -242,3 +245,14 @@
 .subtask-item-edit-actions img:hover {
   filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
 }
+
+/* -------------------------------------------------------
+   Responsive Anpassungen
+   ------------------------------------------------------- */
+
+@media (max-width: 500px) {
+  .priority-options {
+    gap: 8px;
+  }
+}
+

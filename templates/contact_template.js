@@ -5,7 +5,7 @@
 function addContactTemplate() {
     return `  
     <div class="overlay max-w-1440" onclick="closeAddContactOverlay()">
-        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
+        <div class="add-contact-container " onclick="event.stopPropagation()">
         <!-- Add Container Left -->
         <div class="edit-add-contact-container d-flex-c-fs-fs-gap8">
             <div class="add-contact-close-container-mobile">
@@ -119,7 +119,7 @@ function editContactTemplate(data) {
 
     return `
     <div class="overlay" onclick="closeEditContactOverlay()">
-        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
+        <div class="add-contact-container " onclick="event.stopPropagation()">
 
             <!-- Edit Container Left -->
             <div class="edit-add-contact-container d-flex-c-fs-fs-gap8">

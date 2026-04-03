@@ -88,6 +88,12 @@
 
   .priority {
     padding: 10px;
+    gap: 8px;
+    justify-content: space-evenly;
+  }
+
+  .priority.medium {
+    gap: 4px;
   }
 
   .add-task-uppercontainer {

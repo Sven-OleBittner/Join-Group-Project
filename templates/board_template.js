@@ -38,3 +38,32 @@ function getSubTemplate(subtasks, percent, completedSubtasks) {
     <span class="kb-subtasks">${completedSubtasks}/${subtasks.length}</span>
   `;
 }
+
+function renderSingleModalAvatarTemplate(container, assignee) {
+  return`
+    <div class="td-person">
+      <div class="kb-avatar ${assignee.color || color}">${assignee.initials}</div>
+      <span class="td-person__name">${assignee.name}</span>
+    </div>
+  `;
+}
+
+function renderOverflowModalTemplate(remaining) {
+  return `
+    <div class="td-person">
+      <div class="kb-avatar color-aquamarine">+${remaining}</div>
+    </div>
+  `;
+}
+
+function getModalSubtaskTemplate(sub, index) {
+  const label = typeof sub === "string" ? sub : sub.text;
+  const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";
+  return `
+    <li class="td-task" id="td-task-item-${index}">
+      <input type="checkbox" id="subtask-${index}" ${isChecked}
+        onchange="toggleSubtaskStyle(${index}, this.checked)">
+      <label for="subtask-${index}" class="td-task__label">${label}</label>
+    </li>
+  `;
+}
