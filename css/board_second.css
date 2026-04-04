@@ -123,6 +123,10 @@
 .td-desc {
   color: #374151;
   margin: 0 0 14px;
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 477px;
 }
 
 .td-meta .td-row {

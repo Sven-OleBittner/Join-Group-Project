@@ -16,6 +16,7 @@ function chooseAddTaskSite(buttonId) {
   }
 }
 
+
 function generateAddTaskModal(buttonId) {
   let dialog = document.getElementById("addTaskDialog");
   let dialogContent = document.getElementById("addTaskDialogContent");

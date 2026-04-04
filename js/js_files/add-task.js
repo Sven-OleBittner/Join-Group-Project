@@ -47,7 +47,7 @@ async function fillTaskForm(task, taskId) {
   prefillAssignees(task.assigned || []);
   preFillSubtasks(task.subtasks || []);
   enableCreateButton();
-  Object.assign(document.getElementById("create-btn"), { innerHTML: "Save ✓", onclick: () => saveEditTask(taskId) });
+  Object.assign(document.getElementById("create-btn"), { innerHTML: "Edit ✓", onclick: () => saveEditTask(taskId) });
 }
 
 /**
@@ -219,7 +219,9 @@ async function saveEditTask(taskId) {
   task.priority = getSelectedPriority();
   task.category = document.getElementById("category-selected").textContent;
   task.assigned = getSelectedContacts();
-  task.subtasks = subtasks;
+  task.subtasks = (typeof subtasks !== 'undefined' && Array.isArray(subtasks) && subtasks.length)
+    ? subtasks
+    : (task.subtasks || []);
   await putData(`task/${taskId}`, task);
   showTaskAddedNotification();
 }
