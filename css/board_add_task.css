@@ -28,4 +28,8 @@ dialog:not([open]) {
   .addTaskDialog {
     display: none;
   }
+
+  .td-assignees {
+    max-height: 132px;
+  }
 }
