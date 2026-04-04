@@ -4,7 +4,6 @@
             linke/rechte Spalte, Trennlinie, Footer
    ============================================================= */
 
-
 /* -------------------------------------------------------
    Seitenlayout-Wrapper
    ------------------------------------------------------- */
@@ -16,8 +15,9 @@
 /* Vertikaler Trenner zwischen linker und rechter Form-Spalte */
 .form-divider {
   width: 1px;
-  background-color:#D1D1D1;
+  background-color: #d1d1d1;
   margin: 0 4px;
+  height: 462px;
 }
 
 /* Hauptinhalt-Bereich (wächst / schrumpft flexibel) */
@@ -28,22 +28,6 @@
   flex-shrink: 1;
   flex-basis: auto;
 }
-
-
-/* -------------------------------------------------------
-   Seitenheader
-   ------------------------------------------------------- */
-
-/* .header {
-  background-color: #ffffff;
-  padding: 16px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #dddddd;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  z-index: 100;
-} */
 
 /* Runder Nutzer-Avatar im Header */
 .user-circle {
@@ -56,7 +40,6 @@
   justify-content: center;
 }
 
-
 /* -------------------------------------------------------
    Add-Task-Seiten-Container
    ------------------------------------------------------- */
@@ -65,7 +48,7 @@
 .add-task-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+    justify-content: flex-start;
   padding: 2px 32px 2px;
   height: 100%;
 }
@@ -95,13 +78,11 @@
   padding-top: 8px;
 }
 
-
 /* -------------------------------------------------------
    RESPONSIVE – Schmale Bildschirme (≤ 945 px)
    ------------------------------------------------------- */
 
 @media (max-width: 945px) {
-
   /* Vertikalen Trenner auf schmalen Screens ausblenden */
   .form-divider {
     display: none;

@@ -149,7 +149,7 @@
 /* Scrollbarer Container für alle Subtask-Einträge */
 .subtask-list {
   overflow-y: auto;
-  height: 100px;
+  height: 56px;
   padding: 0;
   margin: 8px 0 0;
 }
