@@ -1,6 +1,6 @@
 function getAddTaskTemplate(buttonId) {
   return `
-        <div class="add-task-container max-w-1440">
+        <div class="width-100 add-task-container add-task-container__dialog max-w-1440">
           <div class="add-task-uppercontainer">
             <h1 class="add-task-title">Add Task</h1>
             <button
