@@ -80,8 +80,8 @@ function updateSelectedContactsDisplay() {
   if (!sel.length) return;
   const maxVisible = 4;
   if (sel.length <= maxVisible) { sel.forEach(s => renderChip(c, s)); return; }
-  sel.slice(0, maxVisible - 1).forEach(s => renderChip(c, s));
-  renderOverflow(c, sel.length - (maxVisible - 1));
+  sel.slice(0, maxVisible).forEach(s => renderChip(c, s));
+  renderOverflow(c, sel.length - maxVisible);
 }
 
 /**

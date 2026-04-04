@@ -227,6 +227,7 @@ body {
   font-weight: 700;
   color: #2a3647;
   margin: 2px 0 0;
+  min-height: 40px;
 }
 
 .kb-card-desc {

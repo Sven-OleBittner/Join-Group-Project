@@ -208,7 +208,7 @@ function fillModalHeader(task) {
   chip.style.color = "#ffffff";
   document.getElementById("td-title").textContent = task.title;
   document.getElementById("td-desc").textContent = task.description;
-  document.getElementById("td-due").textContent = task.dueDate;
+  document.getElementById("td-due").textContent = dateFormatChange(task);
   document.getElementById("td-prio-text").textContent = capitalizeFirstLetter(
     task.priority,
   );
@@ -216,38 +216,31 @@ function fillModalHeader(task) {
     `<img src="./assets/img/${getPriority(task.priority)}">`;
 }
 
-
+function dateFormatChange(task) {
+  let oldDate = task.dueDate;
+  if (oldDate.includes("-")) {
+    const [year, month, day] = oldDate.split("-");
+    return `${day}.${month}.${year}`;
+  } else if (oldDate.includes("/")) {
+    const [day, month, year] = oldDate.split("/");
+    return `${day}.${month}.${year}`;
+  } else {
+    return oldDate;
+  }
+}
 
 async function renderModalAvatars(assigned) {
   const container = document.getElementById("td-assignees");
   container.innerHTML = "";
-  if (!assigned || !assigned.length) return;
-  const maxVisible = 2;
-  if (assigned.length <= maxVisible) {
-    await renderAllModalAvatars(container, assigned);
-    return;
+  for (const assignee of assigned) {
+    const color = await getContactBg(assignee.initials);
+    container.innerHTML += `
+      <div class="td-person">
+        <div class="kb-avatar ${assignee.color || color}">${assignee.initials}</div>
+        <span class="td-person__name">${assignee.name}</span>
+      </div>
+    `;
   }
-  await renderLimitedModalAvatars(container, assigned, maxVisible);
-}
-
-async function renderSingleModalAvatar(container, assignee) {
-  const color = await getContactBg(assignee.initials);
-  container.innerHTML += renderSingleModalAvatarTemplate(container, assignee, color);
-}
-
-function renderOverflowModal(container, remaining) {
-  container.innerHTML +=renderOverflowModalTemplate(remaining);
-}
-
-async function renderAllModalAvatars(container, assigned) {
-  for (const assignee of assigned) await renderSingleModalAvatar(container, assignee);
-}
-
-async function renderLimitedModalAvatars(container, assigned, maxVisible) {
-  const visibleCount = maxVisible - 1;
-  for (let i = 0; i < visibleCount; i++) await renderSingleModalAvatar(container, assigned[i]);
-  const remaining = assigned.length - visibleCount;
-  renderOverflowModal(container, remaining);
 }
 
 function renderModalSubtasks(subtasks) {

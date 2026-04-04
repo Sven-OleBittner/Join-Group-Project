@@ -20,7 +20,12 @@ function generateAddTaskModal(buttonId) {
   let dialog = document.getElementById("addTaskDialog");
   let dialogContent = document.getElementById("addTaskDialogContent");
   dialogContent.innerHTML = getAddTaskTemplate(buttonId);
-
+  // Ensure date picker cannot select past dates
+  try {
+    if (typeof setDateMinToday === 'function') setDateMinToday();
+  } catch (e) {
+    console.warn('setDateMinToday not available', e);
+  }
   // Show the dialog
   dialog.showModal();
 }
@@ -41,18 +46,3 @@ function preFillSubtasks(subtasks) {
     list.innerHTML += getSubtaskHTML(subtask, index);
   });
 }
-
-// /**
-//  * Chooses the correct subtask text from either prefillSubtasks or subtasks array
-//  * @param {number} index - The index of the subtask
-//  * @returns {string} The text of the subtask
-//  */
-// function chooseSubtaskArray(index) {
-//   let subtask = prefillSubtasks[0][index];
-//   if (subtask.text) {
-//     subtasks.push(subtask);
-//     return subtask.text;
-//   } else {
-//     return subtasks[index].text;
-//   }
-// }

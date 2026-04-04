@@ -34,7 +34,7 @@ function getAddTaskTemplate(buttonId) {
               <label for="date">Due date<span class="required">*</span></label>
               <div class="date-wrapper">
                 <input
-                  type="text"
+                  type="date"
                   id="date"
                   placeholder="dd/mm/yyyy"
                   onblur="validateDate()"

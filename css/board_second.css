@@ -152,6 +152,8 @@
   display: grid;
   gap: 12px;
   padding: 4px;
+  max-height: 220px;
+  overflow-y: auto;
 }
 
 .td-person {

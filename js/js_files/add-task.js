@@ -13,6 +13,8 @@ async function add_task_init() {
   enableCreateButton();
   standartselectPriority();
   await loadContactsForDropdown();
+  // Prevent selecting past dates in native date picker
+  if (typeof setDateMinToday === 'function') setDateMinToday();
   const editKey = new URLSearchParams(window.location.search).get("editKey");
   if (editKey) await prefillFormFromUrl(editKey);
 }
@@ -123,6 +125,18 @@ async function postNewTask(buttonId) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function chooseTaskNotification() {
+  switch (site) {
+    case "add_task.html":
+      showTaskAddedNotification();
+      break;
+    case "board.html":
+      showTaskEditNotification();
+      break;
+  }
+
 }
 
 /**

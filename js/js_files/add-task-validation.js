@@ -124,36 +124,89 @@ function validateDate() {
   const value = date.value.trim();
   resetDateErrors();
   if (!value) return showDateError('date-error', date);
-  if (!isValidDateFormat(value)) return showDateError('date-format-error', date);
-  if (!isPossibleDate(value)) return showDateError('date-possible-error', date);
+  if (date.type === 'date' || isIsoDate(value)) {
+    if (!isIsoValid(value)) return showDateError('date-format-error', date);
+    if (!isIsoNotPast(value)) return showDateError('date-possible-error', date);
+  } else {
+    if (!isValidDateFormat(value)) return showDateError('date-format-error', date);
+    if (!isPossibleDate(value)) return showDateError('date-possible-error', date);
+  }
   date.classList.remove('input-error');
   return true;
 }
 
 /**
- * Checks if value matches dd/mm/yyyy format
- * Regex: ^       = Start of string
- *        \d{2}   = Exactly 2 digits (day)
- *        \/      = Forward slash (escaped with \)
- *        \d{2}   = Exactly 2 digits (month)
- *        \/      = Forward slash (escaped with \)
- *        \d{4}   = Exactly 4 digits (year)
- *        $       = End of string
+ * Checks if value matches ISO date format (yyyy-mm-dd)
  * @param {string} value - The date string to check
  * @returns {boolean} True if format is valid
  */
+function isIsoDate(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+/**
+ * Validates if the ISO date is a real calendar date
+ * @param {string} value - The date string in ISO format to validate
+ * @returns {boolean} True if the date is valid
+ */
+function isIsoValid(value) {
+  const [y, m, d] = value.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
+}
+
+/**
+ * Checks if the ISO date is not in the past
+ * @param {string} value - The date string in ISO format to check
+ * @returns {boolean} True if the date is today or in the future
+ */
+function isIsoNotPast(value) {
+  const [y, m, d] = value.split('-').map(Number);
+  const parsed = new Date(y, m - 1, d);
+  const today = new Date();
+  const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  return parsed >= todayMid;
+}
+
+/**
+ * Set the `min` attribute of any date input with id 'date' to today's date
+ * in ISO format (yyyy-mm-dd) so past dates cannot be selected.
+ */
+function setDateMinToday() {
+  const el = document.getElementById('date');
+  if (!el) return;
+  const today = new Date();
+  const y = today.getFullYear();
+  const m = String(today.getMonth() + 1).padStart(2, '0');
+  const d = String(today.getDate()).padStart(2, '0');
+  el.min = `${y}-${m}-${d}`;
+}
+
+/**
+ * Checks if value matches dd/mm/yyyy or dd.mm.yyyy format
+ * Regex: ^       = Start of string
+ *        \d{2}   = Exactly 2 digits (day)
+ *        [\/\.]  = Separator: forward slash or dot
+ *        \d{2}   = Exactly 2 digits (month)
+ *        [\/\.]  = Separator: forward slash or dot
+ *        \d{4}   = Exactly 4 digits (year)
+ *        $       = End of string
+ * @param {string} value - The date string to check
+ * @returns {boolean} True if format is valid (accepts '/' or '.')
+ */
 function isValidDateFormat(value) {
-  return /^\d{2}\/\d{2}\/\d{4}$/.test(value);
+  return /^\d{2}[\/\.]\d{2}[\/\.]\d{4}$/.test(value);
 }
 
 function isPossibleDate(value) {
-  const [day, month, year] = value.split('/').map(Number);
+  // Support both '/' and '.' as separators
+  const [day, month, year] = value.split(/[\/\.]/).map(Number);
   const date = new Date(year, month - 1, day);
   return (
     date.getFullYear() === year &&
     date.getMonth() === month - 1 &&
     date.getDate() === day &&
-    date >= new Date()
+    date >= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
   );
 }
 
