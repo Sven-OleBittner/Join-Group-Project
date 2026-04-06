@@ -32,28 +32,6 @@ body {
   transition: filter 300ms ease-in-out;
 }
 
-@keyframes greeting {
-  0% {
-    opacity: 0;
-    visibility: visible;
-  }
-
-  20% {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  80% {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
 .main-header {
   display: flex;
   flex-direction: row;
@@ -213,7 +191,10 @@ body {
   background-color: transparent;
   border-left: 2px solid var(--dark-grey-color);
   padding: 20px 24px 20px 48px;
-  transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-left-color 300ms ease-in-out;
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out,
+    border-left-color 300ms ease-in-out;
   pointer-events: none;
   height: 98px;
 }
@@ -248,7 +229,9 @@ body {
   padding: 0px 24px;
   background-color: transparent;
   color: inherit;
-  transition: background-color 100ms ease-in-out, color 300ms ease-in-out;
+  transition:
+    background-color 100ms ease-in-out,
+    color 300ms ease-in-out;
   pointer-events: none;
 }
 
@@ -257,6 +240,28 @@ body {
   opacity: 0;
   justify-content: center;
   align-items: center;
+}
+
+@keyframes greeting {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  20% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  80% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes main_fadeIn {
@@ -292,4 +297,3 @@ body {
     visibility: hidden;
   }
 }
-

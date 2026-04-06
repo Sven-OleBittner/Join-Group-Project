@@ -322,9 +322,3 @@
     background-color: var(--lightblue-color);
   }
 }
-
-/* @media (max-width: 945px) {
-  .overlay {
-    height: calc(100vh - 90px);
-  }
-} */

@@ -22,12 +22,6 @@ body {
   flex-direction: column;
 }
 
-/* logo-img {
-  width: 25px !important;
-  height: 30px !important;
-  max-width: 25px;
-} */
-
 .sidebar {
   width: 200px;
   height: 100vh;
@@ -122,7 +116,6 @@ body {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  /* width: 100%; */
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease;

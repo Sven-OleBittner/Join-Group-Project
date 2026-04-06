@@ -319,10 +319,4 @@ form#signup-form {
     gap: 4px;
     flex-wrap: wrap;
   }
-
-  /* .signup-btn {
-    padding: 12px;
-    margin: 0 auto 0 auto;
-    width: 90%;
-  } */
 }
