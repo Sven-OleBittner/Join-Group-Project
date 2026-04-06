@@ -13,6 +13,10 @@ const els = {
 };
 
 /* Set initial logo src and background color based on screen size */
+/**
+ * Adjusts intro logo and background based on current viewport size
+ * @returns {void}
+ */
 function setIntro() {
   if (!els.intro || !els.loginPage || !els.introLogo) return;
   const isMobile = window.innerWidth <= 480;
@@ -21,6 +25,10 @@ function setIntro() {
 }
 
 /* Prepare the login page (invisible) so the header occupies its position in DOM */
+/**
+ * Prepares the login page layout before the transition animation
+ * @returns {void}
+ */
 function prepareLoginPage() {
   els.loginPage.style.opacity = "0";
   els.loginPage.style.visibility = "visible";
@@ -28,6 +36,11 @@ function prepareLoginPage() {
 }
 
 /* Move intro logo directly to the exact position of the header logo */
+/**
+ * Positions the intro logo element to the coordinates of the header logo
+ * @param {DOMRect} rect - Bounding rect of the header logo
+ * @returns {void}
+ */
 function flyLogoToHeader(rect) {
   els.introLogo.style.top = rect.top + 'px';
   els.introLogo.style.left = rect.left + 'px';
@@ -37,6 +50,10 @@ function flyLogoToHeader(rect) {
 }
 
 /* Fade in the login page and clear the intro background */
+/**
+ * Reveals the login page and clears the intro background
+ * @returns {void}
+ */
 function revealPage() {
   els.introLogo.src = "./assets/img/Capa 2.svg";
   els.intro.style.backgroundColor = "transparent";
@@ -45,6 +62,11 @@ function revealPage() {
 }
 
 /* Swap intro logo with header logo seamlessly after flight */
+/**
+ * Fades the header logo in and the intro logo out after animation
+ * @param {HTMLElement} headerLogo - The header logo element
+ * @returns {void}
+ */
 function swapLogo(headerLogo) {
   setTimeout(() => {
     headerLogo.style.opacity = "1";
@@ -53,6 +75,10 @@ function swapLogo(headerLogo) {
 }
 
 /* Orchestrate the full intro-to-login transition */
+/**
+ * Starts the intro-to-login animation sequence
+ * @returns {void}
+ */
 function showLogin() {
   if (!els.intro || !els.loginPage || !els.introLogo) return;
   setTimeout(() => {
@@ -66,6 +92,10 @@ function showLogin() {
 }
 
 /* Toggle password field visibility and update icon */
+/**
+ * Adds click handler to toggle password visibility and icon swap
+ * @returns {void}
+ */
 function togglePasswordVisibility() {
   if (!els.password || !els.toggle) return;
   els.toggle.addEventListener("click", () => {
@@ -76,6 +106,10 @@ function togglePasswordVisibility() {
 }
 
 /* Show eye icon when password has input, show lock icon when empty */
+/**
+ * Shows/hides password icons depending on whether the password input has content
+ * @returns {void}
+ */
 function updatePasswordIcons() {
   if (!els.password || !els.toggle || !els.lock) return;
   els.password.addEventListener("input", () => {
@@ -86,6 +120,10 @@ function updatePasswordIcons() {
 }
 
 /* Validate email and password on form submit, show error messages */
+/**
+ * Attaches form submit validation and shows errors if input invalid
+ * @returns {void}
+ */
 function validateForm() {
   if (!els.form) return;
   els.form.addEventListener("submit", (e) => {
@@ -101,6 +139,10 @@ function validateForm() {
 }
 
 /* Initialize all page functionality */
+/**
+ * Initializes login page behaviors
+ * @returns {void}
+ */
 function init() {
   setIntro();
   showLogin();

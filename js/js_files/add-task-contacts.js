@@ -65,14 +65,31 @@ function toggleContactSelection(firebaseKey) {
  * Updates the display of selected contacts as avatar chips below the dropdown
  * @returns {void}
  */
+/**
+ * Renders a single avatar chip into the provided container
+ * @param {HTMLElement} container - Container to render the chip into
+ * @param {Object} contact - Contact object containing `initials` and `color`
+ * @returns {void}
+ */
 function renderChip(container, contact) {
   container.innerHTML += `<div class="avatar-chip ${contact.color}">${contact.initials}</div>`;
 }
 
+/**
+ * Renders an overflow chip showing how many additional assignees exist
+ * @param {HTMLElement} container - Container to render the overflow chip into
+ * @param {number} count - Number of overflowed assignees
+ * @returns {void}
+ */
 function renderOverflow(container, count) {
   container.innerHTML += `<div class="avatar-chip color-aquamarine overflow">+${count}</div>`;
 }
 
+/**
+ * Updates the assigned chips display under the assignees dropdown
+ * Shows up to 4 chips and an overflow counter if necessary
+ * @returns {void}
+ */
 function updateSelectedContactsDisplay() {
   const sel = getSelectedContacts();
   const c = document.getElementById('assigned-chips');

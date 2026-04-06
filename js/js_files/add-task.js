@@ -127,6 +127,10 @@ async function postNewTask(buttonId) {
   }
 }
 
+/**
+ * Chooses and displays the appropriate notification based on the current site
+ * @returns {void}
+ */
 function chooseTaskNotification() {
   switch (site) {
     case "add_task.html":
@@ -136,7 +140,6 @@ function chooseTaskNotification() {
       showTaskEditNotification();
       break;
   }
-
 }
 
 /**

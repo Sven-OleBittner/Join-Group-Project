@@ -207,6 +207,12 @@ function isValidDateFormat(value) {
   return /^\d{2}[\/\.]\d{2}[\/\.]\d{4}$/.test(value);
 }
 
+/**
+ * Checks if a date string (dd/mm/yyyy or dd.mm.yyyy) represents a real calendar date
+ * and is today or in the future.
+ * @param {string} value - The date string to validate (dd/mm/yyyy or dd.mm.yyyy)
+ * @returns {boolean} True if the date is valid and not in the past
+ */
 function isPossibleDate(value) {
   // Support both '/' and '.' as separators
   const [day, month, year] = value.split(/[\/\.]/).map(Number);
@@ -280,6 +286,10 @@ function validateCategory() {
 
 /**
  * Enables the Create Task button if all required fields are valid
+ */
+/**
+ * Enables or disables the Create Task button based on form validity.
+ * @returns {void}
  */
 function enableCreateButton() {
   const createBtn = document.getElementById("create-btn");

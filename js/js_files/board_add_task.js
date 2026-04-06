@@ -1,3 +1,9 @@
+/**
+ * Shows or hides the "empty column" placeholder depending on column content
+ * @param {string} columnId - ID of the column container
+ * @param {string} emptyColumnId - ID of the placeholder element
+ * @returns {void}
+ */
 function checkColumns(columnId, emptyColumnId) {
   let column = document.getElementById(columnId);
   let emptyColumn = document.getElementById(emptyColumnId);
@@ -8,6 +14,11 @@ function checkColumns(columnId, emptyColumnId) {
   }
 }
 
+/**
+ * Chooses whether to open add-task modal or navigate to add_task page on mobile
+ * @param {string} buttonId - ID of the trigger button
+ * @returns {void}
+ */
 function chooseAddTaskSite(buttonId) {
   if (window.innerWidth > 945) {
     generateAddTaskModal(buttonId);
@@ -17,6 +28,11 @@ function chooseAddTaskSite(buttonId) {
 }
 
 
+/**
+ * Renders and opens the add task modal dialog
+ * @param {string} buttonId - ID passed to template for initial state
+ * @returns {void}
+ */
 function generateAddTaskModal(buttonId) {
   let dialog = document.getElementById("addTaskDialog");
   let dialogContent = document.getElementById("addTaskDialogContent");
@@ -31,6 +47,10 @@ function generateAddTaskModal(buttonId) {
   dialog.showModal();
 }
 
+/**
+ * Closes the add task modal dialog
+ * @returns {void}
+ */
 function closeAddTaskModal() {
   let dialog = document.getElementById("addTaskDialog");
   dialog.close();

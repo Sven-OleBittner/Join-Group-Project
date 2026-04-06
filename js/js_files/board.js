@@ -1,3 +1,7 @@
+/**
+ * Initializes the board page: sorts tasks into columns and sets up listeners
+ * @returns {void}
+ */
 function initBoardSite() {
   sortTaskByStatus("toDoTaskList", "todo", "emptyToDo");
   sortTaskByStatus("inProgressTaskList", "inprogress", "emptyInProgress");
@@ -6,6 +10,10 @@ function initBoardSite() {
   setUpListeners();
 }
 
+/**
+ * Attaches event listeners for board interactions (e.g., search enter key)
+ * @returns {void}
+ */
 function setUpListeners() {
   const searchInput = document.getElementById("searchInput");
   if (searchInput && !searchInput.dataset.enterListener) {
@@ -22,21 +30,42 @@ function setUpListeners() {
 let currentDraggedTask;
 let ghostImage;
 
+/**
+ * Handles drag start for a task card
+ * @param {string} taskId - The DOM id of the dragged task
+ * @param {DragEvent} event - Drag event object
+ * @returns {void}
+ */
 function dragStart(taskId, event) {
   currentDraggedTask = taskId;
   event.dataTransfer.setData("text/plain", taskId);
 }
 
+/**
+ * Drag over handler to allow drop and visual feedback
+ * @param {DragEvent} ev - Drag event
+ * @returns {void}
+ */
 function dragoverHandler(ev) {
   ev.preventDefault();
   ev.currentTarget.classList.add("drag-over");
 }
 
+/**
+ * Removes drag-over visual state when dragging leaves a column
+ * @param {DragEvent} ev - Drag event
+ * @returns {void}
+ */
 function dragLeaveHandler(ev) {
   ev.preventDefault();
   ev.currentTarget.classList.remove("drag-over");
 }
 
+/**
+ * Moves the currently dragged task to a column determined by `columnId`
+ * @param {string} columnId - ID of the target column container
+ * @returns {Promise<void>}
+ */
 async function moveTo(columnId) {
   const taskData = await getData("task");
   if (!taskData) return;
@@ -50,6 +79,12 @@ async function moveTo(columnId) {
   }
 }
 
+/**
+ * Moves a specific task (by id) to a different column/status
+ * @param {string} columnId - ID of the target column container
+ * @param {string} taskId - Firebase key of the task
+ * @returns {Promise<void>}
+ */
 async function moveToResp(columnId, taskId) {
   const taskData = await getData("task");
   if (!taskData) return;
@@ -62,6 +97,11 @@ async function moveToResp(columnId, taskId) {
   }
 }
 
+/**
+ * Maps a column container id to the task status string
+ * @param {string} columnId - ID of the column container
+ * @returns {string} Status value ('todo'|'inprogress'|'feedback'|'done')
+ */
 function setNewStatus(columnId) {
   switch (columnId) {
     case "toDoTaskList":
@@ -75,6 +115,13 @@ function setNewStatus(columnId) {
   }
 }
 
+/**
+ * Loads tasks and renders those matching a given status into the container
+ * @param {string} id - DOM id of the target container
+ * @param {string} status - Task status to filter by
+ * @param {string} emptyColumnId - ID of empty placeholder element
+ * @returns {Promise<void>}
+ */
 async function sortTaskByStatus(id, status, emptyColumnId) {
   const tasksData = await getData("task");
   if (!tasksData) return renderTask(id, [], emptyColumnId);
@@ -85,6 +132,13 @@ async function sortTaskByStatus(id, status, emptyColumnId) {
   renderTask(id, filteredTasks, emptyColumnId);
 }
 
+/**
+ * Renders the provided task entries into the DOM container
+ * @param {string} id - DOM id of the container
+ * @param {Array} filteredTasks - Array of [key, task] entries
+ * @param {string} emptyColumnId - ID of the placeholder element
+ * @returns {Promise<void>}
+ */
 async function renderTask(id, filteredTasks, emptyColumnId) {
   const container = document.getElementById(id);
   container.innerHTML = "";
@@ -105,6 +159,13 @@ async function renderTask(id, filteredTasks, emptyColumnId) {
   checkColumns(id, emptyColumnId);
 }
 
+/**
+ * Ensures avatar area for a task is rendered correctly (clears if too many)
+ * @param {string} id - Container id
+ * @param {Object} task - Task object
+ * @param {string} key - Task firebase key
+ * @returns {void}
+ */
 function checkAssignedContacts(id, task, key) {
   const avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
   if (!avatarsContainer) return;
@@ -114,6 +175,11 @@ function checkAssignedContacts(id, task, key) {
   }
 }
 
+/**
+ * Returns a CSS color class depending on the category name
+ * @param {string|Object} category - Category name or object with `name`
+ * @returns {string} CSS color class name
+ */
 function getCategoryColor(category) {
   const name =
     category && typeof category === "object" ? category.name : category;
@@ -124,6 +190,13 @@ function getCategoryColor(category) {
   }
 }
 
+/**
+ * Renders subtask progress for a given task
+ * @param {string} id - Container id
+ * @param {Object} task - Task object
+ * @param {string} key - Task firebase key
+ * @returns {void}
+ */
 function renderSubTask(id, task, key) {
   const subTasksContainer = document.getElementById(
     `task-${key}-subtasks-${id}`,
@@ -144,6 +217,13 @@ function renderSubTask(id, task, key) {
   );
 }
 
+/**
+ * Renders the avatars for assigned contacts inside a task card
+ * @param {Array} taskAssigned - Array of assignee objects
+ * @param {string} key - Task firebase key
+ * @param {string} id - Container id
+ * @returns {Promise<void>}
+ */
 async function renderAvatars(taskAssigned, key, id) {
   let avatarsContainer = document.getElementById(`task-${key}-avatars-${id}`);
   if (!avatarsContainer) return;
@@ -166,6 +246,11 @@ async function renderAvatars(taskAssigned, key, id) {
   }
 }
 
+/**
+ * Looks up a contact color by initials
+ * @param {string} taskAssigned - Initials of the contact
+ * @returns {Promise<string>} CSS color class for the contact
+ */
 async function getContactBg(taskAssigned) {
   const contactDb = await getData("contacts");
   const contactArray = Object.values(contactDb);
@@ -175,6 +260,11 @@ async function getContactBg(taskAssigned) {
   return contact ? contact.color : "color-default";
 }
 
+/**
+ * Maps task priority key to image filename or class
+ * @param {string} taskPriority - Priority key
+ * @returns {string} Priority image filename or default class
+ */
 function getPriority(taskPriority) {
   if (taskPriority === "urgent") {
     return "red_high_urgent.svg";
@@ -189,6 +279,11 @@ function getPriority(taskPriority) {
 
 let currentTaskId;
 
+/**
+ * Opens the task detail modal for a specific task
+ * @param {string} taskId - Firebase key of the task
+ * @returns {Promise<void>}
+ */
 async function openTaskModal(taskId) {
   currentTaskId = taskId;
   const task = await getData(`task/${taskId}`);
@@ -199,6 +294,11 @@ async function openTaskModal(taskId) {
   document.getElementById("td-modal").classList.add("is-open");
 }
 
+/**
+ * Fills the modal header with task metadata (category, title, due date, priority)
+ * @param {Object} task - Task object
+ * @returns {void}
+ */
 function fillModalHeader(task) {
   const categoryName = task.category?.name || task.category;
   const chip = document.getElementById("td-chip");
@@ -216,6 +316,11 @@ function fillModalHeader(task) {
     `<img src="./assets/img/${getPriority(task.priority)}">`;
 }
 
+/**
+ * Normalizes various due date formats to `dd.mm.yyyy`
+ * @param {Object} task - Task object containing `dueDate`
+ * @returns {string} Formatted date string or original value
+ */
 function dateFormatChange(task) {
   let oldDate = task.dueDate;
   if (oldDate.includes("-")) {
@@ -229,6 +334,11 @@ function dateFormatChange(task) {
   }
 }
 
+/**
+ * Renders full-size avatars inside the task detail modal
+ * @param {Array} assigned - Array of assignee objects
+ * @returns {Promise<void>}
+ */
 async function renderModalAvatars(assigned) {
   const container = document.getElementById("td-assignees");
   container.innerHTML = "";
@@ -243,6 +353,11 @@ async function renderModalAvatars(assigned) {
   }
 }
 
+/**
+ * Renders subtasks inside the task detail modal
+ * @param {Array} subtasks - Array of subtask objects or strings
+ * @returns {void}
+ */
 function renderModalSubtasks(subtasks) {
   document.getElementById("td-subtasks").hidden = !subtasks.length;
   const list = document.getElementById("td-subtasks-list");
@@ -251,6 +366,12 @@ function renderModalSubtasks(subtasks) {
     .join("");
 }
 
+/**
+ * Toggles the completed style for a subtask and persists the change
+ * @param {number} index - Index of the subtask
+ * @param {boolean} isChecked - New completion state
+ * @returns {Promise<void>}
+ */
 async function toggleSubtaskStyle(index, isChecked) {
   document
     .getElementById(`td-task-item-${index}`)
@@ -265,16 +386,30 @@ async function toggleSubtaskStyle(index, isChecked) {
   initBoardSite();
 }
 
+/**
+ * Closes the task detail modal
+ * @returns {void}
+ */
 function closeTaskModal() {
   document.getElementById("td-modal").classList.remove("is-open");
 }
 
+/**
+ * Deletes a task by id and refreshes the board
+ * @param {string} taskId - Firebase key of the task
+ * @returns {Promise<void>}
+ */
 async function deleteTask(taskId) {
   await deleteData(`task/${taskId}`);
   closeTaskModal();
   initBoardSite();
 }
 
+/**
+ * Opens the add/edit task UI prefilled for editing a specific task
+ * @param {string} taskId - Firebase key of the task
+ * @returns {Promise<void>}
+ */
 async function editTask(taskId) {
   const task = await getData(`task/${taskId}`);
   closeTaskModal();
@@ -286,23 +421,44 @@ async function editTask(taskId) {
   await prefillEditForm(task, taskId);
 }
 
+/**
+ * Prepares the add-task form for editing with provided task data
+ * @param {Object} task - Task object to prefill
+ * @param {string} taskId - Firebase key of the task
+ * @returns {Promise<void>}
+ */
 async function prefillEditForm(task, taskId) {
   standartselectPriority();
   await loadContactsForDropdown();
   fillTaskForm(task, taskId);
 }
 
+/**
+ * Capitalizes the first letter of a string
+ * @param {string} string - Input string
+ * @returns {string} String with first letter capitalized
+ */
 function capitalizeFirstLetter(string) {
   if (!string) return "";
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * Toggles the display of the options menu for a task
+ * @param {string} menuId - DOM id of the menu element
+ * @returns {void}
+ */
 function toggleOptions(menuId) {
   const menu = document.getElementById(menuId);
   if (!menu) return;
   menu.style.display = menu.style.display === "flex" ? "none" : "flex";
 }
 
+/**
+ * Hides all responsive menus except the currently opened one
+ * @param {string} currentMenuId - Menu id to keep open
+ * @returns {void}
+ */
 function closeAllOtherOptions(currentMenuId) {
   const allMenus = document.querySelectorAll(".responsiveMoveTo");
   allMenus.forEach((menu) => {
@@ -312,6 +468,10 @@ function closeAllOtherOptions(currentMenuId) {
   });
 }
 
+/**
+ * Closes all responsive menus (used on global click handlers)
+ * @returns {void}
+ */
 function closeAllOptionsOnclick() {
   const allMenus = document.querySelectorAll(".responsiveMoveTo");
   allMenus.forEach((menu) => {
@@ -319,6 +479,11 @@ function closeAllOptionsOnclick() {
   });
 }
 
+/**
+ * Saves edits of an existing task back to the database
+ * @param {string} taskId - Firebase key of the task to save
+ * @returns {Promise<void>}
+ */
 async function saveEditTask(taskId) {
   if (!validateForm()) return;
   const task = await getData(`task/${taskId}`);
@@ -334,15 +499,28 @@ async function saveEditTask(taskId) {
   initBoardSite();
 }
 
+/**
+ * Returns the current trimmed search query from the search input
+ * @returns {string} Lowercased trimmed query
+ */
 function getSearchQuery() {
   return document.getElementById("searchInput").value.trim().toLowerCase();
 }
 
+/**
+ * Shows all tasks (clears active filter)
+ * @returns {void}
+ */
 function showAllTasks() {
   document.querySelectorAll(".kb-card").forEach((t) => (t.style.display = ""));
   updateEmptyPlaceholders();
 }
 
+/**
+ * Filters task cards by the provided query string
+ * @param {string} query - Lowercased query to filter titles and descriptions
+ * @returns {void}
+ */
 function filterTasks(query) {
   document.querySelectorAll(".kb-card").forEach((t) => {
     const title =
@@ -355,12 +533,21 @@ function filterTasks(query) {
   updateEmptyPlaceholders();
 }
 
+/**
+ * Reads the search input and applies the filter (or clears it)
+ * @returns {Promise<void>}
+ */
 async function findTaskBy() {
   const q = getSearchQuery();
   if (!q) return showAllTasks();
   filterTasks(q);
 }
 
+/**
+ * Checks whether an element is visible in the DOM
+ * @param {HTMLElement} el - Element to check
+ * @returns {boolean}
+ */
 function isVisible(el) {
   const cs = window.getComputedStyle(el);
   return (
@@ -371,6 +558,10 @@ function isVisible(el) {
   );
 }
 
+/**
+ * Shows or hides the empty column placeholders based on card visibility
+ * @returns {void}
+ */
 function updateEmptyPlaceholders() {
   const cols = [
     { id: "toDoTaskList", empty: "emptyToDo" },

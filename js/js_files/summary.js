@@ -1,9 +1,17 @@
+/**
+ * Initializes the summary page: greeting animation and data loading
+ * @returns {void}
+ */
 function initSummary() {
   checkAndSetGreetingAnimation();
   loadUserData();
   loadTaskData();
 }
 
+/**
+ * Applies or disables greeting animation based on recent login state
+ * @returns {void}
+ */
 function checkAndSetGreetingAnimation() {
   const justLoggedIn = sessionStorage.getItem("justLoggedIn");
   const greetingContainer = document.querySelector(".greeting-container");
@@ -17,6 +25,10 @@ function checkAndSetGreetingAnimation() {
   }
 }
 
+/**
+ * Loads the current user info from session and renders greeting
+ * @returns {Promise<void>}
+ */
 async function loadUserData() {
   let logInUser = sessionStorage.getItem("loggingInUser")
     ? JSON.parse(sessionStorage.getItem("loggingInUser"))
@@ -30,6 +42,10 @@ async function loadUserData() {
   }
 }
 
+/**
+ * Renders a generic greeting for guests
+ * @returns {void}
+ */
 function guestGreeting() {
   const currentHour = new Date().getHours();
   const greeting =
@@ -44,6 +60,10 @@ function guestGreeting() {
   document.getElementById("greetingBox").innerHTML = greeting;
 }
 
+/**
+ * Loads tasks and updates summary counters and urgent task info
+ * @returns {Promise<void>}
+ */
 async function loadTaskData() {
   let tasks = await getData((path = "task"));
   let tasksArray = Object.values(tasks || {});
@@ -61,11 +81,21 @@ async function loadTaskData() {
   showUrgent(tasksArray);
 }
 
+/**
+ * Filters tasks by status
+ * @param {Array} tasksArray - Array of task objects
+ * @param {string} status - Status to filter by
+ * @returns {Array} Filtered tasks
+ */
 function sortTasks(tasksArray, status) {
   let statusTasks = tasksArray.filter((task) => task.status === status);
   return statusTasks;
 }
 
+/**
+ * Updates task count indicators in the summary view
+ * @returns {void}
+ */
 function showTaskCount(
   tasksArray,
   toDoTasks,
@@ -82,6 +112,11 @@ function showTaskCount(
   document.getElementById("doneCount").innerHTML = doneTasks.length || "0";
 }
 
+/**
+ * Shows the number of urgent tasks and the date of the next urgent task
+ * @param {Array} tasksArray - All tasks
+ * @returns {void}
+ */
 function showUrgent(tasksArray) {
   let urgentTasks = tasksArray.filter((task) => task.priority === "urgent");
   document.getElementById("urgentCount").innerHTML = urgentTasks.length || "0";
@@ -89,6 +124,11 @@ function showUrgent(tasksArray) {
     getNextUrgentDate(urgentTasks);
 }
 
+/**
+ * Returns formatted date string for the next urgent task or fallback text
+ * @param {Array} urgentTasks - Array of urgent tasks
+ * @returns {string}
+ */
 function getNextUrgentDate(urgentTasks) {
   if (urgentTasks.length === 0) return "No date set";
   let sortedTasks = urgentTasks.sort(
@@ -99,6 +139,11 @@ function getNextUrgentDate(urgentTasks) {
     : "No date set";
 }
 
+/**
+ * Parses various date value formats into a Date object
+ * @param {string|Object|Date} dateValue
+ * @returns {Date}
+ */
 function parseDateValue(dateValue) {
   if (!dateValue) return new Date();
   if (typeof dateValue === "string" && dateValue.includes("/")) {
@@ -111,6 +156,11 @@ function parseDateValue(dateValue) {
   return new Date(dateValue);
 }
 
+/**
+ * Formats a Date object into a readable string like `Month day, year`
+ * @param {Date} date
+ * @returns {string}
+ */
 function formatDate(date) {
   if (!date || isNaN(date.getTime())) {
     return "No date set";
@@ -135,6 +185,10 @@ function formatDate(date) {
   return `${month} ${day}, ${year}`;
 }
 
+/**
+ * Sets greeting text based on time of day
+ * @returns {void}
+ */
 function greetingBasedOnTime() {
   let currentHour = new Date().getHours();
   let greeting =
@@ -150,6 +204,11 @@ function greetingBasedOnTime() {
   }
 }
 
+/**
+ * Renders user initials and name in the summary header
+ * @param {Object} logInUser - Logged in user object
+ * @returns {void}
+ */
 function userFound(logInUser) {
   let userInitials = document.getElementById("userInitials");
   let greetingNameResp = document.getElementById("greetingNameResp");

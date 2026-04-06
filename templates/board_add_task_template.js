@@ -1,3 +1,8 @@
+/**
+ * Returns the HTML template for the Add Task dialog/modal
+ * @param {string} buttonId - ID passed to the template to determine behavior/state
+ * @returns {string} HTML string for the add task modal
+ */
 function getAddTaskTemplate(buttonId) {
   return `
         <div class="width-100 add-task-container add-task-container__dialog max-w-1440">

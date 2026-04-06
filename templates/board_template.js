@@ -1,3 +1,13 @@
+/**
+ * Returns the HTML template for a task card
+ * @param {string} id - Container id
+ * @param {Object} task - Task object
+ * @param {string} key - Firebase key of the task
+ * @param {string} backgroundColor - CSS class for category color
+ * @param {string} priority - Priority image or key
+ * @param {any} priorityOptions - Optional priority options
+ * @returns {string} HTML string for the task card
+ */
 function getTasksTemplate(id, task, key, backgroundColor, priority, priorityOptions) {
   return `
   <article id="task-${key}" onclick="openTaskModal('${key}')" ondragstart="dragStart('task-${key}', event)" draggable="true" class="kb-card" data-due="${task.dueDate || ''}"
@@ -30,6 +40,13 @@ function getTasksTemplate(id, task, key, backgroundColor, priority, priorityOpti
 }
 
 
+/**
+ * Returns the HTML for the subtask progress bar and counter
+ * @param {Array} subtasks - Array of subtasks
+ * @param {number} percent - Completion percentage
+ * @param {number} completedSubtasks - Number of completed subtasks
+ * @returns {string} HTML string for the subtask progress
+ */
 function getSubTemplate(subtasks, percent, completedSubtasks) {
   return `
     <div class="kb-progress">
@@ -39,6 +56,12 @@ function getSubTemplate(subtasks, percent, completedSubtasks) {
   `;
 }
 
+/**
+ * Renders a single avatar entry for the modal (non-overflow)
+ * @param {HTMLElement} container - Container element where avatar will be placed
+ * @param {Object} assignee - Assignee object with `initials` and `name`
+ * @returns {string}
+ */
 function renderSingleModalAvatarTemplate(container, assignee) {
   return`
     <div class="td-person">
@@ -48,6 +71,11 @@ function renderSingleModalAvatarTemplate(container, assignee) {
   `;
 }
 
+/**
+ * Renders an overflow avatar entry for the modal
+ * @param {number} remaining - Number of remaining assignees not shown
+ * @returns {string}
+ */
 function renderOverflowModalTemplate(remaining) {
   return `
     <div class="td-person">
@@ -56,6 +84,12 @@ function renderOverflowModalTemplate(remaining) {
   `;
 }
 
+/**
+ * Returns HTML for a modal subtask list item
+ * @param {Object|string} sub - Subtask object or string
+ * @param {number} index - Index of the subtask
+ * @returns {string}
+ */
 function getModalSubtaskTemplate(sub, index) {
   const label = typeof sub === "string" ? sub : sub.text;
   const isChecked = typeof sub === "object" && sub.completed ? "checked" : "";

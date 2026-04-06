@@ -1,3 +1,7 @@
+/**
+ * Calls startup routines for the site
+ * @returns {void}
+ */
 function initSite() {
   searchForLoginUser();
 }
@@ -27,6 +31,11 @@ async function searchForLoginUser() {
   showUserInitials(logInUser);
 }
 
+/**
+ * Renders the initials of the logged in user into the UI
+ * @param {Object} logInUser - The logged in user object containing `name`
+ * @returns {void}
+ */
 function showUserInitials(logInUser) {
   let userInitials = document.getElementById("userInitials");
   const nameWords = logInUser.name.split(" ");
@@ -37,10 +46,14 @@ function showUserInitials(logInUser) {
   userInitials.innerHTML = initials;
 }
 
+/**
+ * Removes `msg` query parameter from current URL without reloading the page
+ * @returns {void}
+ */
 function removeMsgFromUrl() {
-    const url = new URL(window.location);
-    url.searchParams.delete("msg");
-    const newUrl = url.pathname + (url.search ? url.search : "") + (url.hash ? url.hash : "");
-    window.history.replaceState(null, document.title, newUrl);
+  const url = new URL(window.location);
+  url.searchParams.delete("msg");
+  const newUrl = url.pathname + (url.search ? url.search : "") + (url.hash ? url.hash : "");
+  window.history.replaceState(null, document.title, newUrl);
 }
 
