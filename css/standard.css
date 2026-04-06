@@ -2,52 +2,54 @@
   box-sizing: border-box;
   margin: 0;
   scroll-behavior: smooth;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
-    --white-color: #ffffff;
-    --darkblue-light-color: #2A3647;
-    --lightblue-color: #29ABE2;
-    --darkblue-color: #091931;
-    --low-color: #7AE229;
-    --medium-color: #FF7A00;
-    --urgent-color: #FF3D00;
-    --story-color: #0038ff;
-    --technical-color: #1fd7c1;
-    --sidebar-color: #cdcdcd;
-    --light-grey-color: #f6f7f8;
-    --medium-grey-color: #e7e7e7;
-    --dark-grey-color: #a8a8a8;
-    --placeholder-grey-color: #d1d1d1;
-    --subtitle-color: #2a3647;
-    --required-color: #ff8190;
-    --mail-color: #007CEE;
-  }
-  
-/* From Checklist */
-button {
-    cursor: pointer;
+  --white-color: #ffffff;
+  --darkblue-light-color: #2a3647;
+  --lightblue-color: #29abe2;
+  --darkblue-color: #091931;
+  --low-color: #7ae229;
+  --medium-color: #ff7a00;
+  --urgent-color: #ff3d00;
+  --story-color: #0038ff;
+  --technical-color: #1fd7c1;
+  --sidebar-color: #cdcdcd;
+  --light-grey-color: #f6f7f8;
+  --medium-grey-color: #e7e7e7;
+  --dark-grey-color: #a8a8a8;
+  --placeholder-grey-color: #d1d1d1;
+  --subtitle-color: #2a3647;
+  --required-color: #ff8190;
+  --mail-color: #007cee;
+  --box-shadow-color: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.error-box {
+  height: 18px;
 }
 
 button:hover {
-    transition: ease-in-out 150ms;
+  background-color: rgba(41, 171, 226, 1);
+  box-shadow: var(--box-shadow-color);
 }
 
 button:active {
-    transition: ease-in-out 150ms;
+  background-color: rgba(9, 25, 49, 1);
+  box-shadow: var(--box-shadow-color);
 }
 
-button, input {
-    border: unset;
+button,
+input {
+  border: unset;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 
 a {
   text-decoration: none;
@@ -58,11 +60,15 @@ a {
   width: 100%;
 }
 
+.w0 {
+  width: 0;
+}
+
 .d-none {
   display: none;
 }
 
-.d-block{
+.d-block {
   display: block;
 }
 
@@ -80,6 +86,12 @@ a {
   align-items: center;
 }
 
+.d-flex-fs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .d-flex-c-c {
   display: flex;
   flex-direction: column;
@@ -94,8 +106,87 @@ a {
   align-items: flex-start;
 }
 
+.d-flex-c-fs-fs-gap8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+}
+
 .d-flex-c-sb {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.max-w-1440 {
+  max-width: 1440px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+/* Custom scrollbar styling */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Scrollbar track */
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #e0e0e0;
+}
+
+/* Scrollbar track hover state */
+*::-webkit-scrollbar-track:hover {
+  background-color: #e8e8e8;
+}
+
+/* Scrollbar thumb (draggable part) */
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #29abe2 0%, #2a3647 100%);
+  border: 1px solid #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar thumb hover state */
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #1e8cc7 0%, #1e2a35 100%);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Scrollbar thumb active state */
+*::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #1976a3 0%, #151e28 100%);
+}
+
+button:disabled {
+  background-color: #949292;
+  color: #a8a8a8;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/icons/checkbox_default.svg);
+  background-size: cover;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url(../assets/icons/checkbox_checked.svg);
+}
+
+input[type="checkbox"]:disabled {
+  background-image: url(../assets/icons/checkbox_default.svg);
+  filter: grayscale(100%) opacity(50%);
+  cursor: not-allowed;
 }

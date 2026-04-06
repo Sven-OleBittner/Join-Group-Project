@@ -1,0 +1,222 @@
+/* --- overlay + centering modal --- */
+.at-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 900;
+}
+.at-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.at-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 901;
+}
+.at-modal.is-open {
+  display: flex;
+}
+.at-modal .at-dialog {
+  pointer-events: auto;
+}
+
+#at-modal .at-dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  max-width: 980px;
+  width: min(980px, calc(100vw - 80px));
+  background: white;
+  border-radius: 24px;
+  padding: 48px 60px 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  /* KEIN transform hier! */
+  animation: slideIn 0.6s ease-out forwards !important;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(150vw, -50%); /* Startet rechts außerhalb */
+  }
+  100% {
+    transform: translate(-50%, -50%); /* Endet zentriert */
+  }
+}
+
+#at-modal .at-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 40px;
+  align-items: start;
+}
+#at-modal .at-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #e5e7eb;
+  transform: translateX(-0.5px);
+}
+#at-modal .at-col {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+#at-modal .at-footer {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+}
+
+/* dropdowns on top */
+#at-modal .dropdown.full-expandable {
+  position: relative;
+}
+#at-modal .dropdown.full-expandable .dropdown-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  z-index: 4000;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.15s ease;
+}
+#at-modal .dropdown.full-expandable.open .dropdown-menu {
+  max-height: 420px;
+  opacity: 1;
+  overflow: auto;
+}
+
+/* priority */
+#at-modal .priority__btn--active img {
+  filter: brightness(0) invert(1);
+}
+
+/* date input */
+.date-wrapper {
+  position: relative;
+}
+#due-date {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px 42px 12px 14px;
+  background: #fff;
+}
+.icon-calendar {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* avatar + chip color utilities (замість інлайнів) */
+.avatar,
+.avatar-chip,
+.category-chip .dot,
+.category-option .dot {
+  transition: background-color 0.15s ease;
+}
+
+/* палітра */
+.c-azure { background-color: #0ea5e9; }
+.c-green { background-color: #10b981; }
+.c-orange { background-color: #f97316; }
+.c-purple { background-color: #8b5cf6; }
+.c-red { background-color: #ef4444; }
+.c-cyan { background-color: #06b6d4; }
+.c-lime { background-color: #84cc16; }
+.c-amber { background-color: #eab308; }
+.c-rose { background-color: #f43f5e; }
+.c-sky { background-color: #28abe2; }
+.c-mint { background-color: #29cc97; }
+
+/* avatar chip base */
+.avatar-chip {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* category chip base */
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #eef1f6;
+  color: #0f172a;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.category-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.category-chip .remove {
+  margin-left: 8px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* dropdown option avatar/dot */
+.contact-option .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  flex: 0 0 28px;
+}
+.category-option .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: 0 0 12px;
+}
+
+/* mobile */
+@media (max-width: 1023px) {
+  #at-modal .at-grid {
+    grid-template-columns: 1fr;
+  }
+  #at-modal .at-grid::after {
+    display: none;
+  }
+}
+
+@media (min-width:1441px) {
+  .td-modal.is-open {
+    justify-content: flex-start;
+    padding-left: 500px;
+}
+}

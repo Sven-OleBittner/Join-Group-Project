@@ -1,0 +1,237 @@
+/* =============================================================
+   ADD TASK – FORMULAR-EINGABEN
+   Enthält: Text-/Datumseingaben, Custom-Select (Dropdown),
+            Kontakt-Optionen, Assigned-Chips, Kalender-Icon
+   ============================================================= */
+
+/* -------------------------------------------------------
+   Standard-Eingabefelder
+   ------------------------------------------------------- */
+
+/* Einheitliches Styling für Text-, Datum- und Textarea-Felder */
+input[type="text"],
+input[type="date"],
+textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Fokus-Zustand: Rahmen entfernen, Hintergrund aufhellen */
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background-color: var(--light-grey-color);
+}
+
+/* -------------------------------------------------------
+   Custom-Select-Dropdown
+   ------------------------------------------------------- */
+
+/* Äußerer Wrapper – Position: relative für absolut positionierte Elemente */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+/* Sichtbare Auswahl-Zeile (Trigger) */
+.select-selected {
+  padding: 12px 40px 12px 16px;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
+  cursor: pointer;
+  min-height: 51px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+/* Pfeil-Icon rechts im Trigger (CSS-Dreieck) */
+.select-selected::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+}
+
+/* Aufklappbare Optionsliste */
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border: 1px solid var(--placeholder-grey-color);
+  border-radius: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Standard-Optionszeile */
+.select-items div {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.select-items div:hover {
+  background-color: var(--light-grey-color);
+}
+
+/* -------------------------------------------------------
+   Kontakt-Option innerhalb des Selects
+   ------------------------------------------------------- */
+
+/* Zeile mit Avatar + Name + Checkbox */
+.select-items .contact-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  margin: 2px;
+  border-radius: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.select-items .contact-option:hover {
+  background-color: var(--light-grey-color);
+}
+
+.contact-option:has(input[type="checkbox"]:checked) {
+  background-color: var(--subtitle-color);
+}
+
+.contact-option:has(input[type="checkbox"]:checked) .name {
+  color: #fff;
+}
+
+.contact-option:has(input[type="checkbox"]:checked) .contact-checkbox {
+  filter: brightness(0) invert(1);
+}
+
+.contact-option:has(input[type="checkbox"]:checked):hover {
+  background-color: var(--darkblue-color);
+}
+
+/* Runder farbiger Initialen-Avatar */
+.select-items .contact-option .avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  flex: 0 0 42px;
+  text-transform: uppercase;
+}
+
+/* Kontaktname – überschüssiger Text wird abgeschnitten */
+.select-items .contact-option .name {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+
+/* Checkbox am rechten Rand der Kontaktzeile */
+.select-items .contact-option input[type="checkbox"] {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Klasse zum programmatischen Ausblenden der Optionsliste */
+.select-hide {
+  display: none;
+}
+
+/* -------------------------------------------------------
+   Assigned-Chips (ausgewählte Kontakt-Avatare)
+   ------------------------------------------------------- */
+
+/* Container, der die runden Avatar-Chips anzeigt */
+.assigned-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  height: 42px;
+}
+
+/* Einzelner runder Avatar-Chip */
+.assigned-chips .avatar-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 1;
+  border: 2px solid #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------------------------------------------
+   Datums-Picker
+   ------------------------------------------------------- */
+
+/* Wrapper für das Datumsfeld + Kalender-Icon */
+.date-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Datumseingabe */
+
+#date:focus-visible {
+  /* padding: 10px 40px 10px 10px; */
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--light-grey-color);
+}
+
+/* Nativen Kalender-Button unsichtbar machen – eigenes Icon greift stattdessen */
+#date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+}
+
+/* Eigenes Kalender-Icon (dekorativ, kein Pointer-Event) */
+.icon-calendar {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}

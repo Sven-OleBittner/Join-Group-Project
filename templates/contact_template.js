@@ -4,10 +4,10 @@
  */
 function addContactTemplate() {
     return `  
-    <div class="overlay" onclick="closeAddContactOverlay()">
-        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
+    <div class="overlay max-w-1440" onclick="closeAddContactOverlay()">
+        <div class="add-contact-container " onclick="event.stopPropagation()">
         <!-- Add Container Left -->
-        <div class="edit-add-contact-container d-flex-c-c-fs">
+        <div class="edit-add-contact-container d-flex-c-fs-fs-gap8">
             <div class="add-contact-close-container-mobile">
             <img
                 class="close-contact-img c-pointer"
@@ -115,16 +115,14 @@ function addContactTemplate() {
  * @returns {string} HTML template string for the edit contact overlay
  */
 function editContactTemplate(data) {
-    const nameWords = data.name.split(' ');
-    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-    const randomColor = getRandomColorClass();
+    const contactColor = data.color;
 
     return `
     <div class="overlay" onclick="closeEditContactOverlay()">
-        <div class="add-contact-container d-flex-c" onclick="event.stopPropagation()">
+        <div class="add-contact-container " onclick="event.stopPropagation()">
 
             <!-- Edit Container Left -->
-            <div class="edit-add-contact-container d-flex-c-c-fs">
+            <div class="edit-add-contact-container d-flex-c-fs-fs-gap8">
                 <div onclick="closeEditContactOverlay()" class="edit-contact-close-container-mobile">
                     <img class="close-contact-img c-pointer" src="./assets/img/contact-close-white.svg" alt="Close">
                 </div>
@@ -135,8 +133,8 @@ function editContactTemplate(data) {
 
             <!-- Contact Circle -->
             <div class="contact-circle-container d-flex-c">
-                <div class="contact-circle d-flex-c ${randomColor}">
-                    <span class="contact-circle-text">${initials}</span>
+                <div class="contact-circle d-flex-c ${contactColor}">
+                    <span class="contact-circle-text">${data.initials}</span>
                 </div>
             </div>
 
@@ -198,14 +196,12 @@ function getFirstLetter(letter) {
  * @returns {string} HTML template string for the contact card
  */
 function getContact(data) {
-    const nameWords = data.name.split(' ');
-    const initials = nameWords.map(word => word.charAt(0).toUpperCase()).join('').substring(0, 2);
-    const randomColor = getRandomColorClass();
+    const contactColor = data.color;
 
     return `
-        <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${randomColor}')">
-            <div class="person-circle d-flex-c ${randomColor}">
-              ${initials}
+        <div id="contact-${data.firebaseKey}" class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${contactColor}')">
+            <div class="person-circle d-flex-c ${contactColor}">
+              ${data.initials}
             </div>
             <div class="personal-data">
               <span>${data.name}</span>
@@ -215,10 +211,36 @@ function getContact(data) {
     `
 }
 
+/**
+ * Generates the HTML template for the success notification message
+ * Returns a div with animation class that displays for 3 seconds and then disappears
+ * @returns {string} HTML template string for the success notification
+ */
 function getMessageSuccessfullyAdded() {
     return `
-    <div class="succesfully-creat d-flex-c">
-        Contact succesfully created
+    <div class="succesfully-creat">
+        Contact successfully created
+    </div>
+    `
+}
+
+/**
+ * Generates the HTML template for the mobile edit/delete menu
+ * @returns {string} HTML template string for the mobile menu
+ */
+function getMobileEditDeleteMenu() {
+    return `
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" onclick="closeMobileEditMenu()">
+        <div class="mobile-edit-delete" onclick="event.stopPropagation()">
+            <div class="d-flex-c g-8 c-pointer" onclick="openEditContactOverlay(); closeMobileEditMenu();">
+                <img src="./assets/img/contact-edit-mobile.svg" alt="pen">
+                <span class="fs-400-16">Edit</span>
+            </div>
+            <div class="d-flex-c g-8 c-pointer" onclick="deleteSelectedContact(); closeMobileEditMenu();">
+                <img src="./assets/img/contact-delete-mobile.svg" alt="trash can">
+                <span class="fs-400-16">Delete</span>
+            </div>
+        </div>
     </div>
     `
 }

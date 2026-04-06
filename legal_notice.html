@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/responsive.css" />
     <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/standard.css">
+    <link rel="stylesheet" href="./css/color.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/legal_notice.css">
+    <link rel="stylesheet" href="./assets/fonts/fonts.css">
     <title>Join</title>
   </head>
-  <body>
+  <body onload="initSite()" onclick="closeLogOutMenu()">
     <div class="sidebar">
       <div class="frame">
         <div class="capa2">
@@ -19,18 +22,15 @@
       <div class="nav-container">
         <ul class="nav-menu">
           <li>
-            <button class="nav-item" onclick="goToPage('./summary.html')">
+            <a href="summary.html" class="nav-item w100">
               <span class="icon">
-                <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+                <img src="./assets/img/summary_sidebar.svg" alt="Summary">
               </span>
               <span class="text">Summary</span>
-            </button>
+            </a>
           </li>
           <li>
-            <button
-              class="nav-item active"
-              onclick="goToPage('./add_task.html')"
-            >
+            <a href="add_task.html" class="nav-item w100">
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_add_task_icon.svg"
@@ -38,18 +38,18 @@
                 />
               </span>
               <span class="text">Add Task</span>
-            </button>
+            </a>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./board.html')">
+            <a href="board.html" class="nav-item w100">
               <span class="icon">
                 <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
               </span>
               <span class="text">Board</span>
-            </button>
+            </a>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./contacts.html')">
+            <a href="contacts.html" class="nav-item w100">
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_contact_calendar_icon.svg"
@@ -57,36 +57,135 @@
                 />
               </span>
               <span class="text">Contacts</span>
-            </button>
+            </a>
           </li>
         </ul>
       </div>
-      <div class="hide-footer"></div>
       <div class="bottom-links">
-        <a href="#" class="bottom-link">Privacy Policy</a>
-        <a href="#" class="bottom-link">Legal notice</a>
+        <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+        <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
       </div>
     </div>
 
-    <div class="headercontainer">
+  <div class="headercontainer">
       <header class="header">
-        <div class="title-container">
-          <p>Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
-      <div class="main-content">
-        <!-- Main content area -->
+    <div class="main-content max-w-1440">
+      <div class="main-content-privacy">
+        <h1>Legal Notice</h1>
+
+        <h3>Imprint</h3>
+        <ul>
+          <li>Florian Weyrauch</li>
+          <li>Yaroslav Biliavskyi</li>
+          <li>Sven-Ole Bittner</li>
+        </ul>
+
+        <h3>Exploring the Board</h3>
+        <p>Email: max@mustermann.de</p>
+        <p>Password: Service_1</p>
+
+
+        <h3>Acceptance of terms</h3>
+        <p>By accessing and using <a href="summary.html">Join</a> (Product), you
+        acknowledge and agree to the following terms and conditions, and any
+        policies, guidelines, or amendments thereto that may be presented to
+        you from time to time. We, the listed students, may update or change
+        the terms and conditions from time to time without notice.</p>
+
+        <h3>Scope and ownership of the product</h3>
+        <p><a href="summary.html">Join</a> has been developed as part of a student
+        group project in a web development bootcamp at the <a href="#">Developer Akademie
+        GmbH</a>. It has an educational purpose and is not intended for extensive
+        personal & business usage. As such, we cannot guarantee consistent
+        availability, reliability, accuracy, or any other aspect of quality
+        regarding this Product.</p>
+        <p>The design of <a href="summary.html">Join</a> is owned by the <a href="#">Developer
+        Akademie GmbH</a>. Unauthorized use, reproduction, modification,
+        distribution, or replication of the design is strictly prohibited.</p>
+
+        <h3>Proprietary rights</h3>
+        <p>Aside from the design owned by <a href="#">Developer Akademie GmbH</a>, we, the listed
+        students, retain all proprietary rights in <a href="summary.html">Join</a>, including any
+        associated copyrighted material, trademarks, and other proprietary
+        information.</p>
+
+        <h3>Use of the product</h3>
+        <p><a href="summary.html">Join</a> is intended to be used for lawful purposes only, in accordance
+        with all applicable laws and regulations. Any use of <a href="summary.html">Join</a> for illegal
+        activities, or to harass, harm, threaten, or intimidate another
+        person, is strictly prohibited. You are solely responsible for your
+        interactions with other users of <a href="summary.html">Join</a>.</p>
+
+        <h3>Disclaimer of warranties and limitation of liability</h3>
+        <p><a href="summary.html">Join</a> is provided "as is" without warranty of any kind, whether express
+        or implied, including but not limited to the implied warranties of
+        merchantability, fitness for a particular purpose, and non-infringement. 
+        In no event will we, the listed students, or the <a href="#">Developer
+        Akademie</a>, be liable for any direct, indirect, incidental,
+        special, consequential or exemplary damages, including but not limited
+        to, damages for loss of profits, goodwill, use, data, or other
+        intangible losses, even if we have been advised of the possibility of
+        such damages, arising out of or in connection with the use or
+        performance of <a href="summary.html">Join</a>.</p>
+
+        <h3>Indemnity</h3>
+        <p>You agree to indemnify, defend and hold harmless us, the listed
+        students, the <a href="#">Developer Akademie</a>, and our affiliates, partners,
+        officers, directors, agents, and employees, from and against any
+        claim, demand, loss, damage, cost, or liability (including reasonable
+        legal fees) arising out of or relating to your use of <a href="summary.html">Join</a> and/or your
+        breach of this Legal Notice.</p>
+        <p>For any questions or notices, please contact us at [Contact Email].</p>
+
+        <p>Date: July 26, 2023</p>
       </div>
     </div>
-
-    <script>
-      function goToPage(page) {
-        window.location.href = page;
-      }
-    </script>
+    <div class="footer">
+      <nav class="footer-nav">
+        <a href="summary.html" class="footer-nav-item">
+          <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+          <span>Summary</span>
+        </a>
+        <a href="add_tasks.html" class="footer-nav-item">
+          <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+          <span>Add Task</span>
+        </a>
+        <a href="board.html" class="footer-nav-item">
+          <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+          <span>Board</span>
+        </a>
+        <a href="contact.html" class="footer-nav-item">
+          <img
+            src="./assets/img/sidebar_contact_calendar_icon.svg"
+            alt="Contacts"
+          />
+          <span>Contacts</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+    <script src="./js/js_files/db.js"></script>
+    <script src="./general_script.js"></script>
+    <script src="./js/js_files/log_out.js"></script>
   </body>
 </html>

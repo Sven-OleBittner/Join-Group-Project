@@ -1,56 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="./assets/icons/Join_logo 1.svg" type="image/x-icon"/>
-    <link rel="stylesheet" href="./assets/fonts/fonts.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/color.css">
-    <link rel="stylesheet" href="./css/standard.css">
-    <link rel="stylesheet" href="./css/responsive.css">
-    <link rel="stylesheet" href="./css/add_task.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="./assets/icons/Join_logo 1.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/color.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/add_task_media.css" />
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+
     <title>Join</title>
   </head>
-  <body>
+
+  <body
+    onload="
+      add_task_init();
+      initSite();
+    "
+    onclick="
+      closeLogOutMenu();
+      closeDropdown('assignees-items');
+      closeDropdown('category-items');
+    "
+  >
     <div class="sidebar">
       <div class="frame">
         <div class="capa2">
-          <img class="logo-img" src="./assets/icons/Join_logo 2.svg"/>
+          <img
+            class="logo-img"
+            src="./assets/icons/Join_logo 2.svg"
+            alt="Join Logo"
+          />
         </div>
       </div>
       <div class="nav-container">
         <ul class="nav-menu">
           <li>
-            <button class="nav-item" onclick="goToPage('summary.html')">
+            <button class="nav-item w100" onclick="goToPage('summary.html')">
               <span class="icon">
-                <img src="./assets/img/summary_sidebar.svg" alt="Summary"/>
+                <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
               </span>
               <span class="text">Summary</span>
             </button>
           </li>
           <li>
             <button
-              class="nav-item active" onclick="goToPage('add_task.html')">
+              class="nav-item w100 active"
+              onclick="goToPage('add_task.html')"
+            >
               <span class="icon">
-                <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/>
+                <img
+                  src="./assets/img/sidebar_add_task_icon.svg"
+                  alt="Add Task"
+                />
               </span>
               <span class="text">Add Task</span>
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('board.html')">
+            <button class="nav-item w100" onclick="goToPage('board.html')">
               <span class="icon">
-                <img src="./assets/img/sidebar_board_icon.svg" alt="Board"/>
+                <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
               </span>
               <span class="text">Board</span>
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('contacts.html')">
+            <button class="nav-item w100" onclick="goToPage('contacts.html')">
               <span class="icon">
-                <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/>
+                <img
+                  src="./assets/img/sidebar_contact_calendar_icon.svg"
+                  alt="Contacts"
+                />
               </span>
               <span class="text">Contacts</span>
             </button>
@@ -59,129 +87,265 @@
       </div>
       <div class="hide-footer"></div>
       <div class="bottom-links">
-        <a href="#" class="bottom-link">Privacy Policy</a>
-        <a href="#" class="bottom-link">Legal notice</a>
+        <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+        <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
       </div>
     </div>
 
     <div class="headercontainer">
       <header class="header">
-        <div class="title-container">
-          <p class="title">Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
       <div class="main-content">
-        <div class="add-task-container">
+        <div class="add-task-container max-w-1440">
           <div class="add-task-uppercontainer">
-            <h1>Add Task</h1>
+            <h1 class="add-task-title">Add Task</h1>
           </div>
-          <form class="task-form">
+          <form class="task-form" id="task-form">
             <div class="form-left">
               <label for="title">Title<span class="required">*</span></label>
-              <input type="text" id="title" placeholder="Enter a title" required/>
+              <input
+                type="text"
+                id="title"
+                placeholder="Enter a title"
+                onblur="validateTitle()"
+                oninput="validateTitle()"
+              />
+              <span class="error-message" id="title-error"
+                >This field is required!</span
+              >
+
               <label for="description">Description</label>
-              <textarea id="description" placeholder="Enter a Description"></textarea>
-              <label for="due-date">Due date<span class="required">*</span></label>
+              <textarea
+                id="description"
+                placeholder="Enter a Description"
+              ></textarea>
+
+              <label for="date">Due date<span class="required">*</span></label>
               <div class="date-wrapper">
-                <input type="text" id="due-date" placeholder="dd/mm/yyyy" required/>
-                <img src="./assets/img/add_task_due_date_calendar_icon.svg" class="icon-calendar"/>
+                <input
+                  type="date"
+                  name=""
+                  id="date"
+                  onblur="validateDate()"
+                  oninput="validateDate()"
+                />
+                <img
+                  src="./assets/img/add_task_due_date_calendar_icon.svg"
+                  class="icon-calendar"
+                  alt=""
+                />
               </div>
+              <span class="error-message" id="date-error"
+                ></span
+              >
             </div>
+
             <div class="form-divider"></div>
+
             <div class="form-right">
               <label>Priority</label>
               <div class="priority-options">
-                <button type="button" class="priority urgent selected">
-                  Urgent <img src="./assets/img/red_high_urgent.svg" alt="Urgent Arrow"/>
+                <button
+                  type="button"
+                  class="priority urgent"
+                  id="priority-urgent"
+                  onclick="selectPriority('urgent')"
+                >
+                  Urgent
+                  <img
+                    src="./assets/img/red_high_urgent.svg"
+                    alt="Urgent Arrow"
+                  />
                 </button>
-                <button type="button" class="priority medium">
-                  Medium <img src="./assets/img/=_for yellow.svg" alt="equal sign"/>
+                <button
+                  type="button"
+                  class="priority medium"
+                  id="priority-medium"
+                  onclick="selectPriority('medium')"
+                >
+                  Medium
+                  <img
+                    src="./assets/img/icons8-equal-50.png"
+                    alt="equal sign"
+                  />
                 </button>
-                <button type="button" class="priority low">
-                  Low <img src="./assets/img/green_low_urgent.svg" alt="Low Arrow"/>
+                <button
+                  type="button"
+                  class="priority low"
+                  id="priority-low"
+                  onclick="selectPriority('low')"
+                >
+                  Low
+                  <img
+                    src="./assets/img/green_low_urgent.svg"
+                    alt="Low Arrow"
+                  />
                 </button>
               </div>
+
               <label>Assigned to</label>
-                <div class="dropdown full-expandable assigned-to" id="assignees">
-                  <div class="dropdown-toggle" role="button" tabindex="0">
-                    <span class="placeholder">Select contacts to assign</span>
-                    <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="" />
-                  </div>
-                <div class="dropdown-menu">
-                <div class="dropdown-search">
-                  <input type="text" id="assignee-search" placeholder="Search contacts" />
+              <div class="custom-select" id="assignees">
+                <div
+                  class="select-selected"
+                  id="assignees-selected"
+                  onclick="
+                    toggleDropdown('assignees');
+                    event.stopPropagation();
+                  "
+                >
+                  Select contacts to assign
                 </div>
-                <div class="options" id="assignee-options"></div>
+                <div
+                  class="select-items select-hide"
+                  id="assignees-items"
+                ></div>
+              </div>
+              <div class="assigned-chips" id="assigned-chips"></div>
+
+              <label>Category<span class="required">*</span></label>
+              <div class="custom-select" id="category">
+                <div
+                  class="select-selected"
+                  id="category-selected"
+                  onclick="
+                    toggleDropdown('category');
+                    event.stopPropagation();
+                  "
+                >
+                  Select task category
+                </div>
+                <div class="select-items select-hide" id="category-items">
+                  <div
+                    onclick="
+                      selectCategoryOption('Technical Task');
+                      enableCreateButton();
+                    "
+                  >
+                    Technical Task
+                  </div>
+                  <div
+                    onclick="
+                      selectCategoryOption('User Story');
+                      enableCreateButton();
+                    "
+                  >
+                    User Story
+                  </div>
                 </div>
               </div>
-                <div class="chips assigned-chips" id="assignee-chips"></div>
-                <label>Category<span class="required">*</span></label>
-                <div class="dropdown full-expandable category-select" id="category">
-                  <div class="dropdown-toggle" role="button" tabindex="0">
-                    <span class="placeholder">Select task category</span>
-                    <img class="caret" src="./assets/img/arrow_drop_down.svg" alt="" />
-                  </div>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-search">
-                      <input type="text" id="category-search" placeholder="Search categories" />
-                    </div>
-                    <div class="options" id="category-options"></div>
-                  </div>
-                </div>
-                <div class="chips category-chipbox" id="category-chipbox"></div>
+              <span class="error-message" id="category-error"
+                >This field is required</span
+              >
+
               <label>Subtasks</label>
               <div class="subtasks">
-                <input type="text" id="subtask-input" placeholder="Add new subtask"/>
+                <input
+                  type="text"
+                  id="subtask-input"
+                  placeholder="Add new subtask"
+                  onfocus="showSubtaskIcons()"
+                />
                 <div class="subtask-icons">
-                  <img src="./assets/img/Subtasks icons11.svg" id="subtask-add-icon"/>
-                  <img src="./assets/img/iconoir_cancel.svg" id="subtask-cancel-icon" style="display: none;"/>
-                  <img src="./assets/img/check.svg" id="subtask-confirm-icon" style="display: none;"/>
+                  <img
+                    src="./assets/img/iconoir_cancel.svg"
+                    id="subtask-cancel-icon"
+                    class="d-none c-pointer"
+                    onclick="cancelSubtask()"
+                  />
+                  <img
+                    src="./assets/img/check.svg"
+                    id="subtask-confirm-icon"
+                    class="d-none c-pointer"
+                    onclick="addSubtask()"
+                  />
                 </div>
               </div>
+              <div class="subtask-list" id="subtask-list"></div>
             </div>
           </form>
+
           <div class="form-footer">
             <div class="footer-left">
               <span class="required">*</span> This field is required
             </div>
             <div class="form-actions">
-              <button class="clear-btn">Clear <img src="./assets/img/iconoir_cancel.svg" alt="x"></button>
-              <button class="create-btn">Create Task <img src="./assets/img/check.svg" alt="check"></button>
+              <button
+                type="button"
+                class="clear-btn"
+                id="clear-btn"
+                onclick="
+                  clearForm();
+                  enableCreateButton();
+                "
+              >
+                Clear <img src="./assets/img/iconoir_cancel.svg" alt="x" />
+              </button>
+              <button
+                type="button"
+                class="create-btn"
+                id="create-btn"
+                onclick="postNewTask('create-btn')"
+                disabled
+              >
+                Create Task <img src="./assets/img/check.svg" alt="check" />
+              </button>
             </div>
           </div>
         </div>
       </div>
-<div class="footer">
-  <nav class="footer-nav">
-    <a href="summary.html" class="footer-nav-item">
-      <img src="./assets/img/summary_sidebar.svg" alt="Summary"/>
-      <span>Summary</span>
-    </a>
-    <a href="add_task.html" class="footer-nav-item active">
-      <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/>
-      <span>Add Task</span>
-    </a>
-    <a href="board.html" class="footer-nav-item">
-      <img src="./assets/img/sidebar_board_icon.svg" alt="Board"/>
-      <span>Board</span>
-    </a>
-    <a href="contacts.html" class="footer-nav-item">
-      <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/>
-      <span>Contacts</span>
-    </a>
-  </nav>
-</div>
 
-    <script>
-      function goToPage(page) {
-        window.location.href = page;
-      }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="add_task.js"></script>
+      <div class="footer">
+        <nav class="footer-nav">
+          <a href="summary.html" class="footer-nav-item">
+            <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+            <span>Summary</span>
+          </a>
+          <a href="add_task.html" class="footer-nav-item active">
+            <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+            <span>Add Task</span>
+          </a>
+          <a href="board.html" class="footer-nav-item">
+            <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+            <span>Board</span>
+          </a>
+          <a href="contacts.html" class="footer-nav-item">
+            <img
+              src="./assets/img/sidebar_contact_calendar_icon.svg"
+              alt="Contacts"
+            />
+            <span>Contacts</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    <script src="./general_script.js"></script>
+    <script src="./js/js_files/db.js"></script>
+    <script src="./js/js_files/contact-constants.js"></script>
+    <script src="./js/js_files/log_out.js"></script>
+    <script src="./js/js_files/board_add_task.js"></script>
+    <script src="./js/js_files/add-task-contacts.js"></script>
+    <script src="./templates/add-task_template.js"></script>
+    <script src="./js/js_files/add-task-subtasks.js"></script>
+    <script src="./js/js_files/add-task-validation.js"></script>
+    <script src="./js/js_files/add-task.js"></script>
   </body>
 </html>

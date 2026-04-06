@@ -1,0 +1,324 @@
+/**
+ * CONTACT PAGE - OVERLAY & CONTAINER STYLES
+ * 
+ * Styles for add/edit contact overlay and container layouts
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   OVERLAY STYLES
+   =================================================================== */
+
+.contact-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100vh;
+  width: 100vw;
+  z-index: 1001;
+  position: fixed;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* ===================================================================
+   MAIN CONTAINER
+   =================================================================== */
+
+.add-contact-container {
+  width: 1212px;
+  height: 594px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* ===================================================================
+   EDIT + ADD CONTACT STYLES
+   =================================================================== */
+
+.edit-add-contact-container {
+  width: 453px;
+  height: 594px;
+  background-color: var(--darkblue-light-color);
+  color: var(--white-color);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  padding-left: 40px;
+  padding-top: 32px;
+}
+
+.edit-headline {
+  font-size: 61px;
+  font-weight: 700;
+  padding: 16px 0 16px 0;
+}
+
+.add-contact-description {
+  font-size: 27.5px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.contact-logo {
+  width: 48px;
+  height: 56px;
+}
+
+.contact-progress-bar {
+  width: 90px;
+  height: 3px;
+  background-color: var(--lightblue-color);
+  border-radius: 3px;
+}
+
+/* ===================================================================
+   CIRCLE CONTAINER
+   =================================================================== */
+
+.contact-circle-container {
+  width: 240px;
+  height: 594px;
+  background-color: var(--white-color);
+}
+
+.contact-circle {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--white-color);
+  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+  background-color: var(--medium-color);
+  transform: translateY(-56px);
+}
+
+.contact-circle-text {
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 47px;
+}
+
+/* ===================================================================
+   ADD CONTACT IMG CONTAINER
+   =================================================================== */
+
+.add-contact-person-container {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: var(--placeholder-grey-color);
+  border: 3px solid var(--white-color);
+  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+  transform: translateY(-56px);
+}
+
+.add-contact-person-img {
+  width: 43px;
+  height: 43px;
+  background-color: var(--placeholder-grey-color);
+}
+
+/* ===================================================================
+   CLOSE STYLE
+   =================================================================== */
+
+.contact-close-container {
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 64px;
+}
+
+.contact-close-container-mobile {
+  display: none;
+}
+
+.close-contact-img {
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.close-contact-img:hover {
+  background-color: var(--placeholder-grey-color);
+}
+
+/* ===================================================================
+   INPUT CONTAINER
+   =================================================================== */
+
+.input-add-contact-container {
+  width: 500px;
+  height: 594px;
+  background-color: var(--white-color);
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 52px 32px 52px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===================================================================
+   RESPONSIVE STYLES - OVERLAY
+   =================================================================== */
+
+@media (min-width: 1441px) {
+  .overlay {
+  max-width: 1980px;
+  }
+}
+
+@media (max-width: 1230px) {
+  .add-contact-container {
+    width: 100%;
+    margin: 32px;
+  }
+
+  .edit-add-contact-container {
+    width: 40%;
+    padding-left: 32px;
+  }
+
+  .contact-circle-container {
+    width: 20%;
+  }
+
+  .input-add-contact-container {
+    width: 40%;
+    padding: 40px 40px 40px 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .edit-headline {
+    font-size: 48px;
+  }
+
+  .add-contact-description {
+    font-size: 22px;
+  }
+
+  .input-add-contact-container {
+    width: 45%;
+    padding: 40px 20px 40px 0;
+  }
+
+  .edit-add-contact-container {
+    padding-top: 16px;
+    padding-left: 16px;
+  }
+
+  .add-contact-person-container {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media (min-width: 1023px) {
+  .add-contact-close-container-mobile,
+  .edit-contact-close-container-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .overlay {
+    height: 100vh;
+  }
+
+  .add-contact-container {
+    width: 300px;
+    flex-direction: column;
+  }
+
+  .edit-add-contact-container,
+  .contact-circle-container,
+  .input-add-contact-container {
+    width: 300px;
+  }
+
+  .edit-add-contact-container {
+    height: 280px;
+    border-radius: 30px 30px 0 0;
+    padding: 24px 24px 8px 32px;
+  }
+
+  .contact-circle-container {
+    height: 0;
+  }
+
+  .input-add-contact-container {
+    height: 300px;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .add-contact-delete,
+  .contact-logo,
+  .contact-close-container {
+    display: none;
+  }
+
+  .input-add-contact-container {
+    padding: 60px 16px 40px 16px;
+  }
+
+  .edit-headline {
+    font-size: 36px;
+    padding-top: 8px;
+  }
+
+  .add-contact-description {
+    font-size: 20px;
+  }
+
+  .add-contact-person-container,
+  .contact-circle {
+    height: 80px;
+    width: 80px;
+    z-index: 999;
+    transform: translateY(0);
+  }
+
+  .contact-circle-text {
+    font-size: 28px;
+  }
+
+  form {
+    height: 153px;
+  }
+
+  input {
+    height: 32px;
+  }
+
+  .add-contact-close-container-mobile,
+  .edit-contact-close-container-mobile {
+    width: 100%;
+    display: block;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .edit-contact-close-container-mobile {
+    transform: translateY(-12px);
+  }
+
+  .add-contact-close-container-mobile {
+    transform: translateY(-12px);
+  }
+
+  .close-contact-img:hover {
+    background-color: var(--lightblue-color);
+  }
+}

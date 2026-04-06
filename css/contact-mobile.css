@@ -1,0 +1,394 @@
+/**
+ * CONTACT PAGE - MOBILE STYLES
+ * 
+ * Mobile responsive styles, success notifications and mobile edit menu
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   SUCCESS NOTIFICATION
+   =================================================================== */
+
+/* Success notification popup */
+.succesfully-creat {
+    width: 326px;
+    height: 74px;
+    background-color: var( --darkblue-light-color);
+    color: var(--white-color);
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hide success notification on mobile */
+@media (max-width: 1150px) {
+    .succesfully-creat {
+        display: none !important;
+    }
+}
+
+/* Animation trigger for success notification */
+.succesfully-creat, .show-animation {
+    animation: slideInOut 3s ease-in-out forwards;
+}
+
+/* Success notification slide animation */
+@keyframes slideInOut {
+    0% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: flex;
+    }
+    1% {
+        display: flex;
+    }
+    33% {
+        transform: translateX(0);
+        opacity: 1;
+        display: flex;
+    }
+    66% {
+        transform: translateX(0);
+        opacity: 1;
+        display: flex;
+    }
+    99% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: flex;
+    }
+    100% {
+        transform: translateX(400px);
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* ===================================================================
+   MOBILE EDIT DELETE MENU
+   =================================================================== */
+
+/* Overlay for mobile edit/delete menu */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 200;
+    animation: fadeIn 0.2s ease;
+}
+
+/* Mobile edit/delete menu popup */
+.mobile-edit-delete {
+    width: 116px;
+    height: 100px;
+    border-radius: 20px 20px 0 20px;
+    background-color: var(--white-color);
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 8px;
+    position: fixed;
+    bottom: 48px;
+    right: 24px;
+    z-index: 201;
+    animation: slideInFade 0.3s ease;
+    transform-origin: bottom right;
+}
+
+.mobile-edit-delete > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin: -4px -8px;
+}
+
+@media (hover: hover) {
+    .mobile-edit-delete > div {
+        transition: background-color 0.2s ease;
+    }
+
+    .mobile-edit-delete > div:hover {
+        background-color: var(--light-grey-color);
+    }
+}
+
+.mobile-edit-delete img {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 950px) {
+    .mobile-edit-delete {
+        bottom: 120px;
+    }
+
+    html, body {
+    height: 93%;
+}
+
+}
+
+/* Animation for menu appearance */
+@keyframes slideInFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ===================================================================
+   MOBILE RESPONSIVE DESIGN
+   =================================================================== */
+
+@media (min-width: 1151px) {
+    .add-contact-mobile {
+        display: none !important;
+    }
+    
+    .edit-contact-mobile {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1150px) {
+    .add-contact-mobile {
+        position: absolute;
+        bottom: 48px;
+        right: 24px;
+    }
+    
+    .edit-contact-mobile {
+        position: absolute;
+        bottom: 48px;
+        right: 24px;
+    }
+
+    /* Disable hover effects on mobile */
+    .personal-ad:hover {
+        background-color: white;
+        color: inherit;
+        cursor: default;
+        scale: 1;
+    }
+
+    /* Mobile: Default state - show only contact list */
+    .show-contact-container {
+        display: none;
+    }
+
+    /* Mobile: When details are shown, hide contact list and show details full screen */
+    .main-content.mobile-showing-details {
+        position: relative;
+    }
+
+    .main-content.mobile-showing-details .contact-list-container {
+        display: none;
+    }
+
+    .main-content.mobile-showing-details .show-contact-container {
+        display: flex !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--light-grey-color);
+        padding: 24px;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    .add-contact-btn {
+        display: none;
+    }
+
+    .contact-list-container {
+        min-width: 100%;
+    }
+
+    /* .first-letter-container,
+    .personal-ad {
+        width: 90%;
+    } */
+
+    .person-circle {
+        height: 42px !important;
+        width: 42px !important;
+    }
+
+    .personal-data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Hide edit/delete buttons in all mobile views */
+    .contact-form-edit-delete {
+        display: none !important;
+    }
+
+    /* Mobile contact details styling when shown */
+    .main-content.mobile-showing-details .contact-team-container {
+        margin-bottom: 20px;
+        margin-top: 60px; /* Space for back arrow */
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        gap: 8px;
+    }
+
+    .main-content.mobile-showing-details .contact-team-container h1 {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .main-content.mobile-showing-details .contact-team-container p {
+        font-weight: 400;
+    }
+
+    .main-content.mobile-showing-details .bar {
+        width: 80px;
+        height: 3px;
+        border-radius: 3px;
+        background-color: var(--lightblue-color);
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .main-content.mobile-showing-details .contact-form-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+        font-weight: 500;
+        margin-right: 16px;
+        margin-bottom: 0;
+        border: 2px solid var(--white-color);
+        box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content.mobile-showing-details .contact-form-control {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .main-content.mobile-showing-details .contact-form-name {
+        font-size: 36px;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    /* Mobile back arrow */
+    .mobile-back-arrow {
+        display: flex !important;
+        position: fixed;
+        top: 120px;
+        right: 24px;
+        cursor: pointer;
+        z-index: 9999;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-back-arrow.hidden {
+        display: none !important;
+    }
+
+    .mobile-back-arrow svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Extra responsive for very small screens */
+@media (max-width: 400px) {
+    .main-content.mobile-showing-details .contact-form-circle {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        margin-right: 12px;
+    }
+
+    .main-content.mobile-showing-details .contact-form-name {
+        font-size: 28px;
+    }
+
+    .main-content.mobile-showing-details .contact-form-edit-delete {
+        display: none; /* Hide edit/delete buttons in mobile */
+    }
+
+    .main-content.mobile-showing-details .contact-info {
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 24px;
+    }
+
+    .main-content.mobile-showing-details .contact-email-frame,
+    .main-content.mobile-showing-details .contact-phone-frame {
+        margin-bottom: 24px;
+    }
+
+    .main-content.mobile-showing-details .contact-email-frame h3,
+    .main-content.mobile-showing-details .contact-phone-frame h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #000;
+    }
+
+    .main-content.mobile-showing-details .contact-email-frame a {
+        font-size: 16px;
+        color: var(--lightblue-color);
+        text-decoration: none;
+    }
+
+    .main-content.mobile-showing-details .contact-phone-frame a {
+        font-size: 16px;
+        color: #000;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 950px) {
+    .add-contact-mobile {
+       bottom: 120px;
+    }
+    
+    .edit-contact-mobile {
+       bottom: 120px;
+    }
+
+    .add-contact-btn-container {
+        display: none;
+    }
+}

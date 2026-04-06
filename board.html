@@ -1,160 +1,416 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon"/>
-
-  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="./css/standard.css" />
-  <link rel="stylesheet" href="./css/color.css" />
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./css/responsive.css"/>
-  <title>Join</title>
-</head>
-
-<body>
-  <div class="sidebar">
-    <div class="frame">
-      <div class="capa2">
-        <img class="logo-img" src="./assets/icons/Join_logo 2.svg"/>
-      </div>
-    </div>
-    <div class="nav-container">
-      <ul class="nav-menu">
-        <li>
-          <a href="summary.html" class="nav-item">
-            <span class="icon">
-              <img src="./assets/img/summary_sidebar.svg" alt="Summary"/>
-            </span>
-            <span class="text">Summary</span>
-          </a>
-        </li>
-        <li>
-          <a href="add_task.html" class="nav-item active">
-            <span class="icon">
-              <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/>
-            </span>
-            <span class="text">Add Task</span>
-          </a>
-        </li>
-        <li>
-          <a href="board.html" class="nav-item">
-            <span class="icon">
-              <img src="./assets/img/sidebar_board_icon.svg" alt="Board"/>
-            </span>
-            <span class="text">Board</span>
-          </a>
-        </li>
-        <li>
-          <a href="contacts.html" class="nav-item">
-            <span class="icon">
-              <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/>
-            </span>
-            <span class="text">Contacts</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="bottom-links">
-      <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
-      <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
-    </div>
-  </div>
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
+
+    <!-- Fonts & base styles -->
+    <link rel="stylesheet" href="./css/color.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
-    <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/board_second.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/board_add_task_modal.css" />
+    <link rel="stylesheet" href="./css/board_modal_fix.css" />
+    <link rel="stylesheet" href="./css/addtask-modal-bridge.css" />
+    <link rel="stylesheet" href="./css/board_add_task.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/add_task_actions.css" />
+    <link rel="stylesheet" href="./css/add_task_components.css" />
+    <link rel="stylesheet" href="./css/add_task_inputs.css" />
+    <link rel="stylesheet" href="./css/add_task_layout.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link
+      rel="stylesheet"
+      href="./css/responsive_for_board.css/kb-desktop.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/responsive_for_board.css/kb-mobile.css"
+    />
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+
     <title>Join</title>
   </head>
-  <body>
+
+  <body
+    onload="
+      initBoardSite();
+      initSite();
+    "
+    onclick="
+      closeAllOptionsOnclick();
+      closeLogOutMenu();
+    "
+    onclick="
+      closeAllOptionsOnclick();
+      closeLogOutMenu();
+    "
+  >
+    <dialog
+      class="addTaskDialog"
+      id="addTaskDialog"
+      onclick="closeAddTaskModal()"
+    >
+      <div
+        onclick="
+          closeDropdown('assignees-items');
+          closeDropdown('category-items');
+          event.stopPropagation();
+        "
+        id="addTaskDialogContent"
+        class="addTaskDialogContent"
+      ></div>
+    </dialog>
+
     <div class="sidebar">
       <div class="frame">
         <div class="capa2">
-          <img class="logo-img" src="./assets/icons/Join_logo 2.svg" />
+          <img
+            class="logo-img"
+            src="./assets/icons/Join_logo 2.svg"
+            alt="Join"
+          />
         </div>
       </div>
       <div class="nav-container">
         <ul class="nav-menu">
           <li>
-            <button class="nav-item" onclick="goToPage('./summary.html')">
-              <span class="icon">
-                <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
-              </span>
+            <button class="nav-item w100" onclick="goToPage('./summary.html')">
+              <span class="icon"
+                ><img src="./assets/img/summary_sidebar.svg" alt="Summary"
+              /></span>
               <span class="text">Summary</span>
             </button>
           </li>
           <li>
-            <button
-              class="nav-item active"
-              onclick="goToPage('./add_task.html')"
-            >
-              <span class="icon">
-                <img
+            <button class="nav-item w100" onclick="goToPage('./add_task.html')">
+              <span class="icon"
+                ><img
                   src="./assets/img/sidebar_add_task_icon.svg"
                   alt="Add Task"
-                />
-              </span>
+              /></span>
               <span class="text">Add Task</span>
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./board.html')">
-              <span class="icon">
-                <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
-              </span>
+            <button
+              class="nav-item w100 active"
+              onclick="goToPage('./board.html')"
+            >
+              <span class="icon"
+                ><img src="./assets/img/sidebar_board_icon.svg" alt="Board"
+              /></span>
               <span class="text">Board</span>
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./contacts.html')">
-              <span class="icon">
-                <img
+            <button class="nav-item w100" onclick="goToPage('./contacts.html')">
+              <span class="icon"
+                ><img
                   src="./assets/img/sidebar_contact_calendar_icon.svg"
                   alt="Contacts"
-                />
-              </span>
+              /></span>
               <span class="text">Contacts</span>
             </button>
           </li>
         </ul>
       </div>
-      <div class="hide-footer"></div>
       <div class="bottom-links">
-        <a href="#" class="bottom-link">Privacy Policy</a>
-        <a href="#" class="bottom-link">Legal notice</a>
+        <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+        <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
       </div>
     </div>
-
 
     <div class="headercontainer">
       <header class="header">
-        <div class="title-container">
-          <p>Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
-      <div class="main-content">
-        <!-- Main content area -->
-      </div>
 
-    </header>
-    <div class="main-content">
+      <div class="main-content">
+        <section class="kb max-w-1440">
+          <div class="kb-toolbar">
+            <h1 class="kb-title">Board</h1>
+            <div class="kb-actions">
+              <div class="kb-search">
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Find Task"
+                  aria-label="Find Task"
+                  onkeyup="findTaskBy()"
+                />
+                <img
+                  onclick="findTaskBy()"
+                  class="kb-icon"
+                  src="./assets/img/board_input_search_icon.svg"
+                  alt="Search"
+                />
+              </div>
+              <button
+                id="addTaskBoard"
+                onclick="
+                  chooseAddTaskSite('addTaskBoard');
+                  loadContactsForDropdown();
+                "
+                class="kb-add-btn"
+                type="button"
+              >
+                <span class="kb-addTask">Add task</span>
+                <span class="kb-plus">+</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="kb-columns">
+            <!-- To do -->
+            <section
+              ondrop="
+                moveTo('toDoTaskList');
+                dragLeaveHandler(event);
+              "
+              ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
+              id="addTaskBoardToDo"
+              class="kb-col"
+              aria-label="To do"
+              data-status="todo"
+            >
+              <header class="kb-col-head">
+                <h2 class="kb-col-title">To do</h2>
+                <button
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardToDo');
+                    loadContactsForDropdown();
+                  "
+                  class="kb-col-add"
+                  type="button"
+                  aria-label="Add task to To do"
+                ></button>
+              </header>
+              <div id="toDoTaskList" class="kb-card-list" data-cards></div>
+              <div id="emptyToDo" class="kb-empty">
+                <span>No tasks To do</span>
+              </div>
+            </section>
+
+            <!-- In progress -->
+            <section
+              ondrop="
+                moveTo('inProgressTaskList');
+                dragLeaveHandler(event);
+              "
+              ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
+              id="addTaskBoardInProgress"
+              class="kb-col"
+              aria-label="In progress"
+              data-status="inprogress"
+            >
+              <header class="kb-col-head">
+                <h2 class="kb-col-title">In progress</h2>
+                <button
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardInProgress');
+                    loadContactsForDropdown();
+                  "
+                  class="kb-col-add"
+                  type="button"
+                  aria-label="Add task to In progress"
+                ></button>
+              </header>
+              <div
+                id="inProgressTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
+              <div id="emptyInProgress" class="kb-empty">
+                <span>No tasks In progress</span>
+              </div>
+            </section>
+
+            <!-- Await feedback -->
+            <section
+              ondrop="
+                moveTo('awaitFeedbackTaskList');
+                dragLeaveHandler(event);
+              "
+              ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
+              id="addTaskBoardAwaitingFeedback"
+              class="kb-col"
+              aria-label="Await feedback"
+              data-status="feedback"
+            >
+              <header class="kb-col-head">
+                <h2 class="kb-col-title">Await feedback</h2>
+                <button
+                  onclick="
+                    chooseAddTaskSite('addTaskBoardAwaitingFeedback');
+                    loadContactsForDropdown();
+                  "
+                  class="kb-col-add"
+                  type="button"
+                  aria-label="Add task to Await feedback"
+                ></button>
+              </header>
+              <div
+                id="awaitFeedbackTaskList"
+                class="kb-card-list"
+                data-cards
+              ></div>
+              <div id="emptyAwaitFeedback" class="kb-empty">
+                <span>No tasks Await feedback</span>
+              </div>
+            </section>
+
+            <!-- Done -->
+            <section
+              ondrop="
+                moveTo('doneTaskList');
+                dragLeaveHandler(event);
+              "
+              ondragover="dragoverHandler(event)"
+              ondragleave="dragLeaveHandler(event)"
+              id="addTaskBoardDone"
+              class="kb-col"
+              aria-label="Done"
+              data-status="done"
+            >
+              <header class="kb-col-head">
+                <h2 class="kb-col-title">Done</h2>
+              </header>
+              <div id="doneTaskList" class="kb-card-list" data-cards></div>
+              <div id="emptyDone" class="kb-empty">
+                <span>No tasks Done</span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+      <div class="footer">
+        <nav class="footer-nav">
+          <a href="summary.html" class="footer-nav-item">
+            <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+            <span>Summary</span>
+          </a>
+          <a href="add_task.html" class="footer-nav-item">
+            <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+            <span>Add Task</span>
+          </a>
+          <a href="board.html" class="footer-nav-item active">
+            <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+            <span>Board</span>
+          </a>
+          <a href="contacts.html" class="footer-nav-item">
+            <img
+              src="./assets/img/sidebar_contact_calendar_icon.svg"
+              alt="Contacts"
+            />
+            <span>Contacts</span>
+          </a>
+        </nav>
+      </div>
     </div>
 
-    <script>
-      function goToPage(page) {
-        window.location.href = page;
-      }
-    </script>
+    <div
+      id="td-modal"
+      class="td-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="td-title"
+      onclick="closeTaskModal()"
+    >
+      <div class="td-dialog max-w-1440" tabindex="-1" onclick="event.stopPropagation()">
+        <div class="td-chipwrap">
+          <span id="td-chip" class="td-chip">User Story</span>
+          <button class="close-btn-modal" onclick="closeTaskModal()"> &times;</button>
+        </div>
+
+        <h2 id="td-title" class="td-title"></h2>
+        <p id="td-desc" class="td-desc"></p>
+
+        <div class="td-meta">
+          <div class="td-row">
+            <span class="td-label">Due date:</span>
+            <span id="td-due" class="td-value">—</span>
+          </div>
+          <div class="td-row">
+            <span class="td-label">Priority:</span>
+            <span id="td-prio-text" class="td-value">—</span>
+            <span id="td-prio-icon" class="td-icon"></span>
+          </div>
+          <div class="td-row">
+            <span class="td-label">Assigned To:</span>
+          </div>
+          <div id="td-assignees" class="td-assignees"></div>
+        </div>
+
+        <div id="td-subtasks" class="td-subtasks" hidden>
+          <div class="td-row"><span class="td-label">Subtasks</span></div>
+          <ul id="td-subtasks-list" class="td-subtasks__list"></ul>
+        </div>
+
+        <div class="td-footer">
+          <button
+            class="td-delete"
+            type="button"
+            id="td-delete"
+            onclick="deleteTask(currentTaskId)"
+          >
+            <img alt="Delete" class="delete-icon">
+            <span>Delete</span>
+          </button>
+          <button
+            class="td-edit"
+            type="button"
+            id="td-edit"
+            onclick="editTask(currentTaskId)"
+          >
+            <img
+              alt="Edit"
+              class="edit-icon"
+            />
+            <span>Edit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/js_files/db.js"></script>
+    <script src="./general_script.js"></script>
+    <script src="templates/board_template.js"></script>
+    <script src="./templates/board_add_task_template.js"></script>
+    <script src="./templates/add-task_template.js"></script>
+    <script src="./js/js_files/log_out.js"></script>
+    <script src="./js/js_files/board-render.js"></script>
+    <script src="./js/js_files/board-drag-drop.js"></script>
+    <script src="./js/js_files/board_add_task.js"></script>
+    <script src="js/js_files/board.js"></script>
+    <script src="./js/js_files/add-task-contacts.js"></script>
+    <script src="./js/js_files/add-task-subtasks.js"></script>
+    <script src="./js/js_files/add-task-validation.js"></script>
+    <script src="./js/js_files/add-task.js"></script>
   </body>
 </html>

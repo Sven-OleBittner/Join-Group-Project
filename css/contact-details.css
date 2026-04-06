@@ -1,0 +1,186 @@
+/**
+ * CONTACT PAGE - DETAILS STYLES
+ * 
+ * Styles for contact details display section
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   CONTACT DETAILS SECTION
+   =================================================================== */
+
+/* Right side container for contact details */
+.show-contact-container {
+  background-color: var(--light-grey-color);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 88px 0 0 40px;
+}
+
+/* Header section with "Contacts" title */
+.contact-team-container {
+  height: 73px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 17.5px;
+  margin-bottom: 40px;
+}
+
+/* Vertical separator bar */
+.bar {
+  height: 59px;
+  width: 3px;
+  border-radius: 3px;
+  background-color: var(--lightblue-color);
+}
+
+/* Subtitle in contact header */
+.contact-team-container p {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+/* Main title in contact header */
+.contact-team-container h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+/* Contact details main container */
+.contact-form-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* Large contact initials circle in details view */
+.contact-form-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  font-size: 47px;
+  font-weight: 500;
+  border: 2px solid var(--white-color);
+  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+  color: var(--white-color);
+  margin-right: 64px;
+}
+
+/* Contact name in details view */
+.contact-form-name {
+  font-size: 47px;
+  font-weight: 500;
+}
+
+/* Edit and delete buttons container */
+.contact-form-edit-delete {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Icons in edit/delete buttons */
+.contact-form-edit-delete img {
+  width: 24px;
+}
+
+.hover-effect:hover {
+  color: var(--lightblue-color);
+}
+
+.hover-effect.hover-effect__edit:hover img {
+  content: url(../assets/icons/edit_hover.svg);
+}
+
+.hover-effect.hover-effect__delete:hover img {
+  content: url(../assets/icons/delete_hover.svg);
+}
+
+.edit .delete {
+  color: var(--darkblue-light-color);
+}
+
+.edit:active ,.delete:active {
+  color: var(--darkblue-color);
+}
+
+.hover-effect.hover-effect__edit:active img {
+  content: url(../assets/icons/edit.svg);
+}
+
+.hover-effect.hover-effect__delete:active img {
+  content: url(../assets/icons/delete.svg);
+}
+
+
+
+
+
+/* Contact information section */
+.contact-info {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+/* Contact email and phone containers */
+.contact-email-frame,
+.contact-phone-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Spacing for email section */
+.contact-email-frame {
+  margin-bottom: 12px;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN - DETAILS
+   =================================================================== */
+
+/* Tablet landscape view (1300px and below) */
+@media (max-width: 1300px) {
+  .contact-team-container {
+    gap: 10px;
+  }
+
+  .contact-team-container h1 {
+    font-size: 50px;
+  }
+
+  .contact-team-container p {
+    font-size: 22px;
+  }
+
+  .contact-form-name {
+    font-size: 38px;
+  }
+
+  .contact-form-circle {
+    height: 100px;
+    width: 100px;
+    font-size: 40px;
+  }
+}
+
+/* Tablet portrait view (1050px and below) */
+@media (max-width: 1150px) {
+  .show-contact-container {
+    padding-left: 24px;
+  }
+
+  .contact-team-container h1 {
+    font-size: 40px;
+  }
+}

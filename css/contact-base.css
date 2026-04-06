@@ -1,0 +1,61 @@
+/**
+ * CONTACT PAGE - BASE STYLES
+ * 
+ * Base styles, reset, utilities and scrollbar customization
+ * 
+ * @author Florian Weyrauch
+ */
+
+/* ===================================================================
+   1. BASE STYLES & RESET
+   =================================================================== */
+
+/* HTML/Body base configuration */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* ===================================================================
+   2. UTILITY CLASSES
+   =================================================================== */
+
+/* Visibility utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Typography utilities */
+.fs-b-16 {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: bold;
+}
+
+.fs-400-16 {
+    font-size: 16px;
+    font-weight: 400; 
+}
+
+/* Layout utilities */
+.g-8 {
+    gap: 8px;
+}
+
+/* Hide mobile-specific elements on desktop */
+.mobile-back-arrow {
+    display: none;
+}
+
+/* ===================================================================
+   3. LAYOUT COMPONENTS
+   =================================================================== */
+
+/* Main container for the contact page */
+.main-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    min-height: 0; 
+}
+

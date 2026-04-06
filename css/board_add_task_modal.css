@@ -1,0 +1,196 @@
+#at-modal .at-header h2 {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 0 0 16px;
+}
+
+/* === GRID === */
+#at-modal .at-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 40px;
+  align-items: start;
+}
+
+#at-modal .at-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 1px;
+  background: #E5E7EB;
+  transform: translateX(-0.5px);
+}
+
+#at-modal .at-col,
+#at-modal .at-col--right {
+  display: grid;
+  gap: 8px;
+}
+
+/* === FORM FIELDS === */
+#at-modal .field {
+  display: grid;
+  gap: 6px;
+}
+
+#at-modal .field__label {
+  font: 400 17px/1.3 Inter, system-ui;
+  color: #1F2937;
+}
+
+.field__label_description,
+.field__label_due_date {
+  padding-top: 16px;
+}
+
+#at-modal .req {
+  color: #EF4444;
+  margin-left: 2px;
+}
+
+#at-modal .input,
+#at-modal .textarea,
+#at-modal .select {
+  width: 100%;
+  border: 1px solid #D1D5DB;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: 500 16px/1.35 Inter, system-ui;
+  outline: none;
+}
+
+#at-modal .input:focus,
+#at-modal .textarea:focus,
+#at-modal .select:focus {
+  border-color: #94A3B8;
+  box-shadow: 0 0 0 3px rgba(41, 171, 226, .15);
+}
+
+#at-modal .textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* === PLACEHOLDER – schwach grau === */
+#at-modal ::placeholder {
+  color: #9CA3AF !important;
+  opacity: 1 !important;
+}
+
+/* === PRIORITY BUTTONS === */
+#at-modal .priority {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10px;
+  justify-content: start;
+}
+
+#at-modal .priority__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  background: white;
+  font-weight: 700;
+  line-height: 1;
+  color: #111827;
+  cursor: pointer;
+  transition: all .15s ease;
+  margin: auto;
+}
+
+#at-modal .priority__btn img {
+  height: 16px;
+  width: 16px;
+  transition: filter .15s ease;
+}
+
+/* WICHTIG: nur aktive Buttons → weißes Icon */
+#at-modal .priority__btn--active img {
+  filter: brightness(0) invert(1);
+}
+
+/* Aktive Zustände – kürzer mit nth-child(-n+3) */
+#at-modal .priority .priority__btn:nth-child(1).priority__btn--active { background:#FF3B3B; border-color:#FF3B3B; color:#fff; }
+#at-modal .priority .priority__btn:nth-child(2).priority__btn--active { background:#FFA800; border-color:#FFA800; color:#fff; }
+#at-modal .priority .priority__btn:nth-child(3).priority__btn--active { background:#7AE229; border-color:#7AE229; color:#fff; }
+
+#at-modal .priority__btn:active {
+  transform: scale(.98);
+}
+
+/* === FOOTER === */
+#at-modal .at-footer {
+  margin-top: 28px;
+  padding: 56px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.at-footer-modal {
+  padding-bottom: 24px;
+}
+
+/* === BUTTONS === */
+#at-modal .btn {
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #F3F4F6;
+  font: 700 15px/1 Inter, system-ui;
+  color: #111827;
+  cursor: pointer;
+  transition: filter .1s ease;
+}
+
+#at-modal .btn:hover { filter: brightness(.98); }
+#at-modal .btn-primary { background:#2A3647; border-color:#2A3647; color:#fff; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1023px) {
+  #at-modal .at-grid { grid-template-columns: 1fr; }
+  #at-modal .at-grid::after { display: none; }
+}
+
+/* === FINAL OVERRIDES (nur falls nötig) === */
+#at-modal .at-dialog { max-width:980px !important; width:min(980px,calc(100vw-80px)) !important; }
+#at-modal .at-grid { display:grid !important; grid-template-columns:1fr 1fr !important; gap:28px 40px !important; }
+#at-modal .at-col--right { grid-column:2 !important; }
+
+/* Hover-Lift nur für td-modal (Board-Ansicht) – bleibt erhalten */
+.td-modal .priority__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.16);
+  z-index: 1;
+}
+
+.close-btn-modal {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #6B7280;
+  cursor: pointer;
+  transition: color .1s ease;
+  color: var(--darkblue-light-color);
+}
+
+.close-btn-modal:hover {
+  color: var(--lightblue-color);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.close-btn-modal:active {
+  color: var(--darkblue-color);
+  background-color: transparent;
+  box-shadow: none;
+}

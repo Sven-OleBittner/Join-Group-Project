@@ -1,0 +1,147 @@
+/**
+ * Contact Management - Contact Details Display
+ * This module handles displaying and managing detailed contact information
+ */
+
+/**
+ * Displays detailed contact information in the contact details section
+ * @param {string} name - Contact's full name
+ * @param {string} email - Contact's email address
+ * @param {string} phone - Contact's phone number
+ * @param {string} firebaseKey - Firebase database key for the contact
+ * @param {string} contactColor - CSS color class for the contact initials circle
+ */
+function showContactDetails(name, email, phone, firebaseKey, contactColor) {
+    selectedContactKey = firebaseKey;
+    const contact = findContactByKey(firebaseKey);
+    changeActiveBackgroundColor(selectedContactKey);
+    showContactDetailsSection();
+    updateContactDisplayName(name);
+    updateContactInitials(contact.initials, contactColor);
+    updateContactEmail(email);
+    updateContactPhone(phone);
+
+    // Mobile: Show details view and hide contact list
+    if (window.innerWidth <= 1250) {
+        showMobileContactDetails();
+    }
+}
+
+/**
+ * Changes the background color of the selected contact in the list to indicate active selection
+ * @param {string} selectedContactKey - The Firebase key of the currently selected contact
+ * @returns {void}
+ */
+function changeActiveBackgroundColor(selectedContactKey) {
+    const contactElements = document.querySelectorAll('.personal-ad');
+    contactElements.forEach(el => el.classList.remove('active-contact'));
+    const activeElement = document.getElementById(`contact-${selectedContactKey}`);
+    if (activeElement) {
+        activeElement.classList.add('active-contact');
+    }
+}
+
+/**
+ * Shows the contact details section by removing hidden class from elements
+ */
+function showContactDetailsSection() {
+    const contactDetailsSection = document.getElementById('contact-details-section');
+    const contactInfoLabel = document.getElementById('contact-info-label');
+    const contactEmailSection = document.getElementById('contact-email-section');
+    const contactPhoneSection = document.getElementById('contact-phone-section');
+    if (contactDetailsSection) contactDetailsSection.classList.remove('hidden');
+    if (contactInfoLabel) contactInfoLabel.classList.remove('hidden');
+    if (contactEmailSection) contactEmailSection.classList.remove('hidden');
+    if (contactPhoneSection) contactPhoneSection.classList.remove('hidden');
+}
+
+/**
+ * Updates the display name in the contact details section
+ * @param {string} name - The contact's full name to display
+ */
+function updateContactDisplayName(name) {
+    const nameElement = document.getElementById('contact-display-name');
+    if (nameElement) {
+        nameElement.textContent = name;
+    }
+}
+
+/**
+ * Updates the contact initials circle with the contact's initials
+ * @param {string} initials - The contact's initials from Firebase data
+ * @param {string} contactColor - CSS color class to apply to the contact initials circle
+ */
+function updateContactInitials(initials, contactColor) {
+    const circleElement = document.getElementById('contact-initials-circle');
+    if (circleElement) {
+        circleElement.textContent = initials;
+        colorClasses.forEach(colorClass => {
+            circleElement.classList.remove(colorClass);
+        });
+        circleElement.classList.add(contactColor);
+    }
+}
+
+/**
+ * Updates the email link in the contact details section
+ * @param {string} email - The contact's email address
+ */
+function updateContactEmail(email) {
+    const emailLink = document.getElementById('contact-email-link');
+    if (emailLink) {
+        emailLink.textContent = email;
+        emailLink.href = `mailto:${email}`;
+    }
+}
+
+/**
+ * Updates the phone link in the contact details section
+ * @param {string} phone - The contact's phone number
+ */
+function updateContactPhone(phone) {
+    const phoneLink = document.getElementById('contact-phone-link');
+    if (phoneLink) {
+        phoneLink.textContent = phone;
+        phoneLink.href = `tel:${phone}`;
+    }
+}
+
+/**
+ * Hides the contact details section by adding hidden class to elements
+ */
+function hideContactDetailsSection() {
+    const contactDetailsSection = document.getElementById('contact-details-section');
+    const contactInfoLabel = document.getElementById('contact-info-label');
+    const contactEmailSection = document.getElementById('contact-email-section');
+    const contactPhoneSection = document.getElementById('contact-phone-section');
+
+    if (contactDetailsSection) contactDetailsSection.classList.add('hidden');
+    if (contactInfoLabel) contactInfoLabel.classList.add('hidden');
+    if (contactEmailSection) contactEmailSection.classList.add('hidden');
+    if (contactPhoneSection) contactPhoneSection.classList.add('hidden');
+
+    // Mobile: Also hide mobile details view
+    if (window.innerWidth <= 1250) {
+        hideMobileContactDetails();
+    }
+}
+
+/**
+ * Deletes the currently selected contact from the database and updates UI
+ * @async
+ * @returns {Promise<void>}
+ */
+async function deleteSelectedContact() {
+    if (!selectedContactKey) {
+        return;
+    }
+    try {
+        await deleteContactFromDatabase(selectedContactKey);
+        closeEditContactOverlay();
+        hideContactDetailsSection();
+        selectedContactKey = null;
+        await loadContactList();
+    } catch (error) {
+        console.error(error);
+    }
+}

@@ -1,22 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
     <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./css/contact.css" />
-    <link rel="stylesheet" href="./css/standard.css">
-    <link rel="stylesheet" href="./css/edit_&_add_contact.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/color.css" />
-    <script src="./js/js_files/contact.js"></script>
-    <script src="./templates/contact_template.js"></script>
+    <!-- Contact CSS Modules -->
+    <link rel="stylesheet" href="./css/contact-base.css" />
+    <link rel="stylesheet" href="./css/contact-list.css" />
+    <link rel="stylesheet" href="./css/contact-details.css" />
+    <link rel="stylesheet" href="./css/contact-forms.css" />
+    <link rel="stylesheet" href="./css/contact-overlay.css" />
+    <link rel="stylesheet" href="./css/contact-mobile.css" />
     <title id="title">Join</title>
   </head>
-  <body onload="loadContactList()">
-    <div id="contact-overlay"></div>
+  <body onload="(loadContactList(), initSite())" onclick="closeLogOutMenu()">
+    <!-- Contact overlay for add/edit forms -->
+    <div id="contact-overlay" class="contact-overlay d-none"></div>
+
+    <!-- Sidebar Navigation -->
     <div class="sidebar">
       <div class="frame">
         <div class="capa2">
@@ -26,7 +33,7 @@
       <div class="nav-container">
         <ul class="nav-menu">
           <li>
-            <button class="nav-item" onclick="goToPage('./summary.html')">
+            <button class="nav-item w100" onclick="goToPage('./summary.html')">
               <span class="icon">
                 <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
               </span>
@@ -34,10 +41,7 @@
             </button>
           </li>
           <li>
-            <button
-              class="nav-item active"
-              onclick="goToPage('./add_task.html')"
-            >
+            <button class="nav-item w100" onclick="goToPage('./add_task.html')">
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_add_task_icon.svg"
@@ -48,7 +52,7 @@
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./board.html')">
+            <button class="nav-item w100" onclick="goToPage('./board.html')">
               <span class="icon">
                 <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
               </span>
@@ -56,7 +60,10 @@
             </button>
           </li>
           <li>
-            <button class="nav-item" onclick="goToPage('./contacts.html')">
+            <button
+              class="nav-item w100 active"
+              onclick="goToPage('./contacts.html')"
+            >
               <span class="icon">
                 <img
                   src="./assets/img/sidebar_contact_calendar_icon.svg"
@@ -70,53 +77,106 @@
       </div>
       <div class="hide-footer"></div>
       <div class="bottom-links">
-        <a href="#" class="bottom-link">Privacy Policy</a>
-        <a href="#" class="bottom-link">Legal notice</a>
+        <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+        <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
       </div>
     </div>
 
+    <!-- Main Header Container -->
     <div class="headercontainer">
       <header class="header">
-        <div class="title-container">
-          <p>Kanban Project Management Tool</p>
-        </div>
-        <div class="header-right">
-          <div onclick="goToPage('./help.html')" class="help-icon">?</div>
-          <div class="user-avatar">SM</div>
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
         </div>
       </header>
 
-      <!-- maincontent -->
+      <!-- Main Content Area -->
       <div class="main-content">
-        <div class="contact-list-container">
-          <button onclick="openAddContactOverlay()" class="add-contact-btn">Add new contact
-            <img class="add-contact-img" src="./assets/img/contact_add.svg" alt="Add Contact">
-          </button>
+        <!-- Contact List Panel -->
+        <div class="contact-list-container max-w-1440">
+          <div class="add-contact-btn-container d-flex-c">
+            <button onclick="openAddContactOverlay()" class="add-contact-btn">
+              Add new contact
+              <img
+                class="add-contact-img"
+                src="./assets/img/contact_add.svg"
+                alt="Add Contact"
+              />
+            </button>
+          </div>
           <div id="contact-list"></div>
         </div>
+
+        <!-- Contact Details Panel -->
         <div class="show-contact-container">
+          <div
+            onclick="hideMobileContactDetails()"
+            class="mobile-back-arrow hidden"
+          >
+            <svg
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 12.5H5M5 12.5L12.5 20M5 12.5L12.5 5"
+                stroke="#29ABE2"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
           <div class="contact-team-container">
             <h1>Contacts</h1>
             <div class="bar"></div>
             <p>Better with a team</p>
           </div>
           <div id="contact-details-section" class="contact-form-control hidden">
-            <div id="contact-initials-circle" class="contact-form-circle d-flex-c"></div>
+            <div
+              id="contact-initials-circle"
+              class="contact-form-circle d-flex-c"
+            ></div>
             <div class="contact-form-description">
-              <h1 id="contact-display-name" class="contact-form-name">Select a contact</h1>
+              <h1 id="contact-display-name" class="contact-form-name">
+                Select a contact
+              </h1>
               <div class="contact-form-edit-delete">
-                <div onclick="openEditContactOverlay()" class="d-flex-c g-8">
-                  <img src="./assets/img/contact-main-edit.svg" alt="Edit">
+                <div onclick="openEditContactOverlay()" class="d-flex-c g-8 edit hover-effect hover-effect__edit">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
                   <span>Edit</span>
                 </div>
-                <div class="d-flex-c g-8" onclick="deleteSelectedContact()">
-                  <img src="./assets/img/contact-main-delete.svg" alt="Delete">
+                <div class="d-flex-c g-8 delete hover-effect hover-effect__delete" onclick="deleteSelectedContact()">
+                  <img
+                    src="./assets/icons/delete.svg"
+                    alt="Delete"
+                  />
                   <span>Delete</span>
                 </div>
               </div>
             </div>
           </div>
-          <span id="contact-info-label" class="contact-info hidden">Contact information</span>
+          <span id="contact-info-label" class="contact-info hidden"
+            >Contact information</span
+          >
           <div id="contact-email-section" class="contact-email-frame hidden">
             <h3 class="fs-b-16">Email</h3>
             <a id="contact-email-link" href="mailto:"></a>
@@ -127,11 +187,23 @@
           </div>
         </div>
       </div>
-      <div onclick="openAddContactOverlay()" class="add-contact-mobile d-flex-c c-pointer">
-        <img src="./assets/img/contact-add-person.svg" alt="Add contact">
+      <div
+        onclick="openAddContactOverlay()"
+        class="add-contact-mobile d-flex-c c-pointer"
+      >
+        <img src="./assets/img/contact-add-person.svg" alt="Add contact" />
+      </div>
+      <div
+        id="edit-contact-mobile"
+        class="edit-contact-mobile d-flex-c c-pointer hidden"
+        onclick="openMobileEditMenu()"
+      >
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
     </div>
-
+    <!-- Mobile Footer Navigation -->
     <div class="footer">
       <nav class="footer-nav">
         <a href="./summary.html" class="footer-nav-item">
@@ -146,16 +218,33 @@
           <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
           <span>Board</span>
         </a>
-        <a href="./contacts.html" class="footer-nav-item">
-          <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+        <a href="./contacts.html" class="footer-nav-item active">
+          <img
+            src="./assets/img/sidebar_contact_calendar_icon.svg"
+            alt="Contacts"
+          />
           <span>Contacts</span>
         </a>
       </nav>
     </div>
-    <script>
-      function goToPage(page) {
-        window.location.href = page;
-      }
-    </script>
+    <!-- JavaScript -->
+    <!-- Base Database Functions -->
+    <script src="./js/js_files/db.js"></script>
+    <!-- Contact Modules -->
+
+    <script src="./general_script.js"></script>
+
+    <script src="./js/js_files/contact-constants.js"></script>
+    <script src="./js/js_files/contact-database.js"></script>
+    <script src="./js/js_files/contact-validation.js"></script>
+    <script src="./js/js_files/contact-utils.js"></script>
+    <script src="./js/js_files/contact-list.js"></script>
+    <script src="./js/js_files/contact-details.js"></script>
+    <script src="./js/js_files/contact-add.js"></script>
+    <script src="./js/js_files/contact-edit.js"></script>
+    <script src="./js/js_files/contact-mobile.js"></script>
+    <script src="./templates/contact_template.js"></script>
+    <script src="./js/js_files/help.js"></script>
+    <script src="./js/js_files/log_out.js"></script>
   </body>
 </html>

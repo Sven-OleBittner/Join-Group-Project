@@ -1,70 +1,168 @@
-<!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
 
-        <!-- ICON TITLE -->
-    <link rel="icon" href="./assets/img/Capa 1.svg" type="image/x-icon"/>
+    <!-- ICON TITLE -->
+    <link rel="icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
 
-    <link rel="stylesheet" href="./css/responsive.css">
-    <link rel="stylesheet" href="./css/color.css">
-    <link rel="stylesheet" href="./css/standard.css">
-    <link rel="stylesheet" href="./css/signup.css">
-    <link rel="stylesheet" href="./assets/fonts/fonts.css">
- </head>
- <body>
-  <div class="signup-page">
-    <header class="signup-header">
-      <img src="./assets/img/Capa 2.svg" alt="Join logo" class="logo" style="width: 60px;"/>
-    </header>
-    
-    <main class="signup-main">
-      <div class="signup-box">
-        <div class="signup-title-row">
-          <img src="./assets/img/Vector.svg" alt="Back" class="back-arrow"/>
-          <h1>Sign up</h1>
+    <link rel="stylesheet" href="./css/signup.css" />
+    <link rel="stylesheet" href="./css/color.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  </head>
+  <body onload="initSite()">
+    <div class="signup-page">
+      <header class="signup-header">
+        <img
+          src="./assets/img/Capa 2.svg"
+          alt="Join logo"
+          class="logo"
+          style="width: 60px"
+        />
+      </header>
+
+      <main class="signup-main">
+        <div class="signup-box">
+          <div class="signup-title-row">
+            <img src="./assets/img/Vector.svg" alt="Back" class="back-arrow" />
+            <h1>Sign up</h1>
+          </div>
+          <div class="underline"></div>
+
+          <form id="signup-form" onsubmit="signUp(event)">
+            <div class="input-group">
+              <input
+                onblur="validateName()"
+                type="text"
+                id="signup-name"
+                placeholder="Name"
+              />
+              <img
+                src="./assets/img/person.svg"
+                id="name-pic"
+                class="input-icon"
+                alt="Name"
+              />
+              <div class="error-box">
+                <span class="error-text" id="name-error"
+                  >Please enter your name.</span
+                >
+              </div>
+            </div>
+            <div class="input-group">
+              <input
+                onblur="validateSignupEmail()"
+                type="email"
+                id="signup-email"
+                placeholder="Email"
+              />
+              <img
+                src="./assets/img/mail.svg"
+                id="email-pic"
+                class="input-icon"
+                alt="Email"
+              />
+              <div class="error-box">
+                <span class="error-text" id="email-error"
+                  >Please enter a valid email.</span
+                >
+              </div>
+            </div>
+            <div class="input-group">
+              <input
+                onblur="validateSignupPassword()"
+                type="password"
+                id="signup-password"
+                placeholder="Password"
+              />
+              <img
+                src="./assets/img/lock.svg"
+                class="input-icon"
+                id="lock-signup-password"
+                alt="Password"
+              />
+              <img
+                src="./assets/img/visibility_off.svg"
+                class="toggle-password-icon"
+                id="toggle-signup-password"
+                style="display: none"
+              />
+              <div class="error-box">
+                <span class="error-text" id="password-error"
+                  >Please enter a valid password.</span
+                >
+              </div>
+            </div>
+            <div class="input-group">
+              <input
+                onblur="
+                  validatePasswordMatch();
+                  enablePolicyCheckbox();
+                "
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm Password"
+              />
+              <img
+                src="./assets/img/lock.svg"
+                class="input-icon"
+                id="lock-confirm-password"
+                alt="Confirm Password"
+              />
+              <img
+                src="./assets/img/visibility_off.svg"
+                class="toggle-password-icon"
+                id="toggle-confirm-password"
+                style="display: none"
+              />
+              <div class="error-box">
+                <span class="error-text" id="password-confirm-error"
+                  >Your passwords don’t match.</span
+                >
+              </div>
+            </div>
+
+            <div class="note">* Password must be at least 6 characters long and include letters and numbers.</div  >
+            <div class="note">* Fill all fields to enable Privacy Policy.</div>
+
+            <label class="checkbox-wrapper">
+              <input
+                onclick="enableSignupBtn()"
+                id="privacy-policy-checkbox"
+                type="checkbox"
+                class="privacy-policy-checkbox"
+                disabled
+              />
+              I accept the
+              <a href="./privacy_policy_before_logged_in.html"
+                >Privacy policy</a
+              >
+            </label>
+
+            <button
+              id="signup-btn"
+              type="submit"
+              class="signup-btn"
+              disabled
+            >
+              Sign up
+            </button>
+          </form>
         </div>
-        <div class="underline"></div>
-    
-        <form id="signup-form">
-          <div class="input-group">
-            <input type="text" id="signup-name" placeholder="Name" required />
-            <img src="./assets/img/person.svg" class="input-icon" alt="Name" />
-          </div>
-          <div class="input-group">
-            <input type="email" id="signup-email" placeholder="Email" required />
-            <img src="./assets/img/mail.svg" class="input-icon" alt="Email" />
-            <div class="error-text" id="email-error">Please enter a valid email.</div>
-          </div>
-          <div class="input-group">
-            <input type="password" id="signup-password" placeholder="Password" required />
-            <img src="./assets/img/lock.svg" class="input-icon" id="lock-signup-password" alt="Password" />
-            <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-signup-password" style="display: none;" />
-          </div>
-          <div class="input-group">
-            <input type="password" id="confirm-password" placeholder="Confirm Password" required />
-            <img src="./assets/img/lock.svg" class="input-icon" id="lock-confirm-password" alt="Confirm Password" />
-            <img src="./assets/img/visibility_off.svg" class="toggle-password-icon" id="toggle-confirm-password" style="display: none;" />
-            <div class="error-text" id="password-error">Your passwords don’t match. Please try again.</div>
-          </div>
-        
-          <label class="checkbox-wrapper">
-            <input type="checkbox" required />
-            I accept the <a href="#">Privacy policy</a>
-          </label>
-        
-          <button type="submit" class="signup-btn">Sign up</button>
-        </form>
-      </div>
-    </main>
-    
-    <footer class="signup-footer">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Legal notice</a>
-    </footer>
-  </div>
-  <script src="./js/js_files/signup.js"></script>
-</body>
+      </main>
+
+      <footer class="signup-footer">
+        <a href="privacy_policy_before_logged_in.html">Privacy Policy</a>
+        <a href="legal_notice_before_logged_in.html">Legal notice</a>
+      </footer>
+    </div>
+    <script src="./general_script.js"></script>
+    <script src="./js/js_files/db.js"></script>
+    <script src="./js/js_files/signup.js"></script>
+    <script src="./js/js_files/login.js"></script>
+  </body>
 </html>

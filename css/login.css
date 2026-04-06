@@ -3,36 +3,32 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-  background-color: rgba(188, 188, 188, 0.567);
-}
-
-.intro-logo {
-  z-index: 10001; 
-}
-
-.login-header .logo {
-  display: none; 
+  background-color: #F6F7F8;
 }
 
 .login-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
-
-/* === HEADER === */
-.login-header {
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  padding: 32px;
   width: 100%;
   max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.login-header {
+  width: 100%;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.login-header .logo {
+  display: block;
+  width: 87px;
 }
 
 .logo {
@@ -41,21 +37,19 @@ body, html {
 
 .signup-text {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  padding-right: 10px;
   gap: 10px;
 }
 
-.signup-page {
-  min-width: 100vh;
-  overflow: hidden;
+.signup-text.signup-down {
+  position: static;
 }
 
 .signup-btn {
-  background-color: #2a3647;
+  background-color: var(--darkblue-light-color);
   color: white;
   border: none;
+  font-size: 18px;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -63,26 +57,33 @@ body, html {
 }
 
 .signup-btn:hover {
-  background-color: #29abe2;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  background-color: var(--lightblue-color);
+  box-shadow: var(--box-shadow-color);
+}
+
+.signup-btn:active {
+  background-color: var(--darkblue-color);
+  box-shadow: var(--box-shadow-color);
 }
 
 /* === MAIN === */
 .login-main {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding-top: 180px; /* ← фіксована висота логотипа + відступ */
+  padding: 32px 20px;
   box-sizing: border-box;
+  width: 100%;
+  gap: 24px;
 }
 
 /* === LOGIN BOX === */
 .login-box {
   background-color: #ffffff;
   width: 100%;
+  max-width: 560px;
   border-radius: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -91,7 +92,8 @@ body, html {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 48px;
+  padding: 48px 61px;
+  box-sizing: border-box;
 }
 
 .login-box h1 {
@@ -110,23 +112,19 @@ body, html {
 form#login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* gap: 20px; */
+  width: 100%;
 }
 
-/* === INPUTS === */
 .input-group {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto 20px auto;
-  margin-bottom: 20px;
+  margin: 0 auto 8px auto;
 }
 
 .input-group input {
   display: block;
-  width: 480px;
-  max-width: 90%;
-  margin: 0 auto;
+  width: 100%;
   padding: 14px 48px 14px 16px;
   font-size: 16px;
   border-radius: 10px;
@@ -136,9 +134,8 @@ form#login-form {
 
 .input-icon {
   position: absolute;
-  top: 50%;
-  right: calc(50% - 200px + 14px);
-  transform: translateY(-50%);
+  top: 20%;
+  right: 16px;
   height: 20px;
   opacity: 0.7;
   pointer-events: none;
@@ -157,7 +154,7 @@ form#login-form {
   color: white;
   border: none;
   height: 48px;
-  font-size: 16px;
+  font-size: 18px;
   padding: 0 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -166,32 +163,29 @@ form#login-form {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-btn:hover {
-  background-color: #29ABE2;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+.login-btn:enabled:hover {
+  background-color: var(--lightblue-color);
+  box-shadow: var(--box-shadow-color);
 }
 
 .guest-btn {
   background: white;
-  border: 2px solid #2A3647;
-  color: #2A3647;
+  border: 2px solid var(--darkblue-light-color);
+  color: var(--darkblue-light-color);
   height: 48px;
-  font-size: 16px;
+  font-size: 18px;
   padding: 0 24px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .guest-btn:hover {
-  border-color: #29ABE2;
-  color: #29ABE2;
+  border-color: var(--lightblue-color);
+  color: var(--lightblue-color);
   background: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+  box-shadow: var(--box-shadow-color);
 }
 
 /* === FOOTER === */
@@ -199,9 +193,10 @@ form#login-form {
   display: flex;
   justify-content: center;
   gap: 24px;
-  padding: 20px;
-  font-size: 14px;
+  padding: 12px;
   color: #A8A8A8;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-footer a {
@@ -210,36 +205,31 @@ form#login-form {
   transition: color 0.3s ease;
 }
 
-.login-footer a:hover {
-  color: #29abe2;
-}
+.login-footer a:hover { color: #29abe2; }
 
 /* === INPUT STATES === */
 .input-group input:focus {
-  border: 2px solid #4a90e2;
+  border: 1px solid #4a90e2;
   outline: none;
   background-color: #fff;
 }
 
 .input-group input.error {
-  border: 2px solid #e74c3c;
+  border: 1px solid #e74c3c;
   background-color: #fff5f5;
 }
 
 .error-text {
   color: #e74c3c;
-  font-size: 13px;
-  margin-top: 6px;
-  padding-left: 4px;
   display: none;
   font-weight: 500;
 }
 
-/* === TOGGLE PASSWORD ICON === */
+/* === TOGGLE PASSWORD === */
 .toggle-password {
   position: absolute;
-  top: 50%;
-  right: 40px;
+  top: 35%;
+  right: 16px;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 16px;
@@ -249,27 +239,34 @@ form#login-form {
 
 .toggle-password-icon {
   position: absolute;
-  top: 50%;
-  right: 50px;
+  top: 35%;
+  right: 16px;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   opacity: 0.7;
-  z-index: 2;
 }
 
-.toggle-password:hover {
-  opacity: 1;
+.toggle-password-icon-error {
+  position: absolute;
+  top: 35%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
-.toggle-password-icon:hover {
-  opacity: 1;
-}
+.toggle-password:hover { opacity: 1; }
+.toggle-password-icon:hover { opacity: 1; }
 
+/* === MOBILE ≤ 580px === */
 @media (max-width: 580px) {
+
   .login-box {
-    width: 82%;
+    width: 100%;
     max-width: 100%;
     margin: 0 auto;
     padding: 32px 24px;
@@ -284,11 +281,7 @@ form#login-form {
   }
 
   .login-header {
-    flex-direction: row; 
-    justify-content: space-between;
-    align-items: center;
     padding: 16px 20px;
-    width: 100%;
   }
 
   .signup-text.signup-down {
@@ -297,66 +290,40 @@ form#login-form {
 
   .signup-text.signup-up {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 8px;
     margin: 24px auto 0 auto;
-    font-size: 14px;
   }
 
-  .logo {
-    width: 60px;
-    margin: 0;
-  }
+  .logo { width: 60px; }
 
   .signup-btn {
     padding: 6px 12px;
-    font-size: 14px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
   }
 
   .login-main {
-    margin-top: 16px;
     width: 100%;
-    display: grid;
+    padding: 16px;
+    gap: 0px;
   }
 
   .login-footer {
     display: flex;
     justify-content: center;
     gap: 24px;
-    padding: 20px;
-    font-size: 14px;
-    color: #A8A8A8;
-    flex-wrap: wrap;
-  }
-  
-  .login-footer a {
-    color: #A8A8A8;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  .login-footer a:hover {
-    color: #29abe2;
   }
 
-  .login-box h1 {
-    font-size: 28px;
-  }
+  .login-box h1 { font-size: 28px; }
+  .login-footer { flex-wrap: wrap; }
 
   .input-group input {
-    width: 100%;
-    max-width: 90vw;
     padding: 12px 40px 12px 12px;
-    font-size: 16px;
-    margin: 0 auto;
-  }
-
-  .input-icon {
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .button-group {
@@ -369,16 +336,11 @@ form#login-form {
   .guest-btn {
     max-width: 280px;
     width: 90%;
-    font-size: 16px;
     padding: 12px;
-    font-weight: 600;
     border-radius: 8px;
-    cursor: pointer;
   }
 }
 
 @media (min-width: 480px) {
-  .signup-up {
-    display: none;
-  }
+  .signup-up { display: none; }
 }

@@ -1,0 +1,397 @@
+/* === ADD TASK SECOND MODAL === */
+
+/* === BASE GRID STRUCTURE === */
+#at-modal .at-dialog {
+  max-width: 980px !important;
+  width: calc(100vw - 80px) !important;
+  margin: 0 auto;
+  background:white;
+  border-radius: 24px;
+  padding: 48px 60px 28px !important;
+  overflow: visible;
+}
+
+#at-modal .at-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 28px !important;
+  position: relative !important;
+}
+
+#at-modal .at-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #F6F7F8;
+  transform: translateX(-50%);
+}
+
+#at-modal .at-col {
+  grid-column: auto !important;
+  min-width: 0 !important;
+}
+
+#at-modal .at-col:not(.at-col--right) {
+  grid-column: 1 !important;
+}
+
+#at-modal .at-col--right {
+  grid-column: 2 !important;
+}
+
+/* === PRIORITY === */
+#at-modal .priority,
+#at-modal .priority-options {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* === DROPDOWNS === */
+#at-modal .dropdown.full-expandable {
+  position: relative !important;
+}
+
+#at-modal .dropdown.full-expandable .dropdown-menu {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  z-index: 4000;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
+}
+
+#at-modal .dropdown.full-expandable.open .dropdown-menu {
+  max-height: 420px;
+  opacity: 1;
+  overflow: auto;
+}
+
+/* === ASSIGNED-TO DROPDOWN === */
+.dropdown.assigned-to {
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown.assigned-to .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.dropdown.assigned-to .dropdown-toggle img {
+  transition: transform 0.1s ease;
+}
+
+.dropdown.assigned-to.open .dropdown-toggle img {
+  transform: rotate(180deg);
+}
+
+.dropdown.assigned-to .dropdown-menu {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  margin-top: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
+  z-index: 1000;
+}
+
+.dropdown.assigned-to.open .dropdown-menu {
+  max-height: 420px;
+  overflow-y: auto;
+  opacity: 1;
+}
+
+.dropdown.assigned-to .dropdown-search {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown.assigned-to .dropdown-search input {
+  width: 100%;
+  height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.dropdown.assigned-to .options {
+  padding: 6px;
+}
+
+.dropdown.assigned-to .contact-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.dropdown.assigned-to .contact-option:hover {
+  background: #f6f7f8;
+}
+
+.dropdown.assigned-to .contact-option .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  flex: 0 0 28px;
+}
+
+.dropdown.assigned-to .contact-option .name {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown.assigned-to .contact-option input[type="checkbox"] {
+  margin-left: auto;
+}
+
+.dropdown.assigned-to .assigned-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dropdown.assigned-to .assigned-chips .avatar-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* === CATEGORY SELECT === */
+.dropdown.category-select {
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown.category-select .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.dropdown.category-select .dropdown-toggle img {
+  transition: transform 0.1s ease;
+}
+
+.dropdown.category-select.open .dropdown-toggle img {
+  transform: rotate(180deg);
+}
+
+.dropdown.category-select .dropdown-menu {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  margin-top: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.12s ease, opacity 0.1s ease;
+  z-index: 1000;
+}
+
+.dropdown.category-select.open .dropdown-menu {
+  max-height: 420px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.dropdown.category-select .dropdown-search {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown.category-select .dropdown-search input {
+  width: 100%;
+  height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.dropdown.category-select .options {
+  padding: 6px;
+}
+
+.dropdown.category-select .category-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.dropdown.category-select .category-option:hover {
+  background: #f6f7f8;
+}
+
+.dropdown.category-select .category-option .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: 0 0 12px;
+}
+
+.dropdown.category-select .category-option .name {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown.category-select .category-option input[type="radio"],
+.dropdown.category-select .category-option input[type="checkbox"] {
+  margin-left: auto;
+}
+
+.dropdown.category-select .category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dropdown.category-select .category-chips .category-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #eef1f6;
+  color: #0f172a;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.dropdown.category-select .category-chips .category-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.dropdown.category-select .category-chips .category-chip .remove {
+  margin-left: 8px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* === DESCRIPTION FIELD === */
+#description {
+  resize: vertical;
+  min-height: 80px;
+  max-height: 160px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* === FORM ACTIONS === */
+.form-actions {
+  position: fixed !important;
+  right: 60px;
+  bottom: 16px;
+  z-index: 2000;
+  background: #fff;
+  display: flex;
+  gap: 16px;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* === MISC === */
+.add-task-container {
+  padding-bottom: 180px;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatar-chip {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 820px) {
+  #at-modal .at-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #at-modal .at-grid::before {
+    display: none;
+  }
+}

@@ -1,86 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Join</title>
 
-  <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon"/>
-  <link rel="stylesheet" href="./assets/fonts/fonts.css"/>
-  <link rel="stylesheet" href="./css/standard.css"/>
-  <link rel="stylesheet" href="./css/color.css"/>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <link rel="stylesheet" href="./css/summary.css"/>
-  <link rel="stylesheet" href="./css/responsive.css"/>
-  <!-- ICON TITLE -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
   <link rel="icon" href="./assets/icons/fav.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+  <link rel="stylesheet" href="./css/standard.css">
+  <link rel="stylesheet" href="./css/color.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/summary.css">
+  <link rel="stylesheet" href="./css/summary_responsive.css">
+  <link rel="stylesheet" href="./css/responsive.css">
 </head>
-<body>
+
+<body onload="initSummary(); searchForLoginUser();" onclick="closeLogOutMenu();">
   <div class="sidebar">
     <div class="frame">
       <div class="capa2">
-        <img class="logo-img" src="./assets/icons/Join_logo 2.svg"/>
+        <img class="logo-img" src="./assets/icons/Join_logo 2.svg" alt="Join" />
       </div>
     </div>
     <div class="nav-container">
       <ul class="nav-menu">
         <li>
-          <button class="nav-item" onclick="goToPage('./summary.html')">
-            <span class="icon">
-              <img src="./assets/img/sidebar_board_icon.svg" alt="Summary"/>
-            </span>
+          <button class="nav-item w100 active" onclick="goToPage('./summary.html')">
+            <span class="icon"><img src="./assets/img/summary_sidebar.svg" alt="Summary" /></span>
             <span class="text">Summary</span>
           </button>
         </li>
         <li>
-          <button class="nav-item active" onclick="goToPage('./add_task.html')">
-            <span class="icon">
-              <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task"/>
-            </span>
+          <button class="nav-item w100" onclick="goToPage('./add_task.html')">
+            <span class="icon"><img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" /></span>
             <span class="text">Add Task</span>
           </button>
         </li>
         <li>
-          <button class="nav-item" onclick="goToPage('./board.html')">
-            <span class="icon">
-              <img src="./assets/img/sidebar_board_icon.svg" alt="Board"/>
-            </span>
+          <button class="nav-item w100" onclick="goToPage('./board.html')">
+            <span class="icon"><img src="./assets/img/sidebar_board_icon.svg" alt="Board" /></span>
             <span class="text">Board</span>
           </button>
         </li>
         <li>
-          <button class="nav-item" onclick="goToPage('./contacts.html')">
-            <span class="icon">
-              <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts"/>
-            </span>
+          <button class="nav-item w100" onclick="goToPage('./contacts.html')">
+            <span class="icon"><img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" /></span>
             <span class="text">Contacts</span>
           </button>
         </li>
       </ul>
     </div>
-    <div class="hide-footer"></div>
     <div class="bottom-links">
-      <a href="#" class="bottom-link">Privacy Policy</a>
-      <a href="#" class="bottom-link">Legal notice</a>
+      <a href="./privacy_policy.html" class="bottom-link">Privacy Policy</a>
+      <a href="./legal_notice.html" class="bottom-link">Legal notice</a>
     </div>
   </div>
 
   <div class="headercontainer">
-    <header class="header">
-  <div class="header-left">
-    <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
-  </div>
-  <div class="title-container">
-    <p>Kanban Project Management Tool</p>
-  </div>
-  <div class="header-right">
-    <div class="help-icon">?</div>
-    <div class="user-avatar">SM</div>
-  </div>
-</header>
-
+      <header class="header">
+        <div class="max-w-1440 d-flex-c-sb width-100">
+          <div class="header-left">
+            <img src="./assets/img/Capa 2.svg" alt="Logo" class="header-logo" />
+          </div>
+          <div class="title-container">
+            <p class="title">Kanban Project Management Tool</p>
+          </div>
+          <div class="header-right">
+            <div onclick="goToPage('./help.html')" class="help-icon">?</div>
+            <div
+              onclick="
+                showLogOutMenu();
+                event.stopPropagation();
+              "
+              id="userInitials"
+              class="user-avatar"
+            ></div>
+          </div>
+        </div>
+      </header>
+    <div class="greeting-container">
+      <span id="greetingText" class="greeting-text"><span id="greetingResp" class="greetingResp"></span><br> <span class="greetingName" id="greetingNameResp"></span></span>
+    </div>
     <div class="main-content">
-      <main>
+      <main class="max-w-1440">
         <section>
           <header class="main-header">
             <h1>Join 360</h1>
@@ -92,20 +94,20 @@
               <section class="summary-head-footer">
                 <a href="./board.html" class="summary-container">
                   <div class="icon-container background-color">
-                    <img src="./assets/img/summary_to_do_pencil.svg" alt=""/>
+                    <img class="icon__container--img" src="./assets/img/summary_to_do_pencil.svg" alt="" />
                   </div>
                   <div class="summary-text">
-                    <span class="task-count">1</span>
-                    <span>To-Do</span>
+                    <span id="todoCount" class="task-count"></span>
+                    <span class="resp-size">To-Do</span>
                   </div>
                 </a>
                 <a href="./board.html" class="summary-container">
                   <div class="icon-container background-color">
-                    <img src="./assets/img/summary_done_checkmark.svg" alt=""/>
+                    <img class="icon__container--img" src="./assets/img/summary_done_checkmark.svg" alt="" />
                   </div>
                   <div class="summary-text">
-                    <span class="task-count">1</span>
-                    <span>Done</span>
+                    <span id="doneCount" class="task-count"></span>
+                    <span class="resp-size">Done</span>
                   </div>
                 </a>
               </section>
@@ -113,15 +115,15 @@
                 <a href="./board.html" class="summary-container">
                   <div class="urgent-container">
                     <div class="icon-container-urgent urgent">
-                      <img src="./assets/img/summary_urgent_sign.svg" alt="urgent_sign"/>
+                      <img src="./assets/img/summary_urgent_sign.svg" alt="urgent_sign" />
                     </div>
                     <div class="summary-text">
-                      <span class="task-count">1</span>
+                      <span id="urgentCount" class="task-count">1</span>
                       <span>Urgent</span>
                     </div>
                   </div>
                   <div class="summary-mid-right">
-                    <span class="date">October 16,2022</span>
+                    <span id="urgentDate" class="date">October 16,2022</span>
                     <span class="msg-box">Upcoming Deadline</span>
                   </div>
                 </a>
@@ -129,56 +131,77 @@
               <section class="summary-head-footer">
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">5</span>
-                    <span class="text-align-center">Tasks in <br> Board</span>
+                    <span id="boardCount" class="task-count">5</span>
+                    <span class="text-align-center resp-size">Tasks in <br> Board</span>
                   </div>
                 </a>
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">2</span>
-                    <span class="text-align-center">Tasks in <br> Progress</span>
+                    <span id="progressCount" class="task-count">2</span>
+                    <span class="text-align-center resp-size">Tasks in <br> Progress</span>
                   </div>
                 </a>
                 <a href="./board.html" class="summary-container">
                   <div class="summary-text">
-                    <span class="task-count">2</span>
-                    <span class="text-align-center">Awaiting Feedback</span>
+                    <span id="awaitingFeedbackCount" class="task-count">2</span>
+                    <span class="text-align-center resp-size">Awaiting <br> Feedback</span>
                   </div>
                 </a>
               </section>
             </section>
             <section class="summary-right">
-              <span class="greeting-box">Good Morning!</span>
+              <span id="greetingBox" class="greeting-box"><span id="greeting" class="greeting-text"></span> <br> <span class="greetingName" id="greetingName"></span></span>
             </section>
           </section>
       </main>
-<div class="footer">
-  <nav class="footer-nav">
-    <a href="summary.html" class="footer-nav-item">
-      <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
-      <span>Summary</span>
-    </a>
-    <a href="add_tasks.html" class="footer-nav-item">
-      <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
-      <span>Add Task</span>
-    </a>
-    <a href="board.html" class="footer-nav-item">
-      <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
-      <span>Board</span>
-    </a>
-    <a href="contact.html" class="footer-nav-item">
-      <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
-      <span>Contacts</span>
-    </a>
-  </nav>
-</div>
+      <div class="footer">
+        <nav class="footer-nav">
+          <a href="summary.html" id="summary-site" class="footer-nav-item">
+            <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+            <span>Summary</span>
+          </a>
+          <a href="add_tasks.html" id="add-tasks-site" class="footer-nav-item">
+            <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+            <span>Add Task</span>
+          </a>
+          <a href="board.html" id="board-site" class="footer-nav-item">
+            <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+            <span>Board</span>
+          </a>
+          <a href="contact.html" id="contact-site" class="footer-nav-item">
+            <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+            <span>Contacts</span>
+          </a>
+        </nav>
+      </div>
     </div>
   </div>
-  <script>
-    function goToPage(page) {
-      window.location.href = page;
-    }
-  </script>
+  <div class="footer">
+    <nav class="footer-nav">
+      <a href="summary.html" id="summary-site-resp" class="footer-nav-item active">
+        <img src="./assets/img/summary_sidebar.svg" alt="Summary" />
+        <span>Summary</span>
+      </a>
+      <a href="add_task.html" id="add-tasks-site-resp" class="footer-nav-item">
+        <img src="./assets/img/sidebar_add_task_icon.svg" alt="Add Task" />
+        <span>Add Task</span>
+      </a>
+      <a href="board.html" id="board-site-resp" class="footer-nav-item">
+        <img src="./assets/img/sidebar_board_icon.svg" alt="Board" />
+        <span>Board</span>
+      </a>
+      <a href="contacts.html" id="contact-site-resp" class="footer-nav-item">
+        <img src="./assets/img/sidebar_contact_calendar_icon.svg" alt="Contacts" />
+        <span>Contacts</span>
+      </a>
+    </nav>
+  </div>
+  <script src="./general_script.js"></script>
+  <script src="./js/js_files/db.js"></script>
+  <script src="./js/js_files/summary.js"></script>
+  <script src="./js/js_files/login.js"></script>
+  <script src="./js/js_files/log_out.js"></script>
+
 </body>
 
 </html>

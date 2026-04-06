@@ -1,0 +1,259 @@
+/* =============================================================
+   ADD TASK – INTERAKTIVE KOMPONENTEN
+   Enthält: Prioritäts-Buttons, Erweiterbare Dropdowns,
+            Subtask-Eingabe, Subtask-Liste & Edit-Modus
+   ============================================================= */
+
+
+/* -------------------------------------------------------
+   Prioritäts-Auswahl
+   ------------------------------------------------------- */
+
+/* Wrapper für die drei Prioritäts-Buttons */
+.priority-options {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Einzelner Prioritäts-Button */
+.priority {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: white;
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  max-width: 200px;
+  min-width: 88px;
+  flex-grow: 1;
+}
+
+/* Hover: leicht vergößern und Schatten zeigen */
+.priority:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+}
+
+/* Icon-Übergang vorbereiten */
+.priority img {
+  transition: filter .1s ease;
+  width: 16px;
+}
+
+/* Icon-Farben im Standard-Zustand (per CSS-Filter) */
+.priority.urgent img {
+  filter: brightness(0) saturate(100%) invert(34%) sepia(88%) saturate(7494%) hue-rotate(356deg) brightness(101%) contrast(105%);
+}
+
+.priority.medium img {
+  filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
+  width: 12px;
+}
+
+.priority.low img {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(72%) saturate(357%) hue-rotate(76deg) brightness(91%) contrast(98%);
+}
+
+/* Ausgewählter Zustand: Hintergrundfarbe nach Priorität */
+.priority.selected.urgent {
+  background: var(--urgent-color);
+  color: var(--white-color);
+}
+
+.priority.selected.medium {
+  background: var(--medium-color);
+  color: var(--white-color);
+}
+
+.priority.selected.low {
+  background: var(--low-color);
+  color: var(--white-color);
+}
+
+/* Icon im ausgewählten Zustand immer weiß */
+.priority.selected img {
+  filter: brightness(0) invert(1);
+}
+
+
+/* -------------------------------------------------------
+   Erweiterbare Dropdown-Komponente (Kategorie)
+   ------------------------------------------------------- */
+
+/* Trigger-Element: geschlossen durch Standard */
+.dropdown.full-expandable {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Menü im geschlossenen Zustand – unsichtbar und ohne Höhe */
+.dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.12s ease;
+  transform: translateY(-10px);
+}
+
+/* Menü im geöffneten Zustand – voll sichtbar, über anderen Elementen */
+.dropdown.full-expandable.open .dropdown-menu {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 10px;
+  position: absolute;
+  z-index: 100;
+}
+
+
+/* -------------------------------------------------------
+   Subtask-Eingabe
+   ------------------------------------------------------- */
+
+/* Wrapper: relativer Container für Icon-Positionierung */
+.subtasks {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Eingabefeld – Platz rechts für die Icons freilassen */
+#subtask-input {
+  flex: 1 1 auto;
+  padding: 10px 90px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Aktions-Icons (hinzufügen / abbrechen) rechts im Eingabefeld */
+.subtask-icons {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+
+/* -------------------------------------------------------
+   Subtask-Liste
+   ------------------------------------------------------- */
+
+/* Scrollbarer Container für alle Subtask-Einträge */
+.subtask-list {
+  overflow-y: auto;
+  height: 56px;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+/* Einzelner Subtask-Eintrag */
+.subtask-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: default;
+}
+
+/* Hintergrundfarbe beim Hover */
+.subtask-item:hover {
+  background: var(--light-grey-color);
+}
+
+/* Text-Bereich des Subtasks */
+.subtask-item-text {
+  flex: 1;
+  font-size: 16px;
+}
+
+/* Bearbeiten/Löschen-Icons – erst beim Hover sichtbar */
+.subtask-item-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+}
+
+.subtask-item:hover .subtask-item-actions {
+  opacity: 1;
+}
+
+/* Icon-Größe und Cursor */
+.subtask-item-actions img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* Icon-Farbe bei Hover auf blau */
+.subtask-item-actions img:hover {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
+}
+
+/* Vertikale Trennlinie zwischen den Icons */
+.subtask-item-divider {
+  width: 1px;
+  height: 20px;
+  background: #A8A8A8;
+}
+
+
+/* -------------------------------------------------------
+   Subtask – Bearbeitungsmodus
+   ------------------------------------------------------- */
+
+/* Inline-Edit-Zeile mit blauer Unterlinie */
+.subtask-item-edit {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #29ABE2;
+  gap: 8px;
+}
+
+/* Unsichtbares Eingabefeld (rahmenlos, transparent) */
+.subtask-item-edit input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  padding: 4px 0;
+}
+
+/* Aktions-Icons im Edit-Modus */
+.subtask-item-edit-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.subtask-item-edit-actions img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.subtask-item-edit-actions img:hover {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1975%) hue-rotate(169deg) brightness(98%) contrast(101%);
+}
+
+/* -------------------------------------------------------
+   Responsive Anpassungen
+   ------------------------------------------------------- */
+
+@media (max-width: 500px) {
+  .priority-options {
+    gap: 8px;
+  }
+}
+
