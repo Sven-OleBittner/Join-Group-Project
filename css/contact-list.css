@@ -67,6 +67,11 @@
     background-color: var(--light-grey-color);
     cursor: pointer;
   }
+
+  .active-contact:hover {
+    background-color: var(--darkblue-color);
+    color: var(--white-color);
+  }
 }
 
 .personal-ad:active {
