@@ -82,7 +82,6 @@ function clearValidationErrors() {
   document.getElementById("title-error").classList.remove("visible");
   document.getElementById("date").classList.remove("input-error");
   document.getElementById("date-error").classList.remove("visible");
-  document.getElementById("date-format-error").classList.remove("visible");
   document.getElementById("category").classList.remove("select-error");
   document.getElementById("category-error").classList.remove("visible");
 }
