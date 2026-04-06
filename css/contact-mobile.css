@@ -387,4 +387,8 @@
     .edit-contact-mobile {
        bottom: 120px;
     }
+
+    .add-contact-btn-container {
+        display: none;
+    }
 }
