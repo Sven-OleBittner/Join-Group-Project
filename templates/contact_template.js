@@ -199,7 +199,7 @@ function getContact(data) {
     const contactColor = data.color;
 
     return `
-        <div class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${contactColor}')">
+        <div id="contact-${data.firebaseKey}" class="personal-ad" onclick="showContactDetails('${data.name}', '${data.email}', '${data.phone}', '${data.firebaseKey}', '${contactColor}')">
             <div class="person-circle d-flex-c ${contactColor}">
               ${data.initials}
             </div>

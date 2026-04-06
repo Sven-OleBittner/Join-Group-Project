@@ -14,6 +14,7 @@
 function showContactDetails(name, email, phone, firebaseKey, contactColor) {
     selectedContactKey = firebaseKey;
     const contact = findContactByKey(firebaseKey);
+    changeActiveBackgroundColor(selectedContactKey);
     showContactDetailsSection();
     updateContactDisplayName(name);
     updateContactInitials(contact.initials, contactColor);
@@ -23,6 +24,20 @@ function showContactDetails(name, email, phone, firebaseKey, contactColor) {
     // Mobile: Show details view and hide contact list
     if (window.innerWidth <= 1250) {
         showMobileContactDetails();
+    }
+}
+
+/**
+ * Changes the background color of the selected contact in the list to indicate active selection
+ * @param {string} selectedContactKey - The Firebase key of the currently selected contact
+ * @returns {void}
+ */
+function changeActiveBackgroundColor(selectedContactKey) {
+    const contactElements = document.querySelectorAll('.personal-ad');
+    contactElements.forEach(el => el.classList.remove('active-contact'));
+    const activeElement = document.getElementById(`contact-${selectedContactKey}`);
+    if (activeElement) {
+        activeElement.classList.add('active-contact');
     }
 }
 

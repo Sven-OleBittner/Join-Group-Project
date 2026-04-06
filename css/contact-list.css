@@ -45,6 +45,12 @@
   border-bottom: solid var(--placeholder-grey-color) 1px;
 }
 
+/* Active contact card styling */
+.active-contact {
+  background-color: var(--darkblue-color);
+  color: var(--white-color);
+}
+
 /* Individual contact cards in the list */
 .personal-ad {
   width: 352px;
