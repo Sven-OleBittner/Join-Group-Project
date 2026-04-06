@@ -16,7 +16,6 @@ function openEditContactOverlay() {
   }
   const contactOverlay = document.getElementById("contact-overlay");
   contactOverlay.classList.remove("d-none");
-  contactOverlay.classList.add("d-flex-c");
   contactOverlay.innerHTML = editContactTemplate(selectedContact);
 }
 
@@ -26,7 +25,6 @@ function openEditContactOverlay() {
 function closeEditContactOverlay() {
   let contactOverlay = document.getElementById("contact-overlay");
   contactOverlay.classList.add("d-none");
-  contactOverlay.classList.remove("d-flex-c");
   contactOverlay.innerHTML = "";
 }
 

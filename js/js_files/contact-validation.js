@@ -10,13 +10,13 @@
  * @returns {boolean|string} True if valid, error message string if invalid
  */
 function validateName(value, showRequired = false) {
-    const nameRegex = /^[a-zA-ZäöüßÄÖÜ.'\- ]{5,}$/;
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜ.'\- ]{3,}$/;
     const trimmedValue = value.trim();
     if (trimmedValue === "") {
         return showRequired ? "Name is required." : true;
     }
     if (!nameRegex.test(trimmedValue)) {
-        return "Name can only contain letters, spaces, apostrophes, and hyphens.";
+        return "Name can only contain letters, spaces, apostrophes, hyphen.";
     }
 
     return true;

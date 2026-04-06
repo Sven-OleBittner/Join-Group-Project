@@ -24,6 +24,11 @@
   border: 1px solid var(--required-color) !important;
 }
 
+/* Container für Fehlermeldungen unterhalb des Datumsfeldes */
+.date-error-messages {
+  height: 16px;
+}
+
 /* Fehlermeldungstext unterhalb des Feldes (standardmäßig ausgeblendet) */
 .error-message {
   color: var(--required-color);

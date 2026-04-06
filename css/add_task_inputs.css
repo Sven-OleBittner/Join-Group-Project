@@ -4,7 +4,6 @@
             Kontakt-Optionen, Assigned-Chips, Kalender-Icon
    ============================================================= */
 
-
 /* -------------------------------------------------------
    Standard-Eingabefelder
    ------------------------------------------------------- */
@@ -18,7 +17,7 @@ textarea {
   border-radius: 10px;
   width: 100%;
   font-size: 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* Fokus-Zustand: Rahmen entfernen, Hintergrund aufhellen */
@@ -27,7 +26,6 @@ textarea:focus {
   outline: none;
   background-color: var(--light-grey-color);
 }
-
 
 /* -------------------------------------------------------
    Custom-Select-Dropdown
@@ -54,7 +52,7 @@ textarea:focus {
 
 /* Pfeil-Icon rechts im Trigger (CSS-Dreieck) */
 .select-selected::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 16px;
   top: 50%;
@@ -76,7 +74,6 @@ textarea:focus {
   border-radius: 10px;
   max-height: 300px;
   overflow-y: auto;
-  
 }
 
 /* Standard-Optionszeile */
@@ -89,7 +86,6 @@ textarea:focus {
 .select-items div:hover {
   background-color: var(--light-grey-color);
 }
-
 
 /* -------------------------------------------------------
    Kontakt-Option innerhalb des Selects
@@ -121,15 +117,12 @@ textarea:focus {
 }
 
 .contact-option:has(input[type="checkbox"]:checked) .contact-checkbox {
-filter: brightness(0) invert(1); ;
+  filter: brightness(0) invert(1);
 }
-
 
 .contact-option:has(input[type="checkbox"]:checked):hover {
   background-color: var(--darkblue-color);
 }
-
-
 
 /* Runder farbiger Initialen-Avatar */
 .select-items .contact-option .avatar {
@@ -169,7 +162,6 @@ filter: brightness(0) invert(1); ;
   display: none;
 }
 
-
 /* -------------------------------------------------------
    Assigned-Chips (ausgewählte Kontakt-Avatare)
    ------------------------------------------------------- */
@@ -178,9 +170,8 @@ filter: brightness(0) invert(1); ;
 .assigned-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-  min-height: 10px;
+  gap: 2px;
+  height: 42px;
 }
 
 /* Einzelner runder Avatar-Chip */
@@ -199,7 +190,6 @@ filter: brightness(0) invert(1); ;
   border: 2px solid #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
-
 
 /* -------------------------------------------------------
    Datums-Picker
@@ -221,7 +211,6 @@ filter: brightness(0) invert(1); ;
   border-radius: 8px;
   outline: none;
   background-color: var(--light-grey-color);
-  
 }
 
 /* Nativen Kalender-Button unsichtbar machen – eigenes Icon greift stattdessen */

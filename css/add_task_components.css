@@ -42,6 +42,7 @@
 /* Icon-Übergang vorbereiten */
 .priority img {
   transition: filter .1s ease;
+  width: 16px;
 }
 
 /* Icon-Farben im Standard-Zustand (per CSS-Filter) */
@@ -51,7 +52,7 @@
 
 .priority.medium img {
   filter: brightness(0) saturate(100%) invert(63%) sepia(79%) saturate(638%) hue-rotate(1deg) brightness(105%) contrast(104%);
-  width: 16px;
+  width: 12px;
 }
 
 .priority.low img {
