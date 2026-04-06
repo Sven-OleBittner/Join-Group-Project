@@ -157,15 +157,10 @@ function parseDateValue(dateValue) {
 }
 
 /**
- * Formats a Date object into a readable string like `Month day, year`
- * @param {Date} date
- * @returns {string}
+ * Returns the months of the year
  */
-function formatDate(date) {
-  if (!date || isNaN(date.getTime())) {
-    return "No date set";
-  }
-  const months = [
+function getMonths() {
+  return [
     "January",
     "February",
     "March",
@@ -179,6 +174,18 @@ function formatDate(date) {
     "November",
     "December",
   ];
+}
+
+/**
+ * Formats a Date object into a readable string like `Month day, year`
+ * @param {Date} date
+ * @returns {string}
+ */
+function formatDate(date) {
+  if (!date || isNaN(date.getTime())) {
+    return "No date set";
+  }
+  const months = getMonths();
   const month = months[date.getMonth()];
   const day = date.getDate();
   const year = date.getFullYear();

@@ -68,43 +68,68 @@ function getValues() {
  * @returns {Promise<void>}
  */
 async function saveEditedContact() {
-  if (!validationEditContactInput()) {
-    return;
-  }
-  if (!selectedContactKey) {
-    return;
-  }
+  if (!validationEditContactInput()) return;
+  if (!selectedContactKey) return;
+
   const { oldName, oldEmail, oldPhone, editName, editEmail, editPhone } =
     getValues();
   const selectedContact = findContactByKey(selectedContactKey);
   try {
-    if (
-      editName !== oldName ||
-      editEmail !== oldEmail ||
-      editPhone !== oldPhone
-    ) {
-      const updatedContact = {
-        name: editName,
-        email: editEmail,
-        phone: editPhone,
-        color: selectedContact.color,
-        initials:
-          editName !== oldName
-            ? getInitials(editName)
-            : selectedContact.initials,
-      };
-      await updateContactInDatabase(selectedContactKey, updatedContact);
-      await loadContactList();
-      showContactDetails(
-        updatedContact.name,
-        updatedContact.email,
-        updatedContact.phone,
-        selectedContactKey,
-        updatedContact.color,
+    if (hasEditChanges(oldName, oldEmail, oldPhone, editName, editEmail, editPhone)) {
+      const updatedContact = buildUpdatedContact(
+        selectedContact,
+        editName,
+        editEmail,
+        editPhone,
       );
+      await persistUpdatedContact(selectedContactKey, updatedContact);
+      updateUIAfterSave(updatedContact, selectedContactKey);
     }
     closeEditContactOverlay();
   } catch (error) {
     console.error(error);
   }
+}
+
+/**
+ * Returns true when any editable field was changed
+ */
+function hasEditChanges(oldName, oldEmail, oldPhone, editName, editEmail, editPhone) {
+  return editName !== oldName || editEmail !== oldEmail || editPhone !== oldPhone;
+}
+
+/**
+ * Builds the updated contact object preserving color/initials when appropriate
+ */
+function buildUpdatedContact(selectedContact, editName, editEmail, editPhone) {
+  return {
+    name: editName,
+    email: editEmail,
+    phone: editPhone,
+    color: selectedContact.color,
+    initials: editName !== document.getElementById('contact-display-name').textContent
+      ? getInitials(editName)
+      : selectedContact.initials,
+  };
+}
+
+/**
+ * Persists the updated contact to backend and reloads list
+ */
+async function persistUpdatedContact(firebaseKey, updatedContact) {
+  await updateContactInDatabase(firebaseKey, updatedContact);
+  await loadContactList();
+}
+
+/**
+ * Updates UI after successful save (show details)
+ */
+function updateUIAfterSave(updatedContact, firebaseKey) {
+  showContactDetails(
+    updatedContact.name,
+    updatedContact.email,
+    updatedContact.phone,
+    firebaseKey,
+    updatedContact.color,
+  );
 }
